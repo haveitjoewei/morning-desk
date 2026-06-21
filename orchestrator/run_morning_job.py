@@ -19,22 +19,25 @@ def build_content():
     wardrobe_items = load_wardrobe()
     raw_priority_events = fetch_airbnb_messages() + fetch_va_messages()
 
+    priority_items = [
+        PriorityItem(
+            event.title,
+            event.source,
+            classify_urgency(event),
+            event.body,
+            event.metadata["suggested_action"],
+        )
+        for event in raw_priority_events
+    ]
+    briefing = generate_briefing(calendar, weather, priority_items)
+
     return BriefingContent.from_parts(
         weather=weather,
         outfit=generate_outfit(weather, wardrobe_items, calendar),
-        briefing=generate_briefing(),
+        briefing=briefing,
         calendar=calendar,
-        priority_items=[
-            PriorityItem(
-                event.title,
-                event.source,
-                classify_urgency(event),
-                event.body,
-                event.metadata["suggested_action"],
-            )
-            for event in raw_priority_events
-        ],
-        journal_prompt=generate_journal_prompt(),
+        priority_items=priority_items,
+        journal_prompt=generate_journal_prompt(briefing, calendar),
     ).to_dict()
 
 
