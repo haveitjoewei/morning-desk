@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+*.pyc
+content/latest.json
+renderer/out.png
+renderer/latest.png

@@ -1,0 +1,43 @@
+canvas:
+  width: 800
+  height: 480
+slots:
+  - id: hero
+    type: hero
+    source: date_label
+    label: weather.summary
+    position: {x: 28, y: 24, w: 744, h: 74}
+    style: {font_size: 34, chrome: none}
+  - id: attention
+    type: attention
+    source: priority_items
+    fields: [title]
+    max_items: 2
+    position: {x: 28, y: 114, w: 744, h: 112}
+    style: {font_size: 18, chrome: solid}
+  - id: calendar
+    type: list
+    source: calendar
+    label: TODAY
+    fields: [time, title]
+    max_items: 4
+    position: {x: 28, y: 250, w: 338, h: 112}
+    style: {font_size: 15, chrome: line}
+  - id: wear
+    type: text
+    source: outfit
+    label: WEAR
+    position: {x: 404, y: 250, w: 368, h: 112}
+    style: {font_size: 15, chrome: line}
+  - id: briefing
+    type: text
+    source: briefing
+    label: READ
+    position: {x: 28, y: 390, w: 476, h: 62}
+    style: {font_size: 12, chrome: line}
+  - id: journal
+    type: text
+    source: journal_prompt
+    label: ASK
+    position: {x: 542, y: 390, w: 230, h: 62}
+    style: {font_size: 12, chrome: line}
