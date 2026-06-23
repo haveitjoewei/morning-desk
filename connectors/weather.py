@@ -1,108 +1,102 @@
-"""Weather connector — Open-Meteo (free, no API key).
-
-Returns the stable shape consumed by the orchestrator + outfit generator:
-    {"summary": str, "high": int, "low": int, "condition": str}
-
-Location is env-configurable so this is not hardcoded to one city:
-    MD_LAT, MD_LON   floats   (default: Sydney, AU)
-    MD_TZ            string   (default: auto)
-
-Network/parse failures degrade gracefully to a safe "unknown" payload rather
-than crashing the morning job — a briefing appliance must still render.
-"""
-from __future__ import annotations
-
 import json
-import os
-import urllib.parse
-import urllib.request
+from pathlib import Path
+from urllib.error import URLError
+from urllib.parse import urlencode
+from urllib.request import urlopen
 
-API = "https://api.open-meteo.com/v1/forecast"
-DEFAULT_LAT = -33.8688   # Sydney
-DEFAULT_LON = 151.2093
 
-# WMO weather codes → (condition slug, human label). Grouped to keep it readable.
-_WMO = {
-    0: ("clear", "clear"),
-    1: ("mostly_clear", "mostly clear"),
-    2: ("partly_cloudy", "partly cloudy"),
-    3: ("overcast", "overcast"),
-    45: ("fog", "fog"),
-    48: ("fog", "freezing fog"),
-    51: ("drizzle", "light drizzle"),
-    53: ("drizzle", "drizzle"),
-    55: ("drizzle", "heavy drizzle"),
-    56: ("freezing_drizzle", "freezing drizzle"),
-    57: ("freezing_drizzle", "freezing drizzle"),
-    61: ("rain", "light rain"),
-    63: ("rain", "rain"),
-    65: ("rain", "heavy rain"),
-    66: ("freezing_rain", "freezing rain"),
-    67: ("freezing_rain", "freezing rain"),
-    71: ("snow", "light snow"),
-    73: ("snow", "snow"),
-    75: ("snow", "heavy snow"),
-    77: ("snow", "snow grains"),
-    80: ("rain_showers", "rain showers"),
-    81: ("rain_showers", "rain showers"),
-    82: ("rain_showers", "violent rain showers"),
-    85: ("snow_showers", "snow showers"),
-    86: ("snow_showers", "snow showers"),
-    95: ("thunderstorm", "thunderstorm"),
-    96: ("thunderstorm", "thunderstorm with hail"),
-    99: ("thunderstorm", "thunderstorm with hail"),
+OPEN_METEO_ENDPOINT = "https://api.open-meteo.com/v1/forecast"
+FALLBACK_WEATHER = {
+    "summary": "18C, rain later",
+    "high": 18,
+    "low": 11,
+    "condition": "rain_later",
+    "precipitation_probability": 60,
+    "precipitation_mm": 1.0,
 }
 
 
-def _decode(code):
-    return _WMO.get(code, ("unknown", "unsettled"))
+def load_weather_config(path=None):
+    path = Path(path) if path else Path(__file__).resolve().parents[1] / "config" / "location.json"
+    return json.loads(path.read_text())
 
 
-def _location():
-    lat = float(os.environ.get("MD_LAT", DEFAULT_LAT))
-    lon = float(os.environ.get("MD_LON", DEFAULT_LON))
-    tz = os.environ.get("MD_TZ", "auto")
-    return lat, lon, tz
-
-
-def _unavailable():
-    return {
-        "summary": "Weather unavailable",
-        "high": None,
-        "low": None,
-        "condition": "unknown",
-    }
-
-
-def fetch_weather():
-    lat, lon, tz = _location()
-    query = urllib.parse.urlencode(
+def build_open_meteo_url(config):
+    query = urlencode(
         {
-            "latitude": lat,
-            "longitude": lon,
-            "daily": "temperature_2m_max,temperature_2m_min,weather_code",
-            "timezone": tz,
+            "latitude": config["latitude"],
+            "longitude": config["longitude"],
+            "timezone": config.get("timezone", "auto"),
             "forecast_days": 1,
+            "current": "temperature_2m,weather_code,precipitation",
+            "daily": ",".join(
+                [
+                    "temperature_2m_max",
+                    "temperature_2m_min",
+                    "precipitation_probability_max",
+                    "precipitation_sum",
+                    "weather_code",
+                ]
+            ),
         }
     )
-    url = f"{API}?{query}"
-    try:
-        with urllib.request.urlopen(url, timeout=10) as resp:
-            data = json.load(resp)
-        daily = data["daily"]
-        high = round(daily["temperature_2m_max"][0])
-        low = round(daily["temperature_2m_min"][0])
-        condition, label = _decode(daily["weather_code"][0])
-    except Exception:
-        return _unavailable()
+    return f"{OPEN_METEO_ENDPOINT}?{query}"
+
+
+def condition_from(code, precipitation_probability=0, precipitation_mm=0):
+    if code in {95, 96, 99}:
+        return "storm"
+    if code in {71, 73, 75, 77, 85, 86}:
+        return "snow"
+    if code in {51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82}:
+        return "rain_likely" if precipitation_probability >= 70 or precipitation_mm >= 3 else "rain_later"
+    if code in {45, 48}:
+        return "fog"
+    if code in {1, 2, 3}:
+        return "cloudy"
+    return "clear"
+
+
+def summary_for(temp, condition):
+    labels = {
+        "rain_likely": "rain likely",
+        "rain_later": "rain later",
+        "storm": "storms",
+        "snow": "snow",
+        "fog": "fog",
+        "cloudy": "cloudy",
+        "clear": "clear",
+    }
+    return f"{round(temp)}C, {labels.get(condition, condition)}"
+
+
+def parse_open_meteo(payload):
+    current = payload["current"]
+    daily = payload["daily"]
+    high = round(daily["temperature_2m_max"][0])
+    low = round(daily["temperature_2m_min"][0])
+    precipitation_probability = daily.get("precipitation_probability_max", [0])[0] or 0
+    precipitation_mm = daily.get("precipitation_sum", [0])[0] or 0
+    weather_code = daily.get("weather_code", [current.get("weather_code", 0)])[0]
+    condition = condition_from(weather_code, precipitation_probability, precipitation_mm)
 
     return {
-        "summary": f"{high}C, {label}",
+        "summary": summary_for(current["temperature_2m"], condition),
         "high": high,
         "low": low,
         "condition": condition,
+        "precipitation_probability": precipitation_probability,
+        "precipitation_mm": precipitation_mm,
     }
 
 
-if __name__ == "__main__":
-    print(json.dumps(fetch_weather(), indent=2))
+def fetch_open_meteo(config):
+    with urlopen(build_open_meteo_url(config), timeout=8) as response:
+        return json.loads(response.read().decode("utf-8"))
+
+
+def fetch_weather(config_path=None):
+    try:
+        return parse_open_meteo(fetch_open_meteo(load_weather_config(config_path)))
+    except (OSError, URLError, TimeoutError, KeyError, json.JSONDecodeError):
+        return FALLBACK_WEATHER.copy()

@@ -4,7 +4,10 @@ import unittest
 from pathlib import Path
 
 from content.schema import BriefingContent, PriorityItem
+from connectors.weather import build_open_meteo_url, parse_open_meteo
+from ai.generate_outfit import generate_outfit
 from orchestrator.run_morning_job import build_content, write_content
+from scripts.morning import run_morning
 from renderer.render import load_layout, render, slot_text
 from wardrobe.import_photos import import_photos
 
@@ -97,6 +100,80 @@ class StageOneTest(unittest.TestCase):
             self.assertEqual(records[0]["image"], "wardrobe/images/navy-rain-shell.jpg")
             self.assertTrue((images / "navy-rain-shell.jpg").exists())
             self.assertEqual(json.loads(drafts.read_text()), records)
+
+    def test_open_meteo_response_maps_to_weather_contract(self):
+        weather = parse_open_meteo(
+            {
+                "current": {
+                    "temperature_2m": 17.6,
+                    "weather_code": 61,
+                    "precipitation": 0.2,
+                },
+                "daily": {
+                    "temperature_2m_max": [20.2],
+                    "temperature_2m_min": [11.4],
+                    "precipitation_probability_max": [80],
+                    "precipitation_sum": [5.1],
+                    "weather_code": [61],
+                },
+            }
+        )
+
+        self.assertEqual(weather["summary"], "18C, rain likely")
+        self.assertEqual(weather["high"], 20)
+        self.assertEqual(weather["low"], 11)
+        self.assertEqual(weather["condition"], "rain_likely")
+        self.assertEqual(weather["precipitation_probability"], 80)
+
+    def test_open_meteo_url_uses_location_config(self):
+        url = build_open_meteo_url(
+            {
+                "latitude": -33.8688,
+                "longitude": 151.2093,
+                "timezone": "Australia/Sydney",
+            }
+        )
+
+        self.assertIn("latitude=-33.8688", url)
+        self.assertIn("longitude=151.2093", url)
+        self.assertIn("timezone=Australia%2FSydney", url)
+        self.assertIn("current=temperature_2m%2Cweather_code%2Cprecipitation", url)
+        self.assertIn("daily=temperature_2m_max%2Ctemperature_2m_min", url)
+
+    def test_outfit_reason_matches_non_rain_weather(self):
+        outfit = generate_outfit(
+            {"condition": "cloudy", "high": 16, "low": 8},
+            [
+                {"name": "olive overshirt", "category": "midlayer", "rain_ok": False},
+                {"name": "grey tee", "category": "top", "rain_ok": False},
+                {"name": "black jeans", "category": "bottom", "rain_ok": False},
+                {"name": "black sneakers", "category": "shoes", "rain_ok": False},
+            ],
+        )
+
+        self.assertEqual(outfit["headline"], "Easy casual layers")
+        self.assertIn("cloudy", outfit["reason"].lower())
+        self.assertNotIn("Rain later", outfit["reason"])
+
+    def test_morning_command_builds_content_and_png(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+
+            def build():
+                return {
+                    "weather": {"summary": "18C, clear"},
+                    "outfit": {"headline": "Easy layers", "items": [], "reason": ""},
+                }
+
+            def render_content(content, output):
+                output.parent.mkdir(parents=True, exist_ok=True)
+                output.write_bytes(b"\x89PNG\r\n\x1a\nfake")
+
+            result = run_morning(root, build_content_fn=build, render_fn=render_content)
+
+            self.assertEqual(result["weather"], "18C, clear")
+            self.assertTrue((root / "content" / "latest.json").exists())
+            self.assertEqual((root / "renderer" / "latest.png").read_bytes()[:8], b"\x89PNG\r\n\x1a\n")
 
 
 if __name__ == "__main__":

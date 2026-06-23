@@ -13,12 +13,18 @@ Stage 1 scaffold for an e-ink morning briefing appliance.
 ## Run
 
 ```bash
-PYTHONPATH=. python3 orchestrator/run_morning_job.py
-PYTHONPATH=. python3 renderer/render.py
-PYTHONPATH=. python3 server/app.py
+make morning
+make serve
 ```
 
 Then open `http://127.0.0.1:8080/latest.png`.
+
+Without `make`, run:
+
+```bash
+PYTHONPATH=. python3 scripts/morning.py
+PYTHONPATH=. python3 server/app.py
+```
 
 Install Pillow for anti-aliased text:
 
@@ -31,7 +37,7 @@ Without Pillow, the renderer falls back to the dependency-free bitmap font.
 ## Test
 
 ```bash
-PYTHONPATH=. python3 -m unittest discover -s tests
+make test
 ```
 
 ## Wardrobe Intake
