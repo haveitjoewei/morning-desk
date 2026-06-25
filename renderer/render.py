@@ -188,14 +188,14 @@ def slot_text(value, fields=None, max_items=None):
         for item in value[: max_items or len(value)]:
             lines.append(" - ".join(str(item[field]) for field in fields))
         return "\n".join(lines)
-    if isinstance(value, dict) and {"headline", "items", "reason"} <= set(value):
-        return "\n".join(
-            [
-                value["headline"],
-                ", ".join(value["items"]),
-                value["reason"],
-            ]
-        )
+    if isinstance(value, dict) and fields:
+        lines = []
+        for field in fields:
+            field_value = value.get(field, "")
+            if isinstance(field_value, list):
+                field_value = ", ".join(str(item) for item in field_value)
+            lines.append(str(field_value))
+        return "\n".join(lines)
     return str(value)
 
 
@@ -211,7 +211,9 @@ def _label_text(content, label):
     return label
 
 
-def _attention_text(value, max_items=None):
+def attention_text(value, max_items=None):
+    if not value:
+        return "ALL CLEAR\nNothing needs your attention right now."
     items = value[: max_items or len(value)]
     noun = "THING" if len(value) == 1 else "THINGS"
     lines = [f"{len(value)} {noun} NEED ATTENTION"]
@@ -268,73 +270,159 @@ def _draw_pillow_text(draw, xy, text, font, width, fill=0, leading=1.18):
         draw.text((x, y + index * line_height), line, font=font, fill=fill)
 
 
-def _draw_pillow_outfit(draw, xy, outfit, width, fonts):
+def _draw_pillow_fields(draw, xy, value, fields, width, fonts):
     x, y = xy
     title_font, item_font, reason_font = fonts
-    draw.text((x, y), outfit["headline"], font=title_font, fill=0)
+    values = []
+    for field in fields:
+        field_value = value.get(field, "")
+        if isinstance(field_value, list):
+            field_value = ", ".join(str(item) for item in field_value)
+        values.append(str(field_value))
+    values += [""] * (3 - len(values))
 
-    item_y = y + 25
-    items = ", ".join(outfit["items"])
+    draw.text((x, y), values[0], font=title_font, fill=0)
+
+    item_y = y + round(title_font.size * 1.35)
+    item_line_height = round(item_font.size * 1.2)
+    items = values[1]
     for index, line in enumerate(_wrap_pillow(draw, items, item_font, width)):
-        draw.text((x, item_y + index * 18), line, font=item_font, fill=0)
+        draw.text(
+            (x, item_y + index * item_line_height),
+            line,
+            font=item_font,
+            fill=0,
+        )
 
-    reason_y = item_y + min(2, len(_wrap_pillow(draw, items, item_font, width))) * 18 + 4
-    reason = outfit["reason"]
+    reason_y = (
+        item_y
+        + min(2, len(_wrap_pillow(draw, items, item_font, width)))
+        * item_line_height
+        + round(reason_font.size * 0.3)
+    )
+    reason = values[2]
+    reason_line_height = round(reason_font.size * 1.15)
     for index, line in enumerate(_wrap_pillow(draw, reason, reason_font, width)):
-        draw.text((x, reason_y + index * 15), line, font=reason_font, fill=0)
+        draw.text(
+            (x, reason_y + index * reason_line_height),
+            line,
+            font=reason_font,
+            fill=0,
+        )
 
 
 def _render_with_pillow(content, layout, output_path):
-    image = Image.new("L", (layout["canvas"]["width"], layout["canvas"]["height"]), 255)
+    canvas_config = layout["canvas"]
+    width = canvas_config["width"]
+    height = canvas_config["height"]
+    scale_x = width / canvas_config.get("design_width", width)
+    scale_y = height / canvas_config.get("design_height", height)
+    font_scale = min(scale_x, scale_y)
+    image = Image.new("L", (width, height), 255)
     draw = ImageDraw.Draw(image)
 
-    display = _font("/System/Library/Fonts/NewYork.ttf", 42)
-    body = _font("/System/Library/Fonts/SFNS.ttf", 18)
-    body_small = _font("/System/Library/Fonts/SFNS.ttf", 15)
-    body_tiny = _font("/System/Library/Fonts/SFNS.ttf", 13)
-    label_font = _font("/System/Library/Fonts/SFNSMono.ttf", 13)
-    attention_label = _font("/System/Library/Fonts/SFNSMono.ttf", 21)
-    attention_item = _font("/System/Library/Fonts/SFNS.ttf", 21)
+    def size(value):
+        return max(1, round(value * font_scale))
+
+    display = _font("/System/Library/Fonts/NewYork.ttf", size(42))
+    body = _font("/System/Library/Fonts/SFNS.ttf", size(18))
+    body_small = _font("/System/Library/Fonts/SFNS.ttf", size(15))
+    body_tiny = _font("/System/Library/Fonts/SFNS.ttf", size(13))
+    label_font = _font("/System/Library/Fonts/SFNSMono.ttf", size(13))
+    attention_label = _font("/System/Library/Fonts/SFNSMono.ttf", size(21))
+    attention_item = _font("/System/Library/Fonts/SFNS.ttf", size(21))
 
     for slot in layout["slots"]:
         pos = slot["position"]
-        x, y, w, h = pos["x"], pos["y"], pos["w"], pos["h"]
+        x = round(pos["x"] * scale_x)
+        y = round(pos["y"] * scale_y)
+        w = round(pos["w"] * scale_x)
+        h = round(pos["h"] * scale_y)
         chrome = slot.get("style", {}).get("chrome", "line")
         value = _resolve(content, slot["source"])
 
         if slot["type"] == "hero":
-            draw.text((x, y - 2), str(value), font=display, fill=0)
+            draw.text((x, y - round(2 * scale_y)), str(value), font=display, fill=0)
             weather = _label_text(content, slot.get("label"))
             weather_width = draw.textlength(weather, font=body)
-            draw.text((x + w - weather_width, y + 10), weather, font=body, fill=0)
+            draw.text(
+                (x + w - weather_width, y + round(10 * scale_y)),
+                weather,
+                font=body,
+                fill=0,
+            )
             draw.line((x, y + h - 1, x + w, y + h - 1), fill=0, width=1)
             continue
 
         if chrome == "solid":
+            if not value:
+                draw.line((x, y, x + w, y), fill=0, width=2)
+                draw.text(
+                    (x, y + round(18 * scale_y)),
+                    "ALL CLEAR",
+                    font=attention_label,
+                    fill=0,
+                )
+                draw.text(
+                    (x, y + round(55 * scale_y)),
+                    "Nothing needs your attention right now.",
+                    font=attention_item,
+                    fill=0,
+                )
+                continue
+
             draw.rectangle((x, y, x + w, y + h), fill=0)
             items = value[: slot.get("max_items", len(value))]
             noun = "THING" if len(value) == 1 else "THINGS"
-            draw.text((x + 18, y + 14), f"{len(value)} {noun} NEED ATTENTION", font=attention_label, fill=255)
-            item_y = y + 48
+            draw.text(
+                (x + round(18 * scale_x), y + round(14 * scale_y)),
+                f"{len(value)} {noun} NEED ATTENTION",
+                font=attention_label,
+                fill=255,
+            )
+            item_y = y + round(48 * scale_y)
             for item in items:
-                draw.text((x + 18, item_y), item["title"], font=attention_item, fill=255)
-                item_y += 26
+                draw.text(
+                    (x + round(18 * scale_x), item_y),
+                    item["title"],
+                    font=attention_item,
+                    fill=255,
+                )
+                item_y += round(26 * scale_y)
             continue
 
         if chrome == "line":
             draw.line((x, y, x + w, y), fill=0, width=2)
 
         label = _label_text(content, slot.get("label"))
-        text_y = y + 35 if label else y + 12
+        text_y = y + round((35 if label else 12) * scale_y)
         if label:
-            draw.text((x, y + 9), label, font=label_font, fill=0)
+            draw.text(
+                (x, y + round(9 * scale_y)),
+                label,
+                font=label_font,
+                fill=0,
+            )
 
         font = body if slot.get("style", {}).get("font_size", 14) >= 15 else body_small
-        if isinstance(value, dict) and {"headline", "items", "reason"} <= set(value):
-            _draw_pillow_outfit(draw, (x + 14, text_y), value, w - 28, (body, body_small, body_tiny))
+        if isinstance(value, dict) and slot.get("fields"):
+            _draw_pillow_fields(
+                draw,
+                (x + round(14 * scale_x), text_y),
+                value,
+                slot["fields"],
+                w - round(28 * scale_x),
+                (body, body_small, body_tiny),
+            )
         else:
             text = _slot_text(value, slot.get("fields"), slot.get("max_items"))
-            _draw_pillow_text(draw, (x + 14, text_y), text, font, w - 28)
+            _draw_pillow_text(
+                draw,
+                (x + round(14 * scale_x), text_y),
+                text,
+                font,
+                w - round(28 * scale_x),
+            )
 
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     image.save(output_path)
@@ -345,16 +433,28 @@ def render(content, layout, output_path):
         _render_with_pillow(content, layout, output_path)
         return
 
-    canvas = Canvas(layout["canvas"]["width"], layout["canvas"]["height"])
+    canvas_config = layout["canvas"]
+    width = canvas_config["width"]
+    height = canvas_config["height"]
+    scale_x = width / canvas_config.get("design_width", width)
+    scale_y = height / canvas_config.get("design_height", height)
+    canvas = Canvas(width, height)
 
     for slot in layout["slots"]:
-        pos = slot["position"]
+        raw_pos = slot["position"]
+        pos = {
+            "x": round(raw_pos["x"] * scale_x),
+            "y": round(raw_pos["y"] * scale_y),
+            "w": round(raw_pos["w"] * scale_x),
+            "h": round(raw_pos["h"] * scale_y),
+        }
         style = slot.get("style", {})
-        _draw_slot_chrome(canvas, slot, pos)
         value = _resolve(content, slot["source"])
+        if value or slot["type"] != "attention":
+            _draw_slot_chrome(canvas, slot, pos)
         size = style.get("font_size", 14)
         scale = 5 if slot["type"] == "hero" else 3 if size >= 18 else 2
-        shade = 255 if style.get("chrome") == "solid" else 0
+        shade = 255 if style.get("chrome") == "solid" and value else 0
 
         if slot["type"] == "hero":
             canvas.text(pos["x"], pos["y"], str(value), scale, pos["w"] - 190)
@@ -363,7 +463,7 @@ def render(content, layout, output_path):
             continue
 
         if slot["type"] == "attention":
-            text = _attention_text(value, slot.get("max_items"))
+            text = attention_text(value, slot.get("max_items"))
         else:
             text = _slot_text(value, slot.get("fields"), slot.get("max_items"))
 

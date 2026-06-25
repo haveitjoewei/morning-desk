@@ -18,7 +18,6 @@ def build_content():
     calendar = fetch_calendar()
     wardrobe_items = load_wardrobe()
     raw_priority_events = fetch_airbnb_messages() + fetch_va_messages()
-
     priority_items = [
         PriorityItem(
             event.title,
@@ -29,7 +28,10 @@ def build_content():
         )
         for event in raw_priority_events
     ]
-    briefing = generate_briefing(calendar, weather, priority_items)
+    visible_priorities = [
+        item.to_dict() for item in priority_items if item.urgency in {"today", "urgent"}
+    ]
+    briefing = generate_briefing(weather, calendar, visible_priorities)
 
     return BriefingContent.from_parts(
         weather=weather,
@@ -37,14 +39,19 @@ def build_content():
         briefing=briefing,
         calendar=calendar,
         priority_items=priority_items,
-        journal_prompt=generate_journal_prompt(briefing, calendar),
+        journal_prompt=generate_journal_prompt(
+            briefing,
+            calendar,
+        ),
     ).to_dict()
 
 
 def write_content(content, output_path):
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(content, indent=2) + "\n")
+    temporary = output_path.with_name(f"{output_path.name}.tmp")
+    temporary.write_text(json.dumps(content, indent=2) + "\n")
+    temporary.replace(output_path)
     return content
 
 

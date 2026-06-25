@@ -26,8 +26,8 @@ _STUB = [
 def fetch_airbnb_messages():
     query = os.environ.get("MD_AIRBNB_QUERY", DEFAULT_QUERY)
     messages = _gmail.search(query, max_results=int(os.environ.get("MD_AIRBNB_MAX", "10")))
-    if not messages:
-        return list(_STUB)
+    if messages is None:
+        return list(_STUB) if os.environ.get("MD_DEMO") == "1" else []
     return [
         RawEvent(
             source="airbnb",

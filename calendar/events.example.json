@@ -1,0 +1,26 @@
+[
+  {
+    "day_offset": 0,
+    "time": "09:30",
+    "duration_minutes": 30,
+    "title": "Standup",
+    "location": "",
+    "dress_code": "casual"
+  },
+  {
+    "day_offset": 0,
+    "time": "12:00",
+    "duration_minutes": 60,
+    "title": "Lunch",
+    "location": "Surry Hills",
+    "dress_code": "smart casual"
+  },
+  {
+    "day_offset": 0,
+    "time": "17:30",
+    "duration_minutes": 60,
+    "title": "Badminton",
+    "location": "Court",
+    "dress_code": "athletic"
+  }
+]

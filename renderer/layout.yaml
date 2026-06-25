@@ -1,6 +1,8 @@
 canvas:
-  width: 800
-  height: 480
+  width: 1200
+  height: 825
+  design_width: 800
+  design_height: 480
 slots:
   - id: hero
     type: hero
@@ -27,6 +29,7 @@ slots:
     type: text
     source: outfit
     label: WEAR
+    fields: [headline, items, reason]
     position: {x: 404, y: 250, w: 368, h: 112}
     style: {font_size: 15, chrome: line}
   - id: briefing

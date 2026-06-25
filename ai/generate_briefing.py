@@ -1,46 +1,75 @@
-"""Briefing — 2-3 sentence narrative summary of the day from calendar + context."""
-from __future__ import annotations
-
+"""Generate a concise narrative briefing, with a deterministic local fallback."""
 import json
 
 from ai._llm import MODEL, available, client, text_of
 
+
 SYSTEM = (
-    "You write the morning briefing for a distraction-free e-ink desk display. "
-    "Given the day's weather, calendar, and priority items, write 2-3 calm, "
-    "plain sentences summarizing what needs attention before the day starts. "
-    "No greeting, no preamble, no markdown — just the briefing sentences."
-)
-
-_FALLBACK = (
-    "A light admin morning with one guest issue and one VA decision needing attention. "
-    "The afternoon looks wet, so handle errands early if you can."
+    "Write a calm morning briefing for a living-room e-ink display. "
+    "Use 2-3 short plain sentences. Mention the first scheduled event, actionable "
+    "priority count, and useful weather implications. No greeting, markdown, or filler."
 )
 
 
-def generate_briefing(calendar=None, weather=None, priority_items=None):
+def fallback_briefing(weather, calendar, priority_items):
+    parts = []
+
+    if calendar:
+        first = calendar[0]
+        parts.append(
+            f"{len(calendar)} scheduled event{'s' if len(calendar) != 1 else ''}; "
+            f"first is {first['title']} at {first['time']}."
+        )
+    else:
+        parts.append("No scheduled events today.")
+
+    if priority_items:
+        parts.append(
+            f"{len(priority_items)} thing{'s' if len(priority_items) != 1 else ''} "
+            "need attention before the day gets away."
+        )
+    else:
+        parts.append("There is nothing urgent waiting.")
+
+    condition = weather.get("condition", "")
+    if condition in {"rain_likely", "rain_later", "storm"}:
+        parts.append("Rain is likely, so handle outdoor errands early.")
+    elif condition == "clear":
+        parts.append("Conditions look clear.")
+    elif condition:
+        parts.append(f"Expect {condition.replace('_', ' ')} conditions.")
+
+    return " ".join(parts)
+
+
+def generate_briefing(weather, calendar, priority_items):
+    fallback = fallback_briefing(weather, calendar, priority_items)
     if not available():
-        return _FALLBACK
+        return fallback
+
     try:
         context = {
-            "weather": weather or {},
-            "calendar": calendar or [],
-            "priority_items": [
-                {
-                    "title": getattr(p, "title", None) or p.get("title"),
-                    "urgency": getattr(p, "urgency", None) or p.get("urgency"),
-                    "source": getattr(p, "source", None) or p.get("source"),
-                }
-                for p in (priority_items or [])
-            ],
+            "weather": weather,
+            "calendar": calendar,
+            "priority_items": priority_items,
         }
-        resp = client().messages.create(
+        response = client().messages.create(
             model=MODEL,
-            max_tokens=300,
-            system=[{"type": "text", "text": SYSTEM, "cache_control": {"type": "ephemeral"}}],
-            messages=[{"role": "user", "content": json.dumps(context, ensure_ascii=False)}],
+            max_tokens=220,
+            system=[
+                {
+                    "type": "text",
+                    "text": SYSTEM,
+                    "cache_control": {"type": "ephemeral"},
+                }
+            ],
+            messages=[
+                {
+                    "role": "user",
+                    "content": json.dumps(context, ensure_ascii=False),
+                }
+            ],
         )
-        out = text_of(resp)
-        return out or _FALLBACK
+        return text_of(response) or fallback
     except Exception:
-        return _FALLBACK
+        return fallback

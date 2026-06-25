@@ -64,11 +64,13 @@ def authorize():
 
 
 def search(query, max_results=10):
-    """Run a Gmail search; return [{id, subject, sender, snippet}] or [] on failure."""
+    """Return messages, [] for an empty authenticated search, or None if unavailable."""
+    if os.environ.get("MD_OFFLINE") == "1":
+        return None
     try:
         creds = load_credentials()
         if not creds:
-            return []
+            return None
         from googleapiclient.discovery import build
 
         service = build("gmail", "v1", credentials=creds, cache_discovery=False)
@@ -103,4 +105,4 @@ def search(query, max_results=10):
             )
         return out
     except Exception:
-        return []
+        return None

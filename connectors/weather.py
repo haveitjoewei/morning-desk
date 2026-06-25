@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 from urllib.error import URLError
 from urllib.parse import urlencode
@@ -96,6 +97,8 @@ def fetch_open_meteo(config):
 
 
 def fetch_weather(config_path=None):
+    if os.environ.get("MD_OFFLINE") == "1":
+        return FALLBACK_WEATHER.copy()
     try:
         return parse_open_meteo(fetch_open_meteo(load_weather_config(config_path)))
     except (OSError, URLError, TimeoutError, KeyError, json.JSONDecodeError):

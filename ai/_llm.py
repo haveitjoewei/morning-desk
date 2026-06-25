@@ -8,18 +8,25 @@ from __future__ import annotations
 
 import os
 
-MODEL = "claude-opus-4-8"
+MODEL = os.environ.get("MD_CLAUDE_MODEL", "claude-opus-4-8")
 
 
 def available() -> bool:
     """True if an Anthropic credential is present in the environment."""
+    if os.environ.get("MD_OFFLINE") == "1":
+        return False
     return bool(os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN"))
 
 
 def client():
     import anthropic
 
-    return anthropic.Anthropic()
+    return anthropic.Anthropic(
+        api_key=os.environ.get("ANTHROPIC_API_KEY"),
+        auth_token=os.environ.get("ANTHROPIC_AUTH_TOKEN"),
+        timeout=12.0,
+        max_retries=1,
+    )
 
 
 def text_of(response) -> str:

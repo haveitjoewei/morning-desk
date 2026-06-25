@@ -1,51 +1,164 @@
 # Morning Desk
 
-Stage 1 scaffold for an e-ink morning briefing appliance.
+A distraction-free morning briefing rendered to a single 800x480 e-ink image.
 
-## What works
+## Current Pipeline
 
-- Builds the v1 content JSON contract with stubbed data.
-- Filters priority items to `today` and `urgent` in the orchestrator/content layer.
-- Loads a non-coder-editable YAML layout.
-- Renders the latest briefing to a PNG using only the Python standard library.
-- Serves the PNG at `/latest.png`.
+```text
+Weather + Calendar + Gmail
+            |
+      classify/generate
+            |
+    content/latest.json
+            |
+       layout.yaml
+            |
+    renderer/latest.png
+            |
+       HTTP endpoint
+```
 
-## Run
+The project works without credentials using deterministic local fallbacks. When
+Anthropic or Google credentials are configured, the same pipeline automatically
+uses the live integrations.
+
+## Setup
 
 ```bash
+make setup
+make test
+make status
 make morning
 make serve
 ```
 
-Then open `http://127.0.0.1:8080/latest.png`.
+Open `http://127.0.0.1:8080/latest.png`.
 
-Without `make`, run:
+`make morning` fetches weather, collects calendar and priority items, generates
+the briefing/outfit/journal content, writes `content/latest.json`, and renders
+`renderer/latest.png`.
 
-```bash
-PYTHONPATH=. python3 scripts/morning.py
-PYTHONPATH=. python3 server/app.py
-```
+`make status` reports whether Claude, Google Calendar, Gmail, the rendered image,
+and server configuration are ready without making external requests.
 
-Install Pillow for anti-aliased text:
+## Automatic Startup
 
-```bash
-python3 -m pip install -r requirements.txt
-```
-
-Without Pillow, the renderer falls back to the dependency-free bitmap font.
-
-## Test
+On macOS, install the daily generator and always-on image server with:
 
 ```bash
-make test
+make install-service
 ```
+
+The briefing is generated at 5:45 AM local time and once immediately when the
+agent is loaded. Logs are written under `logs/`.
+
+Remove both agents with:
+
+```bash
+make uninstall-service
+```
+
+## Configuration
+
+Weather location is editable in `config/location.json`.
+
+Local fallback calendar events live in `calendar/events.json`. Relative events
+with `"day_offset": 0` always represent today. The default file is empty;
+`calendar/events.example.json` contains demo data you can copy or adapt.
+
+The local wardrobe catalog lives in `wardrobe/items.json`.
+
+## Claude
+
+Set either credential before running `make morning`:
+
+```bash
+export ANTHROPIC_API_KEY="..."
+```
+
+Optional model override:
+
+```bash
+export MD_CLAUDE_MODEL="claude-opus-4-8"
+```
+
+For launchd, put runtime values in:
+
+```text
+~/.config/morning-desk/environment
+```
+
+Use `config/environment.example` as the template and set permissions to `600`.
+Existing process environment values take precedence over the file.
+
+Without a credential, briefing, outfit, urgency, and journal generation use
+deterministic local logic. Claude outfit output is rejected if it invents an
+item not present in `wardrobe/items.json`.
+
+## Google Calendar
+
+1. Enable the Google Calendar API.
+2. Create an OAuth desktop-app credential.
+3. Save it to:
+
+```text
+~/.config/morning-desk/gcal_credentials.json
+```
+
+4. Run:
+
+```bash
+make calendar-auth
+```
+
+The token is stored at `~/.config/morning-desk/gcal_token.json`. If OAuth is not
+configured or fails, Morning Desk uses `calendar/events.json`. An authenticated
+but empty Google Calendar stays empty rather than showing demo events.
+
+## Gmail Sources
+
+Enable the Gmail API and save an OAuth desktop credential to:
+
+```text
+~/.config/morning-desk/gmail_credentials.json
+```
+
+Then run:
+
+```bash
+make gmail-auth
+```
+
+Airbnb mail and VA-forwarded items are read-only Gmail searches. Queries can be
+overridden with `MD_AIRBNB_QUERY` and `MD_VA_QUERY`.
+
+Missing Gmail credentials and authenticated searches with no matching messages
+produce no priority items. Set `MD_DEMO=1` only when you explicitly want the
+sample Airbnb/VA alerts.
 
 ## Wardrobe Intake
 
-Drop clothing photos into `wardrobe/inbox/`, then run:
+Wardrobe photo intake is scaffolded but optional. Drop photos into
+`wardrobe/inbox/`, then run:
 
 ```bash
-PYTHONPATH=. python3 wardrobe/import_photos.py
+PYTHONPATH=. venv/bin/python wardrobe/import_photos.py
 ```
 
-The importer copies supported images into `wardrobe/images/` and writes editable draft records to `wardrobe/drafts.json`. Review warmth, rain suitability, formality, and notes before promoting real items into `wardrobe/items.json`.
+Draft records are written to `wardrobe/drafts.json` for review before promotion
+to `wardrobe/items.json`.
+
+## Device
+
+The backend now renders at Inkplate 10's native 1200x825 resolution. Design
+coordinates remain 800x480 in `renderer/layout.yaml`, and the renderer scales
+them to the configured canvas.
+
+The Arduino sketch is in `device/morning_desk/`. Create
+`device/morning_desk/secrets.h` from `secrets.example.h`, set the Wi-Fi details
+and the server's LAN URL, then upload it with the Inkplate board package and
+Inkplate library installed.
+
+The device wakes, connects to Wi-Fi, streams `/latest.png`, refreshes the panel,
+and sleeps for 24 hours. Failed fetches retry after 15 minutes without replacing
+an already-displayed briefing.

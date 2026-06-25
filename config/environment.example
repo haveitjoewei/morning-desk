@@ -1,0 +1,5 @@
+# Copy to ~/.config/morning-desk/environment and chmod 600.
+ANTHROPIC_API_KEY=
+MD_CLAUDE_MODEL=claude-opus-4-8
+MD_SERVER_PORT=8080
+MD_TZ=Australia/Sydney

@@ -1,6 +1,9 @@
 venv/
+.venv/
 __pycache__/
 *.pyc
 content/latest.json
 renderer/out.png
 renderer/latest.png
+device/morning_desk/secrets.h
+logs/

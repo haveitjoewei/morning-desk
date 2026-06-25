@@ -43,5 +43,32 @@
     "rain_ok": false,
     "formality": "casual",
     "style_tags": ["layered", "relaxed"]
+  },
+  {
+    "name": "white oxford shirt",
+    "category": "top",
+    "colors": ["white"],
+    "warmth": "light",
+    "rain_ok": false,
+    "formality": "smart casual",
+    "style_tags": ["clean", "structured"]
+  },
+  {
+    "name": "charcoal wool trousers",
+    "category": "bottom",
+    "colors": ["charcoal"],
+    "warmth": "medium",
+    "rain_ok": false,
+    "formality": "smart casual",
+    "style_tags": ["tailored", "polished"]
+  },
+  {
+    "name": "black leather loafers",
+    "category": "shoes",
+    "colors": ["black"],
+    "warmth": "light",
+    "rain_ok": false,
+    "formality": "smart casual",
+    "style_tags": ["polished", "simple"]
   }
 ]
