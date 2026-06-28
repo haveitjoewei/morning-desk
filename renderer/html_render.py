@@ -101,17 +101,18 @@ body { background:var(--bg); color:var(--ink); font-family:-apple-system,"SF Pro
 """
 
 
-def render_html(content, refresh_seconds=900):
+def _hero(content):
     weather = content.get("weather", {})
-    parts = [
-        "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
-        "<meta name='viewport' content='width=device-width,initial-scale=1'>",
-        f"<meta http-equiv='refresh' content='{int(refresh_seconds)}'>",
-        f"<title>Morning Desk — {_esc(content.get('date_label',''))}</title>",
-        f"<style>{CSS}</style></head><body>",
+    return (
         "<header class='hero'>"
         f"<h1>{_esc(content.get('date_label',''))}</h1>"
-        f"<span class='weather'>{_esc(weather.get('summary',''))}</span></header>",
+        f"<span class='weather'>{_esc(weather.get('summary',''))}</span></header>"
+    )
+
+
+def _morning_body(content):
+    return "".join([
+        _hero(content),
         _attention_block(content.get("priority_items", [])),
         "<div class='cols'>"
         f"<section class='panel'><h3>TODAY</h3><ul class='cal'>{_calendar_rows(content.get('calendar', []))}</ul></section>"
@@ -121,9 +122,36 @@ def render_html(content, refresh_seconds=900):
         f"<section class='panel'><h3>READ</h3><p>{_esc(content.get('briefing',''))}</p></section>"
         f"<section class='panel ask'><h3>ASK</h3><p>{_esc(content.get('journal_prompt',''))}</p></section>"
         "</div>",
+    ])
+
+
+def _evening_body(content):
+    return "".join([
+        _hero(content),
+        f"<section class='attention clear'><h2>PREP FOR TOMORROW</h2>"
+        f"<p>Lay it out tonight so the morning is easy.</p></section>",
+        "<div class='cols'>"
+        f"<section class='panel'><h3>TOMORROW</h3><ul class='cal'>{_calendar_rows(content.get('calendar', []))}</ul></section>"
+        f"<section class='panel wear'><h3>WEAR</h3>{_outfit_block(content.get('outfit', {}))}</section>"
+        "</div>",
+        "<div class='bottom'>"
+        f"<section class='panel'><h3>TODAY'S RECAP</h3><p>{_esc(content.get('recap',''))}</p></section>"
+        f"<section class='panel ask'><h3>REFLECT</h3><p>{_esc(content.get('reflection_prompt',''))}</p></section>"
+        "</div>",
+    ])
+
+
+def render_html(content, refresh_seconds=900):
+    body = _evening_body(content) if content.get("mode") == "evening" else _morning_body(content)
+    return "".join([
+        "<!doctype html><html lang='en'><head><meta charset='utf-8'>",
+        "<meta name='viewport' content='width=device-width,initial-scale=1'>",
+        f"<meta http-equiv='refresh' content='{int(refresh_seconds)}'>",
+        f"<title>Morning Desk — {_esc(content.get('date_label',''))}</title>",
+        f"<style>{CSS}</style></head><body>",
+        body,
         "</body></html>",
-    ]
-    return "".join(parts)
+    ])
 
 
 def main():

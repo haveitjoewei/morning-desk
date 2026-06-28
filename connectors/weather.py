@@ -22,13 +22,13 @@ def load_weather_config(path=None):
     return json.loads(path.read_text())
 
 
-def build_open_meteo_url(config):
+def build_open_meteo_url(config, days=1):
     query = urlencode(
         {
             "latitude": config["latitude"],
             "longitude": config["longitude"],
             "timezone": config.get("timezone", "auto"),
-            "forecast_days": 1,
+            "forecast_days": days,
             "current": "temperature_2m,weather_code,precipitation",
             "daily": ",".join(
                 [
@@ -71,18 +71,20 @@ def summary_for(temp, condition):
     return f"{round(temp)}C, {labels.get(condition, condition)}"
 
 
-def parse_open_meteo(payload):
-    current = payload["current"]
+def parse_open_meteo(payload, day=0):
+    current = payload.get("current", {})
     daily = payload["daily"]
-    high = round(daily["temperature_2m_max"][0])
-    low = round(daily["temperature_2m_min"][0])
-    precipitation_probability = daily.get("precipitation_probability_max", [0])[0] or 0
-    precipitation_mm = daily.get("precipitation_sum", [0])[0] or 0
-    weather_code = daily.get("weather_code", [current.get("weather_code", 0)])[0]
+    high = round(daily["temperature_2m_max"][day])
+    low = round(daily["temperature_2m_min"][day])
+    precipitation_probability = (daily.get("precipitation_probability_max") or [0] * (day + 1))[day] or 0
+    precipitation_mm = (daily.get("precipitation_sum") or [0] * (day + 1))[day] or 0
+    weather_code = (daily.get("weather_code") or [current.get("weather_code", 0)] * (day + 1))[day]
     condition = condition_from(weather_code, precipitation_probability, precipitation_mm)
+    # Today uses the current temperature; future days use the daily high.
+    temp = current.get("temperature_2m", high) if day == 0 else high
 
     return {
-        "summary": summary_for(current["temperature_2m"], condition),
+        "summary": summary_for(temp, condition),
         "high": high,
         "low": low,
         "condition": condition,
@@ -91,15 +93,16 @@ def parse_open_meteo(payload):
     }
 
 
-def fetch_open_meteo(config):
-    with urlopen(build_open_meteo_url(config), timeout=8) as response:
+def fetch_open_meteo(config, days=1):
+    with urlopen(build_open_meteo_url(config, days), timeout=8) as response:
         return json.loads(response.read().decode("utf-8"))
 
 
-def fetch_weather(config_path=None):
+def fetch_weather(config_path=None, day=0):
     if os.environ.get("MD_OFFLINE") == "1":
         return FALLBACK_WEATHER.copy()
     try:
-        return parse_open_meteo(fetch_open_meteo(load_weather_config(config_path)))
-    except (OSError, URLError, TimeoutError, KeyError, json.JSONDecodeError):
+        payload = fetch_open_meteo(load_weather_config(config_path), days=day + 1)
+        return parse_open_meteo(payload, day=day)
+    except (OSError, URLError, TimeoutError, KeyError, IndexError, json.JSONDecodeError):
         return FALLBACK_WEATHER.copy()
