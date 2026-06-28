@@ -18,13 +18,17 @@ def available() -> bool:
     return bool(os.environ.get("ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_AUTH_TOKEN"))
 
 
-def client():
+def client(timeout=None):
     import anthropic
 
+    # Default stays tight so the morning job fails fast to its fallback; interactive
+    # tools (vision ingest, corrections) pass a longer timeout for slower calls.
+    if timeout is None:
+        timeout = float(os.environ.get("MD_LLM_TIMEOUT", "12"))
     return anthropic.Anthropic(
         api_key=os.environ.get("ANTHROPIC_API_KEY"),
         auth_token=os.environ.get("ANTHROPIC_AUTH_TOKEN"),
-        timeout=12.0,
+        timeout=timeout,
         max_retries=1,
     )
 

@@ -107,7 +107,7 @@ def encode_upright(path):
 
 
 def analyze(b64):
-    resp = client().messages.create(
+    resp = client(timeout=60).messages.create(
         model=MODEL,
         max_tokens=600,
         output_config={"format": {"type": "json_schema", "schema": GARMENT_SCHEMA}},

@@ -404,6 +404,53 @@ class StageOneTest(unittest.TestCase):
         self.assertIn("rain shell", outfit["items"])
         self.assertIn("waterproof sneakers", outfit["items"])
 
+    def test_outfit_avoids_athletic_shorts_for_rainy_casual_day(self):
+        outfit = generate_outfit(
+            {"condition": "rain_later", "high": 18, "low": 12},
+            [
+                {
+                    "name": "hooded softshell jacket",
+                    "category": "outerwear",
+                    "formality": ["casual"],
+                    "rain_ok": True,
+                    "warmth": 3,
+                },
+                {
+                    "name": "white waffle henley",
+                    "category": "top",
+                    "formality": ["casual", "smart casual"],
+                    "rain_ok": False,
+                    "warmth": 2,
+                },
+                {
+                    "name": "grey mesh athletic shorts",
+                    "category": "bottom",
+                    "formality": ["athletic"],
+                    "rain_ok": False,
+                    "warmth": 1,
+                    "subtype": "athletic shorts",
+                },
+                {
+                    "name": "black slim jeans",
+                    "category": "bottom",
+                    "formality": ["casual", "smart casual"],
+                    "rain_ok": False,
+                    "warmth": 3,
+                    "subtype": "jeans",
+                },
+                {
+                    "name": "white leather sneakers",
+                    "category": "shoes",
+                    "formality": ["casual", "smart casual"],
+                    "rain_ok": True,
+                    "warmth": 2,
+                },
+            ],
+        )
+
+        self.assertIn("black slim jeans", outfit["items"])
+        self.assertNotIn("grey mesh athletic shorts", outfit["items"])
+
     def test_outfit_calls_out_athletic_event_separately(self):
         outfit = generate_outfit(
             {"condition": "clear", "high": 22, "low": 14},

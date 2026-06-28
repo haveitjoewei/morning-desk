@@ -1,0 +1,115 @@
+[
+  {
+    "name": "navy rain shell",
+    "category": "outerwear",
+    "colors": [
+      "navy"
+    ],
+    "warmth": "light",
+    "rain_ok": true,
+    "formality": "casual",
+    "style_tags": [
+      "clean",
+      "minimal",
+      "rain"
+    ]
+  },
+  {
+    "name": "grey heavyweight tee",
+    "category": "top",
+    "colors": [
+      "grey"
+    ],
+    "warmth": "light",
+    "rain_ok": false,
+    "formality": "casual",
+    "style_tags": [
+      "basic",
+      "soft"
+    ]
+  },
+  {
+    "name": "black straight jeans",
+    "category": "bottom",
+    "colors": [
+      "black"
+    ],
+    "warmth": "medium",
+    "rain_ok": false,
+    "formality": "casual",
+    "style_tags": [
+      "clean",
+      "versatile"
+    ]
+  },
+  {
+    "name": "waterproof black sneakers",
+    "category": "shoes",
+    "colors": [
+      "black"
+    ],
+    "warmth": "medium",
+    "rain_ok": true,
+    "formality": "casual",
+    "style_tags": [
+      "rain",
+      "walking"
+    ]
+  },
+  {
+    "name": "olive overshirt",
+    "category": "midlayer",
+    "colors": [
+      "olive"
+    ],
+    "warmth": "medium",
+    "rain_ok": false,
+    "formality": "casual",
+    "style_tags": [
+      "layered",
+      "relaxed"
+    ]
+  },
+  {
+    "name": "white oxford shirt",
+    "category": "top",
+    "colors": [
+      "white"
+    ],
+    "warmth": "light",
+    "rain_ok": false,
+    "formality": "smart casual",
+    "style_tags": [
+      "clean",
+      "structured"
+    ]
+  },
+  {
+    "name": "charcoal wool trousers",
+    "category": "bottom",
+    "colors": [
+      "charcoal"
+    ],
+    "warmth": "medium",
+    "rain_ok": false,
+    "formality": "smart casual",
+    "style_tags": [
+      "tailored",
+      "polished"
+    ]
+  },
+  {
+    "name": "black leather loafers",
+    "category": "shoes",
+    "colors": [
+      "black"
+    ],
+    "warmth": "light",
+    "rain_ok": false,
+    "formality": "smart casual",
+    "style_tags": [
+      "polished",
+      "simple"
+    ]
+  }
+]

@@ -74,6 +74,6 @@
 - Consumes: `make test`, `MD_OFFLINE=1 make morning`
 - Produces: verified local build and updated user docs
 
-- [ ] **Step 1: Document local photo/correction workflow**
-- [ ] **Step 2: Run full test suite**
-- [ ] **Step 3: Generate offline preview**
+- [x] **Step 1: Document local photo/correction workflow**
+- [x] **Step 2: Run full test suite**
+- [x] **Step 3: Generate offline preview**

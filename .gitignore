@@ -7,3 +7,7 @@ renderer/out.png
 renderer/latest.png
 device/morning_desk/secrets.h
 logs/
+.DS_Store
+# Personal wardrobe photos (binary, kept on disk; items.json is the versioned catalog)
+wardrobe/images/
+wardrobe/inbox/
