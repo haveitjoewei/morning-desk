@@ -1,4 +1,5 @@
 import json
+import os
 import struct
 import textwrap
 import zlib
@@ -236,11 +237,59 @@ def _draw_slot_chrome(canvas, slot, pos):
         canvas.rect(pos["x"], pos["y"], pos["w"], 2)
 
 
-def _font(path, size):
-    try:
-        return ImageFont.truetype(path, size)
-    except OSError:
-        return ImageFont.load_default(size)
+# Font candidates per role: macOS first, then DejaVu (ships on Linux / the Pi),
+# then Pillow's built-in default. Keeps the local look and still renders on-device.
+FONTS = {
+    "display": [
+        "/System/Library/Fonts/NewYork.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf",
+    ],
+    "body": [
+        "/System/Library/Fonts/SFNS.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    ],
+    "mono": [
+        "/System/Library/Fonts/SFNSMono.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",
+    ],
+}
+
+
+def _font(role, size):
+    for path in FONTS.get(role, []):
+        try:
+            return ImageFont.truetype(path, size)
+        except OSError:
+            continue
+    return ImageFont.load_default(size)
+
+
+def _fit(draw, text, role, base_size, width, max_height, min_size=9, leading=1.18):
+    """Largest font (<= base_size) whose wrapped text fits max_height; truncates with
+    an ellipsis only if it still overflows at min_size. Returns (lines, line_height)."""
+    min_size = min(min_size, base_size)
+    size = base_size
+    while size >= min_size:
+        font = _font(role, size)
+        lines = _wrap_pillow(draw, text, font, width)
+        line_height = max(1, int(size * leading))
+        if len(lines) * line_height <= max_height:
+            return font, lines, line_height
+        size -= 1
+    font = _font(role, min_size)
+    line_height = max(1, int(min_size * leading))
+    lines = _wrap_pillow(draw, text, font, width)
+    max_lines = max(1, max_height // line_height)
+    if len(lines) > max_lines:
+        lines = lines[:max_lines]
+        lines[-1] = (lines[-1][:-1] + "…") if lines[-1] else "…"
+    return font, lines, line_height
+
+
+def _draw_lines(draw, x, y, lines, font, line_height, fill=0):
+    for index, line in enumerate(lines):
+        draw.text((x, y + index * line_height), line, font=font, fill=fill)
+    return len(lines) * line_height
 
 
 def _wrap_pillow(draw, text, font, width):
@@ -262,17 +311,17 @@ def _wrap_pillow(draw, text, font, width):
     return lines
 
 
-def _draw_pillow_text(draw, xy, text, font, width, fill=0, leading=1.18):
+def _draw_pillow_text(draw, xy, text, role, base_size, width, max_height, fill=0):
     x, y = xy
-    lines = _wrap_pillow(draw, text, font, width)
-    line_height = int(font.size * leading)
-    for index, line in enumerate(lines):
-        draw.text((x, y + index * line_height), line, font=font, fill=fill)
+    font, lines, line_height = _fit(draw, text, role, base_size, width, max_height)
+    _draw_lines(draw, x, y, lines, font, line_height, fill)
 
 
-def _draw_pillow_fields(draw, xy, value, fields, width, fonts):
+def _draw_pillow_fields(draw, xy, value, fields, width, max_height, sizes):
+    """Title / items / reason stacked, each auto-fit, reason flowing below the real
+    (not capped) item lines and the whole block clamped to max_height."""
     x, y = xy
-    title_font, item_font, reason_font = fonts
+    title_size, item_size, reason_size = sizes
     values = []
     for field in fields:
         field_value = value.get(field, "")
@@ -281,40 +330,29 @@ def _draw_pillow_fields(draw, xy, value, fields, width, fonts):
         values.append(str(field_value))
     values += [""] * (3 - len(values))
 
-    draw.text((x, y), values[0], font=title_font, fill=0)
+    title_font, title_lines, title_lh = _fit(draw, values[0], "body", title_size, width, max_height)
+    used = _draw_lines(draw, x, y, title_lines, title_font, title_lh)
+    used += round(title_size * 0.25)
 
-    item_y = y + round(title_font.size * 1.35)
-    item_line_height = round(item_font.size * 1.2)
-    items = values[1]
-    for index, line in enumerate(_wrap_pillow(draw, items, item_font, width)):
-        draw.text(
-            (x, item_y + index * item_line_height),
-            line,
-            font=item_font,
-            fill=0,
-        )
+    # Reserve ~2 lines for the reason; let items take the rest.
+    reason_reserve = round(reason_size * 1.15 * 2)
+    item_budget = max(item_size, max_height - used - reason_reserve)
+    item_font, item_lines, item_lh = _fit(draw, values[1], "body", item_size, width, item_budget)
+    used += _draw_lines(draw, x, y + used, item_lines, item_font, item_lh)
+    used += round(reason_size * 0.3)
 
-    reason_y = (
-        item_y
-        + min(2, len(_wrap_pillow(draw, items, item_font, width)))
-        * item_line_height
-        + round(reason_font.size * 0.3)
-    )
-    reason = values[2]
-    reason_line_height = round(reason_font.size * 1.15)
-    for index, line in enumerate(_wrap_pillow(draw, reason, reason_font, width)):
-        draw.text(
-            (x, reason_y + index * reason_line_height),
-            line,
-            font=reason_font,
-            fill=0,
+    reason_budget = max(0, max_height - used)
+    if values[2] and reason_budget >= reason_size:
+        reason_font, reason_lines, reason_lh = _fit(
+            draw, values[2], "body", reason_size, width, reason_budget
         )
+        _draw_lines(draw, x, y + used, reason_lines, reason_font, reason_lh)
 
 
 def _render_with_pillow(content, layout, output_path):
     canvas_config = layout["canvas"]
-    width = canvas_config["width"]
-    height = canvas_config["height"]
+    width = int(os.environ.get("MD_RENDER_WIDTH", canvas_config["width"]))
+    height = int(os.environ.get("MD_RENDER_HEIGHT", canvas_config["height"]))
     scale_x = width / canvas_config.get("design_width", width)
     scale_y = height / canvas_config.get("design_height", height)
     font_scale = min(scale_x, scale_y)
@@ -324,13 +362,11 @@ def _render_with_pillow(content, layout, output_path):
     def size(value):
         return max(1, round(value * font_scale))
 
-    display = _font("/System/Library/Fonts/NewYork.ttf", size(42))
-    body = _font("/System/Library/Fonts/SFNS.ttf", size(18))
-    body_small = _font("/System/Library/Fonts/SFNS.ttf", size(15))
-    body_tiny = _font("/System/Library/Fonts/SFNS.ttf", size(13))
-    label_font = _font("/System/Library/Fonts/SFNSMono.ttf", size(13))
-    attention_label = _font("/System/Library/Fonts/SFNSMono.ttf", size(21))
-    attention_item = _font("/System/Library/Fonts/SFNS.ttf", size(21))
+    display = _font("display", size(42))
+    body = _font("body", size(18))
+    label_font = _font("mono", size(13))
+    attention_label = _font("mono", size(21))
+    attention_item = _font("body", size(21))
 
     for slot in layout["slots"]:
         pos = slot["position"]
@@ -404,15 +440,18 @@ def _render_with_pillow(content, layout, output_path):
                 fill=0,
             )
 
-        font = body if slot.get("style", {}).get("font_size", 14) >= 15 else body_small
+        inner_width = w - round(28 * scale_x)
+        max_height = max(size(10), (y + h) - text_y)
+        base = size(18) if slot.get("style", {}).get("font_size", 14) >= 15 else size(15)
         if isinstance(value, dict) and slot.get("fields"):
             _draw_pillow_fields(
                 draw,
                 (x + round(14 * scale_x), text_y),
                 value,
                 slot["fields"],
-                w - round(28 * scale_x),
-                (body, body_small, body_tiny),
+                inner_width,
+                max_height,
+                (size(18), size(15), size(13)),
             )
         else:
             text = _slot_text(value, slot.get("fields"), slot.get("max_items"))
@@ -420,8 +459,10 @@ def _render_with_pillow(content, layout, output_path):
                 draw,
                 (x + round(14 * scale_x), text_y),
                 text,
-                font,
-                w - round(28 * scale_x),
+                "body",
+                base,
+                inner_width,
+                max_height,
             )
 
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)

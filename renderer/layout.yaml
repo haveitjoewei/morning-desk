@@ -1,6 +1,6 @@
 canvas:
-  width: 1200
-  height: 825
+  width: 1280
+  height: 720
   design_width: 800
   design_height: 480
 slots:

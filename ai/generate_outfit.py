@@ -55,12 +55,23 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None):
         value = 0
         if formality and _formality_ok(item, formality):
             value += 4
+        if athletic_events:
+            if _formality_ok(item, "athletic"):
+                value += 2
+        elif _formality_ok(item, "athletic") and not _formality_ok(item, "casual"):
+            value -= 5
         if dress_to_impress and "dress_to_impress" in item.get("style_tags", []):
             value += 3
         if office_day and "office" in item.get("best_for", []):
             value += 2
         if context.get("occasion") and context["occasion"] in item.get("best_for", []):
             value += 2
+        if (
+            item.get("category") == "bottom"
+            and "short" in item.get("subtype", "").lower()
+            and weather.get("high", 0) < 24
+        ):
+            value -= 3
         return value
 
     def first(category, *, rain_ok=None, formality=None):
@@ -79,14 +90,14 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None):
             return None
         return best["name"]
 
-    formality = "smart casual" if smart_casual or dress_to_impress else None
+    formality = "smart casual" if smart_casual or dress_to_impress else "casual"
     items = [
         first("outerwear", rain_ok=True)
         if wants_rain
         else first("midlayer", formality=formality),
         first("top", formality=formality) or first("top"),
         first("bottom", formality=formality) or first("bottom"),
-        first("shoes", rain_ok=True, formality=formality)
+        first("shoes", rain_ok=True, formality=formality) or first("shoes", formality=formality)
         if wants_rain
         else first("shoes", formality=formality),
     ]
