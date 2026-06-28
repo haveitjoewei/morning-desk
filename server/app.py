@@ -18,7 +18,10 @@ class LatestImageHandler(BaseHTTPRequestHandler):
         return self.project_root / "content" / "latest.json"
 
     def do_HEAD(self):
-        if self.path in {"/", "/latest.png"}:
+        if self.path in {"/", "/index.html"}:
+            self.serve_html(include_body=False)
+            return
+        if self.path == "/latest.png":
             self.serve_image(include_body=False)
             return
         if self.path == "/health.json":
@@ -27,13 +30,32 @@ class LatestImageHandler(BaseHTTPRequestHandler):
         self.send_error(404)
 
     def do_GET(self):
-        if self.path in {"/", "/latest.png"}:
+        if self.path in {"/", "/index.html"}:
+            self.serve_html(include_body=True)
+            return
+        if self.path == "/latest.png":
             self.serve_image(include_body=True)
             return
         if self.path == "/health.json":
             self.serve_health(include_body=True)
             return
         self.send_error(404)
+
+    def serve_html(self, include_body):
+        from renderer.html_render import render_html
+
+        if not self.content_path.exists():
+            self.send_error(404, "no briefing has been generated yet")
+            return
+        content = json.loads(self.content_path.read_text())
+        data = render_html(content).encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(data)))
+        self.send_header("Cache-Control", "no-cache")
+        self.end_headers()
+        if include_body:
+            self.wfile.write(data)
 
     def serve_image(self, include_body):
         if not self.image_path.exists():

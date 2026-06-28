@@ -8,6 +8,7 @@ load_environment()
 
 from orchestrator.run_morning_job import build_content, write_content
 from renderer.render import load_layout, render
+from renderer.html_render import render_html
 
 
 def render_latest(content, output_path):
@@ -32,10 +33,14 @@ def run_morning(root=None, *, build_content_fn=build_content, render_fn=render_l
         if temporary_png.exists():
             temporary_png.unlink()
 
+    html_path = root / "renderer" / "latest.html"
+    html_path.write_text(render_html(content))
+
     return {
         "weather": content.get("weather", {}).get("summary", "weather unavailable"),
         "json": str(json_path),
         "png": str(png_path),
+        "html": str(html_path),
     }
 
 

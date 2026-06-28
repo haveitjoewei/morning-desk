@@ -11,3 +11,4 @@ logs/
 # Personal wardrobe photos (binary, kept on disk; items.json is the versioned catalog)
 wardrobe/images/
 wardrobe/inbox/
+renderer/latest.html
