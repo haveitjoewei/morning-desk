@@ -67,7 +67,7 @@ class StageOneTest(unittest.TestCase):
             self.assertEqual(saved["date_label"], content["date_label"])
             self.assertIn("weather", saved)
             self.assertIn("priority_items", saved)
-            self.assertEqual(set(saved["outfit"]), {"headline", "items", "reason"})
+            self.assertLessEqual({"headline", "items", "reason"}, set(saved["outfit"]))
             self.assertGreaterEqual(len(saved["outfit"]["items"]), 3)
             self.assertTrue(
                 all(item["urgency"] in {"today", "urgent"} for item in saved["priority_items"])

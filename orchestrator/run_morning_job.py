@@ -11,7 +11,7 @@ from connectors.calendar_google import fetch_calendar
 from connectors.va_inbox import fetch_va_messages
 from connectors.weather import fetch_weather
 from content.schema import BriefingContent, PriorityItem
-from wardrobe.catalog import load_wardrobe
+from wardrobe.catalog import load_wardrobe, resolve_pieces
 from wardrobe.outfit_plan import planned_outfit
 
 
@@ -52,6 +52,7 @@ def build_content():
         lambda: generate_outfit(weather, wardrobe_items, calendar, context),
         keep_from=today.isoformat(),
     )
+    outfit = {**outfit, "pieces": resolve_pieces(outfit.get("items", []), wardrobe_items)}
 
     return BriefingContent.from_parts(
         weather=weather,

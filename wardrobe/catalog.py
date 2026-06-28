@@ -45,3 +45,29 @@ def load_wardrobe(path=None, corrections_path=None):
         else item
         for item in items
     ]
+
+
+_ROOT = Path(__file__).resolve().parents[1]
+
+
+def _piece_image(item):
+    """Prefer the cleaned product shot, fall back to the original photo, else None."""
+    image = item.get("image")  # e.g. "wardrobe/images/<id>.jpg"
+    if not image:
+        return None
+    clean = image.replace("/images/", "/images_clean/")
+    if (_ROOT / clean).exists():
+        return clean
+    if (_ROOT / image).exists():
+        return image
+    return None
+
+
+def resolve_pieces(names, items):
+    """Map chosen outfit item names to [{name, image}] for visual display."""
+    by_name = {item.get("name"): item for item in items}
+    pieces = []
+    for name in names:
+        item = by_name.get(name)
+        pieces.append({"name": name, "image": _piece_image(item) if item else None})
+    return pieces

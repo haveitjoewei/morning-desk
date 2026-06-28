@@ -13,7 +13,7 @@ from ai.generate_reflection import generate_reflection
 from connectors.calendar_google import fetch_calendar, tzinfo
 from connectors.weather import fetch_weather
 from orchestrator.run_morning_job import daily_context
-from wardrobe.catalog import load_wardrobe
+from wardrobe.catalog import load_wardrobe, resolve_pieces
 from wardrobe.outfit_plan import planned_outfit
 
 
@@ -33,6 +33,7 @@ def build_evening_content(today=None):
         lambda: generate_outfit(weather, wardrobe_items, calendar_tomorrow, context),
         keep_from=today.isoformat(),
     )
+    outfit = {**outfit, "pieces": resolve_pieces(outfit.get("items", []), wardrobe_items)}
     reflection = generate_reflection(calendar_today)
 
     return {

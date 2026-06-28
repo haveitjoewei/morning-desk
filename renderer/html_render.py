@@ -9,11 +9,36 @@ the e-ink PNG there's no font/ellipsis limit, and it's the seam for future touch
 """
 from __future__ import annotations
 
+import base64
 import html as _html
+import io
+from pathlib import Path
+
+_ROOT = Path(__file__).resolve().parents[1]
 
 
 def _esc(value):
     return _html.escape(str(value), quote=True)
+
+
+def _thumb_data_uri(rel_path, size=240):
+    """Inline a downscaled garment image as a data URI (works served or via file://)."""
+    if not rel_path:
+        return None
+    path = _ROOT / rel_path
+    if not path.exists():
+        return None
+    try:
+        from PIL import Image
+
+        img = Image.open(path).convert("RGB")
+        img.thumbnail((size, size))
+        buf = io.BytesIO()
+        img.save(buf, format="JPEG", quality=82)
+        data = base64.b64encode(buf.getvalue()).decode("ascii")
+        return f"data:image/jpeg;base64,{data}"
+    except Exception:
+        return None
 
 
 def _calendar_rows(calendar):
@@ -49,16 +74,31 @@ def _attention_block(priority_items):
     )
 
 
+def _piece_card(piece):
+    name = piece.get("name", "")
+    uri = _thumb_data_uri(piece.get("image"))
+    if uri:
+        inner = f'<img src="{uri}" alt="{_esc(name)}">'
+        cls = "piece"
+    else:
+        inner = f'<span class="ph">{_esc(name)}</span>'
+        cls = "piece noimg"
+    return f'<figure class="{cls}">{inner}<figcaption>{_esc(name)}</figcaption></figure>'
+
+
 def _outfit_block(outfit):
     if not isinstance(outfit, dict):
         return f'<p>{_esc(outfit)}</p>'
-    items = outfit.get("items", [])
-    items_html = "".join(f"<li>{_esc(i)}</li>" for i in items)
-    return (
-        f'<p class="headline">{_esc(outfit.get("headline", ""))}</p>'
-        f'<ul class="items">{items_html}</ul>'
-        f'<p class="reason">{_esc(outfit.get("reason", ""))}</p>'
-    )
+    pieces = outfit.get("pieces") or []
+    have_images = any(_thumb_data_uri(p.get("image")) for p in pieces)
+    head = f'<p class="headline">{_esc(outfit.get("headline", ""))}</p>'
+    reason = f'<p class="reason">{_esc(outfit.get("reason", ""))}</p>'
+    if pieces and have_images:
+        strip = '<div class="pieces">' + "".join(_piece_card(p) for p in pieces) + "</div>"
+        return head + strip + reason
+    # Fallback to the text list when no images are available yet.
+    items_html = "".join(f"<li>{_esc(i)}</li>" for i in outfit.get("items", []))
+    return head + f'<ul class="items">{items_html}</ul>' + reason
 
 
 CSS = """
@@ -95,6 +135,14 @@ body { background:var(--bg); color:var(--ink); font-family:-apple-system,"SF Pro
 .wear .items li::after { content:"·"; margin-left:14px; color:var(--line); }
 .wear .items li:last-child::after { content:""; }
 .wear .reason { font-size:16px; color:var(--muted); margin-top:10px; line-height:1.4; }
+.wear .pieces { display:flex; gap:14px; flex-wrap:wrap; margin:12px 0 4px; }
+.wear .piece { width:118px; margin:0; text-align:center; }
+.wear .piece img { width:118px; height:118px; object-fit:contain; background:#fff;
+  border:1px solid var(--line); border-radius:10px; }
+.wear .piece figcaption { font-size:12px; color:var(--muted); margin-top:5px; line-height:1.2; }
+.wear .piece.noimg { width:118px; height:118px; border:1px dashed var(--line); border-radius:10px;
+  display:flex; align-items:center; justify-content:center; padding:6px; }
+.wear .piece.noimg .ph { font-size:12px; color:var(--muted); }
 .bottom { display:grid; grid-template-columns:2fr 1fr; gap:36px; }
 .bottom p { font-size:18px; line-height:1.5; }
 .ask p { font-style:italic; }
