@@ -188,26 +188,31 @@ def fetch_google_calendar(today=None):
         return None
 
 
+def is_excluded(title):
+    """Drop calendar entries that aren't personal appointments — e.g. Airbnb guest
+    reservations synced into Google Calendar. Configurable via MD_CALENDAR_EXCLUDE
+    (comma-separated, case-insensitive substrings)."""
+    raw = os.environ.get(
+        "MD_CALENDAR_EXCLUDE", "reserved,reservation,airbnb,not available,stay at"
+    )
+    keys = [k.strip().lower() for k in raw.split(",") if k.strip()]
+    text = (title or "").lower()
+    return any(k in text for k in keys)
+
+
 def fetch_calendar(path=None, today=None):
     if path is not None:
-        return parse_calendar_events(
-            load_calendar_events(path),
-            today=today,
+        events = parse_calendar_events(load_calendar_events(path), today=today)
+    elif os.environ.get("MD_OFFLINE") == "1":
+        events = parse_calendar_events(load_calendar_events(), today=today)
+    else:
+        google_events = fetch_google_calendar(today=today)
+        events = (
+            google_events
+            if google_events is not None
+            else parse_calendar_events(load_calendar_events(), today=today)
         )
-
-    if os.environ.get("MD_OFFLINE") == "1":
-        return parse_calendar_events(
-            load_calendar_events(),
-            today=today,
-        )
-
-    google_events = fetch_google_calendar(today=today)
-    if google_events is not None:
-        return google_events
-    return parse_calendar_events(
-        load_calendar_events(),
-        today=today,
-    )
+    return [event for event in events if not is_excluded(event.get("title", ""))]
 
 
 def authorize():

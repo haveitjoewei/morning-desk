@@ -22,25 +22,25 @@ slots:
     source: calendar
     label: TODAY
     fields: [time, title]
-    max_items: 4
-    position: {x: 28, y: 250, w: 338, h: 112}
+    max_items: 5
+    position: {x: 28, y: 250, w: 338, h: 130}
     style: {font_size: 15, chrome: line}
   - id: wear
     type: text
     source: outfit
     label: WEAR
     fields: [headline, items, reason]
-    position: {x: 404, y: 250, w: 368, h: 112}
+    position: {x: 404, y: 250, w: 368, h: 130}
     style: {font_size: 15, chrome: line}
   - id: briefing
     type: text
     source: briefing
     label: READ
-    position: {x: 28, y: 390, w: 476, h: 62}
-    style: {font_size: 12, chrome: line}
+    position: {x: 28, y: 398, w: 476, h: 78}
+    style: {font_size: 15, chrome: line}
   - id: journal
     type: text
     source: journal_prompt
     label: ASK
-    position: {x: 542, y: 390, w: 230, h: 62}
-    style: {font_size: 12, chrome: line}
+    position: {x: 542, y: 398, w: 230, h: 78}
+    style: {font_size: 16, chrome: line}
