@@ -16,7 +16,7 @@ load_environment()
 from orchestrator.run_evening_job import build_evening_content
 from orchestrator.run_morning_job import write_content
 from renderer.html_render import render_html
-from wardrobe.compose import write_outfit_composite
+from wardrobe.compose import write_outfit_cutouts
 
 
 def run_evening(root=None):
@@ -26,7 +26,7 @@ def run_evening(root=None):
     html_path = root / "renderer" / "latest.html"
 
     write_content(content, json_path)
-    write_outfit_composite(content, root)
+    write_outfit_cutouts(content, root)
     html_path.write_text(render_html(content))
     return {
         "weather": content.get("weather", {}).get("summary", "weather unavailable"),

@@ -11,7 +11,9 @@ import os
 from connectors import _gmail
 from connectors.base import RawEvent
 
-DEFAULT_QUERY = "from:airbnb.com newer_than:2d -in:trash"
+# is:unread so handled notifications drop once you open/archive them. Gmail can't
+# see replies made in the Airbnb app, so unread state is the best "handled" signal.
+DEFAULT_QUERY = "from:airbnb.com is:unread newer_than:3d -in:trash"
 
 _STUB = [
     RawEvent(

@@ -155,6 +155,13 @@ def load_credentials():
     return credentials if credentials.valid else None
 
 
+def calendar_ids():
+    """Calendars to read. MD_GCAL_IDS (comma-separated) for several — e.g. personal +
+    work — else MD_GCAL_ID, else 'primary'."""
+    raw = os.environ.get("MD_GCAL_IDS") or os.environ.get("MD_GCAL_ID", "primary")
+    return [c.strip() for c in raw.split(",") if c.strip()]
+
+
 def fetch_google_calendar(today=None):
     try:
         credentials = load_credentials()
@@ -167,27 +174,41 @@ def fetch_google_calendar(today=None):
         today = today or datetime.now(local_tz).date()
         start = datetime.combine(today, time.min, local_tz)
         end = start + timedelta(days=1)
-        events = (
-            build(
-                "calendar",
-                "v3",
-                credentials=credentials,
-                cache_discovery=False,
-            )
-            .events()
-            .list(
-                calendarId=os.environ.get("MD_GCAL_ID", "primary"),
-                timeMin=start.astimezone(timezone.utc).isoformat(),
-                timeMax=end.astimezone(timezone.utc).isoformat(),
-                singleEvents=True,
-                orderBy="startTime",
-            )
-            .execute()
-            .get("items", [])
-        )
-        return parse_google_events(events, timezone_name())
+        service = build("calendar", "v3", credentials=credentials, cache_discovery=False)
+
+        items = []
+        for cal_id in calendar_ids():
+            try:
+                items += (
+                    service.events()
+                    .list(
+                        calendarId=cal_id,
+                        timeMin=start.astimezone(timezone.utc).isoformat(),
+                        timeMax=end.astimezone(timezone.utc).isoformat(),
+                        singleEvents=True,
+                        orderBy="startTime",
+                    )
+                    .execute()
+                    .get("items", [])
+                )
+            except Exception:
+                continue  # a single bad calendar id shouldn't sink the rest
+        parsed = parse_google_events(items, timezone_name())
+        return sorted(parsed, key=lambda event: event["start"])
     except Exception:
         return None
+
+
+def list_calendars():
+    """Print the calendars you can read, with their ids (to set MD_GCAL_IDS)."""
+    credentials = load_credentials()
+    if not credentials:
+        raise SystemExit("Not authorized yet — run `--auth` first.")
+    from googleapiclient.discovery import build
+
+    service = build("calendar", "v3", credentials=credentials, cache_discovery=False)
+    for cal in service.calendarList().list().execute().get("items", []):
+        print(f"{cal.get('summary', '(no name)')}  ->  {cal.get('id')}")
 
 
 def is_excluded(event):
@@ -249,5 +270,7 @@ if __name__ == "__main__":
 
     if "--auth" in sys.argv:
         authorize()
+    elif "--list" in sys.argv:
+        list_calendars()
     else:
         print(json.dumps(fetch_calendar(), indent=2))

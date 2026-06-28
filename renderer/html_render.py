@@ -21,6 +21,25 @@ def _esc(value):
     return _html.escape(str(value), quote=True)
 
 
+def _png_data_uri(rel_path, size=300):
+    """Inline a transparent cutout PNG (preserves alpha for the flat-lay)."""
+    if not rel_path:
+        return None
+    path = _ROOT / rel_path
+    if not path.exists():
+        return None
+    try:
+        from PIL import Image
+
+        img = Image.open(path).convert("RGBA")
+        img.thumbnail((size, size))
+        buf = io.BytesIO()
+        img.save(buf, format="PNG")
+        return "data:image/png;base64," + base64.b64encode(buf.getvalue()).decode("ascii")
+    except Exception:
+        return None
+
+
 def _thumb_data_uri(rel_path, size=240):
     """Inline a downscaled garment image as a data URI (works served or via file://)."""
     if not rel_path:
@@ -86,28 +105,45 @@ def _piece_card(piece):
     return f'<figure class="{cls}">{inner}<figcaption>{_esc(name)}</figcaption></figure>'
 
 
+def _look_item(piece):
+    from pathlib import Path
+
+    image = piece.get("image")
+    if not image:
+        return None
+    uri = _png_data_uri(f"renderer/cutouts/{Path(image).stem}.png")
+    if not uri:
+        return None
+    cat = piece.get("category") or "other"
+    name = piece.get("name", "")
+    return (
+        f'<figure class="look-item cat-{_esc(cat)}">'
+        f'<img src="{uri}" alt="{_esc(name)}"><figcaption>{_esc(name)}</figcaption></figure>'
+    )
+
+
 def _outfit_block(outfit):
     if not isinstance(outfit, dict):
         return f'<p>{_esc(outfit)}</p>'
     pieces = outfit.get("pieces") or []
     head = f'<p class="headline">{_esc(outfit.get("headline", ""))}</p>'
     reason = f'<p class="reason">{_esc(outfit.get("reason", ""))}</p>'
-    names = ", ".join(p.get("name", "") for p in pieces) or ", ".join(outfit.get("items", []))
 
-    # Preferred: the cut-out, stacked full-outfit composite built by the job.
-    composite = _thumb_data_uri("renderer/outfit.png", size=720)
-    if composite:
-        return (
-            head
-            + f'<img class="composite" src="{composite}" alt="today\'s outfit">'
-            + f'<p class="items-line">{_esc(names)}</p>'
-            + reason
-        )
-    # Next best: a strip of individual garment thumbnails.
-    if pieces and any(_thumb_data_uri(p.get("image")) for p in pieces):
-        strip = '<div class="pieces">' + "".join(_piece_card(p) for p in pieces) + "</div>"
-        return head + strip + reason
-    # Fallback: text list.
+    # Flat-lay: cutouts grouped into a tops row and a bottoms+shoes row, each item
+    # sized by category (so same-category pieces match) with its name beneath it.
+    tops = [p for p in pieces if p.get("category") in {"outerwear", "midlayer", "top"}]
+    bottoms = [p for p in pieces if p.get("category") in {"bottom", "shoes", "accessory"}]
+    if not tops and not bottoms:
+        tops = pieces
+    rows = []
+    for group in (tops, bottoms):
+        cards = [c for c in (_look_item(p) for p in group) if c]
+        if cards:
+            rows.append('<div class="look-row">' + "".join(cards) + "</div>")
+    if rows:
+        return head + '<div class="look">' + "".join(rows) + "</div>" + reason
+
+    # Fallback: text list (no cutouts available yet).
     items_html = "".join(f"<li>{_esc(i)}</li>" for i in outfit.get("items", []))
     return head + f'<ul class="items">{items_html}</ul>' + reason
 
@@ -146,9 +182,17 @@ body { background:var(--bg); color:var(--ink); font-family:-apple-system,"SF Pro
 .wear .items li::after { content:"·"; margin-left:14px; color:var(--line); }
 .wear .items li:last-child::after { content:""; }
 .wear .reason { font-size:16px; color:var(--muted); margin-top:10px; line-height:1.4; }
-.wear .composite { width:100%; max-height:320px; object-fit:contain; object-position:left top;
-  display:block; margin:10px 0 6px; }
-.wear .items-line { font-size:13px; color:var(--muted); line-height:1.3; }
+.wear .look { display:flex; flex-direction:column; gap:6px; margin:12px 0 8px; }
+.wear .look-row { display:flex; align-items:flex-end; gap:26px; flex-wrap:wrap; }
+.wear .look-item { margin:0; text-align:center; }
+.wear .look-item img { display:block; object-fit:contain; }
+.wear .cat-top img, .wear .cat-midlayer img, .wear .cat-outerwear img { height:150px; }
+.wear .cat-bottom img { height:172px; }
+.wear .cat-shoes img { height:78px; }
+.wear .cat-accessory img { height:92px; }
+.wear .cat-other img { height:140px; }
+.wear .look-item figcaption { font-size:11px; color:var(--muted); margin-top:5px;
+  max-width:150px; line-height:1.2; }
 .wear .pieces { display:flex; gap:14px; flex-wrap:wrap; margin:12px 0 4px; }
 .wear .piece { width:118px; margin:0; text-align:center; }
 .wear .piece img { width:118px; height:118px; object-fit:contain; background:#fff;

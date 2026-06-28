@@ -180,6 +180,30 @@ def write_outfit_composite(content, root):
     return result
 
 
+def write_outfit_cutouts(content, root):
+    """Save a transparent cutout PNG per outfit piece to renderer/cutouts/<id>.png
+    for the HTML flat-lay to lay out with captions. Skipped offline (tests)."""
+    import os
+
+    if os.environ.get("MD_OFFLINE") == "1":
+        return None
+    out_dir = Path(root) / "renderer" / "cutouts"
+    if out_dir.exists():
+        for stale in out_dir.glob("*.png"):
+            stale.unlink()
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    pieces = (content.get("outfit") or {}).get("pieces", [])
+    written = 0
+    for piece in pieces:
+        image = piece.get("image")
+        if not image or not (ROOT / image).exists():
+            continue
+        cutout(ROOT / image).save(out_dir / f"{Path(image).stem}.png")
+        written += 1
+    return out_dir if written else None
+
+
 def main():
     if len(sys.argv) < 2:
         raise SystemExit("usage: python -m wardrobe.compose <id> <id> ...")

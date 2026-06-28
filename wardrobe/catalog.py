@@ -64,10 +64,14 @@ def _piece_image(item):
 
 
 def resolve_pieces(names, items):
-    """Map chosen outfit item names to [{name, image}] for visual display."""
+    """Map chosen outfit item names to [{name, image, category}] for visual display."""
     by_name = {item.get("name"): item for item in items}
     pieces = []
     for name in names:
         item = by_name.get(name)
-        pieces.append({"name": name, "image": _piece_image(item) if item else None})
+        pieces.append({
+            "name": name,
+            "image": _piece_image(item) if item else None,
+            "category": item.get("category", "") if item else "",
+        })
     return pieces
