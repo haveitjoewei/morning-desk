@@ -90,13 +90,24 @@ def _outfit_block(outfit):
     if not isinstance(outfit, dict):
         return f'<p>{_esc(outfit)}</p>'
     pieces = outfit.get("pieces") or []
-    have_images = any(_thumb_data_uri(p.get("image")) for p in pieces)
     head = f'<p class="headline">{_esc(outfit.get("headline", ""))}</p>'
     reason = f'<p class="reason">{_esc(outfit.get("reason", ""))}</p>'
-    if pieces and have_images:
+    names = ", ".join(p.get("name", "") for p in pieces) or ", ".join(outfit.get("items", []))
+
+    # Preferred: the cut-out, stacked full-outfit composite built by the job.
+    composite = _thumb_data_uri("renderer/outfit.png", size=720)
+    if composite:
+        return (
+            head
+            + f'<img class="composite" src="{composite}" alt="today\'s outfit">'
+            + f'<p class="items-line">{_esc(names)}</p>'
+            + reason
+        )
+    # Next best: a strip of individual garment thumbnails.
+    if pieces and any(_thumb_data_uri(p.get("image")) for p in pieces):
         strip = '<div class="pieces">' + "".join(_piece_card(p) for p in pieces) + "</div>"
         return head + strip + reason
-    # Fallback to the text list when no images are available yet.
+    # Fallback: text list.
     items_html = "".join(f"<li>{_esc(i)}</li>" for i in outfit.get("items", []))
     return head + f'<ul class="items">{items_html}</ul>' + reason
 
@@ -135,6 +146,9 @@ body { background:var(--bg); color:var(--ink); font-family:-apple-system,"SF Pro
 .wear .items li::after { content:"·"; margin-left:14px; color:var(--line); }
 .wear .items li:last-child::after { content:""; }
 .wear .reason { font-size:16px; color:var(--muted); margin-top:10px; line-height:1.4; }
+.wear .composite { width:100%; max-height:210px; object-fit:contain; object-position:left;
+  margin:10px 0 4px; }
+.wear .items-line { font-size:13px; color:var(--muted); line-height:1.3; }
 .wear .pieces { display:flex; gap:14px; flex-wrap:wrap; margin:12px 0 4px; }
 .wear .piece { width:118px; margin:0; text-align:center; }
 .wear .piece img { width:118px; height:118px; object-fit:contain; background:#fff;

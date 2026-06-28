@@ -9,6 +9,7 @@ load_environment()
 from orchestrator.run_morning_job import build_content, write_content
 from renderer.render import load_layout, render
 from renderer.html_render import render_html
+from wardrobe.compose import write_outfit_composite
 
 
 def render_latest(content, output_path):
@@ -33,6 +34,7 @@ def run_morning(root=None, *, build_content_fn=build_content, render_fn=render_l
         if temporary_png.exists():
             temporary_png.unlink()
 
+    write_outfit_composite(content, root)
     html_path = root / "renderer" / "latest.html"
     html_path.write_text(render_html(content))
 
