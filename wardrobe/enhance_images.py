@@ -24,12 +24,13 @@ MODEL = os.environ.get("MD_IMAGE_MODEL", "gemini-2.5-flash-image")
 
 PROMPT = (
     "Re-photograph this exact garment as a clean e-commerce product shot. Present it "
-    "neatly on a seamless light-grey studio background, gently steamed so it is smooth "
-    "and wrinkle-free, evenly and softly lit, centered with a little margin. Remove any "
-    "hangers, clutter, floor, furniture, hands or people. Preserve the garment's exact "
-    "colour, pattern, fabric texture, proportions, collar/sleeve/hem shape, and any logos "
-    "or graphics precisely. Do not restyle, recolour, or change the garment in any way — "
-    "only clean up the presentation."
+    "neatly on a pure solid white (#FFFFFF) seamless background with NO drop shadow, "
+    "gently steamed so it is smooth and wrinkle-free, evenly and softly lit, centered "
+    "with even margins. Remove any hangers, clutter, floor, furniture, hands or people. "
+    "Preserve the garment's exact colour, pattern, fabric texture, proportions, collar/"
+    "sleeve/hem shape, and any logos or graphics precisely. Do not restyle, recolour, or "
+    "change the garment in any way — only clean up the presentation. The flat white "
+    "background must be uniform so the garment can be cleanly cut out later."
 )
 
 
