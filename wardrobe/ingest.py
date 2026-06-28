@@ -54,7 +54,7 @@ GARMENT_SCHEMA = {
         "material": {"type": "string", "description": "Best inference, e.g. 'cotton jersey', 'leather'"},
         "texture": {"type": "string", "description": "e.g. 'smooth knit', 'brushed fleece', 'mesh'"},
         "thickness": {"type": "string", "enum": ["thin", "medium", "thick"]},
-        "warmth": {"type": "integer", "minimum": 1, "maximum": 5},
+        "warmth": {"type": "integer", "description": "1 (lightest) to 5 (warmest)"},
         "formality": {
             "type": "array",
             "items": {"type": "string", "enum": FORMALITY_LEVELS},
