@@ -36,6 +36,8 @@ from scripts.install_launchd import build_plists
 from scripts.status import collect_status
 from renderer.render import attention_text, load_layout, render, slot_text
 from server.app import create_handler
+from wardrobe.analyze_photos import image_content_block, merge_analysis
+from wardrobe.catalog import load_wardrobe
 from wardrobe.import_photos import import_photos
 
 
@@ -143,8 +145,113 @@ class StageOneTest(unittest.TestCase):
             self.assertEqual(records[0]["colors"], ["navy"])
             self.assertTrue(records[0]["rain_ok"])
             self.assertEqual(records[0]["image"], "wardrobe/images/navy-rain-shell.jpg")
+            self.assertEqual(records[0]["material_guess"], "unknown")
+            self.assertEqual(records[0]["texture"], "unknown")
+            self.assertEqual(records[0]["thickness"], "unknown")
+            self.assertEqual(records[0]["fit"], "unknown")
+            self.assertEqual(records[0]["best_for"], [])
+            self.assertEqual(records[0]["avoid_for"], [])
+            self.assertEqual(records[0]["review_status"], "needs_review")
+            self.assertEqual(records[0]["confidence"], "low")
+            self.assertEqual(records[0]["correction_history"], [])
             self.assertTrue((images / "navy-rain-shell.jpg").exists())
             self.assertEqual(json.loads(drafts.read_text()), records)
+
+    def test_wardrobe_catalog_applies_local_corrections(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp).resolve()
+            items = root / "items.json"
+            corrections = root / "corrections.json"
+            items.write_text(
+                json.dumps(
+                    [
+                        {
+                            "name": "navy chore coat",
+                            "category": "outerwear",
+                            "style_tags": ["casual"],
+                            "best_for": ["office"],
+                            "warmth": "medium",
+                        }
+                    ]
+                )
+            )
+            corrections.write_text(
+                json.dumps(
+                    [
+                        {
+                            "name": "navy chore coat",
+                            "set": {
+                                "fit": "boxy but cropped",
+                                "warmth": "light",
+                            },
+                            "add": {
+                                "style_tags": ["dress_to_impress"],
+                                "best_for": ["nice dinner"],
+                            },
+                            "note": "Looks longer in one photo than it fits.",
+                        }
+                    ]
+                )
+            )
+
+            wardrobe = load_wardrobe(items, corrections)
+
+            self.assertEqual(wardrobe[0]["fit"], "boxy but cropped")
+            self.assertEqual(wardrobe[0]["warmth"], "light")
+            self.assertEqual(
+                wardrobe[0]["style_tags"],
+                ["casual", "dress_to_impress"],
+            )
+            self.assertEqual(wardrobe[0]["best_for"], ["office", "nice dinner"])
+            self.assertEqual(
+                wardrobe[0]["correction_history"],
+                ["Looks longer in one photo than it fits."],
+            )
+
+    def test_wardrobe_analyzer_builds_base64_image_block(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            image = Path(tmp) / "shirt.jpg"
+            image.write_bytes(b"fake image bytes")
+
+            block = image_content_block(image)
+
+            self.assertEqual(block["type"], "image")
+            self.assertEqual(block["source"]["type"], "base64")
+            self.assertEqual(block["source"]["media_type"], "image/jpeg")
+            self.assertEqual(block["source"]["data"], "ZmFrZSBpbWFnZSBieXRlcw==")
+
+    def test_wardrobe_analyzer_merges_only_allowed_fields(self):
+        record = {
+            "name": "img 6443",
+            "category": "unknown",
+            "style_tags": ["needs_review"],
+            "best_for": [],
+        }
+
+        merged = merge_analysis(
+            record,
+            {
+                "name": "blue linen shirt",
+                "category": "top",
+                "colors": ["blue"],
+                "material_guess": "linen",
+                "texture": "slubby",
+                "thickness": "light",
+                "fit": "relaxed",
+                "best_for": ["office"],
+                "avoid_for": ["heavy rain"],
+                "style_tags": ["dress_to_impress"],
+                "confidence": "medium",
+                "made_up_field": "ignored",
+            },
+        )
+
+        self.assertEqual(merged["name"], "blue linen shirt")
+        self.assertEqual(merged["category"], "top")
+        self.assertEqual(merged["material_guess"], "linen")
+        self.assertEqual(merged["style_tags"], ["dress_to_impress"])
+        self.assertEqual(merged["best_for"], ["office"])
+        self.assertNotIn("made_up_field", merged)
 
     def test_open_meteo_response_maps_to_weather_contract(self):
         weather = parse_open_meteo(
@@ -228,6 +335,60 @@ class StageOneTest(unittest.TestCase):
         self.assertIn("oxford shirt", outfit["items"])
         self.assertIn("wool trousers", outfit["items"])
         self.assertIn("smart casual", outfit["reason"].lower())
+
+    def test_outfit_uses_dress_to_impress_items_for_office_days(self):
+        outfit = generate_outfit(
+            {"condition": "cloudy", "high": 20, "low": 13},
+            [
+                {
+                    "name": "soft grey tee",
+                    "category": "top",
+                    "formality": "casual",
+                    "style_tags": ["basic"],
+                    "rain_ok": False,
+                },
+                {
+                    "name": "white textured shirt",
+                    "category": "top",
+                    "formality": "smart casual",
+                    "style_tags": ["dress_to_impress"],
+                    "rain_ok": False,
+                },
+                {
+                    "name": "black jeans",
+                    "category": "bottom",
+                    "formality": "casual",
+                    "style_tags": ["basic"],
+                    "rain_ok": False,
+                },
+                {
+                    "name": "charcoal trousers",
+                    "category": "bottom",
+                    "formality": "smart casual",
+                    "style_tags": ["dress_to_impress"],
+                    "rain_ok": False,
+                },
+                {
+                    "name": "black sneakers",
+                    "category": "shoes",
+                    "formality": "casual",
+                    "rain_ok": False,
+                },
+                {
+                    "name": "black loafers",
+                    "category": "shoes",
+                    "formality": "smart casual",
+                    "style_tags": ["dress_to_impress"],
+                    "rain_ok": False,
+                },
+            ],
+            context={"work_mode": "office", "intent": "dress_to_impress"},
+        )
+
+        self.assertEqual(outfit["headline"], "Office polish")
+        self.assertIn("white textured shirt", outfit["items"])
+        self.assertIn("charcoal trousers", outfit["items"])
+        self.assertIn("dress to impress", outfit["reason"].lower())
 
     def test_outfit_uses_rain_layer_when_rain_is_likely(self):
         outfit = generate_outfit(

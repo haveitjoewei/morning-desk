@@ -1,4 +1,5 @@
 import json
+from datetime import date
 from pathlib import Path
 
 from ai.classify_urgency import classify_urgency
@@ -13,10 +14,21 @@ from content.schema import BriefingContent, PriorityItem
 from wardrobe.catalog import load_wardrobe
 
 
+def daily_context(today=None):
+    today = today or date.today()
+    weekday = today.weekday()
+    if weekday in {1, 3, 4}:
+        return {"work_mode": "office", "intent": "dress_to_impress"}
+    if weekday in {0, 2}:
+        return {"work_mode": "work_from_home", "intent": "comfort"}
+    return {"work_mode": "off", "intent": "casual"}
+
+
 def build_content():
     weather = fetch_weather()
     calendar = fetch_calendar()
     wardrobe_items = load_wardrobe()
+    context = daily_context()
     raw_priority_events = fetch_airbnb_messages() + fetch_va_messages()
     priority_items = [
         PriorityItem(
@@ -35,7 +47,7 @@ def build_content():
 
     return BriefingContent.from_parts(
         weather=weather,
-        outfit=generate_outfit(weather, wardrobe_items, calendar),
+        outfit=generate_outfit(weather, wardrobe_items, calendar, context),
         briefing=briefing,
         calendar=calendar,
         priority_items=priority_items,

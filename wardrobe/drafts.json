@@ -1,1 +1,2134 @@
-[]
+[
+  {
+    "id": "img-6443",
+    "name": "img 6443",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6443.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6444",
+    "name": "img 6444",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6444.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6445",
+    "name": "img 6445",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6445.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6446",
+    "name": "img 6446",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6446.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6447",
+    "name": "img 6447",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6447.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6448",
+    "name": "img 6448",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6448.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6449",
+    "name": "img 6449",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6449.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6450",
+    "name": "img 6450",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6450.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6451",
+    "name": "img 6451",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6451.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6452",
+    "name": "img 6452",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6452.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6453",
+    "name": "img 6453",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6453.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6454",
+    "name": "img 6454",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6454.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6455",
+    "name": "img 6455",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6455.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6456",
+    "name": "img 6456",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6456.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6457",
+    "name": "img 6457",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6457.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6458",
+    "name": "img 6458",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6458.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6459",
+    "name": "img 6459",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6459.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6460",
+    "name": "img 6460",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6460.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6461",
+    "name": "img 6461",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6461.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6462",
+    "name": "img 6462",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6462.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6463",
+    "name": "img 6463",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6463.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6464",
+    "name": "img 6464",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6464.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6465",
+    "name": "img 6465",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6465.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6466",
+    "name": "img 6466",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6466.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6467",
+    "name": "img 6467",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6467.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6468",
+    "name": "img 6468",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6468.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6469",
+    "name": "img 6469",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6469.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6470",
+    "name": "img 6470",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6470.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6471",
+    "name": "img 6471",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6471.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6472",
+    "name": "img 6472",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6472.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6473",
+    "name": "img 6473",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6473.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6474",
+    "name": "img 6474",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6474.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6475",
+    "name": "img 6475",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6475.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6476",
+    "name": "img 6476",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6476.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6477",
+    "name": "img 6477",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6477.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6478",
+    "name": "img 6478",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6478.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6479",
+    "name": "img 6479",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6479.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6480",
+    "name": "img 6480",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6480.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6481",
+    "name": "img 6481",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6481.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6482",
+    "name": "img 6482",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6482.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6483",
+    "name": "img 6483",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6483.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6484",
+    "name": "img 6484",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6484.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6485",
+    "name": "img 6485",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6485.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6486",
+    "name": "img 6486",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6486.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6487",
+    "name": "img 6487",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6487.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6488",
+    "name": "img 6488",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6488.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6489",
+    "name": "img 6489",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6489.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6490",
+    "name": "img 6490",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6490.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6491",
+    "name": "img 6491",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6491.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6492",
+    "name": "img 6492",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6492.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6493",
+    "name": "img 6493",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6493.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6494",
+    "name": "img 6494",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6494.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6495",
+    "name": "img 6495",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6495.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6496",
+    "name": "img 6496",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6496.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6497",
+    "name": "img 6497",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6497.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6498",
+    "name": "img 6498",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6498.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6499",
+    "name": "img 6499",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6499.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6500",
+    "name": "img 6500",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6500.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6501",
+    "name": "img 6501",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6501.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6502",
+    "name": "img 6502",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6502.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6503",
+    "name": "img 6503",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6503.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6504",
+    "name": "img 6504",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6504.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6505",
+    "name": "img 6505",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6505.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6506",
+    "name": "img 6506",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6506.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6507",
+    "name": "img 6507",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6507.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6508",
+    "name": "img 6508",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6508.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6509",
+    "name": "img 6509",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6509.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6510",
+    "name": "img 6510",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6510.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6511",
+    "name": "img 6511",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6511.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6512",
+    "name": "img 6512",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6512.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6513",
+    "name": "img 6513",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6513.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6514",
+    "name": "img 6514",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6514.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6515",
+    "name": "img 6515",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6515.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6516",
+    "name": "img 6516",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6516.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6517",
+    "name": "img 6517",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6517.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6518",
+    "name": "img 6518",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6518.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6519",
+    "name": "img 6519",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6519.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6520",
+    "name": "img 6520",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6520.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6521",
+    "name": "img 6521",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6521.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6522",
+    "name": "img 6522",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6522.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6523",
+    "name": "img 6523",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6523.jpg",
+    "notes": ""
+  },
+  {
+    "id": "img-6524",
+    "name": "img 6524",
+    "category": "unknown",
+    "colors": [
+      "unknown"
+    ],
+    "warmth": "unknown",
+    "rain_ok": false,
+    "wind_ok": false,
+    "formality": "unknown",
+    "style_tags": [
+      "needs_review"
+    ],
+    "material_guess": "unknown",
+    "texture": "unknown",
+    "thickness": "unknown",
+    "fit": "unknown",
+    "best_for": [],
+    "avoid_for": [],
+    "review_status": "needs_review",
+    "confidence": "low",
+    "correction_history": [],
+    "image": "wardrobe/images/img-6524.jpg",
+    "notes": ""
+  }
+]

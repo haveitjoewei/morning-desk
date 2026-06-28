@@ -16,17 +16,34 @@ OUTFIT_SCHEMA = {
 }
 
 SYSTEM = (
-    "Choose one outfit only from the provided wardrobe item names. Balance weather, "
-    "style, dress code, and activity. Return a short headline, 3-5 exact item names, "
-    "and one concise reason. Never invent an item."
+    "Choose one outfit using ONLY the provided wardrobe item names — never invent an item. "
+    "Match the day's context: 'formality' on each item lists the settings it suits, so pick "
+    "items whose formality covers today's intent (office/dress_to_impress -> include 'smart "
+    "casual'; work_from_home/off -> 'casual' is fine). Colour rule: neutrals (neutral=true) "
+    "pair with anything; allow at most one non-neutral statement colour and make the rest "
+    "neutral so the outfit coordinates. Weight 'warmth'/'thickness'/'material' to the "
+    "temperature, and prefer rain_ok items when rain is likely. Avoid condition 'worn' items "
+    "when dressing to impress. Return a short headline, 3-5 exact item names, and one concise "
+    "reason naming the weather and occasion."
 )
 
 
-def fallback_outfit(weather, wardrobe_items, calendar=None):
+def _formality_ok(item, target):
+    """Formality may be a scalar (legacy) or a list of suitable settings."""
+    value = item.get("formality")
+    if isinstance(value, list):
+        return target in value
+    return value == target
+
+
+def fallback_outfit(weather, wardrobe_items, calendar=None, context=None):
     calendar = calendar or []
+    context = context or {}
     wants_rain = weather.get("condition") in {"rain_later", "rain_likely", "storm"}
     smart_casual = any(event.get("dress_code") == "smart casual" for event in calendar)
     athletic_events = [event for event in calendar if event.get("dress_code") == "athletic"]
+    office_day = context.get("work_mode") == "office"
+    dress_to_impress = context.get("intent") == "dress_to_impress" or office_day
     condition = weather.get("condition", "weather").replace("_", " ")
     temperature_note = "mild temperature"
     if weather.get("high", 0) <= 14:
@@ -34,18 +51,35 @@ def fallback_outfit(weather, wardrobe_items, calendar=None):
     elif weather.get("high", 0) >= 26:
         temperature_note = "warm day"
 
+    def score(item, formality=None):
+        value = 0
+        if formality and _formality_ok(item, formality):
+            value += 4
+        if dress_to_impress and "dress_to_impress" in item.get("style_tags", []):
+            value += 3
+        if office_day and "office" in item.get("best_for", []):
+            value += 2
+        if context.get("occasion") and context["occasion"] in item.get("best_for", []):
+            value += 2
+        return value
+
     def first(category, *, rain_ok=None, formality=None):
+        matches = []
         for item in wardrobe_items:
             if item["category"] != category:
                 continue
             if rain_ok is not None and item.get("rain_ok") != rain_ok:
                 continue
-            if formality is not None and item.get("formality") != formality:
-                continue
-            return item["name"]
-        return None
+            matches.append(item)
+        if not matches:
+            return None
+        matches.sort(key=lambda item: score(item, formality), reverse=True)
+        best = matches[0]
+        if formality and not _formality_ok(best, formality) and score(best, formality) == 0:
+            return None
+        return best["name"]
 
-    formality = "smart casual" if smart_casual else None
+    formality = "smart casual" if smart_casual or dress_to_impress else None
     items = [
         first("outerwear", rain_ok=True)
         if wants_rain
@@ -62,6 +96,9 @@ def fallback_outfit(weather, wardrobe_items, calendar=None):
     calendar_note = "smart casual calendar" if smart_casual else "casual calendar"
     if smart_casual:
         headline = "Smart casual layers"
+    elif office_day:
+        headline = "Office polish"
+        calendar_note = "office day, dress to impress"
     athletic_note = ""
     if athletic_events:
         athletic_note = f" Bring athletic kit for {athletic_events[0]['title']}."
@@ -88,9 +125,10 @@ def valid_outfit(outfit, wardrobe_items):
     )
 
 
-def generate_outfit(weather, wardrobe_items, calendar=None):
+def generate_outfit(weather, wardrobe_items, calendar=None, context=None):
     calendar = calendar or []
-    fallback = fallback_outfit(weather, wardrobe_items, calendar)
+    context = context or {}
+    fallback = fallback_outfit(weather, wardrobe_items, calendar, context)
     if not available():
         return fallback
 
@@ -98,6 +136,7 @@ def generate_outfit(weather, wardrobe_items, calendar=None):
         context = {
             "weather": weather,
             "calendar": calendar,
+            "context": context,
             "wardrobe": wardrobe_items,
         }
         response = client().messages.create(

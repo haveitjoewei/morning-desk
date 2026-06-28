@@ -1,4 +1,4 @@
-.PHONY: setup morning serve test status calendar-auth gmail-auth install-service uninstall-service
+.PHONY: setup morning serve test status wardrobe-import wardrobe-analyze calendar-auth gmail-auth install-service uninstall-service
 
 PYTHON ?= $(if $(wildcard venv/bin/python),venv/bin/python,$(if $(wildcard .venv/bin/python3),.venv/bin/python3,python3))
 
@@ -17,6 +17,12 @@ test:
 
 status:
 	PYTHONPATH=. $(PYTHON) scripts/status.py
+
+wardrobe-import:
+	PYTHONPATH=. $(PYTHON) -m wardrobe.import_photos
+
+wardrobe-analyze:
+	PYTHONPATH=. $(PYTHON) -m wardrobe.analyze_photos
 
 calendar-auth:
 	PYTHONPATH=. $(PYTHON) -m connectors.calendar_google --auth

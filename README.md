@@ -138,15 +138,55 @@ sample Airbnb/VA alerts.
 
 ## Wardrobe Intake
 
-Wardrobe photo intake is scaffolded but optional. Drop photos into
+Wardrobe photo intake is local-first. Drop photos into
 `wardrobe/inbox/`, then run:
 
 ```bash
-PYTHONPATH=. venv/bin/python wardrobe/import_photos.py
+make wardrobe-import
 ```
 
 Draft records are written to `wardrobe/drafts.json` for review before promotion
-to `wardrobe/items.json`.
+to `wardrobe/items.json`. Originals stay in `wardrobe/inbox/`; copied working
+images are stored in `wardrobe/images/`.
+
+Drafts include editable style fields such as material guess, texture,
+thickness, fit, best uses, avoid uses, review status, confidence, and correction
+history. Unknown values are intentional: they keep weak photo evidence separate
+from facts you have confirmed.
+
+Local corrections can be stored in `wardrobe/corrections.json` without editing
+the base catalog. Each correction targets an exact item name:
+
+```json
+[
+  {
+    "name": "navy chore coat",
+    "set": {
+      "fit": "boxy but cropped",
+      "warmth": "light"
+    },
+    "add": {
+      "style_tags": ["dress_to_impress"],
+      "best_for": ["office", "nice dinner"]
+    },
+    "note": "Looks longer in one photo than it fits."
+  }
+]
+```
+
+Morning Desk applies those corrections automatically before choosing an outfit.
+The default schedule treats Tuesday, Thursday, and Friday as office days with a
+dress-to-impress bias; Monday and Wednesday are work-from-home comfort days.
+
+When you are ready to send wardrobe images to Claude for visual analysis, run:
+
+```bash
+make wardrobe-analyze
+```
+
+Use `MD_OFFLINE=1` to guarantee no photo analysis call is made. The analyzer
+updates `wardrobe/drafts.json` with AI-inferred garment fields and marks records
+as `ai_reviewed`; review before promoting them into the main catalog.
 
 ## Device
 
