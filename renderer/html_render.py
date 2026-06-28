@@ -64,7 +64,7 @@ def _attention_block(priority_items):
     noun = "THING" if count == 1 else "THINGS"
     rows = "\n".join(
         f'<li><span class="u u-{_esc(item.get("urgency", "today"))}"></span>'
-        f'{_esc(item.get("title", ""))}'
+        f'{_esc(item.get("summary") or item.get("title", ""))}'
         f'<span class="action">{_esc(item.get("suggested_action", ""))}</span></li>'
         for item in priority_items
     )
@@ -146,8 +146,8 @@ body { background:var(--bg); color:var(--ink); font-family:-apple-system,"SF Pro
 .wear .items li::after { content:"·"; margin-left:14px; color:var(--line); }
 .wear .items li:last-child::after { content:""; }
 .wear .reason { font-size:16px; color:var(--muted); margin-top:10px; line-height:1.4; }
-.wear .composite { width:100%; max-height:210px; object-fit:contain; object-position:left;
-  margin:10px 0 4px; }
+.wear .composite { max-width:50%; max-height:360px; object-fit:contain; object-position:left top;
+  display:block; margin:10px 0 6px; }
 .wear .items-line { font-size:13px; color:var(--muted); line-height:1.3; }
 .wear .pieces { display:flex; gap:14px; flex-wrap:wrap; margin:12px 0 4px; }
 .wear .piece { width:118px; margin:0; text-align:center; }

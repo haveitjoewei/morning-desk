@@ -218,7 +218,7 @@ def attention_text(value, max_items=None):
     items = value[: max_items or len(value)]
     noun = "THING" if len(value) == 1 else "THINGS"
     lines = [f"{len(value)} {noun} NEED ATTENTION"]
-    lines.extend(item["title"] for item in items)
+    lines.extend(item.get("summary") or item.get("title", "") for item in items)
     return "\n".join(lines)
 
 
@@ -420,7 +420,7 @@ def _render_with_pillow(content, layout, output_path):
             for item in items:
                 draw.text(
                     (x + round(18 * scale_x), item_y),
-                    item["title"],
+                    item.get("summary") or item.get("title", ""),
                     font=attention_item,
                     fill=255,
                 )

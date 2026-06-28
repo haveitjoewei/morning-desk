@@ -80,7 +80,23 @@ def compose_outfit(pieces, items, out_path, cell=380, gap=24, pad=40, layout="co
     if not cuts:
         return None
 
-    if layout == "row":
+    if layout == "stack":
+        # Overlapped vertical column (cuts ordered top -> shoes): each piece sits
+        # over the previous so the whole outfit reads as one layered look.
+        overlap = 0.24
+        ys, y = [], pad
+        for index, img in enumerate(cuts):
+            if index:
+                y = ys[-1] + int(cuts[index - 1].height * (1 - overlap))
+            ys.append(y)
+        width = max(c.width for c in cuts) + pad * 2
+        height = ys[-1] + cuts[-1].height + pad
+        canvas = Image.new("RGBA", (width, height), (255, 255, 255, 255))
+        # Paste lowest piece first so upper garments render in front at the overlaps.
+        for index in reversed(range(len(cuts))):
+            img = cuts[index]
+            canvas.paste(img, ((width - img.width) // 2, ys[index]), img)
+    elif layout == "row":
         height = cell + pad * 2
         width = pad * 2 + sum(c.width for c in cuts) + gap * (len(cuts) - 1)
         canvas = Image.new("RGBA", (width, height), (255, 255, 255, 255))
@@ -112,7 +128,7 @@ def write_outfit_composite(content, root):
         return None
     out = Path(root) / "renderer" / "outfit.png"
     pieces = (content.get("outfit") or {}).get("pieces", [])
-    result = compose_outfit(pieces, load_wardrobe(), out, layout="row")
+    result = compose_outfit(pieces, load_wardrobe(), out, layout="stack")
     if result is None and out.exists():
         out.unlink()
     return result

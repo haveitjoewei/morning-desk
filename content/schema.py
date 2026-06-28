@@ -13,6 +13,7 @@ class PriorityItem:
     urgency: str
     reason: str
     suggested_action: str
+    summary: str = ""
 
     def to_dict(self):
         return {
@@ -21,6 +22,7 @@ class PriorityItem:
             "urgency": self.urgency,
             "reason": self.reason,
             "suggested_action": self.suggested_action,
+            "summary": self.summary,
         }
 
 

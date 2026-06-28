@@ -2,7 +2,7 @@ import json
 from datetime import date
 from pathlib import Path
 
-from ai.classify_urgency import classify_urgency
+from ai.triage_priorities import triage
 from ai.generate_briefing import generate_briefing
 from ai.generate_journal import generate_journal_prompt
 from ai.generate_outfit import generate_outfit
@@ -32,15 +32,17 @@ def build_content():
     wardrobe_items = load_wardrobe()
     context = daily_context(today)
     raw_priority_events = fetch_airbnb_messages() + fetch_va_messages()
+    triaged = triage(raw_priority_events)
     priority_items = [
         PriorityItem(
             event.title,
             event.source,
-            classify_urgency(event),
+            verdict["urgency"],
             event.body,
             event.metadata["suggested_action"],
+            summary=verdict["summary"],
         )
-        for event in raw_priority_events
+        for event, verdict in zip(raw_priority_events, triaged)
     ]
     visible_priorities = [
         item.to_dict() for item in priority_items if item.urgency in {"today", "urgent"}
