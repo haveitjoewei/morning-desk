@@ -12,6 +12,7 @@ from connectors.va_inbox import fetch_va_messages
 from connectors.weather import fetch_weather
 from content.schema import BriefingContent, PriorityItem
 from wardrobe.catalog import load_wardrobe
+from wardrobe.outfit_plan import planned_outfit
 
 
 def daily_context(today=None):
@@ -25,10 +26,11 @@ def daily_context(today=None):
 
 
 def build_content():
+    today = date.today()
     weather = fetch_weather()
     calendar = fetch_calendar()
     wardrobe_items = load_wardrobe()
-    context = daily_context()
+    context = daily_context(today)
     raw_priority_events = fetch_airbnb_messages() + fetch_va_messages()
     priority_items = [
         PriorityItem(
@@ -45,9 +47,15 @@ def build_content():
     ]
     briefing = generate_briefing(weather, calendar, visible_priorities)
 
+    outfit = planned_outfit(
+        today.isoformat(),
+        lambda: generate_outfit(weather, wardrobe_items, calendar, context),
+        keep_from=today.isoformat(),
+    )
+
     return BriefingContent.from_parts(
         weather=weather,
-        outfit=generate_outfit(weather, wardrobe_items, calendar, context),
+        outfit=outfit,
         briefing=briefing,
         calendar=calendar,
         priority_items=priority_items,

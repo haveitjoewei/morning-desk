@@ -99,6 +99,7 @@ def parse_calendar_events(events, today=None, timezone_value=None):
                 "end": end,
                 "location": event.get("location", ""),
                 "dress_code": event.get("dress_code", "casual"),
+                "event_type": event.get("event_type", "default"),
             }
         )
 
@@ -133,6 +134,7 @@ def parse_google_events(events, timezone_name=None):
                 "end": end_value,
                 "location": event.get("location", ""),
                 "dress_code": infer_dress_code(event),
+                "event_type": event.get("eventType", "default"),
             }
         )
 
@@ -188,15 +190,25 @@ def fetch_google_calendar(today=None):
         return None
 
 
-def is_excluded(title):
-    """Drop calendar entries that aren't personal appointments — e.g. Airbnb guest
-    reservations synced into Google Calendar. Configurable via MD_CALENDAR_EXCLUDE
-    (comma-separated, case-insensitive substrings)."""
+def is_excluded(event):
+    """Drop calendar entries that aren't personal appointments.
+
+    Primary signal: Google tags events it auto-creates from email (flights, hotel,
+    Airbnb reservations, forwarded confirmations) with eventType 'fromGmail' — no
+    manual marking needed. MD_CALENDAR_EXCLUDE_TYPES tunes the excluded types.
+    A keyword fallback (MD_CALENDAR_EXCLUDE) catches anything not so tagged."""
+    types = {
+        t.strip()
+        for t in os.environ.get("MD_CALENDAR_EXCLUDE_TYPES", "fromGmail").split(",")
+        if t.strip()
+    }
+    if event.get("event_type") in types:
+        return True
     raw = os.environ.get(
         "MD_CALENDAR_EXCLUDE", "reserved,reservation,airbnb,not available,stay at"
     )
     keys = [k.strip().lower() for k in raw.split(",") if k.strip()]
-    text = (title or "").lower()
+    text = (event.get("title", "") or "").lower()
     return any(k in text for k in keys)
 
 
@@ -212,7 +224,7 @@ def fetch_calendar(path=None, today=None):
             if google_events is not None
             else parse_calendar_events(load_calendar_events(), today=today)
         )
-    return [event for event in events if not is_excluded(event.get("title", ""))]
+    return [event for event in events if not is_excluded(event)]
 
 
 def authorize():

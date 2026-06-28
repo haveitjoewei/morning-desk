@@ -14,6 +14,7 @@ from connectors.calendar_google import fetch_calendar, tzinfo
 from connectors.weather import fetch_weather
 from orchestrator.run_morning_job import daily_context
 from wardrobe.catalog import load_wardrobe
+from wardrobe.outfit_plan import planned_outfit
 
 
 def build_evening_content(today=None):
@@ -27,7 +28,11 @@ def build_evening_content(today=None):
     wardrobe_items = load_wardrobe()
     context = daily_context(tomorrow)
 
-    outfit = generate_outfit(weather, wardrobe_items, calendar_tomorrow, context)
+    outfit = planned_outfit(
+        tomorrow.isoformat(),
+        lambda: generate_outfit(weather, wardrobe_items, calendar_tomorrow, context),
+        keep_from=today.isoformat(),
+    )
     reflection = generate_reflection(calendar_today)
 
     return {

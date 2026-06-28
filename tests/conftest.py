@@ -9,7 +9,9 @@ import pytest
 
 
 @pytest.fixture(autouse=True)
-def hermetic_env(monkeypatch):
+def hermetic_env(monkeypatch, tmp_path):
     monkeypatch.setenv("MD_OFFLINE", "1")
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.delenv("ANTHROPIC_AUTH_TOKEN", raising=False)
+    # Isolate the per-date outfit plan so tests don't read/write the real one.
+    monkeypatch.setenv("MD_OUTFIT_PLAN", str(tmp_path / "outfit_plan.json"))
