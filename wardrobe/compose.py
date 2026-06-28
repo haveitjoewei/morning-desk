@@ -67,7 +67,8 @@ def compose_outfit(pieces, items, out_path, cell=380, gap=24, pad=40, layout="co
     card) or 'row' (wide, fits the dashboard WEAR panel). Returns out_path or None."""
     from PIL import Image
 
-    cuts = []
+    cat_of = {i.get("name"): i.get("category", "") for i in items}
+    cuts, cats = [], []
     for piece in _ordered(pieces, items):
         image = piece.get("image")
         if not image or not (ROOT / image).exists():
@@ -77,34 +78,54 @@ def compose_outfit(pieces, items, out_path, cell=380, gap=24, pad=40, layout="co
         if scale < 1.0:
             img = img.resize((round(img.width * scale), round(img.height * scale)))
         cuts.append(img)
+        cats.append(cat_of.get(piece.get("name"), ""))
     if not cuts:
         return None
 
     if layout == "flatlay":
-        # Staggered diagonal collage: alternate pieces left/right, tilt each a few
-        # degrees, overlap vertically — the curated "stylist flat-lay" look.
-        from PIL import Image
+        # Two staggered columns — tops on the left, bottoms+shoes on the right —
+        # each overlapped and gently tilted: the curated stylist flat-lay look.
+        angles = [-5, 4, -4, 5]
 
-        angles = [-6, 5, -5, 6, -4, 5]
-        rot = [
-            c.rotate(angles[i % len(angles)], expand=True, resample=Image.BICUBIC, fillcolor=(0, 0, 0, 0))
-            for i, c in enumerate(cuts)
-        ]
-        base_w = max(r.width for r in rot)
-        stagger = int(base_w * 0.32)
-        overlap = 0.26
-        ys, y = [], pad
-        for index, r in enumerate(rot):
-            if index:
-                y = ys[-1] + int(rot[index - 1].height * (1 - overlap))
-            ys.append(y)
-        width = base_w + stagger + pad * 2
-        height = ys[-1] + rot[-1].height + pad
+        def _rot(idxs):
+            return [
+                cuts[i].rotate(angles[k % len(angles)], expand=True, resample=Image.BICUBIC,
+                               fillcolor=(0, 0, 0, 0))
+                for k, i in enumerate(idxs)
+            ]
+
+        tops = [i for i, c in enumerate(cats) if c in {"outerwear", "midlayer", "top"}]
+        bottoms = [i for i, c in enumerate(cats) if c in {"bottom", "shoes", "accessory"}]
+        if not tops or not bottoms:  # fallback: split in half
+            half = (len(cuts) + 1) // 2
+            tops, bottoms = list(range(half)), list(range(half, len(cuts)))
+        col1, col2 = _rot(tops), _rot(bottoms)
+
+        overlap = 0.20
+
+        def _col(imgs):
+            ys, y = [], 0
+            for k, im in enumerate(imgs):
+                if k:
+                    y = ys[-1] + int(imgs[k - 1].height * (1 - overlap))
+                ys.append(y)
+            w = max((im.width for im in imgs), default=0)
+            h = (ys[-1] + imgs[-1].height) if imgs else 0
+            return ys, w, h
+
+        ys1, w1, h1 = _col(col1)
+        ys2, w2, h2 = _col(col2)
+        colgap = int(max(w1, w2) * 0.10)
+        drop = int(max(h1, h2) * 0.12)  # stagger the right column downward
+        width = pad * 2 + w1 + colgap + w2
+        height = pad * 2 + max(h1, h2 + drop)
         canvas = Image.new("RGBA", (width, height), (255, 255, 255, 255))
-        for index in reversed(range(len(rot))):  # lower pieces behind
-            r = rot[index]
-            x = pad + (stagger if index % 2 else 0)
-            canvas.paste(r, (x, ys[index]), r)
+        for k in reversed(range(len(col1))):
+            im = col1[k]
+            canvas.paste(im, (pad + (w1 - im.width) // 2, pad + ys1[k]), im)
+        for k in reversed(range(len(col2))):
+            im = col2[k]
+            canvas.paste(im, (pad + w1 + colgap + (w2 - im.width) // 2, pad + drop + ys2[k]), im)
     elif layout == "stack":
         # Overlapped vertical column (cuts ordered top -> shoes): each piece sits
         # over the previous so the whole outfit reads as one layered look.

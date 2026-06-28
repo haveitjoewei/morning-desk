@@ -146,7 +146,7 @@ body { background:var(--bg); color:var(--ink); font-family:-apple-system,"SF Pro
 .wear .items li::after { content:"·"; margin-left:14px; color:var(--line); }
 .wear .items li:last-child::after { content:""; }
 .wear .reason { font-size:16px; color:var(--muted); margin-top:10px; line-height:1.4; }
-.wear .composite { max-width:72%; max-height:420px; object-fit:contain; object-position:left top;
+.wear .composite { width:100%; max-height:320px; object-fit:contain; object-position:left top;
   display:block; margin:10px 0 6px; }
 .wear .items-line { font-size:13px; color:var(--muted); line-height:1.3; }
 .wear .pieces { display:flex; gap:14px; flex-wrap:wrap; margin:12px 0 4px; }

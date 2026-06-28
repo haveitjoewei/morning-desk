@@ -64,7 +64,10 @@ def authorize():
 
 
 def search(query, max_results=10):
-    """Return messages, [] for an empty authenticated search, or None if unavailable."""
+    """Return one item per matching thread whose LATEST message is inbound (i.e. you
+    haven't replied yet). Threads where your reply is the most recent message are
+    dropped, so already-handled conversations don't keep showing up. Returns [] for
+    an empty authenticated search, or None when Gmail is unavailable."""
     if os.environ.get("MD_OFFLINE") == "1":
         return None
     try:
@@ -81,26 +84,39 @@ def search(query, max_results=10):
             .execute()
             .get("messages", [])
         )
+
+        seen = set()
         out = []
         for ref in listing:
-            msg = (
+            thread_id = ref.get("threadId")
+            if not thread_id or thread_id in seen:
+                continue
+            seen.add(thread_id)
+            thread = (
                 service.users()
-                .messages()
+                .threads()
                 .get(
                     userId="me",
-                    id=ref["id"],
+                    id=thread_id,
                     format="metadata",
                     metadataHeaders=["Subject", "From"],
                 )
                 .execute()
             )
-            headers = {h["name"]: h["value"] for h in msg.get("payload", {}).get("headers", [])}
+            messages = thread.get("messages", [])
+            if not messages:
+                continue
+            last = messages[-1]
+            # If my reply is the most recent message, the thread is handled — skip it.
+            if "SENT" in last.get("labelIds", []):
+                continue
+            headers = {h["name"]: h["value"] for h in last.get("payload", {}).get("headers", [])}
             out.append(
                 {
-                    "id": ref["id"],
+                    "id": last.get("id", ref["id"]),
                     "subject": headers.get("Subject", "(no subject)"),
                     "sender": headers.get("From", ""),
-                    "snippet": msg.get("snippet", ""),
+                    "snippet": last.get("snippet", ""),
                 }
             )
         return out
