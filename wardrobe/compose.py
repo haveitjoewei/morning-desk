@@ -80,7 +80,32 @@ def compose_outfit(pieces, items, out_path, cell=380, gap=24, pad=40, layout="co
     if not cuts:
         return None
 
-    if layout == "stack":
+    if layout == "flatlay":
+        # Staggered diagonal collage: alternate pieces left/right, tilt each a few
+        # degrees, overlap vertically — the curated "stylist flat-lay" look.
+        from PIL import Image
+
+        angles = [-6, 5, -5, 6, -4, 5]
+        rot = [
+            c.rotate(angles[i % len(angles)], expand=True, resample=Image.BICUBIC, fillcolor=(0, 0, 0, 0))
+            for i, c in enumerate(cuts)
+        ]
+        base_w = max(r.width for r in rot)
+        stagger = int(base_w * 0.32)
+        overlap = 0.26
+        ys, y = [], pad
+        for index, r in enumerate(rot):
+            if index:
+                y = ys[-1] + int(rot[index - 1].height * (1 - overlap))
+            ys.append(y)
+        width = base_w + stagger + pad * 2
+        height = ys[-1] + rot[-1].height + pad
+        canvas = Image.new("RGBA", (width, height), (255, 255, 255, 255))
+        for index in reversed(range(len(rot))):  # lower pieces behind
+            r = rot[index]
+            x = pad + (stagger if index % 2 else 0)
+            canvas.paste(r, (x, ys[index]), r)
+    elif layout == "stack":
         # Overlapped vertical column (cuts ordered top -> shoes): each piece sits
         # over the previous so the whole outfit reads as one layered look.
         overlap = 0.24
@@ -128,7 +153,7 @@ def write_outfit_composite(content, root):
         return None
     out = Path(root) / "renderer" / "outfit.png"
     pieces = (content.get("outfit") or {}).get("pieces", [])
-    result = compose_outfit(pieces, load_wardrobe(), out, layout="stack")
+    result = compose_outfit(pieces, load_wardrobe(), out, layout="flatlay")
     if result is None and out.exists():
         out.unlink()
     return result
