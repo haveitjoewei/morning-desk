@@ -1,0 +1,11 @@
+venv/
+.git/
+__pycache__/
+*.pyc
+profiles/joseph/
+renderer/
+content/
+logs/
+tests/
+docs/
+node_modules/

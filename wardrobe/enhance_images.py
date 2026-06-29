@@ -17,9 +17,9 @@ import io
 import os
 from pathlib import Path
 
+from core.profiles import DEFAULT_PROFILE, profile_dir
+
 ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "wardrobe" / "images"
-DST = ROOT / "wardrobe" / "images_clean"
 MODEL = os.environ.get("MD_IMAGE_MODEL", "gemini-2.5-flash-image")
 
 PROMPT = (
@@ -57,14 +57,16 @@ def _enhance_one(client, image_bytes):
     raise RuntimeError("no image returned")
 
 
-def enhance(limit=None):
+def enhance(limit=None, profile=DEFAULT_PROFILE):
     if not _key():
         raise SystemExit("GEMINI_API_KEY not set — image cleanup needs it. See SETUP.md.")
-    DST.mkdir(parents=True, exist_ok=True)
+    p = profile_dir(profile)
+    src, dst = p / "images", p / "images_clean"
+    dst.mkdir(parents=True, exist_ok=True)
     client = _client()
 
-    photos = sorted(p for p in SRC.iterdir() if p.suffix.lower() == ".jpg")
-    photos = [p for p in photos if not (DST / p.name).exists()]
+    photos = sorted(q for q in src.iterdir() if q.suffix.lower() == ".jpg")
+    photos = [q for q in photos if not (dst / q.name).exists()]
     if limit is not None:
         photos = photos[:limit]
 
@@ -72,18 +74,19 @@ def enhance(limit=None):
     for index, path in enumerate(photos, 1):
         try:
             data = _enhance_one(client, path.read_bytes())
-            (DST / path.name).write_bytes(data)
+            (dst / path.name).write_bytes(data)
             print(f"  [{index}/{len(photos)}] {path.name} -> images_clean/{path.name}")
         except Exception as exc:
             print(f"  [{index}/{len(photos)}] {path.name}: SKIPPED ({exc})")
-    print(f"Done. Cleaned images in {DST}")
+    print(f"Done. Cleaned images in {dst}")
 
 
 def main():
     parser = argparse.ArgumentParser(description="Clean up wardrobe photos into product shots.")
     parser.add_argument("--limit", type=int, default=None, help="Process only the first N images.")
+    parser.add_argument("--profile", default=DEFAULT_PROFILE, help="Wardrobe profile.")
     args = parser.parse_args()
-    enhance(limit=args.limit)
+    enhance(limit=args.limit, profile=args.profile)
 
 
 if __name__ == "__main__":

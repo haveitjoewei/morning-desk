@@ -17,7 +17,7 @@ from pathlib import Path
 
 from ai._llm import MODEL, available, client, text_of
 
-CLEAN = Path(__file__).resolve().parents[1] / "wardrobe" / "images_clean"
+from core.profiles import DEFAULT_PROFILE, profile_dir
 
 SYSTEM = (
     "You see one clothing item photographed as a product shot on white. Reply with the "
@@ -66,12 +66,12 @@ def _detect(b64):
     return int(json.loads(text_of(resp)).get("rotation", 0))
 
 
-def fix(limit=None):
+def fix(limit=None, profile=DEFAULT_PROFILE):
     if not available():
         raise SystemExit("ANTHROPIC_API_KEY not set — orientation fix needs it.")
     from PIL import Image
 
-    photos = sorted(CLEAN.glob("*.jpg"))
+    photos = sorted((profile_dir(profile) / "images_clean").glob("*.jpg"))
     if limit is not None:
         photos = photos[:limit]
 
@@ -93,8 +93,9 @@ def fix(limit=None):
 def main():
     parser = argparse.ArgumentParser(description="Fix wrongly-rotated cleaned wardrobe images.")
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--profile", default=DEFAULT_PROFILE, help="Wardrobe profile.")
     args = parser.parse_args()
-    fix(limit=args.limit)
+    fix(limit=args.limit, profile=args.profile)
 
 
 if __name__ == "__main__":

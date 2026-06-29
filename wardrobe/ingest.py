@@ -23,13 +23,29 @@ import re
 from pathlib import Path
 
 from ai._llm import MODEL, available, client, text_of
+from core.categories import categories_for
+from core.profiles import DEFAULT_PROFILE, load_config, profile_dir
 
 ROOT = Path(__file__).resolve().parents[1]
-INBOX = ROOT / "wardrobe" / "inbox"
-IMAGES = ROOT / "wardrobe" / "images"
-ITEMS = ROOT / "wardrobe" / "items.json"
-SEED_BACKUP = ROOT / "wardrobe" / "items.seed.json"
-REVIEW = ROOT / "wardrobe" / "review.md"
+PROFILE = DEFAULT_PROFILE
+_pdir = profile_dir(PROFILE)
+INBOX = _pdir / "inbox"
+IMAGES = _pdir / "images"
+ITEMS = _pdir / "items.json"
+SEED_BACKUP = _pdir / "items.seed.json"
+REVIEW = _pdir / "review.md"
+CATEGORIES = categories_for(load_config(PROFILE).get("categories", "menswear"))
+
+
+def configure(profile):
+    """Point the ingest at a profile's folders + category vocabulary."""
+    global PROFILE, INBOX, IMAGES, ITEMS, SEED_BACKUP, REVIEW, CATEGORIES
+    PROFILE = profile
+    p = profile_dir(profile)
+    INBOX, IMAGES = p / "inbox", p / "images"
+    ITEMS, SEED_BACKUP, REVIEW = p / "items.json", p / "items.seed.json", p / "review.md"
+    CATEGORIES = categories_for(load_config(profile).get("categories", "menswear"))
+    GARMENT_SCHEMA["properties"]["category"]["enum"] = CATEGORIES
 
 SUPPORTED = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif"}
 MAX_EDGE = 1024
@@ -43,7 +59,7 @@ GARMENT_SCHEMA = {
         "name": {"type": "string", "description": "Short human label, e.g. 'navy colorblock crewneck'"},
         "category": {
             "type": "string",
-            "enum": ["top", "midlayer", "outerwear", "bottom", "shoes", "accessory"],
+            "enum": CATEGORIES,
         },
         "subtype": {"type": "string", "description": "e.g. 'long-sleeve t-shirt', 'low-top sneakers'"},
         "brand": {"type": ["string", "null"], "description": "Only if a logo/wordmark is visible, else null"},
@@ -197,7 +213,7 @@ def ingest(limit=None):
 
         item_id = unique_id(slugify(record["name"]), taken_ids)
         taken_ids.add(item_id)
-        image_rel = Path("wardrobe") / "images" / f"{item_id}.jpg"
+        image_rel = Path("profiles") / PROFILE / "images" / f"{item_id}.jpg"
         (ROOT / image_rel).write_bytes(jpeg)
 
         record.update({"id": item_id, "image": str(image_rel), "source": path.name, "learned": []})
@@ -213,7 +229,9 @@ def ingest(limit=None):
 def main():
     parser = argparse.ArgumentParser(description="Vision wardrobe ingest.")
     parser.add_argument("--limit", type=int, default=None, help="Process only the first N photos.")
+    parser.add_argument("--profile", default=DEFAULT_PROFILE, help="Wardrobe profile to ingest into.")
     args = parser.parse_args()
+    configure(args.profile)
     ingest(limit=args.limit)
 
 
