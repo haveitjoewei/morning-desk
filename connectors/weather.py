@@ -106,3 +106,17 @@ def fetch_weather(config_path=None, day=0):
         return parse_open_meteo(payload, day=day)
     except (OSError, URLError, TimeoutError, KeyError, IndexError, json.JSONDecodeError):
         return FALLBACK_WEATHER.copy()
+
+
+def fetch_weather_for(profile, day=0):
+    """Weather for a profile's configured location (profiles/<profile>/config.json)."""
+    if os.environ.get("MD_OFFLINE") == "1":
+        return FALLBACK_WEATHER.copy()
+    try:
+        from core.profiles import load_config
+
+        location = load_config(profile).get("location", {})
+        payload = fetch_open_meteo(location, days=day + 1)
+        return parse_open_meteo(payload, day=day)
+    except (OSError, URLError, TimeoutError, KeyError, IndexError, json.JSONDecodeError):
+        return FALLBACK_WEATHER.copy()

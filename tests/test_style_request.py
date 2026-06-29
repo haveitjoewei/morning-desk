@@ -40,3 +40,15 @@ def test_fallback_outfit_includes_anchor_item():
     out = generate_outfit(weather, wardrobe, calendar=[], context={},
                           request={"anchor": "green cardigan", "instructions": "", "formality_hint": "casual"})
     assert "green cardigan" in out["items"]
+
+
+def test_plan_outfit_for_profile_returns_pieces(tmp_path, monkeypatch):
+    monkeypatch.setenv("MD_PROFILES_ROOT", str(tmp_path))
+    monkeypatch.setenv("MD_OFFLINE", "1")
+    d = tmp_path / "eve"
+    d.mkdir()
+    (d / "items.json").write_text('[{"name":"Red Dress","id":"red-dress","category":"dress","formality":["smart casual"],"warmth":2}]')
+    (d / "config.json").write_text('{"categories":"womenswear","location":{"latitude":-33.8,"longitude":151.2,"timezone":"Australia/Sydney"}}')
+    from core.outfit import plan_outfit
+    result = plan_outfit("eve", prefs={}, day={"occasion": "dressy"})
+    assert "headline" in result and "pieces" in result and "weather" in result
