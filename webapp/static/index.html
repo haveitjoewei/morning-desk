@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f3efe9">
+  <title>Closet</title>
+  <link rel="manifest" href="/static/manifest.json">
+  <link rel="apple-touch-icon" href="/static/icon-192.png">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Lock screen -->
+  <section id="lock" class="lock">
+    <div class="lock-card">
+      <h1 class="brand">Your Closet</h1>
+      <p class="sub">A little outfit, picked for today.</p>
+      <input id="pin" class="pin" type="password" inputmode="numeric" placeholder="Enter PIN" autocomplete="off">
+      <button id="unlock" class="btn primary">Open</button>
+      <p id="lock-error" class="error" hidden>That PIN didn't work.</p>
+    </div>
+  </section>
+
+  <!-- App -->
+  <main id="app" hidden>
+    <header class="top">
+      <div>
+        <div id="date" class="date"></div>
+        <div id="weather" class="weather"></div>
+      </div>
+      <button id="settings-btn" class="icon-btn" aria-label="Settings">⚙</button>
+    </header>
+
+    <section class="outfit">
+      <h2 id="headline" class="headline"></h2>
+      <div id="look" class="look"></div>
+      <p id="reason" class="reason"></p>
+    </section>
+
+    <section class="tweaks">
+      <div class="row" id="occasions"></div>
+      <div class="row">
+        <button class="chip" data-nudge="warmer">Warmer</button>
+        <button class="chip" data-nudge="lighter">Lighter</button>
+        <button id="anchor-btn" class="chip">★ Anchor a piece</button>
+      </div>
+      <div class="row wish-row">
+        <input id="wish" class="wish" type="text" placeholder="Anything else? e.g. “something flowy”, “wear the green cardigan”">
+      </div>
+      <button id="regen" class="btn primary wide">Show me an outfit</button>
+    </section>
+  </main>
+
+  <!-- Anchor picker -->
+  <div id="picker" class="modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head"><span>Build around…</span><button id="picker-close" class="icon-btn">✕</button></div>
+      <div id="picker-grid" class="grid"></div>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div id="settings" class="modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head"><span>Preferences</span><button id="settings-close" class="icon-btn">✕</button></div>
+      <label class="toggle"><input type="checkbox" id="runs-cold"> I run cold (prefer warmer layers)</label>
+      <label class="field"><span>Your style, in your words</span>
+        <textarea id="style-notes" rows="3" placeholder="soft neutrals, cozy and put-together…"></textarea></label>
+      <label class="field"><span>Colours you love (comma separated)</span>
+        <input type="text" id="love-colors" placeholder="sage, cream, camel"></label>
+      <label class="field"><span>Colours to avoid</span>
+        <input type="text" id="avoid-colors" placeholder="neon"></label>
+      <button id="settings-save" class="btn primary wide">Save</button>
+    </div>
+  </div>
+
+  <div id="loading" class="loading" hidden><div class="spinner"></div></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
