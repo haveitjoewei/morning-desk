@@ -59,15 +59,21 @@ hardcodes a profile; callers pass one. morning-desk's scripts default to `joseph
 
 ## 3. Her web app
 
-Mobile-first, single screen. Stack: FastAPI + a light HTML/CSS/JS frontend (no heavy
-framework — server-rendered page + a little vanilla JS for tweaks/regenerate).
+Mobile-first, single screen, shipped as an installable **PWA** (web app manifest +
+minimal service worker + app icon) so she can "Add to Home Screen" and it opens
+full-screen like a native app. Stack: FastAPI + a light HTML/CSS/JS frontend (no heavy
+framework — server-rendered page + a little vanilla JS for tweaks/regenerate). The
+service worker caches the app shell (offline-friendly launch); outfit generation needs
+the network.
 
 **Screens / states:**
 - **Unlock:** one PIN field; on success the device remembers it (token in localStorage).
 - **Today:** the recommended outfit rendered as the flat-lay (her cutouts), headline +
   stylist reason, the weather line.
 - **Tweak bar:** occasion picker, warmer/lighter toggle, "anchor a piece" (opens a
-  thumbnail grid of her wardrobe to pick one), a wish text field, and Regenerate.
+  thumbnail grid of her wardrobe to pick one), a **free-text box for any wish or
+  preference** ("I'm cold today", "something flowy", "wear the green cardigan" — never
+  boxed in by the structured controls), and Regenerate.
 - **Prefs (settings):** runs-cold toggle, style notes, love/avoid colors. Saved to
   localStorage.
 
@@ -110,8 +116,16 @@ category set is profile-scoped, so Joseph's stays menswear.
 
 ## 6. Hosting & security
 
-- **Host:** Railway or Fly.io, ~$5/mo, always-on (no cold-start lag). Her wardrobe images
-  ship inside the deploy. `ANTHROPIC_API_KEY` and the `WARDROBE_PIN` are host env vars.
+- **Host:** **Vercel (free Hobby tier).** Works because the app is stateless and the
+  runtime is light — cutouts/enhanced images are precomputed offline by Joseph and ship as
+  static assets, so request-time needs only the Claude call plus serving static files (no
+  rembg/PIL/onnxruntime in the deploy, which would blow the serverless size limit). The
+  outfit call fits the 10s function limit. Hobby tier is for personal/non-commercial use —
+  a private gift qualifies. API endpoints as Python serverless functions (FastAPI via an
+  ASGI handler, or plain functions for the few routes). `ANTHROPIC_API_KEY` and
+  `WARDROBE_PIN` are Vercel env vars; HTTPS + a domain come free.
+  **Fallback:** Railway or Fly.io (~$5/mo, always-on) if Vercel's Python/FastAPI specifics
+  bite, or home-machine + Cloudflare tunnel.
 - **Security:** single shared PIN. `POST /api/unlock` checks it and returns a signed
   (HMAC) token stored in localStorage; the token is required on API calls. Not real auth,
   but keeps strangers out and is frictionless for her. HTTPS via the host's domain.
@@ -135,7 +149,7 @@ build her catalog + images. Roughly the same flow already used for his 82 items.
 
 ## Success criteria
 
-On Thursday, Evangeline opens a link on her phone, enters a PIN once, and sees a
-genuinely good outfit from her own clothes. She can say "I'm cold," pick an occasion,
+On Thursday, Evangeline opens (and can "Add to Home Screen" as an app) a link on her
+phone, enters a PIN once, and sees a genuinely good outfit from her own clothes. She can say "I'm cold," pick an occasion,
 anchor a piece she wants to wear, or type a wish, and get a new look that respects it —
 all without touching Joseph's wardrobe or anything technical.
