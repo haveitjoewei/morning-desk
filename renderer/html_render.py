@@ -131,8 +131,10 @@ def _outfit_block(outfit):
 
     # Flat-lay: cutouts grouped into a tops row and a bottoms+shoes row, each item
     # sized by category (so same-category pieces match) with its name beneath it.
-    tops = [p for p in pieces if p.get("category") in {"outerwear", "midlayer", "top"}]
-    bottoms = [p for p in pieces if p.get("category") in {"bottom", "shoes", "accessory"}]
+    from core.categories import BOTTOM_ROW, TOP_ROW
+
+    tops = [p for p in pieces if p.get("category") in TOP_ROW]
+    bottoms = [p for p in pieces if p.get("category") in BOTTOM_ROW]
     if not tops and not bottoms:
         tops = pieces
     rows = []
@@ -186,10 +188,13 @@ body { background:var(--bg); color:var(--ink); font-family:-apple-system,"SF Pro
 .wear .look-row { display:flex; align-items:flex-end; gap:26px; flex-wrap:wrap; }
 .wear .look-item { margin:0; text-align:center; }
 .wear .look-item img { display:block; object-fit:contain; }
-.wear .cat-top img, .wear .cat-midlayer img, .wear .cat-outerwear img { height:150px; }
-.wear .cat-bottom img { height:172px; }
+.wear .cat-top img, .wear .cat-midlayer img, .wear .cat-outerwear img,
+.wear .cat-blouse img, .wear .cat-knit img, .wear .cat-cardigan img { height:150px; }
+.wear .cat-dress img { height:200px; }
+.wear .cat-bottom img, .wear .cat-pants img, .wear .cat-jeans img,
+.wear .cat-skirt img, .wear .cat-shorts img { height:172px; }
 .wear .cat-shoes img { height:78px; }
-.wear .cat-accessory img { height:92px; }
+.wear .cat-accessory img, .wear .cat-bag img { height:92px; }
 .wear .cat-other img { height:140px; }
 .wear .look-item figcaption { font-size:11px; color:var(--muted); margin-top:5px;
   max-width:150px; line-height:1.2; }

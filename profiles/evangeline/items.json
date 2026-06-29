@@ -1,0 +1,2842 @@
+[
+  {
+    "name": "grey Nike mesh athletic shorts",
+    "category": "shorts",
+    "subtype": "athletic shorts",
+    "brand": "Nike",
+    "colors": [
+      "grey",
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "polyester mesh",
+    "texture": "perforated mesh knit",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with elastic drawstring waist and side stripe detail",
+    "confidence": "high",
+    "id": "grey-nike-mesh-athletic-shorts",
+    "image": "wardrobe/images/grey-nike-mesh-athletic-shorts.jpg",
+    "source": "IMG_6443.JPG",
+    "learned": []
+  },
+  {
+    "name": "white waffle-knit henley",
+    "category": "top",
+    "subtype": "long-sleeve henley",
+    "brand": null,
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton waffle knit",
+    "texture": "waffle thermal knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "worn",
+    "fit_notes": "Regular fit with ribbed cuffs and curved hem; visibly wrinkled with slight wear at hem edges",
+    "confidence": "high",
+    "id": "white-waffle-knit-henley",
+    "image": "wardrobe/images/white-waffle-knit-henley.jpg",
+    "source": "IMG_6444.JPG",
+    "learned": []
+  },
+  {
+    "name": "olive green long-sleeve tee",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "olive green"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with ribbed crew neck and cuffs, slightly worn-in look",
+    "confidence": "high",
+    "id": "olive-green-long-sleeve-tee",
+    "image": "wardrobe/images/olive-green-long-sleeve-tee.jpg",
+    "source": "IMG_6445.JPG",
+    "learned": []
+  },
+  {
+    "name": "olive green long-sleeve crewneck tee",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": "Faherty",
+    "colors": [
+      "olive green"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton blend jersey",
+    "texture": "smooth soft knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed regular fit with ribbed cuffs and crew neckline",
+    "confidence": "high",
+    "id": "olive-green-long-sleeve-crewneck-tee",
+    "image": "wardrobe/images/olive-green-long-sleeve-crewneck-tee.jpg",
+    "source": "IMG_6446.JPG",
+    "learned": []
+  },
+  {
+    "name": "charcoal grey owl long-sleeve tee",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": "OVO",
+    "colors": [
+      "charcoal grey",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "graphic",
+    "sleeve": "long",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed regular fit with crew neck; heavily wrinkled, slight fading consistent with washed cotton",
+    "confidence": "high",
+    "id": "charcoal-grey-owl-long-sleeve-tee",
+    "image": "wardrobe/images/charcoal-grey-owl-long-sleeve-tee.jpg",
+    "source": "IMG_6447.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige linen-blend button-down shirt",
+    "category": "blouse",
+    "subtype": "button-down shirt",
+    "brand": null,
+    "colors": [
+      "beige",
+      "cream"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "linen-cotton blend",
+    "texture": "slightly slubbed woven",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed fit with chest pocket and button-down collar; shown wrinkled",
+    "confidence": "medium",
+    "id": "beige-linen-blend-button-down-shirt",
+    "image": "wardrobe/images/beige-linen-blend-button-down-shirt.jpg",
+    "source": "IMG_6448.JPG",
+    "learned": []
+  },
+  {
+    "name": "heather grey crewneck sweatshirt",
+    "category": "knit",
+    "subtype": "crewneck sweatshirt",
+    "brand": null,
+    "colors": [
+      "heather grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton-polyester fleece",
+    "texture": "brushed fleece interior, smooth knit exterior",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed, roomy fit with ribbed crew collar and cuffs",
+    "confidence": "high",
+    "id": "heather-grey-crewneck-sweatshirt",
+    "image": "wardrobe/images/heather-grey-crewneck-sweatshirt.jpg",
+    "source": "IMG_6449.JPG",
+    "learned": []
+  },
+  {
+    "name": "grey and charcoal hooded softshell jacket",
+    "category": "outerwear",
+    "subtype": "hooded softshell jacket",
+    "brand": null,
+    "colors": [
+      "charcoal grey",
+      "light grey",
+      "red"
+    ],
+    "neutral": true,
+    "pattern": "colorblock",
+    "sleeve": "long",
+    "material": "polyester softshell with fleece backing",
+    "texture": "smooth bonded shell with brushed fleece interior",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": true,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "athletic fit with thumbhole cuffs and full-length zip, hooded",
+    "confidence": "medium",
+    "id": "grey-and-charcoal-hooded-softshell-jacket",
+    "image": "wardrobe/images/grey-and-charcoal-hooded-softshell-jacket.jpg",
+    "source": "IMG_6450.JPG",
+    "learned": []
+  },
+  {
+    "name": "black full-zip fleece jacket",
+    "category": "knit",
+    "subtype": "full-zip fleece jacket",
+    "brand": null,
+    "colors": [
+      "black",
+      "gold"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "polyester fleece",
+    "texture": "brushed fleece",
+    "thickness": "medium",
+    "warmth": 4,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Standard fit with stand collar, two zip hand pockets, embroidered logo at left chest",
+    "confidence": "high",
+    "id": "black-full-zip-fleece-jacket",
+    "image": "wardrobe/images/black-full-zip-fleece-jacket.jpg",
+    "source": "IMG_6451.JPG",
+    "learned": []
+  },
+  {
+    "name": "light blue logo crewneck sweatshirt",
+    "category": "knit",
+    "subtype": "crewneck sweatshirt",
+    "brand": null,
+    "colors": [
+      "light blue",
+      "purple"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton fleece blend",
+    "texture": "brushed fleece",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Regular fit with ribbed crew neck, cuffs and hem",
+    "confidence": "high",
+    "id": "light-blue-logo-crewneck-sweatshirt",
+    "image": "wardrobe/images/light-blue-logo-crewneck-sweatshirt.jpg",
+    "source": "IMG_6452.JPG",
+    "learned": []
+  },
+  {
+    "name": "white bomber jacket",
+    "category": "outerwear",
+    "subtype": "bomber jacket",
+    "brand": "Banana Republic",
+    "colors": [
+      "white",
+      "cream"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton-nylon blend",
+    "texture": "smooth woven",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Classic bomber silhouette with ribbed collar, cuffs and hem; full zip front, utility sleeve pocket, slash hand pockets",
+    "confidence": "high",
+    "id": "white-bomber-jacket",
+    "image": "wardrobe/images/white-bomber-jacket.jpg",
+    "source": "IMG_6453.JPG",
+    "learned": []
+  },
+  {
+    "name": "charcoal Okta zip hoodie",
+    "category": "knit",
+    "subtype": "full-zip hoodie",
+    "brand": "Okta",
+    "colors": [
+      "charcoal grey",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton-poly blend jersey",
+    "texture": "smooth heathered knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Lightweight hooded zip-up with kangaroo pockets and contrast white zipper; relaxed fit",
+    "confidence": "high",
+    "id": "charcoal-okta-zip-hoodie",
+    "image": "wardrobe/images/charcoal-okta-zip-hoodie.jpg",
+    "source": "IMG_6454.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige crewneck knit sweater",
+    "category": "knit",
+    "subtype": "crewneck sweater",
+    "brand": "Zara",
+    "colors": [
+      "beige",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton knit",
+    "texture": "fine smooth knit with ribbed trim",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed regular fit with ribbed crew neck, cuffs and hem",
+    "confidence": "high",
+    "id": "beige-crewneck-knit-sweater",
+    "image": "wardrobe/images/beige-crewneck-knit-sweater.jpg",
+    "source": "IMG_6455.JPG",
+    "learned": []
+  },
+  {
+    "name": "sage green band-collar linen shirt",
+    "category": "blouse",
+    "subtype": "long-sleeve button-up shirt",
+    "brand": null,
+    "colors": [
+      "sage green",
+      "beige"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "linen",
+    "texture": "lightweight woven, slightly slubby",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit, band/mandarin collar, heavily wrinkled",
+    "confidence": "high",
+    "id": "sage-green-band-collar-linen-shirt",
+    "image": "wardrobe/images/sage-green-band-collar-linen-shirt.jpg",
+    "source": "IMG_6456.JPG",
+    "learned": []
+  },
+  {
+    "name": "cream linen-blend button-up shirt",
+    "category": "blouse",
+    "subtype": "long-sleeve button-up shirt",
+    "brand": "Zara",
+    "colors": [
+      "cream",
+      "off-white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "linen-cotton blend",
+    "texture": "slubby woven",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "regular fit, button-down collar with chest pocket, slightly wrinkled",
+    "confidence": "high",
+    "id": "cream-linen-blend-button-up-shirt",
+    "image": "wardrobe/images/cream-linen-blend-button-up-shirt.jpg",
+    "source": "IMG_6457.JPG",
+    "learned": []
+  },
+  {
+    "name": "black hooded windbreaker jacket",
+    "category": "outerwear",
+    "subtype": "hooded windbreaker",
+    "brand": "Zara",
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "nylon/polyester shell",
+    "texture": "smooth woven shell",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": true,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed fit with hood, zip front, chest and side zip pockets, elasticated cuffs",
+    "confidence": "medium",
+    "id": "black-hooded-windbreaker-jacket",
+    "image": "wardrobe/images/black-hooded-windbreaker-jacket.jpg",
+    "source": "IMG_6458.JPG",
+    "learned": []
+  },
+  {
+    "name": "tan canvas work jacket",
+    "category": "outerwear",
+    "subtype": "canvas work jacket",
+    "brand": "Zara",
+    "colors": [
+      "tan",
+      "brown",
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton canvas",
+    "texture": "woven canvas, smooth with contrast collar",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "workwear-style boxy fit with contrast collar and zip front",
+    "confidence": "high",
+    "id": "tan-canvas-work-jacket",
+    "image": "wardrobe/images/tan-canvas-work-jacket.jpg",
+    "source": "IMG_6459.JPG",
+    "learned": []
+  },
+  {
+    "name": "dark brown cotton trucker jacket",
+    "category": "outerwear",
+    "subtype": "trucker jacket",
+    "brand": "Zara",
+    "colors": [
+      "dark brown",
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton canvas",
+    "texture": "brushed twill",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "regular fit, zip front with chest and side pockets, spread collar",
+    "confidence": "high",
+    "id": "dark-brown-cotton-trucker-jacket",
+    "image": "wardrobe/images/dark-brown-cotton-trucker-jacket.jpg",
+    "source": "IMG_6460.JPG",
+    "learned": []
+  },
+  {
+    "name": "black Bay Area highway graphic hoodie",
+    "category": "knit",
+    "subtype": "pullover hoodie",
+    "brand": null,
+    "colors": [
+      "black",
+      "green",
+      "blue",
+      "white",
+      "red"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "long",
+    "material": "cotton fleece blend",
+    "texture": "brushed fleece",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "athletic"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "standard fit pullover with kangaroo pocket and hood",
+    "confidence": "high",
+    "id": "black-bay-area-highway-graphic-hoodie",
+    "image": "wardrobe/images/black-bay-area-highway-graphic-hoodie.jpg",
+    "source": "IMG_6461.jpg",
+    "learned": []
+  },
+  {
+    "name": "beige pullover hoodie",
+    "category": "knit",
+    "subtype": "pullover hoodie",
+    "brand": null,
+    "colors": [
+      "beige",
+      "cream"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton fleece blend",
+    "texture": "brushed fleece",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with kangaroo pocket, ribbed cuffs and hem, drawstring hood",
+    "confidence": "high",
+    "id": "beige-pullover-hoodie",
+    "image": "wardrobe/images/beige-pullover-hoodie.jpg",
+    "source": "IMG_6462.jpg",
+    "learned": []
+  },
+  {
+    "name": "black and olive colorblock sweatshirt",
+    "category": "knit",
+    "subtype": "crewneck sweatshirt",
+    "brand": null,
+    "colors": [
+      "black",
+      "olive green",
+      "tan"
+    ],
+    "neutral": false,
+    "pattern": "colorblock",
+    "sleeve": "long",
+    "material": "cotton blend fleece",
+    "texture": "brushed fleece",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "regular fit with ribbed cuffs and hem, crew neckline",
+    "confidence": "high",
+    "id": "black-and-olive-colorblock-sweatshirt",
+    "image": "wardrobe/images/black-and-olive-colorblock-sweatshirt.jpg",
+    "source": "IMG_6463.jpg",
+    "learned": []
+  },
+  {
+    "name": "navy ribbed zip cardigan",
+    "category": "cardigan",
+    "subtype": "full-zip ribbed cardigan",
+    "brand": "Zara",
+    "colors": [
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton blend knit",
+    "texture": "ribbed knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "standard fit with tall ribbed funnel collar and full-length zip",
+    "confidence": "high",
+    "id": "navy-ribbed-zip-cardigan",
+    "image": "wardrobe/images/navy-ribbed-zip-cardigan.jpg",
+    "source": "IMG_6464.jpg",
+    "learned": []
+  },
+  {
+    "name": "olive Banana Republic graphic hoodie",
+    "category": "knit",
+    "subtype": "pullover hoodie",
+    "brand": "Banana Republic",
+    "colors": [
+      "olive green",
+      "dark grey"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "long",
+    "material": "cotton fleece blend",
+    "texture": "brushed fleece",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "standard fit, ribbed cuffs and hem",
+    "confidence": "high",
+    "id": "olive-banana-republic-graphic-hoodie",
+    "image": "wardrobe/images/olive-banana-republic-graphic-hoodie.jpg",
+    "source": "IMG_6465.jpg",
+    "learned": []
+  },
+  {
+    "name": "navy and cream striped rugby shirt",
+    "category": "blouse",
+    "subtype": "long-sleeve rugby shirt",
+    "brand": null,
+    "colors": [
+      "navy",
+      "cream"
+    ],
+    "neutral": true,
+    "pattern": "striped",
+    "sleeve": "long",
+    "material": "cotton jersey",
+    "texture": "smooth knit with ribbed cuffs",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "regular fit with collared neckline and ribbed cuffs",
+    "confidence": "high",
+    "id": "navy-and-cream-striped-rugby-shirt",
+    "image": "wardrobe/images/navy-and-cream-striped-rugby-shirt.jpg",
+    "source": "IMG_6466.jpg",
+    "learned": []
+  },
+  {
+    "name": "light grey waffle-knit crewneck sweater",
+    "category": "knit",
+    "subtype": "crewneck sweater",
+    "brand": null,
+    "colors": [
+      "light grey",
+      "heather grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton blend knit",
+    "texture": "waffle knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "regular fit, ribbed crew neckline and cuffs",
+    "confidence": "high",
+    "id": "light-grey-waffle-knit-crewneck-sweater",
+    "image": "wardrobe/images/light-grey-waffle-knit-crewneck-sweater.jpg",
+    "source": "IMG_6467.jpg",
+    "learned": []
+  },
+  {
+    "name": "navy Nike Cal hoodie",
+    "category": "knit",
+    "subtype": "pullover hoodie",
+    "brand": "Nike",
+    "colors": [
+      "navy",
+      "yellow",
+      "white"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "long",
+    "material": "polyester fleece",
+    "texture": "brushed fleece interior, smooth knit face",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "standard relaxed hoodie fit with kangaroo pocket and ribbed hem",
+    "confidence": "high",
+    "id": "navy-nike-cal-hoodie",
+    "image": "wardrobe/images/navy-nike-cal-hoodie.jpg",
+    "source": "IMG_6468.jpg",
+    "learned": []
+  },
+  {
+    "name": "dark wash denim trucker jacket",
+    "category": "outerwear",
+    "subtype": "denim jacket",
+    "brand": "Banana Republic",
+    "colors": [
+      "dark blue",
+      "indigo"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton denim",
+    "texture": "woven denim with subtle fading",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "classic trucker cut with chest and side pockets, button front, regular fit",
+    "confidence": "high",
+    "id": "dark-wash-denim-trucker-jacket",
+    "image": "wardrobe/images/dark-wash-denim-trucker-jacket.jpg",
+    "source": "IMG_6469.jpg",
+    "learned": []
+  },
+  {
+    "name": "black raglan crewneck sweatshirt",
+    "category": "knit",
+    "subtype": "raglan-sleeve crewneck sweatshirt",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton blend fleece",
+    "texture": "brushed soft knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with raglan sleeves and curved hem",
+    "confidence": "medium",
+    "id": "black-raglan-crewneck-sweatshirt",
+    "image": "wardrobe/images/black-raglan-crewneck-sweatshirt.jpg",
+    "source": "IMG_6470.jpg",
+    "learned": []
+  },
+  {
+    "name": "cream button-up shirt",
+    "category": "blouse",
+    "subtype": "long-sleeve button-up shirt",
+    "brand": "Madewell",
+    "colors": [
+      "cream",
+      "off-white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton",
+    "texture": "smooth woven",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed fit with dual chest pockets and a collar; slightly oversized drape",
+    "confidence": "high",
+    "id": "cream-button-up-shirt",
+    "image": "wardrobe/images/cream-button-up-shirt.jpg",
+    "source": "IMG_6471.jpg",
+    "learned": []
+  },
+  {
+    "name": "navy Cal Badminton quarter-zip pullover",
+    "category": "knit",
+    "subtype": "quarter-zip pullover",
+    "brand": "Under Armour",
+    "colors": [
+      "navy",
+      "yellow",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "polyester knit",
+    "texture": "smooth performance knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "standard athletic fit with raglan sleeves and stand collar",
+    "confidence": "high",
+    "id": "navy-cal-badminton-quarter-zip-pullover",
+    "image": "wardrobe/images/navy-cal-badminton-quarter-zip-pullover.jpg",
+    "source": "IMG_6472.jpg",
+    "learned": []
+  },
+  {
+    "name": "navy long-sleeve button-up shirt",
+    "category": "blouse",
+    "subtype": "button-up shirt",
+    "brand": null,
+    "colors": [
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton or cotton-linen blend",
+    "texture": "smooth woven",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Standard fit with chest pocket and snap-button placket; appears slightly relaxed",
+    "confidence": "medium",
+    "id": "navy-long-sleeve-button-up-shirt",
+    "image": "wardrobe/images/navy-long-sleeve-button-up-shirt.jpg",
+    "source": "IMG_6473.jpg",
+    "learned": []
+  },
+  {
+    "name": "light blue oxford button-down shirt",
+    "category": "blouse",
+    "subtype": "button-down dress shirt",
+    "brand": null,
+    "colors": [
+      "light blue"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton oxford",
+    "texture": "woven oxford weave",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "standard fit with button-down collar, slight wrinkling from storage",
+    "confidence": "high",
+    "id": "light-blue-oxford-button-down-shirt",
+    "image": "wardrobe/images/light-blue-oxford-button-down-shirt.jpg",
+    "source": "IMG_6474.jpg",
+    "learned": []
+  },
+  {
+    "name": "navy Warriors basketball jersey",
+    "category": "top",
+    "subtype": "basketball jersey tank",
+    "brand": "NBA",
+    "colors": [
+      "navy",
+      "gold",
+      "orange"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "sleeveless",
+    "material": "polyester mesh",
+    "texture": "mesh",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "Loose athletic cut, sleeveless tank with side splits, appears men's L/XL",
+    "confidence": "high",
+    "id": "navy-warriors-basketball-jersey",
+    "image": "wardrobe/images/navy-warriors-basketball-jersey.jpg",
+    "source": "IMG_6475.JPG",
+    "learned": []
+  },
+  {
+    "name": "Golden State Warriors #30 white jersey",
+    "category": "top",
+    "subtype": "basketball jersey",
+    "brand": "Nike",
+    "colors": [
+      "white",
+      "blue",
+      "yellow"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "sleeveless",
+    "material": "polyester mesh",
+    "texture": "mesh",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "Size 48, athletic tank cut with wide armholes",
+    "confidence": "high",
+    "id": "golden-state-warriors-30-white-jersey",
+    "image": "wardrobe/images/golden-state-warriors-30-white-jersey.jpg",
+    "source": "IMG_6476.JPG",
+    "learned": []
+  },
+  {
+    "name": "red 49ers #85 football jersey",
+    "category": "top",
+    "subtype": "football jersey",
+    "brand": "Nike",
+    "colors": [
+      "red",
+      "white",
+      "gold"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "short",
+    "material": "polyester mesh",
+    "texture": "smooth mesh with sewn-on twill numbers",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Size L, relaxed athletic cut, slightly loose drape",
+    "confidence": "high",
+    "id": "red-49ers-85-football-jersey",
+    "image": "wardrobe/images/red-49ers-85-football-jersey.jpg",
+    "source": "IMG_6477.jpg",
+    "learned": []
+  },
+  {
+    "name": "navy Cal Nike football jersey",
+    "category": "top",
+    "subtype": "football jersey",
+    "brand": "Nike",
+    "colors": [
+      "navy",
+      "gold"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "short",
+    "material": "polyester mesh",
+    "texture": "smooth mesh knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Size L, athletic cut with V-neck collar and number 16 graphic",
+    "confidence": "high",
+    "id": "navy-cal-nike-football-jersey",
+    "image": "wardrobe/images/navy-cal-nike-football-jersey.jpg",
+    "source": "IMG_6478.JPG",
+    "learned": []
+  },
+  {
+    "name": "yellow California basketball jersey",
+    "category": "top",
+    "subtype": "basketball jersey tank",
+    "brand": "Jordan",
+    "colors": [
+      "yellow",
+      "navy",
+      "white"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "sleeveless",
+    "material": "polyester mesh",
+    "texture": "mesh",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "Size L, loose athletic cut with deep armholes",
+    "confidence": "high",
+    "id": "yellow-california-basketball-jersey",
+    "image": "wardrobe/images/yellow-california-basketball-jersey.jpg",
+    "source": "IMG_6479.jpg",
+    "learned": []
+  },
+  {
+    "name": "tan Nike Vomero running sneakers",
+    "category": "shoes",
+    "subtype": "running sneakers",
+    "brand": "Nike",
+    "colors": [
+      "tan",
+      "beige",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "mesh and suede",
+    "texture": "mesh with suede overlays",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Low-top running shoe with chunky cushioned sole, true to size athletic fit",
+    "confidence": "high",
+    "id": "tan-nike-vomero-running-sneakers",
+    "image": "wardrobe/images/tan-nike-vomero-running-sneakers.jpg",
+    "source": "IMG_6480.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige suede low-top sneakers",
+    "category": "shoes",
+    "subtype": "low-top sneakers",
+    "brand": "New Balance",
+    "colors": [
+      "beige",
+      "tan",
+      "cream"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "suede with mesh panels",
+    "texture": "brushed suede with smooth mesh",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "worn",
+    "fit_notes": "Standard lifestyle sneaker fit; visible wear and discoloration on suede and midsole",
+    "confidence": "high",
+    "id": "beige-suede-low-top-sneakers",
+    "image": "wardrobe/images/beige-suede-low-top-sneakers.jpg",
+    "source": "IMG_6481.JPG",
+    "learned": []
+  },
+  {
+    "name": "cream and rust Nike Air Max 90 sneakers",
+    "category": "shoes",
+    "subtype": "low-top sneakers",
+    "brand": "Nike",
+    "colors": [
+      "cream",
+      "rust",
+      "white",
+      "pink"
+    ],
+    "neutral": false,
+    "pattern": "colorblock",
+    "sleeve": "na",
+    "material": "canvas and suede with rubber sole",
+    "texture": "woven canvas with mesh panels",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "worn",
+    "fit_notes": "standard lace-up athletic fit, visible Air unit in heel; signs of dirt and wear on toe and midsole",
+    "confidence": "high",
+    "id": "cream-and-rust-nike-air-max-90-sneakers",
+    "image": "wardrobe/images/cream-and-rust-nike-air-max-90-sneakers.jpg",
+    "source": "IMG_6482.JPG",
+    "learned": []
+  },
+  {
+    "name": "tan leather low-top sneakers",
+    "category": "shoes",
+    "subtype": "low-top sneakers",
+    "brand": null,
+    "colors": [
+      "tan",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth leather with white rubber sole",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Lace-up minimalist sneaker with cupsole; versatile cognac tone pairs with denim or chinos",
+    "confidence": "high",
+    "id": "tan-leather-low-top-sneakers",
+    "image": "wardrobe/images/tan-leather-low-top-sneakers.jpg",
+    "source": "IMG_6483.JPG",
+    "learned": []
+  },
+  {
+    "name": "white leather low-top sneakers",
+    "category": "shoes",
+    "subtype": "low-top sneakers",
+    "brand": "Nike",
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth leather with rubber sole",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "athletic"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "worn",
+    "fit_notes": "Classic Air Force 1 silhouette; visible scuffs and dirt on toe and midsole indicating heavy wear",
+    "confidence": "high",
+    "id": "white-leather-low-top-sneakers",
+    "image": "wardrobe/images/white-leather-low-top-sneakers.jpg",
+    "source": "IMG_6484.JPG",
+    "learned": []
+  },
+  {
+    "name": "brown leather boat shoes",
+    "category": "shoes",
+    "subtype": "boat shoes",
+    "brand": null,
+    "colors": [
+      "brown",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth leather with moccasin stitching",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Classic moccasin boat shoe with rawhide laces and gum rubber sole; some visible wear on toes.",
+    "confidence": "high",
+    "id": "brown-leather-boat-shoes",
+    "image": "wardrobe/images/brown-leather-boat-shoes.jpg",
+    "source": "IMG_6485.JPG",
+    "learned": []
+  },
+  {
+    "name": "white leather low-top sneakers",
+    "category": "shoes",
+    "subtype": "low-top sneakers",
+    "brand": null,
+    "colors": [
+      "white",
+      "cream"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth leather",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Clean minimalist cupsole sneaker with flat laces; versatile everyday fit.",
+    "confidence": "high",
+    "id": "white-leather-low-top-sneakers-2",
+    "image": "wardrobe/images/white-leather-low-top-sneakers-2.jpg",
+    "source": "IMG_6486.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy Converse high-top sneakers",
+    "category": "shoes",
+    "subtype": "high-top sneakers",
+    "brand": "Converse",
+    "colors": [
+      "navy",
+      "white",
+      "rust"
+    ],
+    "neutral": true,
+    "pattern": "colorblock",
+    "sleeve": "na",
+    "material": "canvas",
+    "texture": "woven canvas with rubber sole",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "worn",
+    "fit_notes": "Classic Chuck Taylor high-top silhouette with rust trim and rubber toe cap; visible scuffing and dirt on white rubber.",
+    "confidence": "high",
+    "id": "navy-converse-high-top-sneakers",
+    "image": "wardrobe/images/navy-converse-high-top-sneakers.jpg",
+    "source": "IMG_6487.JPG",
+    "learned": []
+  },
+  {
+    "name": "light grey cotton chinos",
+    "category": "pants",
+    "subtype": "chino trousers",
+    "brand": null,
+    "colors": [
+      "light grey",
+      "beige"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton twill",
+    "texture": "smooth woven twill",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "summer"
+    ],
+    "condition": "good",
+    "fit_notes": "straight-leg flat-front chino with belt loops and slant pockets; appears mid-rise, regular fit",
+    "confidence": "high",
+    "id": "light-grey-cotton-chinos",
+    "image": "wardrobe/images/light-grey-cotton-chinos.jpg",
+    "source": "IMG_6488.JPG",
+    "learned": []
+  },
+  {
+    "name": "tan cotton chinos",
+    "category": "pants",
+    "subtype": "chino trousers",
+    "brand": null,
+    "colors": [
+      "tan",
+      "beige"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton twill",
+    "texture": "smooth woven twill",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "slim to straight fit, mid-rise, flat front",
+    "confidence": "high",
+    "id": "tan-cotton-chinos",
+    "image": "wardrobe/images/tan-cotton-chinos.jpg",
+    "source": "IMG_6489.JPG",
+    "learned": []
+  },
+  {
+    "name": "olive cargo joggers",
+    "category": "pants",
+    "subtype": "cargo jogger pants",
+    "brand": null,
+    "colors": [
+      "olive",
+      "brown"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton twill",
+    "texture": "smooth woven twill",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Tapered cargo joggers with elasticated/cuffed ankles and side cargo pockets, relaxed fit",
+    "confidence": "high",
+    "id": "olive-cargo-joggers",
+    "image": "wardrobe/images/olive-cargo-joggers.jpg",
+    "source": "IMG_6490.JPG",
+    "learned": []
+  },
+  {
+    "name": "light wash blue jeans",
+    "category": "jeans",
+    "subtype": "straight-leg jeans",
+    "brand": "Banana Republic",
+    "colors": [
+      "light blue"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton denim with stretch",
+    "texture": "faded denim weave",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "summer"
+    ],
+    "condition": "good",
+    "fit_notes": "straight to slim leg, mid rise, five-pocket styling",
+    "confidence": "high",
+    "id": "light-wash-blue-jeans",
+    "image": "wardrobe/images/light-wash-blue-jeans.jpg",
+    "source": "IMG_6491.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige five-pocket chinos",
+    "category": "pants",
+    "subtype": "chino trousers",
+    "brand": null,
+    "colors": [
+      "beige",
+      "cream"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton twill with stretch",
+    "texture": "smooth twill",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "summer"
+    ],
+    "condition": "good",
+    "fit_notes": "slim to straight leg, mid-rise five-pocket styling",
+    "confidence": "medium",
+    "id": "beige-five-pocket-chinos",
+    "image": "wardrobe/images/beige-five-pocket-chinos.jpg",
+    "source": "IMG_6492.JPG",
+    "learned": []
+  },
+  {
+    "name": "light grey tech 5-pocket pants",
+    "category": "pants",
+    "subtype": "5-pocket trousers",
+    "brand": null,
+    "colors": [
+      "light grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "nylon-spandex blend",
+    "texture": "smooth woven with slight sheen",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": true,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "summer"
+    ],
+    "condition": "good",
+    "fit_notes": "slim straight cut, 5-pocket styling with stretch tech fabric",
+    "confidence": "medium",
+    "id": "light-grey-tech-5-pocket-pants",
+    "image": "wardrobe/images/light-grey-tech-5-pocket-pants.jpg",
+    "source": "IMG_6493.JPG",
+    "learned": []
+  },
+  {
+    "name": "black slim jeans",
+    "category": "jeans",
+    "subtype": "slim-fit jeans",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton denim with stretch",
+    "texture": "smooth denim weave",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "slim straight leg, five-pocket styling, mid-rise",
+    "confidence": "high",
+    "id": "black-slim-jeans",
+    "image": "wardrobe/images/black-slim-jeans.jpg",
+    "source": "IMG_6494.JPG",
+    "learned": []
+  },
+  {
+    "name": "light grey fleece joggers",
+    "category": "pants",
+    "subtype": "jogger sweatpants",
+    "brand": null,
+    "colors": [
+      "light grey",
+      "heather grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton fleece blend",
+    "texture": "brushed fleece",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with elastic drawstring waist and ribbed cuffs, side pockets",
+    "confidence": "high",
+    "id": "light-grey-fleece-joggers",
+    "image": "wardrobe/images/light-grey-fleece-joggers.jpg",
+    "source": "IMG_6495.JPG",
+    "learned": []
+  },
+  {
+    "name": "charcoal Cal Badminton sweatpants",
+    "category": "pants",
+    "subtype": "jogger sweatpants",
+    "brand": "Cal",
+    "colors": [
+      "charcoal grey",
+      "black",
+      "gold"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton fleece blend",
+    "texture": "brushed fleece",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "worn",
+    "fit_notes": "relaxed fit with elastic ribbed cuffs and drawstring waist, faded from wash",
+    "confidence": "high",
+    "id": "charcoal-cal-badminton-sweatpants",
+    "image": "wardrobe/images/charcoal-cal-badminton-sweatpants.jpg",
+    "source": "IMG_6496.JPG",
+    "learned": []
+  },
+  {
+    "name": "brown straight-leg chinos",
+    "category": "pants",
+    "subtype": "chino trousers",
+    "brand": null,
+    "colors": [
+      "brown",
+      "taupe"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton twill",
+    "texture": "smooth woven twill",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "straight fit, size 33 waist per label, five-pocket styling",
+    "confidence": "high",
+    "id": "brown-straight-leg-chinos",
+    "image": "wardrobe/images/brown-straight-leg-chinos.jpg",
+    "source": "IMG_6497.JPG",
+    "learned": []
+  },
+  {
+    "name": "tan slim jeans",
+    "category": "jeans",
+    "subtype": "slim-fit jeans",
+    "brand": null,
+    "colors": [
+      "tan",
+      "beige"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton denim with stretch",
+    "texture": "twill weave",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "summer"
+    ],
+    "condition": "good",
+    "fit_notes": "Slim tapered fit, five-pocket styling, some fading and wear at knees",
+    "confidence": "high",
+    "id": "tan-slim-jeans",
+    "image": "wardrobe/images/tan-slim-jeans.jpg",
+    "source": "IMG_6498.jpg",
+    "learned": []
+  },
+  {
+    "name": "black slim chino trousers",
+    "category": "pants",
+    "subtype": "chino trousers",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton-stretch twill",
+    "texture": "smooth woven",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "slim straight leg, belt loops, mid rise",
+    "confidence": "medium",
+    "id": "black-slim-chino-trousers",
+    "image": "wardrobe/images/black-slim-chino-trousers.jpg",
+    "source": "IMG_6499.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy cotton five-pocket trousers",
+    "category": "pants",
+    "subtype": "five-pocket trousers",
+    "brand": null,
+    "colors": [
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton twill",
+    "texture": "smooth woven twill",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "Straight-leg cut with classic five-pocket styling, regular waist",
+    "confidence": "high",
+    "id": "navy-cotton-five-pocket-trousers",
+    "image": "wardrobe/images/navy-cotton-five-pocket-trousers.jpg",
+    "source": "IMG_6500.JPG",
+    "learned": []
+  },
+  {
+    "name": "black drawstring joggers",
+    "category": "pants",
+    "subtype": "sweatpants/joggers",
+    "brand": null,
+    "colors": [
+      "black",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton fleece",
+    "texture": "brushed fleece",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with elastic ribbed cuffs, drawstring waist, side pockets",
+    "confidence": "high",
+    "id": "black-drawstring-joggers",
+    "image": "wardrobe/images/black-drawstring-joggers.jpg",
+    "source": "IMG_6501.JPG",
+    "learned": []
+  },
+  {
+    "name": "black adidas Cal track pants",
+    "category": "pants",
+    "subtype": "track pants/joggers",
+    "brand": "adidas",
+    "colors": [
+      "black",
+      "white",
+      "yellow"
+    ],
+    "neutral": true,
+    "pattern": "striped",
+    "sleeve": "na",
+    "material": "polyester",
+    "texture": "smooth tricot knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "tapered athletic fit with elastic cuffs and three-stripe detail down sides",
+    "confidence": "high",
+    "id": "black-adidas-cal-track-pants",
+    "image": "wardrobe/images/black-adidas-cal-track-pants.jpg",
+    "source": "IMG_6502.JPG",
+    "learned": []
+  },
+  {
+    "name": "white graphic long-sleeve tee",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "white",
+      "grey",
+      "black",
+      "blue"
+    ],
+    "neutral": true,
+    "pattern": "graphic",
+    "sleeve": "long",
+    "material": "polyester jersey",
+    "texture": "smooth athletic knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with raglan-style piping, slightly cropped boxy cut",
+    "confidence": "medium",
+    "id": "white-graphic-long-sleeve-tee",
+    "image": "wardrobe/images/white-graphic-long-sleeve-tee.jpg",
+    "source": "IMG_6503.JPG",
+    "learned": []
+  },
+  {
+    "name": "black crewneck sweatshirt",
+    "category": "knit",
+    "subtype": "crewneck sweatshirt",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton fleece blend",
+    "texture": "smooth knit with brushed interior",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with dropped shoulders, slightly oversized",
+    "confidence": "medium",
+    "id": "black-crewneck-sweatshirt",
+    "image": "wardrobe/images/black-crewneck-sweatshirt.jpg",
+    "source": "IMG_6504.JPG",
+    "learned": []
+  },
+  {
+    "name": "tie-dye 'Be True' pullover hoodie",
+    "category": "knit",
+    "subtype": "pullover hoodie",
+    "brand": "Nike",
+    "colors": [
+      "pink",
+      "grey",
+      "blue",
+      "white"
+    ],
+    "neutral": false,
+    "pattern": "other",
+    "sleeve": "long",
+    "material": "cotton fleece blend",
+    "texture": "brushed fleece",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "casual",
+      "athletic"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with kangaroo pocket and drawstring hood",
+    "confidence": "high",
+    "id": "tie-dye-be-true-pullover-hoodie",
+    "image": "wardrobe/images/tie-dye-be-true-pullover-hoodie.jpg",
+    "source": "IMG_6505.JPG",
+    "learned": []
+  },
+  {
+    "name": "grey short-sleeve knit top",
+    "category": "top",
+    "subtype": "short-sleeve knit crewneck",
+    "brand": null,
+    "colors": [
+      "grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "short",
+    "material": "cotton knit",
+    "texture": "fine knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed boxy fit with ribbed crew neck and cuffs",
+    "confidence": "medium",
+    "id": "grey-short-sleeve-knit-top",
+    "image": "wardrobe/images/grey-short-sleeve-knit-top.jpg",
+    "source": "IMG_6506.JPG",
+    "learned": []
+  },
+  {
+    "name": "white Kith mosaic graphic tee",
+    "category": "top",
+    "subtype": "short-sleeve t-shirt",
+    "brand": "Kith",
+    "colors": [
+      "white",
+      "green",
+      "yellow"
+    ],
+    "neutral": true,
+    "pattern": "graphic",
+    "sleeve": "short",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Standard fit crewneck, appears slightly relaxed",
+    "confidence": "high",
+    "id": "white-kith-mosaic-graphic-tee",
+    "image": "wardrobe/images/white-kith-mosaic-graphic-tee.jpg",
+    "source": "IMG_6507.JPG",
+    "learned": []
+  },
+  {
+    "name": "olive striped ribbed tee",
+    "category": "top",
+    "subtype": "short-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "olive green",
+      "white"
+    ],
+    "neutral": false,
+    "pattern": "striped",
+    "sleeve": "short",
+    "material": "cotton blend knit",
+    "texture": "ribbed knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with slightly dropped shoulders, vertical ribbed stripe texture",
+    "confidence": "high",
+    "id": "olive-striped-ribbed-tee",
+    "image": "wardrobe/images/olive-striped-ribbed-tee.jpg",
+    "source": "IMG_6508.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige ribbed knit sweater",
+    "category": "knit",
+    "subtype": "crewneck sweater",
+    "brand": null,
+    "colors": [
+      "beige",
+      "oatmeal"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton blend knit",
+    "texture": "ribbed knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "regular fit with ribbed cuffs and hem",
+    "confidence": "medium",
+    "id": "beige-ribbed-knit-sweater",
+    "image": "wardrobe/images/beige-ribbed-knit-sweater.jpg",
+    "source": "IMG_6509.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy pocket t-shirt",
+    "category": "blouse",
+    "subtype": "short-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "short",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed fit with chest pocket, crew neckline, slightly faded",
+    "confidence": "high",
+    "id": "navy-pocket-t-shirt",
+    "image": "wardrobe/images/navy-pocket-t-shirt.jpg",
+    "source": "IMG_6510.JPG",
+    "learned": []
+  },
+  {
+    "name": "grey crewneck t-shirt",
+    "category": "blouse",
+    "subtype": "short-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "short",
+    "material": "cotton jersey",
+    "texture": "smooth knit with ribbed collar",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "regular fit, ribbed crew neckline, slightly faded",
+    "confidence": "high",
+    "id": "grey-crewneck-t-shirt",
+    "image": "wardrobe/images/grey-crewneck-t-shirt.jpg",
+    "source": "IMG_6511.JPG",
+    "learned": []
+  },
+  {
+    "name": "grey long-sleeve henley",
+    "category": "top",
+    "subtype": "long-sleeve henley",
+    "brand": null,
+    "colors": [
+      "grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton jersey",
+    "texture": "fine ribbed knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "regular fit, slightly relaxed through body",
+    "confidence": "high",
+    "id": "grey-long-sleeve-henley",
+    "image": "wardrobe/images/grey-long-sleeve-henley.jpg",
+    "source": "IMG_6512.JPG",
+    "learned": []
+  },
+  {
+    "name": "black adidas Hong Kong graphic tee",
+    "category": "top",
+    "subtype": "short-sleeve t-shirt",
+    "brand": "adidas",
+    "colors": [
+      "black",
+      "blue",
+      "red",
+      "white"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "short",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed/regular fit, crew neck",
+    "confidence": "high",
+    "id": "black-adidas-hong-kong-graphic-tee",
+    "image": "wardrobe/images/black-adidas-hong-kong-graphic-tee.jpg",
+    "source": "IMG_6513.JPG",
+    "learned": []
+  },
+  {
+    "name": "charcoal watermelon-print crewneck tee",
+    "category": "top",
+    "subtype": "short-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "charcoal grey",
+      "red",
+      "green"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "short",
+    "material": "cotton blend jersey",
+    "texture": "heathered smooth knit",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "standard fit crewneck, slightly relaxed body, photographed heavily wrinkled",
+    "confidence": "high",
+    "id": "charcoal-watermelon-print-crewneck-tee",
+    "image": "wardrobe/images/charcoal-watermelon-print-crewneck-tee.jpg",
+    "source": "IMG_6514.JPG",
+    "learned": []
+  },
+  {
+    "name": "brown striped crewneck tee",
+    "category": "top",
+    "subtype": "short-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "brown",
+      "grey"
+    ],
+    "neutral": true,
+    "pattern": "striped",
+    "sleeve": "short",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit, slightly boxy cut",
+    "confidence": "high",
+    "id": "brown-striped-crewneck-tee",
+    "image": "wardrobe/images/brown-striped-crewneck-tee.jpg",
+    "source": "IMG_6515.JPG",
+    "learned": []
+  },
+  {
+    "name": "black knit cardigan",
+    "category": "cardigan",
+    "subtype": "button-front cardigan",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton blend knit",
+    "texture": "fine knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with horizontal row of buttons, appears slightly cropped",
+    "confidence": "medium",
+    "id": "black-knit-cardigan",
+    "image": "wardrobe/images/black-knit-cardigan.jpg",
+    "source": "IMG_6516.JPG",
+    "learned": []
+  },
+  {
+    "name": "dark olive crewneck t-shirt",
+    "category": "blouse",
+    "subtype": "short-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "dark olive green"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "short",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed straight cut with standard crew neckline; appears slightly faded.",
+    "confidence": "medium",
+    "id": "dark-olive-crewneck-t-shirt",
+    "image": "wardrobe/images/dark-olive-crewneck-t-shirt.jpg",
+    "source": "IMG_6517.JPG",
+    "learned": []
+  },
+  {
+    "name": "charcoal pinstripe short-sleeve shirt",
+    "category": "blouse",
+    "subtype": "short-sleeve button-up shirt",
+    "brand": "Zara",
+    "colors": [
+      "charcoal grey",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "striped",
+    "sleeve": "short",
+    "material": "cotton blend",
+    "texture": "smooth woven",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "regular fit, drapes loosely",
+    "confidence": "medium",
+    "id": "charcoal-pinstripe-short-sleeve-shirt",
+    "image": "wardrobe/images/charcoal-pinstripe-short-sleeve-shirt.jpg",
+    "source": "IMG_6518.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige Nike crewneck t-shirt",
+    "category": "blouse",
+    "subtype": "short-sleeve t-shirt",
+    "brand": "Nike",
+    "colors": [
+      "beige",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "short",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed fit, appears slightly oversized; wrinkled from storage",
+    "confidence": "high",
+    "id": "beige-nike-crewneck-t-shirt",
+    "image": "wardrobe/images/beige-nike-crewneck-t-shirt.jpg",
+    "source": "IMG_6519.JPG",
+    "learned": []
+  },
+  {
+    "name": "olive waffle-knit henley",
+    "category": "top",
+    "subtype": "long-sleeve henley",
+    "brand": null,
+    "colors": [
+      "olive",
+      "grey-green"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton waffle knit",
+    "texture": "waffle thermal knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed fit with button placket; appears mid-weight thermal",
+    "confidence": "high",
+    "id": "olive-waffle-knit-henley",
+    "image": "wardrobe/images/olive-waffle-knit-henley.jpg",
+    "source": "IMG_6520.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige crewneck t-shirt",
+    "category": "blouse",
+    "subtype": "short-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "beige",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "short",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit, lightweight drapey jersey, slightly wrinkled",
+    "confidence": "medium",
+    "id": "beige-crewneck-t-shirt",
+    "image": "wardrobe/images/beige-crewneck-t-shirt.jpg",
+    "source": "IMG_6521.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy ribbed buttonless polo",
+    "category": "blouse",
+    "subtype": "short-sleeve polo shirt",
+    "brand": "Zara",
+    "colors": [
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "short",
+    "material": "ribbed cotton knit",
+    "texture": "vertical ribbed knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed fit, open collar with no buttons, ribbed hem and cuffs",
+    "confidence": "high",
+    "id": "navy-ribbed-buttonless-polo",
+    "image": "wardrobe/images/navy-ribbed-buttonless-polo.jpg",
+    "source": "IMG_6522.JPG",
+    "learned": []
+  },
+  {
+    "name": "dark brown henley tee",
+    "category": "top",
+    "subtype": "short-sleeve henley",
+    "brand": "Banana Republic",
+    "colors": [
+      "dark brown"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "short",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Standard fit henley with button placket; shown wrinkled",
+    "confidence": "high",
+    "id": "dark-brown-henley-tee",
+    "image": "wardrobe/images/dark-brown-henley-tee.jpg",
+    "source": "IMG_6523.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige crewneck t-shirt",
+    "category": "blouse",
+    "subtype": "short-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "beige",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "short",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed fit, ribbed crew neckline, wrinkled from storage",
+    "confidence": "high",
+    "id": "beige-crewneck-t-shirt-2",
+    "image": "wardrobe/images/beige-crewneck-t-shirt-2.jpg",
+    "source": "IMG_6524.JPG",
+    "learned": []
+  }
+]
