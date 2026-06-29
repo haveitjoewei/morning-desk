@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
 
+from core.profiles import DEFAULT_PROFILE, items_path
+
 
 def _append_unique(values, additions):
     values = list(values or [])
@@ -26,8 +28,8 @@ def _apply_correction(item, correction):
     return item
 
 
-def load_wardrobe(path=None, corrections_path=None):
-    path = Path(path) if path else Path(__file__).with_name("items.json")
+def load_wardrobe(path=None, corrections_path=None, profile=DEFAULT_PROFILE):
+    path = Path(path) if path else items_path(profile)
     items = json.loads(path.read_text())
     corrections_path = (
         Path(corrections_path)
@@ -50,20 +52,22 @@ def load_wardrobe(path=None, corrections_path=None):
 _ROOT = Path(__file__).resolve().parents[1]
 
 
-def _piece_image(item):
-    """Prefer the cleaned product shot, fall back to the original photo, else None."""
-    image = item.get("image")  # e.g. "wardrobe/images/<id>.jpg"
-    if not image:
+def _piece_image(item, profile=DEFAULT_PROFILE):
+    """Resolve a garment's image under its profile, preferring the cleaned product
+    shot, then the original photo, else None. Path derives from the item id."""
+    item_id = item.get("id") or Path(item.get("image", "")).stem
+    if not item_id:
         return None
-    clean = image.replace("/images/", "/images_clean/")
+    clean = f"profiles/{profile}/images_clean/{item_id}.jpg"
+    original = f"profiles/{profile}/images/{item_id}.jpg"
     if (_ROOT / clean).exists():
         return clean
-    if (_ROOT / image).exists():
-        return image
+    if (_ROOT / original).exists():
+        return original
     return None
 
 
-def resolve_pieces(names, items):
+def resolve_pieces(names, items, profile=DEFAULT_PROFILE):
     """Map chosen outfit item names to [{name, image, category}] for visual display."""
     by_name = {item.get("name"): item for item in items}
     pieces = []
@@ -71,7 +75,7 @@ def resolve_pieces(names, items):
         item = by_name.get(name)
         pieces.append({
             "name": name,
-            "image": _piece_image(item) if item else None,
+            "image": _piece_image(item, profile) if item else None,
             "category": item.get("category", "") if item else "",
         })
     return pieces

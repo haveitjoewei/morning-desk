@@ -18,3 +18,7 @@ wardrobe/outfit_preview.png
 wardrobe/images_cutout/
 renderer/outfit.png
 renderer/cutouts/
+profiles/*/images/
+profiles/*/images_clean/
+profiles/*/cutouts/
+profiles/*/inbox/
