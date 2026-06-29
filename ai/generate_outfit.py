@@ -46,7 +46,17 @@ def _formality_ok(item, target):
     return value == target
 
 
-def fallback_outfit(weather, wardrobe_items, calendar=None, context=None):
+def _anchor_name(anchor, wardrobe_items):
+    """Resolve an anchor (a piece name or id) to the wardrobe item's exact name."""
+    if not anchor:
+        return None
+    for item in wardrobe_items:
+        if anchor in (item.get("name"), item.get("id")):
+            return item.get("name")
+    return None
+
+
+def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, request=None):
     calendar = calendar or []
     context = context or {}
     wants_rain = weather.get("condition") in {"rain_later", "rain_likely", "storm"}
@@ -113,6 +123,11 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None):
     ]
     items = [item for item in items if item]
 
+    anchor = _anchor_name((request or {}).get("anchor"), wardrobe_items)
+    if anchor and anchor not in items:
+        items = [anchor] + [i for i in items if i != anchor]
+        items = items[:5]
+
     headline = "Rain-ready casual" if wants_rain else "Easy casual layers"
     calendar_note = "smart casual calendar" if smart_casual else "casual calendar"
     if smart_casual:
@@ -146,44 +161,41 @@ def valid_outfit(outfit, wardrobe_items):
     )
 
 
-def generate_outfit(weather, wardrobe_items, calendar=None, context=None):
+def generate_outfit(weather, wardrobe_items, calendar=None, context=None, request=None):
     calendar = calendar or []
     context = context or {}
-    fallback = fallback_outfit(weather, wardrobe_items, calendar, context)
+    request = request or {}
+    fallback = fallback_outfit(weather, wardrobe_items, calendar, context, request)
     if not available():
         return fallback
 
+    anchor = _anchor_name(request.get("anchor"), wardrobe_items)
+    system_text = SYSTEM
+    if request.get("instructions"):
+        system_text += "\nWearer preferences for today: " + request["instructions"]
+    if anchor:
+        system_text += f"\nYou MUST build the outfit around this exact item and include it: {anchor}."
+
     try:
-        context = {
+        payload = {
             "weather": weather,
             "calendar": calendar,
             "context": context,
+            "request": request,
             "wardrobe": wardrobe_items,
         }
         response = client().messages.create(
             model=MODEL,
             max_tokens=260,
-            output_config={
-                "format": {
-                    "type": "json_schema",
-                    "schema": OUTFIT_SCHEMA,
-                }
-            },
-            system=[
-                {
-                    "type": "text",
-                    "text": SYSTEM,
-                    "cache_control": {"type": "ephemeral"},
-                }
-            ],
-            messages=[
-                {
-                    "role": "user",
-                    "content": json.dumps(context, ensure_ascii=False),
-                }
-            ],
+            output_config={"format": {"type": "json_schema", "schema": OUTFIT_SCHEMA}},
+            system=[{"type": "text", "text": system_text, "cache_control": {"type": "ephemeral"}}],
+            messages=[{"role": "user", "content": json.dumps(payload, ensure_ascii=False)}],
         )
         outfit = json.loads(text_of(response))
-        return outfit if valid_outfit(outfit, wardrobe_items) else fallback
+        if not valid_outfit(outfit, wardrobe_items):
+            return fallback
+        if anchor and anchor not in outfit["items"]:
+            return fallback  # anchor is non-negotiable
+        return outfit
     except Exception:
         return fallback
