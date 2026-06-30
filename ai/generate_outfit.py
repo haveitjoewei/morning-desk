@@ -152,6 +152,15 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
     }
 
 
+_KEEP = ("name", "category", "subtype", "colors", "neutral", "formality",
+         "warmth", "rain_ok", "condition", "pattern")
+
+
+def _compact(wardrobe_items):
+    """Trim each item to the fields the stylist needs — smaller, faster prompts."""
+    return [{k: it[k] for k in _KEEP if k in it} for it in wardrobe_items]
+
+
 def valid_outfit(outfit, wardrobe_items):
     known = {item["name"] for item in wardrobe_items}
     return (
@@ -188,7 +197,7 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
             "calendar": calendar,
             "context": context,
             "request": request,
-            "wardrobe": usable,
+            "wardrobe": _compact(usable),
         }
         response = client().messages.create(
             model=MODEL,
