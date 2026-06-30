@@ -6,6 +6,9 @@ from ai.triage_priorities import triage
 from ai.generate_briefing import generate_briefing
 from ai.generate_journal import generate_journal_prompt
 from ai.generate_outfit import generate_outfit
+from ai.style_request import build_request
+from core.profiles import profile_dir
+from core.recent import record, recent_items
 from connectors.airbnb_gmail import fetch_airbnb_messages
 from connectors.calendar_google import fetch_calendar
 from connectors.va_inbox import fetch_va_messages
@@ -13,6 +16,13 @@ from connectors.weather import fetch_weather
 from content.schema import BriefingContent, PriorityItem
 from wardrobe.catalog import load_wardrobe, resolve_pieces
 from wardrobe.outfit_plan import planned_outfit
+
+
+def _load_prefs(profile):
+    try:
+        return json.loads((profile_dir(profile) / "prefs.json").read_text())
+    except (OSError, json.JSONDecodeError):
+        return {}
 
 
 def daily_context(today=None):
@@ -49,12 +59,16 @@ def build_content():
     ]
     briefing = generate_briefing(weather, calendar, visible_priorities)
 
+    prefs = _load_prefs("joseph")
+    recent = recent_items("joseph", exclude_date=today.isoformat(), days=5)
+    request = build_request(prefs, {"recent": recent})
     outfit = planned_outfit(
         today.isoformat(),
-        lambda: generate_outfit(weather, wardrobe_items, calendar, context),
+        lambda: generate_outfit(weather, wardrobe_items, calendar, context, request),
         keep_from=today.isoformat(),
     )
     outfit = {**outfit, "pieces": resolve_pieces(outfit.get("items", []), wardrobe_items)}
+    record("joseph", today.isoformat(), outfit.get("items", []))
 
     return BriefingContent.from_parts(
         weather=weather,

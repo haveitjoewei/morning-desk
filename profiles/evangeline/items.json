@@ -1,23 +1,121 @@
 [
   {
-    "name": "grey Nike mesh athletic shorts",
-    "category": "shorts",
-    "subtype": "athletic shorts",
-    "brand": "Nike",
+    "name": "cream San Francisco 49ers sweatshirt",
+    "category": "knit",
+    "subtype": "graphic crewneck sweatshirt",
+    "brand": "San Francisco 49ers",
     "colors": [
-      "grey",
+      "cream",
+      "red",
+      "gold"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "long",
+    "material": "cotton-poly fleece blend",
+    "texture": "brushed fleece",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed pullover fit with ribbed cuffs and side stripe detail",
+    "confidence": "high",
+    "id": "cream-san-francisco-49ers-sweatshirt",
+    "image": "profiles/evangeline/images/cream-san-francisco-49ers-sweatshirt.jpg",
+    "source": "IMG_6546.JPG",
+    "learned": []
+  },
+  {
+    "name": "black wool peacoat",
+    "category": "outerwear",
+    "subtype": "double-breasted peacoat",
+    "brand": null,
+    "colors": [
       "black"
     ],
     "neutral": true,
     "pattern": "solid",
-    "sleeve": "na",
-    "material": "polyester mesh",
-    "texture": "perforated mesh knit",
+    "sleeve": "long",
+    "material": "wool blend",
+    "texture": "smooth brushed wool",
+    "thickness": "thick",
+    "warmth": 5,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "Mid-length double-breasted cut with notch lapels and flap pockets; structured tailored fit",
+    "confidence": "high",
+    "id": "black-wool-peacoat",
+    "image": "profiles/evangeline/images/black-wool-peacoat.jpg",
+    "source": "IMG_6548.JPG",
+    "learned": []
+  },
+  {
+    "name": "white ruched midi dress",
+    "category": "dress",
+    "subtype": "sleeveless ruched midi dress",
+    "brand": null,
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "cotton blend",
+    "texture": "lightweight woven with ruched gathering",
     "thickness": "thin",
     "warmth": 1,
     "formality": [
-      "athletic",
-      "casual"
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "V-neck with front tie, cap sleeves, ruched bodice and waist, flowing midi length skirt",
+    "confidence": "medium",
+    "id": "white-ruched-midi-dress",
+    "image": "profiles/evangeline/images/white-ruched-midi-dress.jpg",
+    "source": "IMG_6549.JPG",
+    "learned": []
+  },
+  {
+    "name": "black ribbed tiered halter maxi dress",
+    "category": "dress",
+    "subtype": "halter-neck tiered maxi dress",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "ribbed knit jersey",
+    "texture": "ribbed knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
     ],
     "rain_ok": false,
     "season": [
@@ -26,93 +124,31 @@
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "relaxed fit with elastic drawstring waist and side stripe detail",
+    "fit_notes": "halter neck tie, fitted bodice with elastic waist, flowing tiered maxi skirt for a relaxed flared silhouette",
     "confidence": "high",
-    "id": "grey-nike-mesh-athletic-shorts",
-    "image": "wardrobe/images/grey-nike-mesh-athletic-shorts.jpg",
-    "source": "IMG_6443.JPG",
+    "id": "black-ribbed-tiered-halter-maxi-dress",
+    "image": "profiles/evangeline/images/black-ribbed-tiered-halter-maxi-dress.jpg",
+    "source": "IMG_6550.JPG",
     "learned": []
   },
   {
-    "name": "white waffle-knit henley",
-    "category": "top",
-    "subtype": "long-sleeve henley",
+    "name": "ditsy floral midi skirt",
+    "category": "skirt",
+    "subtype": "elastic-waist flowy midi skirt",
     "brand": null,
     "colors": [
-      "white"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton waffle knit",
-    "texture": "waffle thermal knit",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "winter",
-      "spring",
-      "transitional"
-    ],
-    "condition": "worn",
-    "fit_notes": "Regular fit with ribbed cuffs and curved hem; visibly wrinkled with slight wear at hem edges",
-    "confidence": "high",
-    "id": "white-waffle-knit-henley",
-    "image": "wardrobe/images/white-waffle-knit-henley.jpg",
-    "source": "IMG_6444.JPG",
-    "learned": []
-  },
-  {
-    "name": "olive green long-sleeve tee",
-    "category": "top",
-    "subtype": "long-sleeve t-shirt",
-    "brand": null,
-    "colors": [
-      "olive green"
+      "black",
+      "cream",
+      "rust",
+      "green"
     ],
     "neutral": false,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed fit with ribbed crew neck and cuffs, slightly worn-in look",
-    "confidence": "high",
-    "id": "olive-green-long-sleeve-tee",
-    "image": "wardrobe/images/olive-green-long-sleeve-tee.jpg",
-    "source": "IMG_6445.JPG",
-    "learned": []
-  },
-  {
-    "name": "olive green long-sleeve crewneck tee",
-    "category": "top",
-    "subtype": "long-sleeve t-shirt",
-    "brand": "Faherty",
-    "colors": [
-      "olive green"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton blend jersey",
-    "texture": "smooth soft knit",
-    "thickness": "medium",
-    "warmth": 2,
+    "pattern": "other",
+    "sleeve": "na",
+    "material": "rayon",
+    "texture": "lightweight crinkled weave",
+    "thickness": "thin",
+    "warmth": 1,
     "formality": [
       "casual",
       "smart casual"
@@ -120,31 +156,32 @@
     "rain_ok": false,
     "season": [
       "spring",
+      "summer",
       "autumn",
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "relaxed regular fit with ribbed cuffs and crew neckline",
-    "confidence": "high",
-    "id": "olive-green-long-sleeve-crewneck-tee",
-    "image": "wardrobe/images/olive-green-long-sleeve-crewneck-tee.jpg",
-    "source": "IMG_6446.JPG",
+    "fit_notes": "elasticated gathered waist, flowy A-line drape, midi length",
+    "confidence": "medium",
+    "id": "ditsy-floral-midi-skirt",
+    "image": "profiles/evangeline/images/ditsy-floral-midi-skirt.jpg",
+    "source": "IMG_6551.JPG",
     "learned": []
   },
   {
-    "name": "charcoal grey owl long-sleeve tee",
-    "category": "top",
-    "subtype": "long-sleeve t-shirt",
-    "brand": "OVO",
+    "name": "black & white gingham tiered midi skirt",
+    "category": "skirt",
+    "subtype": "tiered midi skirt",
+    "brand": null,
     "colors": [
-      "charcoal grey",
+      "black",
       "white"
     ],
     "neutral": true,
-    "pattern": "graphic",
-    "sleeve": "long",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
+    "pattern": "check",
+    "sleeve": "na",
+    "material": "cotton blend",
+    "texture": "woven gingham",
     "thickness": "medium",
     "warmth": 2,
     "formality": [
@@ -154,35 +191,66 @@
     "rain_ok": false,
     "season": [
       "spring",
-      "autumn",
+      "summer",
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "Relaxed regular fit with crew neck; heavily wrinkled, slight fading consistent with washed cotton",
+    "fit_notes": "Elastic gathered waistband, A-line with ruffled tiered hem, midi length",
     "confidence": "high",
-    "id": "charcoal-grey-owl-long-sleeve-tee",
-    "image": "wardrobe/images/charcoal-grey-owl-long-sleeve-tee.jpg",
-    "source": "IMG_6447.JPG",
+    "id": "black-white-gingham-tiered-midi-skirt",
+    "image": "profiles/evangeline/images/black-white-gingham-tiered-midi-skirt.jpg",
+    "source": "IMG_6552.JPG",
     "learned": []
   },
   {
-    "name": "beige linen-blend button-down shirt",
-    "category": "blouse",
-    "subtype": "button-down shirt",
+    "name": "white cotton A-line skirt",
+    "category": "skirt",
+    "subtype": "A-line midi skirt",
     "brand": null,
     "colors": [
-      "beige",
-      "cream"
+      "white"
     ],
     "neutral": true,
     "pattern": "solid",
-    "sleeve": "long",
-    "material": "linen-cotton blend",
-    "texture": "slightly slubbed woven",
+    "sleeve": "na",
+    "material": "cotton",
+    "texture": "lightweight woven with textured panel detail",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "Flowy A-line silhouette with horizontal textured/woven trim panels; soft drape, gathered fullness",
+    "confidence": "medium",
+    "id": "white-cotton-a-line-skirt",
+    "image": "profiles/evangeline/images/white-cotton-a-line-skirt.jpg",
+    "source": "IMG_6553.JPG",
+    "learned": []
+  },
+  {
+    "name": "cream tailored trousers",
+    "category": "pants",
+    "subtype": "wide-leg dress trousers",
+    "brand": null,
+    "colors": [
+      "cream",
+      "off-white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "polyester blend suiting",
+    "texture": "smooth woven",
     "thickness": "medium",
     "warmth": 2,
     "formality": [
-      "casual",
       "smart casual",
       "business"
     ],
@@ -193,69 +261,68 @@
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "Relaxed fit with chest pocket and button-down collar; shown wrinkled",
+    "fit_notes": "wide straight leg, mid-to-full length, relaxed tailored cut",
     "confidence": "medium",
-    "id": "beige-linen-blend-button-down-shirt",
-    "image": "wardrobe/images/beige-linen-blend-button-down-shirt.jpg",
-    "source": "IMG_6448.JPG",
+    "id": "cream-tailored-trousers",
+    "image": "profiles/evangeline/images/cream-tailored-trousers.jpg",
+    "source": "IMG_6554.JPG",
     "learned": []
   },
   {
-    "name": "heather grey crewneck sweatshirt",
-    "category": "knit",
-    "subtype": "crewneck sweatshirt",
-    "brand": null,
+    "name": "black shearling-lined biker jacket",
+    "category": "outerwear",
+    "subtype": "faux-shearling aviator biker jacket",
+    "brand": "Zara",
     "colors": [
-      "heather grey"
+      "black",
+      "cream"
     ],
     "neutral": true,
     "pattern": "solid",
     "sleeve": "long",
-    "material": "cotton-polyester fleece",
-    "texture": "brushed fleece interior, smooth knit exterior",
-    "thickness": "medium",
-    "warmth": 3,
+    "material": "faux leather with faux shearling lining",
+    "texture": "smooth leather exterior with fluffy sherpa trim",
+    "thickness": "thick",
+    "warmth": 5,
     "formality": [
-      "athletic",
-      "casual"
+      "casual",
+      "smart casual"
     ],
     "rain_ok": false,
     "season": [
       "autumn",
-      "spring",
-      "winter",
-      "transitional"
+      "winter"
     ],
     "condition": "good",
-    "fit_notes": "relaxed, roomy fit with ribbed crew collar and cuffs",
+    "fit_notes": "cropped boxy biker silhouette with wide lapel collar, diagonal zip, dual chest and side zip pockets",
     "confidence": "high",
-    "id": "heather-grey-crewneck-sweatshirt",
-    "image": "wardrobe/images/heather-grey-crewneck-sweatshirt.jpg",
-    "source": "IMG_6449.JPG",
+    "id": "black-shearling-lined-biker-jacket",
+    "image": "profiles/evangeline/images/black-shearling-lined-biker-jacket.jpg",
+    "source": "IMG_6555.JPG",
     "learned": []
   },
   {
-    "name": "grey and charcoal hooded softshell jacket",
-    "category": "outerwear",
-    "subtype": "hooded softshell jacket",
+    "name": "burgundy striped knit polo",
+    "category": "knit",
+    "subtype": "long-sleeve knit polo sweater",
     "brand": null,
     "colors": [
-      "charcoal grey",
-      "light grey",
-      "red"
+      "burgundy",
+      "white",
+      "navy"
     ],
-    "neutral": true,
-    "pattern": "colorblock",
+    "neutral": false,
+    "pattern": "striped",
     "sleeve": "long",
-    "material": "polyester softshell with fleece backing",
-    "texture": "smooth bonded shell with brushed fleece interior",
+    "material": "cotton knit",
+    "texture": "smooth fine knit",
     "thickness": "medium",
     "warmth": 3,
     "formality": [
-      "athletic",
-      "casual"
+      "casual",
+      "smart casual"
     ],
-    "rain_ok": true,
+    "rain_ok": false,
     "season": [
       "autumn",
       "spring",
@@ -263,64 +330,31 @@
       "winter"
     ],
     "condition": "good",
-    "fit_notes": "athletic fit with thumbhole cuffs and full-length zip, hooded",
-    "confidence": "medium",
-    "id": "grey-and-charcoal-hooded-softshell-jacket",
-    "image": "wardrobe/images/grey-and-charcoal-hooded-softshell-jacket.jpg",
-    "source": "IMG_6450.JPG",
-    "learned": []
-  },
-  {
-    "name": "black full-zip fleece jacket",
-    "category": "knit",
-    "subtype": "full-zip fleece jacket",
-    "brand": null,
-    "colors": [
-      "black",
-      "gold"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "polyester fleece",
-    "texture": "brushed fleece",
-    "thickness": "medium",
-    "warmth": 4,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "winter",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Standard fit with stand collar, two zip hand pockets, embroidered logo at left chest",
+    "fit_notes": "Regular fit with ribbed hem and cuffs, button placket and cream collar",
     "confidence": "high",
-    "id": "black-full-zip-fleece-jacket",
-    "image": "wardrobe/images/black-full-zip-fleece-jacket.jpg",
-    "source": "IMG_6451.JPG",
+    "id": "burgundy-striped-knit-polo",
+    "image": "profiles/evangeline/images/burgundy-striped-knit-polo.jpg",
+    "source": "IMG_6556.JPG",
     "learned": []
   },
   {
-    "name": "light blue logo crewneck sweatshirt",
+    "name": "white UCLA crewneck sweatshirt",
     "category": "knit",
     "subtype": "crewneck sweatshirt",
-    "brand": null,
+    "brand": "UCLA",
     "colors": [
-      "light blue",
-      "purple"
+      "white",
+      "navy"
     ],
-    "neutral": false,
-    "pattern": "solid",
+    "neutral": true,
+    "pattern": "graphic",
     "sleeve": "long",
-    "material": "cotton fleece blend",
+    "material": "cotton-poly fleece",
     "texture": "brushed fleece",
     "thickness": "medium",
     "warmth": 3,
     "formality": [
+      "athletic",
       "casual"
     ],
     "rain_ok": false,
@@ -331,29 +365,267 @@
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "Regular fit with ribbed crew neck, cuffs and hem",
+    "fit_notes": "Relaxed fit with ribbed crew neck, cuffs and hem; appears regular to slightly oversized",
     "confidence": "high",
-    "id": "light-blue-logo-crewneck-sweatshirt",
-    "image": "wardrobe/images/light-blue-logo-crewneck-sweatshirt.jpg",
-    "source": "IMG_6452.JPG",
+    "id": "white-ucla-crewneck-sweatshirt",
+    "image": "profiles/evangeline/images/white-ucla-crewneck-sweatshirt.jpg",
+    "source": "IMG_6557.JPG",
     "learned": []
   },
   {
-    "name": "white bomber jacket",
+    "name": "cream puffer jacket",
     "category": "outerwear",
-    "subtype": "bomber jacket",
-    "brand": "Banana Republic",
+    "subtype": "down puffer jacket",
+    "brand": null,
     "colors": [
-      "white",
-      "cream"
+      "cream",
+      "off-white"
     ],
     "neutral": true,
     "pattern": "solid",
     "sleeve": "long",
-    "material": "cotton-nylon blend",
-    "texture": "smooth woven",
+    "material": "nylon shell with down/synthetic fill",
+    "texture": "smooth quilted puffer",
+    "thickness": "thick",
+    "warmth": 5,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": true,
+    "season": [
+      "winter",
+      "autumn"
+    ],
+    "condition": "good",
+    "fit_notes": "Cropped boxy puffer with full zip, elasticated cuffs and side pockets; relaxed fit",
+    "confidence": "high",
+    "id": "cream-puffer-jacket",
+    "image": "profiles/evangeline/images/cream-puffer-jacket.jpg",
+    "source": "IMG_6558.JPG",
+    "learned": []
+  },
+  {
+    "name": "black floral ruffle blouse",
+    "category": "blouse",
+    "subtype": "long-sleeve ruffle blouse",
+    "brand": null,
+    "colors": [
+      "black",
+      "purple",
+      "pink"
+    ],
+    "neutral": false,
+    "pattern": "other",
+    "sleeve": "long",
+    "material": "chiffon polyester",
+    "texture": "sheer crinkled woven",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Cropped fit with ruffle shoulder detail and elasticated cuffs; flowy drape",
+    "confidence": "high",
+    "id": "black-floral-ruffle-blouse",
+    "image": "profiles/evangeline/images/black-floral-ruffle-blouse.jpg",
+    "source": "IMG_6559.JPG",
+    "learned": []
+  },
+  {
+    "name": "brown cropped puffer jacket",
+    "category": "outerwear",
+    "subtype": "cropped puffer jacket",
+    "brand": "Glassons",
+    "colors": [
+      "brown"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "nylon shell with synthetic fill",
+    "texture": "smooth glossy quilted",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": true,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped boxy fit with high funnel collar, drawcord hem, full zip",
+    "confidence": "high",
+    "id": "brown-cropped-puffer-jacket",
+    "image": "profiles/evangeline/images/brown-cropped-puffer-jacket.jpg",
+    "source": "IMG_6560.JPG",
+    "learned": []
+  },
+  {
+    "name": "black wide-leg trousers",
+    "category": "pants",
+    "subtype": "wide-leg dress trousers",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "polyester blend crepe",
+    "texture": "smooth drapey weave",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "smart casual",
+      "business",
+      "formal"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "high-rise, wide flowing leg with long inseam",
+    "confidence": "medium",
+    "id": "black-wide-leg-trousers",
+    "image": "profiles/evangeline/images/black-wide-leg-trousers.jpg",
+    "source": "IMG_6561.JPG",
+    "learned": []
+  },
+  {
+    "name": "camel pleated midi skirt",
+    "category": "skirt",
+    "subtype": "pleated A-line midi skirt with belt",
+    "brand": null,
+    "colors": [
+      "camel",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "polyester crepe",
+    "texture": "fine accordion pleats with slight sheen",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "high-waisted with self belt, flared pleated silhouette, midi length",
+    "confidence": "high",
+    "id": "camel-pleated-midi-skirt",
+    "image": "profiles/evangeline/images/camel-pleated-midi-skirt.jpg",
+    "source": "IMG_6562.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy ribbed knit midi skirt",
+    "category": "skirt",
+    "subtype": "ribbed knit midi skirt",
+    "brand": null,
+    "colors": [
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton-blend knit",
+    "texture": "wide rib knit",
     "thickness": "medium",
     "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "elastic ribbed waistband, body-skimming column silhouette, midi length",
+    "confidence": "medium",
+    "id": "navy-ribbed-knit-midi-skirt",
+    "image": "profiles/evangeline/images/navy-ribbed-knit-midi-skirt.jpg",
+    "source": "IMG_6563.JPG",
+    "learned": []
+  },
+  {
+    "name": "oatmeal wide-leg sweatpants",
+    "category": "pants",
+    "subtype": "wide-leg sweatpants",
+    "brand": null,
+    "colors": [
+      "oatmeal",
+      "cream"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton fleece blend",
+    "texture": "brushed fleece",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "high-rise drawstring elastic waist, relaxed wide-leg cut with cuffed hems",
+    "confidence": "high",
+    "id": "oatmeal-wide-leg-sweatpants",
+    "image": "profiles/evangeline/images/oatmeal-wide-leg-sweatpants.jpg",
+    "source": "IMG_6564.JPG",
+    "learned": []
+  },
+  {
+    "name": "dark wash denim midi skirt",
+    "category": "skirt",
+    "subtype": "denim midi skirt with front slit",
+    "brand": null,
+    "colors": [
+      "dark blue",
+      "indigo"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton denim",
+    "texture": "woven denim twill",
+    "thickness": "medium",
+    "warmth": 2,
     "formality": [
       "casual",
       "smart casual"
@@ -365,97 +637,198 @@
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "Classic bomber silhouette with ribbed collar, cuffs and hem; full zip front, utility sleeve pocket, slash hand pockets",
+    "fit_notes": "High-waisted midi length with front center slit, patch front pockets, belt loops, and button/zip closure; fitted through hip",
     "confidence": "high",
-    "id": "white-bomber-jacket",
-    "image": "wardrobe/images/white-bomber-jacket.jpg",
-    "source": "IMG_6453.JPG",
+    "id": "dark-wash-denim-midi-skirt",
+    "image": "profiles/evangeline/images/dark-wash-denim-midi-skirt.jpg",
+    "source": "IMG_6565.JPG",
     "learned": []
   },
   {
-    "name": "charcoal Okta zip hoodie",
-    "category": "knit",
-    "subtype": "full-zip hoodie",
-    "brand": "Okta",
+    "name": "tan wide-leg trousers",
+    "category": "pants",
+    "subtype": "wide-leg trousers",
+    "brand": null,
     "colors": [
-      "charcoal grey",
+      "tan",
+      "khaki"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton twill",
+    "texture": "smooth woven",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "High-rise, very wide flowing leg with belt loops and button fly; relaxed drape",
+    "confidence": "medium",
+    "id": "tan-wide-leg-trousers",
+    "image": "profiles/evangeline/images/tan-wide-leg-trousers.jpg",
+    "source": "IMG_6566.JPG",
+    "learned": []
+  },
+  {
+    "name": "white wide-leg jeans",
+    "category": "jeans",
+    "subtype": "high-rise wide-leg jeans",
+    "brand": null,
+    "colors": [
       "white"
     ],
     "neutral": true,
     "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton-poly blend jersey",
-    "texture": "smooth heathered knit",
+    "sleeve": "na",
+    "material": "cotton denim",
+    "texture": "smooth denim weave",
     "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Lightweight hooded zip-up with kangaroo pockets and contrast white zipper; relaxed fit",
-    "confidence": "high",
-    "id": "charcoal-okta-zip-hoodie",
-    "image": "wardrobe/images/charcoal-okta-zip-hoodie.jpg",
-    "source": "IMG_6454.JPG",
-    "learned": []
-  },
-  {
-    "name": "beige crewneck knit sweater",
-    "category": "knit",
-    "subtype": "crewneck sweater",
-    "brand": "Zara",
-    "colors": [
-      "beige",
-      "tan"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton knit",
-    "texture": "fine smooth knit with ribbed trim",
-    "thickness": "medium",
-    "warmth": 3,
+    "warmth": 2,
     "formality": [
       "casual",
-      "smart casual",
-      "business"
+      "smart casual"
     ],
     "rain_ok": false,
     "season": [
-      "autumn",
       "spring",
-      "winter",
+      "summer",
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "relaxed regular fit with ribbed crew neck, cuffs and hem",
+    "fit_notes": "High-rise, wide-leg silhouette with raw frayed hems; five-pocket styling",
     "confidence": "high",
-    "id": "beige-crewneck-knit-sweater",
-    "image": "wardrobe/images/beige-crewneck-knit-sweater.jpg",
-    "source": "IMG_6455.JPG",
+    "id": "white-wide-leg-jeans",
+    "image": "profiles/evangeline/images/white-wide-leg-jeans.jpg",
+    "source": "IMG_6567.JPG",
     "learned": []
   },
   {
-    "name": "sage green band-collar linen shirt",
-    "category": "blouse",
-    "subtype": "long-sleeve button-up shirt",
+    "name": "light wash skinny jeans",
+    "category": "jeans",
+    "subtype": "skinny jeans",
     "brand": null,
     "colors": [
-      "sage green",
-      "beige"
+      "light blue"
     ],
-    "neutral": true,
+    "neutral": false,
     "pattern": "solid",
-    "sleeve": "long",
-    "material": "linen",
-    "texture": "lightweight woven, slightly slubby",
+    "sleeve": "na",
+    "material": "cotton denim with stretch",
+    "texture": "smooth faded denim",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "skinny tapered leg, light-wash faded denim, slim through the thigh",
+    "confidence": "high",
+    "id": "light-wash-skinny-jeans",
+    "image": "profiles/evangeline/images/light-wash-skinny-jeans.jpg",
+    "source": "IMG_6568.JPG",
+    "learned": []
+  },
+  {
+    "name": "olive satin midi skirt",
+    "category": "skirt",
+    "subtype": "satin midi skirt",
+    "brand": null,
+    "colors": [
+      "olive green"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "polyester satin",
+    "texture": "smooth glossy satin",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "smart casual",
+      "business",
+      "formal"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Flowing midi-length skirt with side button/snap closure and slim drape; sits at waist with fluid fall.",
+    "confidence": "medium",
+    "id": "olive-satin-midi-skirt",
+    "image": "profiles/evangeline/images/olive-satin-midi-skirt.jpg",
+    "source": "IMG_6569.JPG",
+    "learned": []
+  },
+  {
+    "name": "leopard print midi skirt",
+    "category": "skirt",
+    "subtype": "A-line midi skirt",
+    "brand": null,
+    "colors": [
+      "beige",
+      "black"
+    ],
+    "neutral": false,
+    "pattern": "other",
+    "sleeve": "na",
+    "material": "polyester satin",
+    "texture": "smooth silky woven",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "A-line silhouette with elasticated waistband, flowy drape, midi length",
+    "confidence": "medium",
+    "id": "leopard-print-midi-skirt",
+    "image": "profiles/evangeline/images/leopard-print-midi-skirt.jpg",
+    "source": "IMG_6570.JPG",
+    "learned": []
+  },
+  {
+    "name": "black daisy floral midi dress",
+    "category": "dress",
+    "subtype": "floral midi dress",
+    "brand": null,
+    "colors": [
+      "black",
+      "white",
+      "yellow"
+    ],
+    "neutral": false,
+    "pattern": "other",
+    "sleeve": "short",
+    "material": "viscose",
+    "texture": "smooth lightweight woven",
     "thickness": "thin",
     "warmth": 1,
     "formality": [
@@ -465,37 +838,38 @@
     "rain_ok": false,
     "season": [
       "summer",
-      "spring",
-      "transitional"
+      "spring"
     ],
     "condition": "good",
-    "fit_notes": "relaxed fit, band/mandarin collar, heavily wrinkled",
-    "confidence": "high",
-    "id": "sage-green-band-collar-linen-shirt",
-    "image": "wardrobe/images/sage-green-band-collar-linen-shirt.jpg",
-    "source": "IMG_6456.JPG",
+    "fit_notes": "Flowy midi-length with ruffle trim and tie/strap detail; relaxed feminine silhouette",
+    "confidence": "medium",
+    "id": "black-daisy-floral-midi-dress",
+    "image": "profiles/evangeline/images/black-daisy-floral-midi-dress.jpg",
+    "source": "IMG_6571.JPG",
     "learned": []
   },
   {
-    "name": "cream linen-blend button-up shirt",
-    "category": "blouse",
-    "subtype": "long-sleeve button-up shirt",
-    "brand": "Zara",
+    "name": "snakeskin print flowy top",
+    "category": "top",
+    "subtype": "draped knit top",
+    "brand": null,
     "colors": [
+      "brown",
+      "black",
       "cream",
-      "off-white"
+      "grey",
+      "teal"
     ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "linen-cotton blend",
-    "texture": "slubby woven",
-    "thickness": "medium",
+    "neutral": false,
+    "pattern": "other",
+    "sleeve": "na",
+    "material": "polyester knit",
+    "texture": "smooth slinky knit",
+    "thickness": "thin",
     "warmth": 2,
     "formality": [
       "casual",
-      "smart casual",
-      "business"
+      "smart casual"
     ],
     "rain_ok": false,
     "season": [
@@ -504,203 +878,129 @@
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "regular fit, button-down collar with chest pocket, slightly wrinkled",
-    "confidence": "high",
-    "id": "cream-linen-blend-button-up-shirt",
-    "image": "wardrobe/images/cream-linen-blend-button-up-shirt.jpg",
-    "source": "IMG_6457.JPG",
+    "fit_notes": "Loose, drapey fit with fluid fabric; appears to be a flowing blouse-style top, hard to gauge exact sleeve length due to bunching",
+    "confidence": "low",
+    "id": "snakeskin-print-flowy-top",
+    "image": "profiles/evangeline/images/snakeskin-print-flowy-top.jpg",
+    "source": "IMG_6572.JPG",
     "learned": []
   },
   {
-    "name": "black hooded windbreaker jacket",
-    "category": "outerwear",
-    "subtype": "hooded windbreaker",
-    "brand": "Zara",
-    "colors": [
-      "black"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "nylon/polyester shell",
-    "texture": "smooth woven shell",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": true,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Relaxed fit with hood, zip front, chest and side zip pockets, elasticated cuffs",
-    "confidence": "medium",
-    "id": "black-hooded-windbreaker-jacket",
-    "image": "wardrobe/images/black-hooded-windbreaker-jacket.jpg",
-    "source": "IMG_6458.JPG",
-    "learned": []
-  },
-  {
-    "name": "tan canvas work jacket",
-    "category": "outerwear",
-    "subtype": "canvas work jacket",
-    "brand": "Zara",
-    "colors": [
-      "tan",
-      "brown",
-      "black"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton canvas",
-    "texture": "woven canvas, smooth with contrast collar",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "spring",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "workwear-style boxy fit with contrast collar and zip front",
-    "confidence": "high",
-    "id": "tan-canvas-work-jacket",
-    "image": "wardrobe/images/tan-canvas-work-jacket.jpg",
-    "source": "IMG_6459.JPG",
-    "learned": []
-  },
-  {
-    "name": "dark brown cotton trucker jacket",
-    "category": "outerwear",
-    "subtype": "trucker jacket",
-    "brand": "Zara",
-    "colors": [
-      "dark brown",
-      "black"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton canvas",
-    "texture": "brushed twill",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "regular fit, zip front with chest and side pockets, spread collar",
-    "confidence": "high",
-    "id": "dark-brown-cotton-trucker-jacket",
-    "image": "wardrobe/images/dark-brown-cotton-trucker-jacket.jpg",
-    "source": "IMG_6460.JPG",
-    "learned": []
-  },
-  {
-    "name": "black Bay Area highway graphic hoodie",
-    "category": "knit",
-    "subtype": "pullover hoodie",
+    "name": "navy V-neck button cardigan",
+    "category": "cardigan",
+    "subtype": "button-front V-neck cardigan",
     "brand": null,
     "colors": [
-      "black",
-      "green",
-      "blue",
-      "white",
-      "red"
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton-acrylic blend knit",
+    "texture": "smooth knit with ribbed cuffs and hem",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Slightly cropped length with ribbed hem and cuffs, relaxed fit",
+    "confidence": "medium",
+    "id": "navy-v-neck-button-cardigan",
+    "image": "profiles/evangeline/images/navy-v-neck-button-cardigan.jpg",
+    "source": "IMG_6573.JPG",
+    "learned": []
+  },
+  {
+    "name": "light grey ribbed long-sleeve top",
+    "category": "top",
+    "subtype": "ribbed long-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "light grey",
+      "heather grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton ribbed knit",
+    "texture": "fine ribbed knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted slim cut, stretchy ribbed fabric, hits at waist",
+    "confidence": "high",
+    "id": "light-grey-ribbed-long-sleeve-top",
+    "image": "profiles/evangeline/images/light-grey-ribbed-long-sleeve-top.jpg",
+    "source": "IMG_6574.JPG",
+    "learned": []
+  },
+  {
+    "name": "light blue mock-neck knit sweater",
+    "category": "knit",
+    "subtype": "mock-neck pullover sweater",
+    "brand": null,
+    "colors": [
+      "light blue",
+      "navy"
     ],
     "neutral": false,
-    "pattern": "graphic",
+    "pattern": "solid",
     "sleeve": "long",
-    "material": "cotton fleece blend",
-    "texture": "brushed fleece",
+    "material": "cotton blend knit",
+    "texture": "smooth fine knit with ribbed cuffs and hem",
     "thickness": "medium",
     "warmth": 3,
     "formality": [
       "casual",
-      "athletic"
+      "smart casual"
     ],
     "rain_ok": false,
     "season": [
-      "autumn",
       "spring",
-      "winter",
+      "autumn",
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "standard fit pullover with kangaroo pocket and hood",
-    "confidence": "high",
-    "id": "black-bay-area-highway-graphic-hoodie",
-    "image": "wardrobe/images/black-bay-area-highway-graphic-hoodie.jpg",
-    "source": "IMG_6461.jpg",
+    "fit_notes": "relaxed boxy fit with dropped shoulders, ribbed mock neck and contrast navy trim at collar and hem",
+    "confidence": "medium",
+    "id": "light-blue-mock-neck-knit-sweater",
+    "image": "profiles/evangeline/images/light-blue-mock-neck-knit-sweater.jpg",
+    "source": "IMG_6575.JPG",
     "learned": []
   },
   {
-    "name": "beige pullover hoodie",
-    "category": "knit",
-    "subtype": "pullover hoodie",
+    "name": "ivory pointelle knit cardigan",
+    "category": "cardigan",
+    "subtype": "button-front pointelle cardigan",
     "brand": null,
     "colors": [
-      "beige",
+      "ivory",
       "cream"
     ],
     "neutral": true,
     "pattern": "solid",
     "sleeve": "long",
-    "material": "cotton fleece blend",
-    "texture": "brushed fleece",
-    "thickness": "thick",
-    "warmth": 4,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "winter",
-      "spring",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed fit with kangaroo pocket, ribbed cuffs and hem, drawstring hood",
-    "confidence": "high",
-    "id": "beige-pullover-hoodie",
-    "image": "wardrobe/images/beige-pullover-hoodie.jpg",
-    "source": "IMG_6462.jpg",
-    "learned": []
-  },
-  {
-    "name": "black and olive colorblock sweatshirt",
-    "category": "knit",
-    "subtype": "crewneck sweatshirt",
-    "brand": null,
-    "colors": [
-      "black",
-      "olive green",
-      "tan"
-    ],
-    "neutral": false,
-    "pattern": "colorblock",
-    "sleeve": "long",
-    "material": "cotton blend fleece",
-    "texture": "brushed fleece",
+    "material": "cotton knit",
+    "texture": "pointelle open knit",
     "thickness": "medium",
     "warmth": 3,
     "formality": [
@@ -709,26 +1009,61 @@
     ],
     "rain_ok": false,
     "season": [
-      "autumn",
       "spring",
-      "winter",
+      "autumn",
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "regular fit with ribbed cuffs and hem, crew neckline",
+    "fit_notes": "Fitted cardigan with peplum hem, drawstring waist, bell cuffs and front button closure",
     "confidence": "high",
-    "id": "black-and-olive-colorblock-sweatshirt",
-    "image": "wardrobe/images/black-and-olive-colorblock-sweatshirt.jpg",
-    "source": "IMG_6463.jpg",
+    "id": "ivory-pointelle-knit-cardigan",
+    "image": "profiles/evangeline/images/ivory-pointelle-knit-cardigan.jpg",
+    "source": "IMG_6576.JPG",
     "learned": []
   },
   {
-    "name": "navy ribbed zip cardigan",
-    "category": "cardigan",
-    "subtype": "full-zip ribbed cardigan",
-    "brand": "Zara",
+    "name": "cream crochet floral-embroidered top",
+    "category": "top",
+    "subtype": "crochet knit blouse with chiffon sleeves",
+    "brand": null,
     "colors": [
-      "navy"
+      "cream",
+      "blue",
+      "brown"
+    ],
+    "neutral": true,
+    "pattern": "other",
+    "sleeve": "long",
+    "material": "cotton crochet with chiffon sleeves",
+    "texture": "open crochet knit with sheer woven sleeves and embroidery",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "semi-fitted bodice with floral embroidery, billowy sheer balloon sleeves",
+    "confidence": "medium",
+    "id": "cream-crochet-floral-embroidered-top",
+    "image": "profiles/evangeline/images/cream-crochet-floral-embroidered-top.jpg",
+    "source": "IMG_6577.JPG",
+    "learned": []
+  },
+  {
+    "name": "white ribbed knit cardigan",
+    "category": "cardigan",
+    "subtype": "button-front ribbed cardigan",
+    "brand": null,
+    "colors": [
+      "white",
+      "cream"
     ],
     "neutral": true,
     "pattern": "solid",
@@ -743,31 +1078,1760 @@
     ],
     "rain_ok": false,
     "season": [
-      "autumn",
       "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "appears fitted with ribbed cuffs and hem, button front closure",
+    "confidence": "medium",
+    "id": "white-ribbed-knit-cardigan",
+    "image": "profiles/evangeline/images/white-ribbed-knit-cardigan.jpg",
+    "source": "IMG_6578.JPG",
+    "learned": []
+  },
+  {
+    "name": "floral ruffle maxi dress",
+    "category": "dress",
+    "subtype": "flutter-sleeve tiered maxi dress",
+    "brand": null,
+    "colors": [
+      "cream",
+      "yellow",
+      "pink",
+      "green"
+    ],
+    "neutral": false,
+    "pattern": "other",
+    "sleeve": "short",
+    "material": "polyester chiffon",
+    "texture": "lightweight woven chiffon with lining",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "flowy empire waist with drawstring tie, flutter sleeves, tiered ruffle hem, high-low length",
+    "confidence": "high",
+    "id": "floral-ruffle-maxi-dress",
+    "image": "profiles/evangeline/images/floral-ruffle-maxi-dress.jpg",
+    "source": "IMG_6579.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige crochet boho blouse",
+    "category": "blouse",
+    "subtype": "long-sleeve peasant blouse with crochet panels",
+    "brand": null,
+    "colors": [
+      "beige",
+      "cream",
+      "rust"
+    ],
+    "neutral": true,
+    "pattern": "other",
+    "sleeve": "long",
+    "material": "cotton gauze with crochet trim",
+    "texture": "crinkled gauze with open crochet detail",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "loose flowy bohemian cut with elasticated cuffs and floral crochet medallions",
+    "confidence": "medium",
+    "id": "beige-crochet-boho-blouse",
+    "image": "profiles/evangeline/images/beige-crochet-boho-blouse.jpg",
+    "source": "IMG_6581.JPG",
+    "learned": []
+  },
+  {
+    "name": "black zip-up hoodie",
+    "category": "outerwear",
+    "subtype": "full-zip hooded sweatshirt",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton-polyester fleece",
+    "texture": "brushed fleece",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Standard relaxed fit with drawstring hood, kangaroo pockets, ribbed cuffs and hem",
+    "confidence": "high",
+    "id": "black-zip-up-hoodie",
+    "image": "profiles/evangeline/images/black-zip-up-hoodie.jpg",
+    "source": "IMG_6582.JPG",
+    "learned": []
+  },
+  {
+    "name": "light blue textured knit cardigan",
+    "category": "cardigan",
+    "subtype": "cropped button-up cardigan",
+    "brand": null,
+    "colors": [
+      "light blue",
+      "white"
+    ],
+    "neutral": false,
+    "pattern": "check",
+    "sleeve": "long",
+    "material": "cotton blend knit",
+    "texture": "textured waffle knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped length with crew neck, contrast trim, faux chest pockets and gold-tone buttons",
+    "confidence": "medium",
+    "id": "light-blue-textured-knit-cardigan",
+    "image": "profiles/evangeline/images/light-blue-textured-knit-cardigan.jpg",
+    "source": "IMG_6583.JPG",
+    "learned": []
+  },
+  {
+    "name": "olive and cream striped knit sweater",
+    "category": "knit",
+    "subtype": "crewneck sweater",
+    "brand": null,
+    "colors": [
+      "olive green",
+      "cream"
+    ],
+    "neutral": false,
+    "pattern": "striped",
+    "sleeve": "long",
+    "material": "acrylic blend knit",
+    "texture": "ribbed chunky knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
       "winter",
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "standard fit with tall ribbed funnel collar and full-length zip",
-    "confidence": "high",
-    "id": "navy-ribbed-zip-cardigan",
-    "image": "wardrobe/images/navy-ribbed-zip-cardigan.jpg",
-    "source": "IMG_6464.jpg",
+    "fit_notes": "relaxed slightly cropped fit with dropped shoulders",
+    "confidence": "medium",
+    "id": "olive-and-cream-striped-knit-sweater",
+    "image": "profiles/evangeline/images/olive-and-cream-striped-knit-sweater.jpg",
+    "source": "IMG_6584.JPG",
     "learned": []
   },
   {
-    "name": "olive Banana Republic graphic hoodie",
-    "category": "knit",
-    "subtype": "pullover hoodie",
-    "brand": "Banana Republic",
+    "name": "teal button-front cardigan",
+    "category": "cardigan",
+    "subtype": "v-neck knit cardigan",
+    "brand": null,
     "colors": [
-      "olive green",
-      "dark grey"
+      "teal"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "acrylic knit",
+    "texture": "soft brushed knit with ribbed cuffs and placket",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with ribbed hem and cuffs, button-front closure",
+    "confidence": "high",
+    "id": "teal-button-front-cardigan",
+    "image": "profiles/evangeline/images/teal-button-front-cardigan.jpg",
+    "source": "IMG_6585.JPG",
+    "learned": []
+  },
+  {
+    "name": "white long-sleeve crewneck top",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton blend jersey",
+    "texture": "smooth soft knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "slim fitted with round crew neckline and slightly tapered sleeves",
+    "confidence": "medium",
+    "id": "white-long-sleeve-crewneck-top",
+    "image": "profiles/evangeline/images/white-long-sleeve-crewneck-top.jpg",
+    "source": "IMG_6586.JPG",
+    "learned": []
+  },
+  {
+    "name": "black long-sleeve crewneck top",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": "Zara",
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted slim cut with crew neckline",
+    "confidence": "high",
+    "id": "black-long-sleeve-crewneck-top",
+    "image": "profiles/evangeline/images/black-long-sleeve-crewneck-top.jpg",
+    "source": "IMG_6587.JPG",
+    "learned": []
+  },
+  {
+    "name": "rust and cream striped pointelle knit sweater",
+    "category": "knit",
+    "subtype": "crewneck sweater",
+    "brand": null,
+    "colors": [
+      "rust orange",
+      "cream"
+    ],
+    "neutral": false,
+    "pattern": "striped",
+    "sleeve": "long",
+    "material": "cotton blend knit",
+    "texture": "open pointelle knit with ribbed trim",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with ribbed cuffs and hem, slightly open knit",
+    "confidence": "medium",
+    "id": "rust-and-cream-striped-pointelle-knit-sweater",
+    "image": "profiles/evangeline/images/rust-and-cream-striped-pointelle-knit-sweater.jpg",
+    "source": "IMG_6588.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige ribbed henley knit",
+    "category": "knit",
+    "subtype": "henley long-sleeve top",
+    "brand": null,
+    "colors": [
+      "beige",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton-acrylic rib knit",
+    "texture": "ribbed knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted, slightly cropped with button placket henley neckline",
+    "confidence": "high",
+    "id": "beige-ribbed-henley-knit",
+    "image": "profiles/evangeline/images/beige-ribbed-henley-knit.jpg",
+    "source": "IMG_6589.JPG",
+    "learned": []
+  },
+  {
+    "name": "white cropped knit cardigan",
+    "category": "cardigan",
+    "subtype": "cropped button-up cardigan",
+    "brand": null,
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton blend knit",
+    "texture": "ribbed knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped length with balloon/puff long sleeves and V-neck button front",
+    "confidence": "high",
+    "id": "white-cropped-knit-cardigan",
+    "image": "profiles/evangeline/images/white-cropped-knit-cardigan.jpg",
+    "source": "IMG_6590.JPG",
+    "learned": []
+  },
+  {
+    "name": "magenta button-front cardigan",
+    "category": "cardigan",
+    "subtype": "v-neck knit cardigan",
+    "brand": null,
+    "colors": [
+      "magenta",
+      "pink"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton blend knit",
+    "texture": "smooth fine knit with ribbed trim",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted cardigan with decorative buttons and ribbed cuffs/hem",
+    "confidence": "medium",
+    "id": "magenta-button-front-cardigan",
+    "image": "profiles/evangeline/images/magenta-button-front-cardigan.jpg",
+    "source": "IMG_6591.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy cable-knit sweater",
+    "category": "knit",
+    "subtype": "cable-knit crewneck sweater",
+    "brand": null,
+    "colors": [
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton or wool blend knit",
+    "texture": "cable knit with ribbed cuffs and hem",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "standard fit crewneck with ribbed trim, appears regular length",
+    "confidence": "medium",
+    "id": "navy-cable-knit-sweater",
+    "image": "profiles/evangeline/images/navy-cable-knit-sweater.jpg",
+    "source": "IMG_6592.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy contrast-trim polo knit",
+    "category": "knit",
+    "subtype": "long-sleeve polo sweater",
+    "brand": null,
+    "colors": [
+      "navy",
+      "cream"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "fine wool blend knit",
+    "texture": "smooth ribbed knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Fitted long-sleeve polo-collar knit with buttoned placket and contrast cream piping; slim tailored silhouette",
+    "confidence": "medium",
+    "id": "navy-contrast-trim-polo-knit",
+    "image": "profiles/evangeline/images/navy-contrast-trim-polo-knit.jpg",
+    "source": "IMG_6593.JPG",
+    "learned": []
+  },
+  {
+    "name": "cream long-sleeve knit top",
+    "category": "top",
+    "subtype": "long-sleeve fitted top",
+    "brand": null,
+    "colors": [
+      "cream",
+      "ivory"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "viscose jersey blend",
+    "texture": "smooth stretch knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "slim fitted body with long stretchy sleeves; appears to have small button detail at front",
+    "confidence": "medium",
+    "id": "cream-long-sleeve-knit-top",
+    "image": "profiles/evangeline/images/cream-long-sleeve-knit-top.jpg",
+    "source": "IMG_6594.JPG",
+    "learned": []
+  },
+  {
+    "name": "pink floral-embroidered knit cardigan",
+    "category": "cardigan",
+    "subtype": "button-front knit cardigan",
+    "brand": null,
+    "colors": [
+      "pink",
+      "green",
+      "yellow",
+      "blue",
+      "red"
+    ],
+    "neutral": false,
+    "pattern": "other",
+    "sleeve": "long",
+    "material": "wool blend knit",
+    "texture": "chunky knit with ribbed trim and embroidered floral details",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed knit fit with ribbed cuffs and hem, button front closure",
+    "confidence": "high",
+    "id": "pink-floral-embroidered-knit-cardigan",
+    "image": "profiles/evangeline/images/pink-floral-embroidered-knit-cardigan.jpg",
+    "source": "IMG_6595.JPG",
+    "learned": []
+  },
+  {
+    "name": "light grey cable-knit cardigan",
+    "category": "cardigan",
+    "subtype": "button-up cable knit cardigan",
+    "brand": null,
+    "colors": [
+      "light grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton blend knit",
+    "texture": "cable knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped, fitted silhouette with ribbed cuffs and hem",
+    "confidence": "medium",
+    "id": "light-grey-cable-knit-cardigan",
+    "image": "profiles/evangeline/images/light-grey-cable-knit-cardigan.jpg",
+    "source": "IMG_6596.JPG",
+    "learned": []
+  },
+  {
+    "name": "red knit cardigan",
+    "category": "cardigan",
+    "subtype": "open-front knit cardigan",
+    "brand": null,
+    "colors": [
+      "red"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "wool blend knit",
+    "texture": "chunky knit with ribbed cuffs and hem",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped length, open V-front with single button closure, ribbed cuffs and hem, relaxed fit",
+    "confidence": "medium",
+    "id": "red-knit-cardigan",
+    "image": "profiles/evangeline/images/red-knit-cardigan.jpg",
+    "source": "IMG_6597.JPG",
+    "learned": []
+  },
+  {
+    "name": "light blue wool-blend cropped jacket",
+    "category": "outerwear",
+    "subtype": "cropped overshirt jacket",
+    "brand": "Zara",
+    "colors": [
+      "light blue",
+      "grey"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "wool blend",
+    "texture": "brushed felted wool",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped boxy fit with collar, snap-button front and chest flap pockets",
+    "confidence": "high",
+    "id": "light-blue-wool-blend-cropped-jacket",
+    "image": "profiles/evangeline/images/light-blue-wool-blend-cropped-jacket.jpg",
+    "source": "IMG_6598.JPG",
+    "learned": []
+  },
+  {
+    "name": "burgundy ribbed mock-neck knit top",
+    "category": "knit",
+    "subtype": "ribbed mock-neck long-sleeve top",
+    "brand": null,
+    "colors": [
+      "burgundy",
+      "maroon"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton-viscose blend knit",
+    "texture": "ribbed knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted cropped silhouette with stretchy ribbing and mock neckline",
+    "confidence": "medium",
+    "id": "burgundy-ribbed-mock-neck-knit-top",
+    "image": "profiles/evangeline/images/burgundy-ribbed-mock-neck-knit-top.jpg",
+    "source": "IMG_6599.JPG",
+    "learned": []
+  },
+  {
+    "name": "white long-sleeve cropped top with side stripes",
+    "category": "top",
+    "subtype": "long-sleeve crop top",
+    "brand": null,
+    "colors": [
+      "white",
+      "grey"
+    ],
+    "neutral": true,
+    "pattern": "striped",
+    "sleeve": "long",
+    "material": "polyester blend",
+    "texture": "smooth stretch jersey",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted cropped silhouette with stretch, contrast stripes down sleeves",
+    "confidence": "medium",
+    "id": "white-long-sleeve-cropped-top-with-side-stripes",
+    "image": "profiles/evangeline/images/white-long-sleeve-cropped-top-with-side-stripes.jpg",
+    "source": "IMG_6600.JPG",
+    "learned": []
+  },
+  {
+    "name": "peach ribbed cropped cardigan",
+    "category": "cardigan",
+    "subtype": "cropped button-front cardigan",
+    "brand": null,
+    "colors": [
+      "peach",
+      "cream"
+    ],
+    "neutral": false,
+    "pattern": "striped",
+    "sleeve": "long",
+    "material": "cotton blend knit",
+    "texture": "ribbed knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped length with fitted ribbed body and slim long sleeves",
+    "confidence": "medium",
+    "id": "peach-ribbed-cropped-cardigan",
+    "image": "profiles/evangeline/images/peach-ribbed-cropped-cardigan.jpg",
+    "source": "IMG_6601.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy long-sleeve knit polo",
+    "category": "knit",
+    "subtype": "long-sleeve polo sweater",
+    "brand": null,
+    "colors": [
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "fine merino wool or cotton knit",
+    "texture": "smooth fine-gauge knit with ribbed cuffs and hem",
+    "thickness": "thin",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with ribbed waist hem and cuffs, two-button placket collar",
+    "confidence": "medium",
+    "id": "navy-long-sleeve-knit-polo",
+    "image": "profiles/evangeline/images/navy-long-sleeve-knit-polo.jpg",
+    "source": "IMG_6602.JPG",
+    "learned": []
+  },
+  {
+    "name": "white tailored blazer",
+    "category": "outerwear",
+    "subtype": "single-breasted blazer",
+    "brand": null,
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "polyester blend suiting",
+    "texture": "smooth woven with slight sheen",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "smart casual",
+      "business",
+      "formal"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "structured tailored fit with notch lapels and welt pockets",
+    "confidence": "medium",
+    "id": "white-tailored-blazer",
+    "image": "profiles/evangeline/images/white-tailored-blazer.jpg",
+    "source": "IMG_6603.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige ribbed knit sweater",
+    "category": "knit",
+    "subtype": "fine-gauge ribbed pullover sweater",
+    "brand": null,
+    "colors": [
+      "beige",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton-viscose blend knit",
+    "texture": "fine ribbed knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "slim fitted body with set-in long sleeves, stretchy ribbed knit hugs the figure",
+    "confidence": "medium",
+    "id": "beige-ribbed-knit-sweater",
+    "image": "profiles/evangeline/images/beige-ribbed-knit-sweater.jpg",
+    "source": "IMG_6604.JPG",
+    "learned": []
+  },
+  {
+    "name": "dusty rose single-breasted blazer",
+    "category": "outerwear",
+    "subtype": "single-breasted blazer",
+    "brand": null,
+    "colors": [
+      "dusty rose",
+      "mauve",
+      "tan"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "polyester suiting",
+    "texture": "smooth woven",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "tailored single-button blazer with notch lapels, flap pockets, fully lined, relaxed feminine cut",
+    "confidence": "high",
+    "id": "dusty-rose-single-breasted-blazer",
+    "image": "profiles/evangeline/images/dusty-rose-single-breasted-blazer.jpg",
+    "source": "IMG_6605.JPG",
+    "learned": []
+  },
+  {
+    "name": "blush pink ribbed mock-neck top",
+    "category": "knit",
+    "subtype": "long-sleeve ribbed mock-neck top",
+    "brand": null,
+    "colors": [
+      "blush pink"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "ribbed cotton blend knit",
+    "texture": "fine vertical rib knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "slim fitted with mock neckline and ruffled cuff detail; stretchy rib clings to body",
+    "confidence": "high",
+    "id": "blush-pink-ribbed-mock-neck-top",
+    "image": "profiles/evangeline/images/blush-pink-ribbed-mock-neck-top.jpg",
+    "source": "IMG_6606.JPG",
+    "learned": []
+  },
+  {
+    "name": "taupe leather saddle crossbody bag",
+    "category": "bag",
+    "subtype": "crossbody saddle bag",
+    "brand": null,
+    "colors": [
+      "taupe",
+      "beige"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "pebbled leather",
+    "texture": "grained leather with woven webbing strap",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Compact half-moon flap bag with front strap detail and adjustable canvas webbing crossbody strap",
+    "confidence": "high",
+    "id": "taupe-leather-saddle-crossbody-bag",
+    "image": "profiles/evangeline/images/taupe-leather-saddle-crossbody-bag.jpg",
+    "source": "IMG_6607.JPG",
+    "learned": []
+  },
+  {
+    "name": "red chain-strap flap bag",
+    "category": "bag",
+    "subtype": "crossbody chain-strap flap bag",
+    "brand": null,
+    "colors": [
+      "red",
+      "gold"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth matte leather",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Small structured flap bag with gold woven chain strap and turn-lock closure; crossbody length.",
+    "confidence": "high",
+    "id": "red-chain-strap-flap-bag",
+    "image": "profiles/evangeline/images/red-chain-strap-flap-bag.jpg",
+    "source": "IMG_6608.JPG",
+    "learned": []
+  },
+  {
+    "name": "brown leather and suede saddle bag",
+    "category": "bag",
+    "subtype": "saddle shoulder bag",
+    "brand": null,
+    "colors": [
+      "brown",
+      "beige",
+      "gold"
+    ],
+    "neutral": true,
+    "pattern": "colorblock",
+    "sleeve": "na",
+    "material": "leather and suede",
+    "texture": "smooth leather with brushed suede panel",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Compact saddle-shaped bag with curved flap, gold U-shaped buckle hardware, and short top handle for shoulder carry.",
+    "confidence": "high",
+    "id": "brown-leather-and-suede-saddle-bag",
+    "image": "profiles/evangeline/images/brown-leather-and-suede-saddle-bag.jpg",
+    "source": "IMG_6610.JPG",
+    "learned": []
+  },
+  {
+    "name": "black quilted chain crossbody bag",
+    "category": "bag",
+    "subtype": "quilted crossbody flap bag",
+    "brand": "Charles & Keith",
+    "colors": [
+      "black",
+      "gold"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "faux leather",
+    "texture": "quilted diamond stitching, smooth",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business",
+      "formal"
+    ],
+    "rain_ok": true,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Compact flap bag with adjustable leather and gold chain strap, gold hardware accents",
+    "confidence": "high",
+    "id": "black-quilted-chain-crossbody-bag",
+    "image": "profiles/evangeline/images/black-quilted-chain-crossbody-bag.jpg",
+    "source": "IMG_6611.JPG",
+    "learned": []
+  },
+  {
+    "name": "green and natural canvas tote bag",
+    "category": "bag",
+    "subtype": "canvas boat tote",
+    "brand": null,
+    "colors": [
+      "natural",
+      "green"
+    ],
+    "neutral": false,
+    "pattern": "colorblock",
+    "sleeve": "na",
+    "material": "cotton canvas",
+    "texture": "heavy woven canvas",
+    "thickness": "thick",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Structured medium tote with dual top handles and zip closure; roomy interior, classic boat-tote shape.",
+    "confidence": "high",
+    "id": "green-and-natural-canvas-tote-bag",
+    "image": "profiles/evangeline/images/green-and-natural-canvas-tote-bag.jpg",
+    "source": "IMG_6612.JPG",
+    "learned": []
+  },
+  {
+    "name": "Trader Joe's canvas tote bag",
+    "category": "bag",
+    "subtype": "canvas tote bag",
+    "brand": "Trader Joe's",
+    "colors": [
+      "cream",
+      "navy",
+      "red"
+    ],
+    "neutral": true,
+    "pattern": "colorblock",
+    "sleeve": "na",
+    "material": "cotton canvas",
+    "texture": "woven canvas",
+    "thickness": "thick",
+    "warmth": 1,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Large two-tone tote with cream body, navy base and handles, red logo print; roomy carry-all",
+    "confidence": "high",
+    "id": "trader-joe-s-canvas-tote-bag",
+    "image": "profiles/evangeline/images/trader-joe-s-canvas-tote-bag.jpg",
+    "source": "IMG_6613.JPG",
+    "learned": []
+  },
+  {
+    "name": "multicolor tweed vest",
+    "category": "outerwear",
+    "subtype": "sleeveless tweed waistcoat/vest",
+    "brand": null,
+    "colors": [
+      "cream",
+      "rust",
+      "blue",
+      "gold"
+    ],
+    "neutral": false,
+    "pattern": "check",
+    "sleeve": "sleeveless",
+    "material": "cotton blend tweed with metallic thread",
+    "texture": "nubby woven tweed with lurex sparkle",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped boxy fit, round neckline, single button front closure",
+    "confidence": "high",
+    "id": "multicolor-tweed-vest",
+    "image": "profiles/evangeline/images/multicolor-tweed-vest.jpg",
+    "source": "IMG_6614.JPG",
+    "learned": []
+  },
+  {
+    "name": "black cropped button cardigan",
+    "category": "cardigan",
+    "subtype": "cropped button-front cardigan",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "wool blend knit",
+    "texture": "soft brushed knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped length with ribbed hem, gold-tone buttons, relaxed fit",
+    "confidence": "medium",
+    "id": "black-cropped-button-cardigan",
+    "image": "profiles/evangeline/images/black-cropped-button-cardigan.jpg",
+    "source": "IMG_6615.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy fair isle button sweater vest",
+    "category": "knit",
+    "subtype": "sleeveless button-front sweater vest",
+    "brand": null,
+    "colors": [
+      "navy",
+      "cream",
+      "light blue",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "other",
+    "sleeve": "sleeveless",
+    "material": "wool blend knit",
+    "texture": "soft brushed knit with fair isle jacquard",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped boxy fit, ribbed crew neck and hem, full button placket",
+    "confidence": "high",
+    "id": "navy-fair-isle-button-sweater-vest",
+    "image": "profiles/evangeline/images/navy-fair-isle-button-sweater-vest.jpg",
+    "source": "IMG_6616.JPG",
+    "learned": []
+  },
+  {
+    "name": "brown argyle button knit vest",
+    "category": "knit",
+    "subtype": "sleeveless button-front sweater vest",
+    "brand": "Zara",
+    "colors": [
+      "brown",
+      "navy",
+      "cream"
+    ],
+    "neutral": false,
+    "pattern": "check",
+    "sleeve": "sleeveless",
+    "material": "acrylic wool blend knit",
+    "texture": "smooth knit with ribbed trim",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit with ribbed crew neck, armholes and hem; layering piece",
+    "confidence": "high",
+    "id": "brown-argyle-button-knit-vest",
+    "image": "profiles/evangeline/images/brown-argyle-button-knit-vest.jpg",
+    "source": "IMG_6617.JPG",
+    "learned": []
+  },
+  {
+    "name": "cream knit button sweater vest",
+    "category": "knit",
+    "subtype": "sleeveless button-front sweater vest",
+    "brand": null,
+    "colors": [
+      "cream",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "acrylic knit blend",
+    "texture": "textured chevron knit with ribbed trim",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed boxy fit with ribbed crew neckline, hem and armholes; wooden front buttons",
+    "confidence": "high",
+    "id": "cream-knit-button-sweater-vest",
+    "image": "profiles/evangeline/images/cream-knit-button-sweater-vest.jpg",
+    "source": "IMG_6618.JPG",
+    "learned": []
+  },
+  {
+    "name": "red cable-knit pom beanie",
+    "category": "accessory",
+    "subtype": "pom-pom beanie",
+    "brand": null,
+    "colors": [
+      "red"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "acrylic knit",
+    "texture": "cable knit with ribbed cuff",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "winter",
+      "autumn"
+    ],
+    "condition": "good",
+    "fit_notes": "Folded ribbed cuff with cable-knit body and pom-pom top; stretchy one-size fit",
+    "confidence": "high",
+    "id": "red-cable-knit-pom-beanie",
+    "image": "profiles/evangeline/images/red-cable-knit-pom-beanie.jpg",
+    "source": "IMG_6619.JPG",
+    "learned": []
+  },
+  {
+    "name": "cream fringed scarf",
+    "category": "accessory",
+    "subtype": "woven fringed scarf",
+    "brand": null,
+    "colors": [
+      "cream",
+      "ivory"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "wool blend",
+    "texture": "soft brushed woven",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Long rectangular scarf with tasseled fringe at both ends; soft drape, neutral tone pairs easily.",
+    "confidence": "medium",
+    "id": "cream-fringed-scarf",
+    "image": "profiles/evangeline/images/cream-fringed-scarf.jpg",
+    "source": "IMG_6620.JPG",
+    "learned": []
+  },
+  {
+    "name": "grey crewneck knit sweater",
+    "category": "knit",
+    "subtype": "crewneck pullover sweater",
+    "brand": null,
+    "colors": [
+      "grey",
+      "light grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "acrylic wool blend knit",
+    "texture": "soft fuzzy knit",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed oversized fit with ribbed cuffs and hem, drop shoulder",
+    "confidence": "medium",
+    "id": "grey-crewneck-knit-sweater",
+    "image": "profiles/evangeline/images/grey-crewneck-knit-sweater.jpg",
+    "source": "IMG_6621.JPG",
+    "learned": []
+  },
+  {
+    "name": "yellow pink floral knit sweater",
+    "category": "knit",
+    "subtype": "crewneck sweater",
+    "brand": null,
+    "colors": [
+      "yellow",
+      "pink"
     ],
     "neutral": false,
     "pattern": "graphic",
     "sleeve": "long",
+    "material": "acrylic knit",
+    "texture": "soft brushed knit with ribbed trim",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped relaxed fit with ribbed cuffs and hem",
+    "confidence": "medium",
+    "id": "yellow-pink-floral-knit-sweater",
+    "image": "profiles/evangeline/images/yellow-pink-floral-knit-sweater.jpg",
+    "source": "IMG_6622.JPG",
+    "learned": []
+  },
+  {
+    "name": "black-to-grey ombre hooded zip jacket",
+    "category": "outerwear",
+    "subtype": "hooded full-zip athletic jacket",
+    "brand": null,
+    "colors": [
+      "black",
+      "grey",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "other",
+    "sleeve": "long",
+    "material": "polyester spandex blend",
+    "texture": "smooth stretch knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted athletic cut with hood and thumbhole-style long sleeves, gradient fade from black at top to light grey at hem",
+    "confidence": "medium",
+    "id": "black-to-grey-ombre-hooded-zip-jacket",
+    "image": "profiles/evangeline/images/black-to-grey-ombre-hooded-zip-jacket.jpg",
+    "source": "IMG_6623.JPG",
+    "learned": []
+  },
+  {
+    "name": "lime green hooded sun jacket",
+    "category": "outerwear",
+    "subtype": "lightweight zip-up hooded sun-protection jacket",
+    "brand": null,
+    "colors": [
+      "lime green",
+      "yellow-green"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "nylon-spandex blend",
+    "texture": "smooth lightweight woven",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "slim athletic cut with hood and thumbhole cuffs, full zip front",
+    "confidence": "medium",
+    "id": "lime-green-hooded-sun-jacket",
+    "image": "profiles/evangeline/images/lime-green-hooded-sun-jacket.jpg",
+    "source": "IMG_6624.JPG",
+    "learned": []
+  },
+  {
+    "name": "pink plaid fringed scarf",
+    "category": "accessory",
+    "subtype": "woven scarf",
+    "brand": null,
+    "colors": [
+      "pink",
+      "mauve",
+      "olive",
+      "purple"
+    ],
+    "neutral": false,
+    "pattern": "check",
+    "sleeve": "na",
+    "material": "wool blend",
+    "texture": "crinkled woven",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Long lightweight scarf with fringed tassel ends and crinkled texture",
+    "confidence": "medium",
+    "id": "pink-plaid-fringed-scarf",
+    "image": "profiles/evangeline/images/pink-plaid-fringed-scarf.jpg",
+    "source": "IMG_6625.JPG",
+    "learned": []
+  },
+  {
+    "name": "grey UCLA Bruins long-sleeve tee",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": "UCLA",
+    "colors": [
+      "heather grey",
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "graphic",
+    "sleeve": "long",
+    "material": "cotton jersey",
+    "texture": "slubby knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit, slightly faded collegiate graphic",
+    "confidence": "high",
+    "id": "grey-ucla-bruins-long-sleeve-tee",
+    "image": "profiles/evangeline/images/grey-ucla-bruins-long-sleeve-tee.jpg",
+    "source": "IMG_6626.JPG",
+    "learned": []
+  },
+  {
+    "name": "black UCLA Alumni long-sleeve tee",
+    "category": "top",
+    "subtype": "long-sleeve v-neck t-shirt",
+    "brand": "UCLA",
+    "colors": [
+      "black",
+      "blue",
+      "yellow"
+    ],
+    "neutral": false,
+    "pattern": "graphic",
+    "sleeve": "long",
+    "material": "cotton jersey blend",
+    "texture": "smooth lightweight knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit, slight v-neck, soft drape consistent with tri-blend tee",
+    "confidence": "high",
+    "id": "black-ucla-alumni-long-sleeve-tee",
+    "image": "profiles/evangeline/images/black-ucla-alumni-long-sleeve-tee.jpg",
+    "source": "IMG_6627.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige long-sleeve top",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "beige",
+      "cream"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton jersey blend",
+    "texture": "smooth knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "slim fitted, slightly cropped length with crewneck",
+    "confidence": "medium",
+    "id": "beige-long-sleeve-top",
+    "image": "profiles/evangeline/images/beige-long-sleeve-top.jpg",
+    "source": "IMG_6628.JPG",
+    "learned": []
+  },
+  {
+    "name": "olive green ribbed long-sleeve top",
+    "category": "top",
+    "subtype": "ribbed long-sleeve crop top",
+    "brand": null,
+    "colors": [
+      "olive green"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "ribbed cotton blend",
+    "texture": "fine vertical rib knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted slim cut, cropped length, slightly stretchy ribbed fabric",
+    "confidence": "high",
+    "id": "olive-green-ribbed-long-sleeve-top",
+    "image": "profiles/evangeline/images/olive-green-ribbed-long-sleeve-top.jpg",
+    "source": "IMG_6629.JPG",
+    "learned": []
+  },
+  {
+    "name": "burgundy long-sleeve tee",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "burgundy"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Regular fit crewneck, slightly long body, wrinkled from storage",
+    "confidence": "high",
+    "id": "burgundy-long-sleeve-tee",
+    "image": "profiles/evangeline/images/burgundy-long-sleeve-tee.jpg",
+    "source": "IMG_6630.JPG",
+    "learned": []
+  },
+  {
+    "name": "grey heathered sweatpants",
+    "category": "pants",
+    "subtype": "jogger sweatpants",
+    "brand": null,
+    "colors": [
+      "grey"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
     "material": "cotton fleece blend",
     "texture": "brushed fleece",
     "thickness": "medium",
@@ -779,172 +2843,33 @@
     "rain_ok": false,
     "season": [
       "autumn",
-      "spring",
-      "winter",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "standard fit, ribbed cuffs and hem",
-    "confidence": "high",
-    "id": "olive-banana-republic-graphic-hoodie",
-    "image": "wardrobe/images/olive-banana-republic-graphic-hoodie.jpg",
-    "source": "IMG_6465.jpg",
-    "learned": []
-  },
-  {
-    "name": "navy and cream striped rugby shirt",
-    "category": "blouse",
-    "subtype": "long-sleeve rugby shirt",
-    "brand": null,
-    "colors": [
-      "navy",
-      "cream"
-    ],
-    "neutral": true,
-    "pattern": "striped",
-    "sleeve": "long",
-    "material": "cotton jersey",
-    "texture": "smooth knit with ribbed cuffs",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "regular fit with collared neckline and ribbed cuffs",
-    "confidence": "high",
-    "id": "navy-and-cream-striped-rugby-shirt",
-    "image": "wardrobe/images/navy-and-cream-striped-rugby-shirt.jpg",
-    "source": "IMG_6466.jpg",
-    "learned": []
-  },
-  {
-    "name": "light grey waffle-knit crewneck sweater",
-    "category": "knit",
-    "subtype": "crewneck sweater",
-    "brand": null,
-    "colors": [
-      "light grey",
-      "heather grey"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton blend knit",
-    "texture": "waffle knit",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "spring",
-      "transitional",
-      "winter"
-    ],
-    "condition": "good",
-    "fit_notes": "regular fit, ribbed crew neckline and cuffs",
-    "confidence": "high",
-    "id": "light-grey-waffle-knit-crewneck-sweater",
-    "image": "wardrobe/images/light-grey-waffle-knit-crewneck-sweater.jpg",
-    "source": "IMG_6467.jpg",
-    "learned": []
-  },
-  {
-    "name": "navy Nike Cal hoodie",
-    "category": "knit",
-    "subtype": "pullover hoodie",
-    "brand": "Nike",
-    "colors": [
-      "navy",
-      "yellow",
-      "white"
-    ],
-    "neutral": false,
-    "pattern": "graphic",
-    "sleeve": "long",
-    "material": "polyester fleece",
-    "texture": "brushed fleece interior, smooth knit face",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
       "winter",
       "spring",
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "standard relaxed hoodie fit with kangaroo pocket and ribbed hem",
+    "fit_notes": "Relaxed fit with elastic waistband and cuffed ankles, side pockets",
     "confidence": "high",
-    "id": "navy-nike-cal-hoodie",
-    "image": "wardrobe/images/navy-nike-cal-hoodie.jpg",
-    "source": "IMG_6468.jpg",
+    "id": "grey-heathered-sweatpants",
+    "image": "profiles/evangeline/images/grey-heathered-sweatpants.jpg",
+    "source": "IMG_6631.JPG",
     "learned": []
   },
   {
-    "name": "dark wash denim trucker jacket",
-    "category": "outerwear",
-    "subtype": "denim jacket",
-    "brand": "Banana Republic",
-    "colors": [
-      "dark blue",
-      "indigo"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton denim",
-    "texture": "woven denim with subtle fading",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "classic trucker cut with chest and side pockets, button front, regular fit",
-    "confidence": "high",
-    "id": "dark-wash-denim-trucker-jacket",
-    "image": "wardrobe/images/dark-wash-denim-trucker-jacket.jpg",
-    "source": "IMG_6469.jpg",
-    "learned": []
-  },
-  {
-    "name": "black raglan crewneck sweatshirt",
-    "category": "knit",
-    "subtype": "raglan-sleeve crewneck sweatshirt",
+    "name": "black fleece sweatpants",
+    "category": "pants",
+    "subtype": "jogger sweatpants",
     "brand": null,
     "colors": [
       "black"
     ],
     "neutral": true,
     "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton blend fleece",
-    "texture": "brushed soft knit",
-    "thickness": "medium",
-    "warmth": 3,
+    "sleeve": "na",
+    "material": "cotton fleece blend",
+    "texture": "brushed fleece",
+    "thickness": "thick",
+    "warmth": 4,
     "formality": [
       "athletic",
       "casual"
@@ -952,69 +2877,32 @@
     "rain_ok": false,
     "season": [
       "autumn",
-      "spring",
       "winter",
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "relaxed fit with raglan sleeves and curved hem",
-    "confidence": "medium",
-    "id": "black-raglan-crewneck-sweatshirt",
-    "image": "wardrobe/images/black-raglan-crewneck-sweatshirt.jpg",
-    "source": "IMG_6470.jpg",
+    "fit_notes": "relaxed wide-leg fit with elastic drawstring waist and tapered cuffed ankles",
+    "confidence": "high",
+    "id": "black-fleece-sweatpants",
+    "image": "profiles/evangeline/images/black-fleece-sweatpants.jpg",
+    "source": "IMG_6632.JPG",
     "learned": []
   },
   {
-    "name": "cream button-up shirt",
-    "category": "blouse",
-    "subtype": "long-sleeve button-up shirt",
-    "brand": "Madewell",
+    "name": "black high-waist leggings",
+    "category": "pants",
+    "subtype": "athletic leggings",
+    "brand": null,
     "colors": [
-      "cream",
-      "off-white"
+      "black"
     ],
     "neutral": true,
     "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton",
-    "texture": "smooth woven",
+    "sleeve": "na",
+    "material": "nylon-spandex blend",
+    "texture": "smooth stretch knit",
     "thickness": "medium",
     "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Relaxed fit with dual chest pockets and a collar; slightly oversized drape",
-    "confidence": "high",
-    "id": "cream-button-up-shirt",
-    "image": "wardrobe/images/cream-button-up-shirt.jpg",
-    "source": "IMG_6471.jpg",
-    "learned": []
-  },
-  {
-    "name": "navy Cal Badminton quarter-zip pullover",
-    "category": "knit",
-    "subtype": "quarter-zip pullover",
-    "brand": "Under Armour",
-    "colors": [
-      "navy",
-      "yellow",
-      "white"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "polyester knit",
-    "texture": "smooth performance knit",
-    "thickness": "medium",
-    "warmth": 3,
     "formality": [
       "athletic",
       "casual"
@@ -1027,477 +2915,226 @@
       "winter"
     ],
     "condition": "good",
-    "fit_notes": "standard athletic fit with raglan sleeves and stand collar",
+    "fit_notes": "high-waisted, slim fitted, full length stretch",
     "confidence": "high",
-    "id": "navy-cal-badminton-quarter-zip-pullover",
-    "image": "wardrobe/images/navy-cal-badminton-quarter-zip-pullover.jpg",
-    "source": "IMG_6472.jpg",
+    "id": "black-high-waist-leggings",
+    "image": "profiles/evangeline/images/black-high-waist-leggings.jpg",
+    "source": "IMG_6633.JPG",
     "learned": []
   },
   {
-    "name": "navy long-sleeve button-up shirt",
-    "category": "blouse",
-    "subtype": "button-up shirt",
-    "brand": null,
-    "colors": [
-      "navy"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton or cotton-linen blend",
-    "texture": "smooth woven",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual",
-      "business"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Standard fit with chest pocket and snap-button placket; appears slightly relaxed",
-    "confidence": "medium",
-    "id": "navy-long-sleeve-button-up-shirt",
-    "image": "wardrobe/images/navy-long-sleeve-button-up-shirt.jpg",
-    "source": "IMG_6473.jpg",
-    "learned": []
-  },
-  {
-    "name": "light blue oxford button-down shirt",
-    "category": "blouse",
-    "subtype": "button-down dress shirt",
-    "brand": null,
-    "colors": [
-      "light blue"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton oxford",
-    "texture": "woven oxford weave",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual",
-      "business"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "summer",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "standard fit with button-down collar, slight wrinkling from storage",
-    "confidence": "high",
-    "id": "light-blue-oxford-button-down-shirt",
-    "image": "wardrobe/images/light-blue-oxford-button-down-shirt.jpg",
-    "source": "IMG_6474.jpg",
-    "learned": []
-  },
-  {
-    "name": "navy Warriors basketball jersey",
-    "category": "top",
-    "subtype": "basketball jersey tank",
-    "brand": "NBA",
-    "colors": [
-      "navy",
-      "gold",
-      "orange"
-    ],
-    "neutral": false,
-    "pattern": "graphic",
-    "sleeve": "sleeveless",
-    "material": "polyester mesh",
-    "texture": "mesh",
-    "thickness": "thin",
-    "warmth": 1,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring"
-    ],
-    "condition": "good",
-    "fit_notes": "Loose athletic cut, sleeveless tank with side splits, appears men's L/XL",
-    "confidence": "high",
-    "id": "navy-warriors-basketball-jersey",
-    "image": "wardrobe/images/navy-warriors-basketball-jersey.jpg",
-    "source": "IMG_6475.JPG",
-    "learned": []
-  },
-  {
-    "name": "Golden State Warriors #30 white jersey",
-    "category": "top",
-    "subtype": "basketball jersey",
-    "brand": "Nike",
-    "colors": [
-      "white",
-      "blue",
-      "yellow"
-    ],
-    "neutral": false,
-    "pattern": "graphic",
-    "sleeve": "sleeveless",
-    "material": "polyester mesh",
-    "texture": "mesh",
-    "thickness": "thin",
-    "warmth": 1,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring"
-    ],
-    "condition": "good",
-    "fit_notes": "Size 48, athletic tank cut with wide armholes",
-    "confidence": "high",
-    "id": "golden-state-warriors-30-white-jersey",
-    "image": "wardrobe/images/golden-state-warriors-30-white-jersey.jpg",
-    "source": "IMG_6476.JPG",
-    "learned": []
-  },
-  {
-    "name": "red 49ers #85 football jersey",
-    "category": "top",
-    "subtype": "football jersey",
-    "brand": "Nike",
-    "colors": [
-      "red",
-      "white",
-      "gold"
-    ],
-    "neutral": false,
-    "pattern": "graphic",
-    "sleeve": "short",
-    "material": "polyester mesh",
-    "texture": "smooth mesh with sewn-on twill numbers",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Size L, relaxed athletic cut, slightly loose drape",
-    "confidence": "high",
-    "id": "red-49ers-85-football-jersey",
-    "image": "wardrobe/images/red-49ers-85-football-jersey.jpg",
-    "source": "IMG_6477.jpg",
-    "learned": []
-  },
-  {
-    "name": "navy Cal Nike football jersey",
-    "category": "top",
-    "subtype": "football jersey",
-    "brand": "Nike",
-    "colors": [
-      "navy",
-      "gold"
-    ],
-    "neutral": false,
-    "pattern": "graphic",
-    "sleeve": "short",
-    "material": "polyester mesh",
-    "texture": "smooth mesh knit",
-    "thickness": "thin",
-    "warmth": 2,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Size L, athletic cut with V-neck collar and number 16 graphic",
-    "confidence": "high",
-    "id": "navy-cal-nike-football-jersey",
-    "image": "wardrobe/images/navy-cal-nike-football-jersey.jpg",
-    "source": "IMG_6478.JPG",
-    "learned": []
-  },
-  {
-    "name": "yellow California basketball jersey",
-    "category": "top",
-    "subtype": "basketball jersey tank",
-    "brand": "Jordan",
-    "colors": [
-      "yellow",
-      "navy",
-      "white"
-    ],
-    "neutral": false,
-    "pattern": "graphic",
-    "sleeve": "sleeveless",
-    "material": "polyester mesh",
-    "texture": "mesh",
-    "thickness": "thin",
-    "warmth": 1,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring"
-    ],
-    "condition": "good",
-    "fit_notes": "Size L, loose athletic cut with deep armholes",
-    "confidence": "high",
-    "id": "yellow-california-basketball-jersey",
-    "image": "wardrobe/images/yellow-california-basketball-jersey.jpg",
-    "source": "IMG_6479.jpg",
-    "learned": []
-  },
-  {
-    "name": "tan Nike Vomero running sneakers",
+    "name": "chestnut suede UGG Tasman slippers",
     "category": "shoes",
-    "subtype": "running sneakers",
-    "brand": "Nike",
+    "subtype": "slip-on slippers",
+    "brand": "UGG",
     "colors": [
-      "tan",
-      "beige",
-      "white"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "mesh and suede",
-    "texture": "mesh with suede overlays",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "summer",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Low-top running shoe with chunky cushioned sole, true to size athletic fit",
-    "confidence": "high",
-    "id": "tan-nike-vomero-running-sneakers",
-    "image": "wardrobe/images/tan-nike-vomero-running-sneakers.jpg",
-    "source": "IMG_6480.JPG",
-    "learned": []
-  },
-  {
-    "name": "beige suede low-top sneakers",
-    "category": "shoes",
-    "subtype": "low-top sneakers",
-    "brand": "New Balance",
-    "colors": [
-      "beige",
-      "tan",
-      "cream"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "suede with mesh panels",
-    "texture": "brushed suede with smooth mesh",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "summer",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "worn",
-    "fit_notes": "Standard lifestyle sneaker fit; visible wear and discoloration on suede and midsole",
-    "confidence": "high",
-    "id": "beige-suede-low-top-sneakers",
-    "image": "wardrobe/images/beige-suede-low-top-sneakers.jpg",
-    "source": "IMG_6481.JPG",
-    "learned": []
-  },
-  {
-    "name": "cream and rust Nike Air Max 90 sneakers",
-    "category": "shoes",
-    "subtype": "low-top sneakers",
-    "brand": "Nike",
-    "colors": [
+      "chestnut brown",
       "cream",
-      "rust",
-      "white",
-      "pink"
-    ],
-    "neutral": false,
-    "pattern": "colorblock",
-    "sleeve": "na",
-    "material": "canvas and suede with rubber sole",
-    "texture": "woven canvas with mesh panels",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "summer",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "worn",
-    "fit_notes": "standard lace-up athletic fit, visible Air unit in heel; signs of dirt and wear on toe and midsole",
-    "confidence": "high",
-    "id": "cream-and-rust-nike-air-max-90-sneakers",
-    "image": "wardrobe/images/cream-and-rust-nike-air-max-90-sneakers.jpg",
-    "source": "IMG_6482.JPG",
-    "learned": []
-  },
-  {
-    "name": "tan leather low-top sneakers",
-    "category": "shoes",
-    "subtype": "low-top sneakers",
-    "brand": null,
-    "colors": [
-      "tan",
-      "white"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "leather",
-    "texture": "smooth leather with white rubber sole",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "summer",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Lace-up minimalist sneaker with cupsole; versatile cognac tone pairs with denim or chinos",
-    "confidence": "high",
-    "id": "tan-leather-low-top-sneakers",
-    "image": "wardrobe/images/tan-leather-low-top-sneakers.jpg",
-    "source": "IMG_6483.JPG",
-    "learned": []
-  },
-  {
-    "name": "white leather low-top sneakers",
-    "category": "shoes",
-    "subtype": "low-top sneakers",
-    "brand": "Nike",
-    "colors": [
-      "white"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "leather",
-    "texture": "smooth leather with rubber sole",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual",
-      "athletic"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "summer",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "worn",
-    "fit_notes": "Classic Air Force 1 silhouette; visible scuffs and dirt on toe and midsole indicating heavy wear",
-    "confidence": "high",
-    "id": "white-leather-low-top-sneakers",
-    "image": "wardrobe/images/white-leather-low-top-sneakers.jpg",
-    "source": "IMG_6484.JPG",
-    "learned": []
-  },
-  {
-    "name": "brown leather boat shoes",
-    "category": "shoes",
-    "subtype": "boat shoes",
-    "brand": null,
-    "colors": [
-      "brown",
       "tan"
     ],
     "neutral": true,
+    "pattern": "other",
+    "sleeve": "na",
+    "material": "suede with wool lining",
+    "texture": "soft suede with braided trim and fleece interior",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "backless slip-on mule style with cushioned cozy lining; true to size",
+    "confidence": "high",
+    "id": "chestnut-suede-ugg-tasman-slippers",
+    "image": "profiles/evangeline/images/chestnut-suede-ugg-tasman-slippers.jpg",
+    "source": "IMG_6634.JPG",
+    "learned": []
+  },
+  {
+    "name": "white square-toe ankle boots",
+    "category": "shoes",
+    "subtype": "square-toe ankle boots",
+    "brand": null,
+    "colors": [
+      "white",
+      "black"
+    ],
+    "neutral": true,
     "pattern": "solid",
     "sleeve": "na",
     "material": "leather",
-    "texture": "smooth leather with moccasin stitching",
+    "texture": "smooth leather",
     "thickness": "medium",
-    "warmth": 2,
+    "warmth": 3,
     "formality": [
       "casual",
       "smart casual"
     ],
     "rain_ok": false,
     "season": [
-      "spring",
-      "summer",
       "autumn",
+      "spring",
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "Classic moccasin boat shoe with rawhide laces and gum rubber sole; some visible wear on toes.",
+    "fit_notes": "Square-toe ankle boots with low block heel and black sole contrast; mid-calf shaft with slight slouch",
     "confidence": "high",
-    "id": "brown-leather-boat-shoes",
-    "image": "wardrobe/images/brown-leather-boat-shoes.jpg",
-    "source": "IMG_6485.JPG",
+    "id": "white-square-toe-ankle-boots",
+    "image": "profiles/evangeline/images/white-square-toe-ankle-boots.jpg",
+    "source": "IMG_6635.JPG",
     "learned": []
   },
   {
-    "name": "white leather low-top sneakers",
+    "name": "black tall lace-up combat boots",
     "category": "shoes",
-    "subtype": "low-top sneakers",
+    "subtype": "knee-high lace-up combat boots",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth glossy leather",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": true,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Tall shaft with full-length lace-up front, chunky lugged platform sole; statement edgy footwear",
+    "confidence": "high",
+    "id": "black-tall-lace-up-combat-boots",
+    "image": "profiles/evangeline/images/black-tall-lace-up-combat-boots.jpg",
+    "source": "IMG_6636.JPG",
+    "learned": []
+  },
+  {
+    "name": "black velvet Mary Jane flats",
+    "category": "shoes",
+    "subtype": "Mary Jane flats",
+    "brand": "Charles & Keith",
+    "colors": [
+      "black",
+      "gold"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "velvet",
+    "texture": "soft velvet with smooth strap",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Square-toe flat with single buckled strap and gold hardware; appears true to size",
+    "confidence": "high",
+    "id": "black-velvet-mary-jane-flats",
+    "image": "profiles/evangeline/images/black-velvet-mary-jane-flats.jpg",
+    "source": "IMG_6637.JPG",
+    "learned": []
+  },
+  {
+    "name": "black suede over-the-knee heeled boots",
+    "category": "shoes",
+    "subtype": "over-the-knee block-heel boots",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "faux suede",
+    "texture": "soft brushed suede",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "Tall over-the-knee shaft with pointed toe, inner side zip, and stacked block heel; stretchy suede upper for snug leg fit",
+    "confidence": "high",
+    "id": "black-suede-over-the-knee-heeled-boots",
+    "image": "profiles/evangeline/images/black-suede-over-the-knee-heeled-boots.jpg",
+    "source": "IMG_6638.JPG",
+    "learned": []
+  },
+  {
+    "name": "white lace-up combat boots",
+    "category": "shoes",
+    "subtype": "lace-up combat boots",
     "brand": null,
     "colors": [
       "white",
-      "cream"
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "faux leather",
+    "texture": "smooth glossy",
+    "thickness": "thick",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": true,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "chunky lugged sole, ankle height with lace-up front and rear pull tab; minor scuffs on toe",
+    "confidence": "high",
+    "id": "white-lace-up-combat-boots",
+    "image": "profiles/evangeline/images/white-lace-up-combat-boots.jpg",
+    "source": "IMG_6639.JPG",
+    "learned": []
+  },
+  {
+    "name": "white square-toe ballet flats",
+    "category": "shoes",
+    "subtype": "square-toe ballet flats",
+    "brand": null,
+    "colors": [
+      "white",
+      "black"
     ],
     "neutral": true,
     "pattern": "solid",
@@ -1508,7 +3145,8 @@
     "warmth": 2,
     "formality": [
       "casual",
-      "smart casual"
+      "smart casual",
+      "business"
     ],
     "rain_ok": false,
     "season": [
@@ -1518,32 +3156,69 @@
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "Clean minimalist cupsole sneaker with flat laces; versatile everyday fit.",
+    "fit_notes": "Square-toe flat with low block heel and slip-on V-cut vamp; appears true to size",
     "confidence": "high",
-    "id": "white-leather-low-top-sneakers-2",
-    "image": "wardrobe/images/white-leather-low-top-sneakers-2.jpg",
-    "source": "IMG_6486.JPG",
+    "id": "white-square-toe-ballet-flats",
+    "image": "profiles/evangeline/images/white-square-toe-ballet-flats.jpg",
+    "source": "IMG_6640.JPG",
     "learned": []
   },
   {
-    "name": "navy Converse high-top sneakers",
+    "name": "black chunky horsebit loafers",
     "category": "shoes",
-    "subtype": "high-top sneakers",
-    "brand": "Converse",
+    "subtype": "chunky platform loafers",
+    "brand": null,
     "colors": [
-      "navy",
-      "white",
-      "rust"
+      "black",
+      "gold"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth glossy leather",
+    "thickness": "thick",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Chunky lug platform sole with gold horsebit hardware; structured loafer fit.",
+    "confidence": "high",
+    "id": "black-chunky-horsebit-loafers",
+    "image": "profiles/evangeline/images/black-chunky-horsebit-loafers.jpg",
+    "source": "IMG_6641.JPG",
+    "learned": []
+  },
+  {
+    "name": "cream quilted Skechers sneakers",
+    "category": "shoes",
+    "subtype": "low-top sneakers",
+    "brand": "Skechers",
+    "colors": [
+      "cream",
+      "tan",
+      "white"
     ],
     "neutral": true,
     "pattern": "colorblock",
     "sleeve": "na",
-    "material": "canvas",
-    "texture": "woven canvas with rubber sole",
+    "material": "quilted textile with synthetic leather trim",
+    "texture": "quilted fabric upper with smooth faux-leather overlays",
     "thickness": "medium",
-    "warmth": 2,
+    "warmth": 3,
     "formality": [
-      "casual"
+      "casual",
+      "athletic"
     ],
     "rain_ok": false,
     "season": [
@@ -1551,134 +3226,30 @@
       "autumn",
       "transitional"
     ],
-    "condition": "worn",
-    "fit_notes": "Classic Chuck Taylor high-top silhouette with rust trim and rubber toe cap; visible scuffing and dirt on white rubber.",
+    "condition": "good",
+    "fit_notes": "cushioned low-top with bungee-style laces, slip-on comfort fit",
     "confidence": "high",
-    "id": "navy-converse-high-top-sneakers",
-    "image": "wardrobe/images/navy-converse-high-top-sneakers.jpg",
-    "source": "IMG_6487.JPG",
+    "id": "cream-quilted-skechers-sneakers",
+    "image": "profiles/evangeline/images/cream-quilted-skechers-sneakers.jpg",
+    "source": "IMG_6642.JPG",
     "learned": []
   },
   {
-    "name": "light grey cotton chinos",
-    "category": "pants",
-    "subtype": "chino trousers",
+    "name": "blush pink crisscross ballet flats",
+    "category": "shoes",
+    "subtype": "slip-on ballet flats",
     "brand": null,
     "colors": [
-      "light grey",
+      "blush pink",
       "beige"
     ],
     "neutral": true,
     "pattern": "solid",
     "sleeve": "na",
-    "material": "cotton twill",
-    "texture": "smooth woven twill",
+    "material": "suede and satin",
+    "texture": "soft suede with smooth satin elastic straps",
     "thickness": "medium",
     "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual",
-      "business"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional",
-      "summer"
-    ],
-    "condition": "good",
-    "fit_notes": "straight-leg flat-front chino with belt loops and slant pockets; appears mid-rise, regular fit",
-    "confidence": "high",
-    "id": "light-grey-cotton-chinos",
-    "image": "wardrobe/images/light-grey-cotton-chinos.jpg",
-    "source": "IMG_6488.JPG",
-    "learned": []
-  },
-  {
-    "name": "tan cotton chinos",
-    "category": "pants",
-    "subtype": "chino trousers",
-    "brand": null,
-    "colors": [
-      "tan",
-      "beige"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton twill",
-    "texture": "smooth woven twill",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual",
-      "business"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "summer",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "slim to straight fit, mid-rise, flat front",
-    "confidence": "high",
-    "id": "tan-cotton-chinos",
-    "image": "wardrobe/images/tan-cotton-chinos.jpg",
-    "source": "IMG_6489.JPG",
-    "learned": []
-  },
-  {
-    "name": "olive cargo joggers",
-    "category": "pants",
-    "subtype": "cargo jogger pants",
-    "brand": null,
-    "colors": [
-      "olive",
-      "brown"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton twill",
-    "texture": "smooth woven twill",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Tapered cargo joggers with elasticated/cuffed ankles and side cargo pockets, relaxed fit",
-    "confidence": "high",
-    "id": "olive-cargo-joggers",
-    "image": "wardrobe/images/olive-cargo-joggers.jpg",
-    "source": "IMG_6490.JPG",
-    "learned": []
-  },
-  {
-    "name": "light wash blue jeans",
-    "category": "jeans",
-    "subtype": "straight-leg jeans",
-    "brand": "Banana Republic",
-    "colors": [
-      "light blue"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton denim with stretch",
-    "texture": "faded denim weave",
-    "thickness": "medium",
-    "warmth": 3,
     "formality": [
       "casual",
       "smart casual"
@@ -1687,21 +3258,159 @@
     "season": [
       "spring",
       "autumn",
-      "transitional",
-      "summer"
+      "transitional"
     ],
     "condition": "good",
-    "fit_notes": "straight to slim leg, mid rise, five-pocket styling",
+    "fit_notes": "Soft padded slip-on with elastic crisscross straps over the instep and a pull tab at the heel; rounded toe, low profile.",
     "confidence": "high",
-    "id": "light-wash-blue-jeans",
-    "image": "wardrobe/images/light-wash-blue-jeans.jpg",
-    "source": "IMG_6491.JPG",
+    "id": "blush-pink-crisscross-ballet-flats",
+    "image": "profiles/evangeline/images/blush-pink-crisscross-ballet-flats.jpg",
+    "source": "IMG_6643.JPG",
     "learned": []
   },
   {
-    "name": "beige five-pocket chinos",
-    "category": "pants",
-    "subtype": "chino trousers",
+    "name": "black Adidas trefoil baseball cap",
+    "category": "accessory",
+    "subtype": "baseball cap",
+    "brand": "Adidas",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "graphic",
+    "sleeve": "na",
+    "material": "cotton twill",
+    "texture": "smooth twill with embroidered logo",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "adjustable strapback, relaxed curved-brim dad cap style",
+    "confidence": "high",
+    "id": "black-adidas-trefoil-baseball-cap",
+    "image": "profiles/evangeline/images/black-adidas-trefoil-baseball-cap.jpg",
+    "source": "IMG_6644.JPG",
+    "learned": []
+  },
+  {
+    "name": "brown corduroy bucket hat",
+    "category": "accessory",
+    "subtype": "bucket hat",
+    "brand": null,
+    "colors": [
+      "brown",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton corduroy",
+    "texture": "ribbed corduroy wale",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "Standard bucket hat shape with wide brim; corduroy wale gives soft structured feel",
+    "confidence": "high",
+    "id": "brown-corduroy-bucket-hat",
+    "image": "profiles/evangeline/images/brown-corduroy-bucket-hat.jpg",
+    "source": "IMG_6645.JPG",
+    "learned": []
+  },
+  {
+    "name": "white adidas trefoil baseball cap",
+    "category": "accessory",
+    "subtype": "baseball cap",
+    "brand": "adidas",
+    "colors": [
+      "white",
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "graphic",
+    "sleeve": "na",
+    "material": "cotton twill",
+    "texture": "smooth woven twill",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "athletic",
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Adjustable strapback, curved brim, structured front panel",
+    "confidence": "high",
+    "id": "white-adidas-trefoil-baseball-cap",
+    "image": "profiles/evangeline/images/white-adidas-trefoil-baseball-cap.jpg",
+    "source": "IMG_6646.JPG",
+    "learned": []
+  },
+  {
+    "name": "washed navy embroidered baseball cap",
+    "category": "accessory",
+    "subtype": "baseball cap",
+    "brand": null,
+    "colors": [
+      "navy",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "washed cotton twill",
+    "texture": "faded brushed twill",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "worn",
+    "fit_notes": "Adjustable curved-brim cap with small embroidered logo patch, faded vintage-washed finish",
+    "confidence": "high",
+    "id": "washed-navy-embroidered-baseball-cap",
+    "image": "profiles/evangeline/images/washed-navy-embroidered-baseball-cap.jpg",
+    "source": "IMG_6647.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige woven straw sun hat",
+    "category": "accessory",
+    "subtype": "wide-brim straw sun hat",
     "brand": null,
     "colors": [
       "beige",
@@ -1710,1133 +3419,92 @@
     "neutral": true,
     "pattern": "solid",
     "sleeve": "na",
-    "material": "cotton twill with stretch",
-    "texture": "smooth twill",
+    "material": "woven paper straw",
+    "texture": "coiled ribbed straw weave",
     "thickness": "medium",
-    "warmth": 2,
+    "warmth": 1,
     "formality": [
       "casual",
       "smart casual"
     ],
     "rain_ok": false,
     "season": [
-      "spring",
-      "autumn",
-      "transitional",
-      "summer"
+      "summer",
+      "spring"
     ],
     "condition": "good",
-    "fit_notes": "slim to straight leg, mid-rise five-pocket styling",
-    "confidence": "medium",
-    "id": "beige-five-pocket-chinos",
-    "image": "wardrobe/images/beige-five-pocket-chinos.jpg",
-    "source": "IMG_6492.JPG",
-    "learned": []
-  },
-  {
-    "name": "light grey tech 5-pocket pants",
-    "category": "pants",
-    "subtype": "5-pocket trousers",
-    "brand": null,
-    "colors": [
-      "light grey"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "nylon-spandex blend",
-    "texture": "smooth woven with slight sheen",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual",
-      "business"
-    ],
-    "rain_ok": true,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional",
-      "summer"
-    ],
-    "condition": "good",
-    "fit_notes": "slim straight cut, 5-pocket styling with stretch tech fabric",
-    "confidence": "medium",
-    "id": "light-grey-tech-5-pocket-pants",
-    "image": "wardrobe/images/light-grey-tech-5-pocket-pants.jpg",
-    "source": "IMG_6493.JPG",
-    "learned": []
-  },
-  {
-    "name": "black slim jeans",
-    "category": "jeans",
-    "subtype": "slim-fit jeans",
-    "brand": null,
-    "colors": [
-      "black"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton denim with stretch",
-    "texture": "smooth denim weave",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "winter",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "slim straight leg, five-pocket styling, mid-rise",
+    "fit_notes": "Soft floppy wide brim, packable straw construction for sun protection",
     "confidence": "high",
-    "id": "black-slim-jeans",
-    "image": "wardrobe/images/black-slim-jeans.jpg",
-    "source": "IMG_6494.JPG",
+    "id": "beige-woven-straw-sun-hat",
+    "image": "profiles/evangeline/images/beige-woven-straw-sun-hat.jpg",
+    "source": "IMG_6648.JPG",
     "learned": []
   },
   {
-    "name": "light grey fleece joggers",
-    "category": "pants",
-    "subtype": "jogger sweatpants",
-    "brand": null,
-    "colors": [
-      "light grey",
-      "heather grey"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton fleece blend",
-    "texture": "brushed fleece",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "winter",
-      "spring",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed fit with elastic drawstring waist and ribbed cuffs, side pockets",
-    "confidence": "high",
-    "id": "light-grey-fleece-joggers",
-    "image": "wardrobe/images/light-grey-fleece-joggers.jpg",
-    "source": "IMG_6495.JPG",
-    "learned": []
-  },
-  {
-    "name": "charcoal Cal Badminton sweatpants",
-    "category": "pants",
-    "subtype": "jogger sweatpants",
-    "brand": "Cal",
-    "colors": [
-      "charcoal grey",
-      "black",
-      "gold"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton fleece blend",
-    "texture": "brushed fleece",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "winter",
-      "spring",
-      "transitional"
-    ],
-    "condition": "worn",
-    "fit_notes": "relaxed fit with elastic ribbed cuffs and drawstring waist, faded from wash",
-    "confidence": "high",
-    "id": "charcoal-cal-badminton-sweatpants",
-    "image": "wardrobe/images/charcoal-cal-badminton-sweatpants.jpg",
-    "source": "IMG_6496.JPG",
-    "learned": []
-  },
-  {
-    "name": "brown straight-leg chinos",
-    "category": "pants",
-    "subtype": "chino trousers",
-    "brand": null,
-    "colors": [
-      "brown",
-      "taupe"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton twill",
-    "texture": "smooth woven twill",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "straight fit, size 33 waist per label, five-pocket styling",
-    "confidence": "high",
-    "id": "brown-straight-leg-chinos",
-    "image": "wardrobe/images/brown-straight-leg-chinos.jpg",
-    "source": "IMG_6497.JPG",
-    "learned": []
-  },
-  {
-    "name": "tan slim jeans",
-    "category": "jeans",
-    "subtype": "slim-fit jeans",
-    "brand": null,
-    "colors": [
-      "tan",
-      "beige"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton denim with stretch",
-    "texture": "twill weave",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional",
-      "summer"
-    ],
-    "condition": "good",
-    "fit_notes": "Slim tapered fit, five-pocket styling, some fading and wear at knees",
-    "confidence": "high",
-    "id": "tan-slim-jeans",
-    "image": "wardrobe/images/tan-slim-jeans.jpg",
-    "source": "IMG_6498.jpg",
-    "learned": []
-  },
-  {
-    "name": "black slim chino trousers",
-    "category": "pants",
-    "subtype": "chino trousers",
-    "brand": null,
-    "colors": [
-      "black"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton-stretch twill",
-    "texture": "smooth woven",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual",
-      "business"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional",
-      "winter"
-    ],
-    "condition": "good",
-    "fit_notes": "slim straight leg, belt loops, mid rise",
-    "confidence": "medium",
-    "id": "black-slim-chino-trousers",
-    "image": "wardrobe/images/black-slim-chino-trousers.jpg",
-    "source": "IMG_6499.JPG",
-    "learned": []
-  },
-  {
-    "name": "navy cotton five-pocket trousers",
-    "category": "pants",
-    "subtype": "five-pocket trousers",
-    "brand": null,
-    "colors": [
-      "navy"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton twill",
-    "texture": "smooth woven twill",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional",
-      "winter"
-    ],
-    "condition": "good",
-    "fit_notes": "Straight-leg cut with classic five-pocket styling, regular waist",
-    "confidence": "high",
-    "id": "navy-cotton-five-pocket-trousers",
-    "image": "wardrobe/images/navy-cotton-five-pocket-trousers.jpg",
-    "source": "IMG_6500.JPG",
-    "learned": []
-  },
-  {
-    "name": "black drawstring joggers",
-    "category": "pants",
-    "subtype": "sweatpants/joggers",
-    "brand": null,
-    "colors": [
-      "black",
-      "white"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "na",
-    "material": "cotton fleece",
-    "texture": "brushed fleece",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "winter",
-      "spring",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed fit with elastic ribbed cuffs, drawstring waist, side pockets",
-    "confidence": "high",
-    "id": "black-drawstring-joggers",
-    "image": "wardrobe/images/black-drawstring-joggers.jpg",
-    "source": "IMG_6501.JPG",
-    "learned": []
-  },
-  {
-    "name": "black adidas Cal track pants",
-    "category": "pants",
-    "subtype": "track pants/joggers",
-    "brand": "adidas",
-    "colors": [
-      "black",
-      "white",
-      "yellow"
-    ],
-    "neutral": true,
-    "pattern": "striped",
-    "sleeve": "na",
-    "material": "polyester",
-    "texture": "smooth tricot knit",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional",
-      "winter"
-    ],
-    "condition": "good",
-    "fit_notes": "tapered athletic fit with elastic cuffs and three-stripe detail down sides",
-    "confidence": "high",
-    "id": "black-adidas-cal-track-pants",
-    "image": "wardrobe/images/black-adidas-cal-track-pants.jpg",
-    "source": "IMG_6502.JPG",
-    "learned": []
-  },
-  {
-    "name": "white graphic long-sleeve tee",
-    "category": "top",
-    "subtype": "long-sleeve t-shirt",
-    "brand": null,
-    "colors": [
-      "white",
-      "grey",
-      "black",
-      "blue"
-    ],
-    "neutral": true,
-    "pattern": "graphic",
-    "sleeve": "long",
-    "material": "polyester jersey",
-    "texture": "smooth athletic knit",
-    "thickness": "thin",
-    "warmth": 2,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed fit with raglan-style piping, slightly cropped boxy cut",
-    "confidence": "medium",
-    "id": "white-graphic-long-sleeve-tee",
-    "image": "wardrobe/images/white-graphic-long-sleeve-tee.jpg",
-    "source": "IMG_6503.JPG",
-    "learned": []
-  },
-  {
-    "name": "black crewneck sweatshirt",
+    "name": "light blue cable-knit sweater",
     "category": "knit",
-    "subtype": "crewneck sweatshirt",
-    "brand": null,
+    "subtype": "crewneck cable-knit sweater",
+    "brand": "Ralph Lauren",
     "colors": [
-      "black"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton fleece blend",
-    "texture": "smooth knit with brushed interior",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "athletic",
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "spring",
-      "winter",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed fit with dropped shoulders, slightly oversized",
-    "confidence": "medium",
-    "id": "black-crewneck-sweatshirt",
-    "image": "wardrobe/images/black-crewneck-sweatshirt.jpg",
-    "source": "IMG_6504.JPG",
-    "learned": []
-  },
-  {
-    "name": "tie-dye 'Be True' pullover hoodie",
-    "category": "knit",
-    "subtype": "pullover hoodie",
-    "brand": "Nike",
-    "colors": [
-      "pink",
-      "grey",
-      "blue",
-      "white"
+      "light blue"
     ],
     "neutral": false,
-    "pattern": "other",
+    "pattern": "solid",
     "sleeve": "long",
-    "material": "cotton fleece blend",
-    "texture": "brushed fleece",
-    "thickness": "thick",
+    "material": "cotton knit",
+    "texture": "cable knit",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted cropped silhouette, ribbed cuffs and hem",
+    "confidence": "high",
+    "id": "light-blue-cable-knit-sweater",
+    "image": "profiles/evangeline/images/light-blue-cable-knit-sweater.jpg",
+    "source": "IMG_6649.JPG",
+    "learned": []
+  },
+  {
+    "name": "dusty blue mock-neck knit sweater",
+    "category": "knit",
+    "subtype": "mock-neck pullover sweater",
+    "brand": null,
+    "colors": [
+      "dusty blue",
+      "grey"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "wool blend knit",
+    "texture": "soft brushed knit with ribbed cuffs and hem",
+    "thickness": "medium",
     "warmth": 4,
     "formality": [
       "casual",
-      "athletic"
+      "smart casual"
     ],
     "rain_ok": false,
     "season": [
       "autumn",
       "winter",
-      "spring",
       "transitional"
     ],
     "condition": "good",
-    "fit_notes": "relaxed fit with kangaroo pocket and drawstring hood",
-    "confidence": "high",
-    "id": "tie-dye-be-true-pullover-hoodie",
-    "image": "wardrobe/images/tie-dye-be-true-pullover-hoodie.jpg",
-    "source": "IMG_6505.JPG",
-    "learned": []
-  },
-  {
-    "name": "grey short-sleeve knit top",
-    "category": "top",
-    "subtype": "short-sleeve knit crewneck",
-    "brand": null,
-    "colors": [
-      "grey"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "short",
-    "material": "cotton knit",
-    "texture": "fine knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed boxy fit with ribbed crew neck and cuffs",
+    "fit_notes": "fitted silhouette with ribbed mock neck, cuffs and hem",
     "confidence": "medium",
-    "id": "grey-short-sleeve-knit-top",
-    "image": "wardrobe/images/grey-short-sleeve-knit-top.jpg",
-    "source": "IMG_6506.JPG",
-    "learned": []
-  },
-  {
-    "name": "white Kith mosaic graphic tee",
-    "category": "top",
-    "subtype": "short-sleeve t-shirt",
-    "brand": "Kith",
-    "colors": [
-      "white",
-      "green",
-      "yellow"
-    ],
-    "neutral": true,
-    "pattern": "graphic",
-    "sleeve": "short",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Standard fit crewneck, appears slightly relaxed",
-    "confidence": "high",
-    "id": "white-kith-mosaic-graphic-tee",
-    "image": "wardrobe/images/white-kith-mosaic-graphic-tee.jpg",
-    "source": "IMG_6507.JPG",
-    "learned": []
-  },
-  {
-    "name": "olive striped ribbed tee",
-    "category": "top",
-    "subtype": "short-sleeve t-shirt",
-    "brand": null,
-    "colors": [
-      "olive green",
-      "white"
-    ],
-    "neutral": false,
-    "pattern": "striped",
-    "sleeve": "short",
-    "material": "cotton blend knit",
-    "texture": "ribbed knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "summer",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed fit with slightly dropped shoulders, vertical ribbed stripe texture",
-    "confidence": "high",
-    "id": "olive-striped-ribbed-tee",
-    "image": "wardrobe/images/olive-striped-ribbed-tee.jpg",
-    "source": "IMG_6508.JPG",
-    "learned": []
-  },
-  {
-    "name": "beige ribbed knit sweater",
-    "category": "knit",
-    "subtype": "crewneck sweater",
-    "brand": null,
-    "colors": [
-      "beige",
-      "oatmeal"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton blend knit",
-    "texture": "ribbed knit",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "spring",
-      "winter",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "regular fit with ribbed cuffs and hem",
-    "confidence": "medium",
-    "id": "beige-ribbed-knit-sweater",
-    "image": "wardrobe/images/beige-ribbed-knit-sweater.jpg",
-    "source": "IMG_6509.JPG",
-    "learned": []
-  },
-  {
-    "name": "navy pocket t-shirt",
-    "category": "blouse",
-    "subtype": "short-sleeve t-shirt",
-    "brand": null,
-    "colors": [
-      "navy"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "short",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Relaxed fit with chest pocket, crew neckline, slightly faded",
-    "confidence": "high",
-    "id": "navy-pocket-t-shirt",
-    "image": "wardrobe/images/navy-pocket-t-shirt.jpg",
-    "source": "IMG_6510.JPG",
-    "learned": []
-  },
-  {
-    "name": "grey crewneck t-shirt",
-    "category": "blouse",
-    "subtype": "short-sleeve t-shirt",
-    "brand": null,
-    "colors": [
-      "grey"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "short",
-    "material": "cotton jersey",
-    "texture": "smooth knit with ribbed collar",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "regular fit, ribbed crew neckline, slightly faded",
-    "confidence": "high",
-    "id": "grey-crewneck-t-shirt",
-    "image": "wardrobe/images/grey-crewneck-t-shirt.jpg",
-    "source": "IMG_6511.JPG",
-    "learned": []
-  },
-  {
-    "name": "grey long-sleeve henley",
-    "category": "top",
-    "subtype": "long-sleeve henley",
-    "brand": null,
-    "colors": [
-      "grey"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton jersey",
-    "texture": "fine ribbed knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "regular fit, slightly relaxed through body",
-    "confidence": "high",
-    "id": "grey-long-sleeve-henley",
-    "image": "wardrobe/images/grey-long-sleeve-henley.jpg",
-    "source": "IMG_6512.JPG",
-    "learned": []
-  },
-  {
-    "name": "black adidas Hong Kong graphic tee",
-    "category": "top",
-    "subtype": "short-sleeve t-shirt",
-    "brand": "adidas",
-    "colors": [
-      "black",
-      "blue",
-      "red",
-      "white"
-    ],
-    "neutral": false,
-    "pattern": "graphic",
-    "sleeve": "short",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed/regular fit, crew neck",
-    "confidence": "high",
-    "id": "black-adidas-hong-kong-graphic-tee",
-    "image": "wardrobe/images/black-adidas-hong-kong-graphic-tee.jpg",
-    "source": "IMG_6513.JPG",
-    "learned": []
-  },
-  {
-    "name": "charcoal watermelon-print crewneck tee",
-    "category": "top",
-    "subtype": "short-sleeve t-shirt",
-    "brand": null,
-    "colors": [
-      "charcoal grey",
-      "red",
-      "green"
-    ],
-    "neutral": false,
-    "pattern": "graphic",
-    "sleeve": "short",
-    "material": "cotton blend jersey",
-    "texture": "heathered smooth knit",
-    "thickness": "thin",
-    "warmth": 1,
-    "formality": [
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "standard fit crewneck, slightly relaxed body, photographed heavily wrinkled",
-    "confidence": "high",
-    "id": "charcoal-watermelon-print-crewneck-tee",
-    "image": "wardrobe/images/charcoal-watermelon-print-crewneck-tee.jpg",
-    "source": "IMG_6514.JPG",
-    "learned": []
-  },
-  {
-    "name": "brown striped crewneck tee",
-    "category": "top",
-    "subtype": "short-sleeve t-shirt",
-    "brand": null,
-    "colors": [
-      "brown",
-      "grey"
-    ],
-    "neutral": true,
-    "pattern": "striped",
-    "sleeve": "short",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
-    "thickness": "thin",
-    "warmth": 1,
-    "formality": [
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed fit, slightly boxy cut",
-    "confidence": "high",
-    "id": "brown-striped-crewneck-tee",
-    "image": "wardrobe/images/brown-striped-crewneck-tee.jpg",
-    "source": "IMG_6515.JPG",
-    "learned": []
-  },
-  {
-    "name": "black knit cardigan",
-    "category": "cardigan",
-    "subtype": "button-front cardigan",
-    "brand": null,
-    "colors": [
-      "black"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton blend knit",
-    "texture": "fine knit",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual",
-      "business"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "spring",
-      "winter",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed fit with horizontal row of buttons, appears slightly cropped",
-    "confidence": "medium",
-    "id": "black-knit-cardigan",
-    "image": "wardrobe/images/black-knit-cardigan.jpg",
-    "source": "IMG_6516.JPG",
-    "learned": []
-  },
-  {
-    "name": "dark olive crewneck t-shirt",
-    "category": "blouse",
-    "subtype": "short-sleeve t-shirt",
-    "brand": null,
-    "colors": [
-      "dark olive green"
-    ],
-    "neutral": false,
-    "pattern": "solid",
-    "sleeve": "short",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Relaxed straight cut with standard crew neckline; appears slightly faded.",
-    "confidence": "medium",
-    "id": "dark-olive-crewneck-t-shirt",
-    "image": "wardrobe/images/dark-olive-crewneck-t-shirt.jpg",
-    "source": "IMG_6517.JPG",
-    "learned": []
-  },
-  {
-    "name": "charcoal pinstripe short-sleeve shirt",
-    "category": "blouse",
-    "subtype": "short-sleeve button-up shirt",
-    "brand": "Zara",
-    "colors": [
-      "charcoal grey",
-      "white"
-    ],
-    "neutral": true,
-    "pattern": "striped",
-    "sleeve": "short",
-    "material": "cotton blend",
-    "texture": "smooth woven",
-    "thickness": "thin",
-    "warmth": 1,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "regular fit, drapes loosely",
-    "confidence": "medium",
-    "id": "charcoal-pinstripe-short-sleeve-shirt",
-    "image": "wardrobe/images/charcoal-pinstripe-short-sleeve-shirt.jpg",
-    "source": "IMG_6518.JPG",
-    "learned": []
-  },
-  {
-    "name": "beige Nike crewneck t-shirt",
-    "category": "blouse",
-    "subtype": "short-sleeve t-shirt",
-    "brand": "Nike",
-    "colors": [
-      "beige",
-      "tan"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "short",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "athletic",
-      "casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Relaxed fit, appears slightly oversized; wrinkled from storage",
-    "confidence": "high",
-    "id": "beige-nike-crewneck-t-shirt",
-    "image": "wardrobe/images/beige-nike-crewneck-t-shirt.jpg",
-    "source": "IMG_6519.JPG",
-    "learned": []
-  },
-  {
-    "name": "olive waffle-knit henley",
-    "category": "top",
-    "subtype": "long-sleeve henley",
-    "brand": null,
-    "colors": [
-      "olive",
-      "grey-green"
-    ],
-    "neutral": false,
-    "pattern": "solid",
-    "sleeve": "long",
-    "material": "cotton waffle knit",
-    "texture": "waffle thermal knit",
-    "thickness": "medium",
-    "warmth": 3,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "autumn",
-      "spring",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Relaxed fit with button placket; appears mid-weight thermal",
-    "confidence": "high",
-    "id": "olive-waffle-knit-henley",
-    "image": "wardrobe/images/olive-waffle-knit-henley.jpg",
-    "source": "IMG_6520.JPG",
-    "learned": []
-  },
-  {
-    "name": "beige crewneck t-shirt",
-    "category": "blouse",
-    "subtype": "short-sleeve t-shirt",
-    "brand": null,
-    "colors": [
-      "beige",
-      "tan"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "short",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
-    "thickness": "thin",
-    "warmth": 1,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "relaxed fit, lightweight drapey jersey, slightly wrinkled",
-    "confidence": "medium",
-    "id": "beige-crewneck-t-shirt",
-    "image": "wardrobe/images/beige-crewneck-t-shirt.jpg",
-    "source": "IMG_6521.JPG",
-    "learned": []
-  },
-  {
-    "name": "navy ribbed buttonless polo",
-    "category": "blouse",
-    "subtype": "short-sleeve polo shirt",
-    "brand": "Zara",
-    "colors": [
-      "navy"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "short",
-    "material": "ribbed cotton knit",
-    "texture": "vertical ribbed knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "summer",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Relaxed fit, open collar with no buttons, ribbed hem and cuffs",
-    "confidence": "high",
-    "id": "navy-ribbed-buttonless-polo",
-    "image": "wardrobe/images/navy-ribbed-buttonless-polo.jpg",
-    "source": "IMG_6522.JPG",
-    "learned": []
-  },
-  {
-    "name": "dark brown henley tee",
-    "category": "top",
-    "subtype": "short-sleeve henley",
-    "brand": "Banana Republic",
-    "colors": [
-      "dark brown"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "short",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "spring",
-      "summer",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Standard fit henley with button placket; shown wrinkled",
-    "confidence": "high",
-    "id": "dark-brown-henley-tee",
-    "image": "wardrobe/images/dark-brown-henley-tee.jpg",
-    "source": "IMG_6523.JPG",
-    "learned": []
-  },
-  {
-    "name": "beige crewneck t-shirt",
-    "category": "blouse",
-    "subtype": "short-sleeve t-shirt",
-    "brand": null,
-    "colors": [
-      "beige",
-      "tan"
-    ],
-    "neutral": true,
-    "pattern": "solid",
-    "sleeve": "short",
-    "material": "cotton jersey",
-    "texture": "smooth knit",
-    "thickness": "medium",
-    "warmth": 2,
-    "formality": [
-      "casual",
-      "smart casual"
-    ],
-    "rain_ok": false,
-    "season": [
-      "summer",
-      "spring",
-      "autumn",
-      "transitional"
-    ],
-    "condition": "good",
-    "fit_notes": "Relaxed fit, ribbed crew neckline, wrinkled from storage",
-    "confidence": "high",
-    "id": "beige-crewneck-t-shirt-2",
-    "image": "wardrobe/images/beige-crewneck-t-shirt-2.jpg",
-    "source": "IMG_6524.JPG",
+    "id": "dusty-blue-mock-neck-knit-sweater",
+    "image": "profiles/evangeline/images/dusty-blue-mock-neck-knit-sweater.jpg",
+    "source": "IMG_6650.JPG",
     "learned": []
   }
 ]

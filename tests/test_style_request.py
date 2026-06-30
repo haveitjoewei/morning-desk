@@ -83,3 +83,32 @@ def test_generate_outfit_never_picks_avoided_item():
     ]
     out = generate_outfit(weather, wardrobe, request={"avoid": ["white tee"], "instructions": "", "formality_hint": "casual"})
     assert "white tee" not in out["items"]
+
+
+def test_recent_store_round_trip(tmp_path, monkeypatch):
+    monkeypatch.setenv("MD_PROFILES_ROOT", str(tmp_path))
+    (tmp_path / "p").mkdir()
+    from core.recent import record, recent_items
+    record("p", "2026-06-28", ["a", "b"])
+    record("p", "2026-06-29", ["b", "c"])
+    assert set(recent_items("p", exclude_date="2026-06-29", days=5)) == {"a", "b"}
+
+
+def test_request_includes_rules_and_recent():
+    r = build_request({"rules": ["prefer sweats when home and cool"]}, {"recent": ["tan sneakers"]})
+    assert "prefer sweats" in r["instructions"]
+    assert "tan sneakers" in r["instructions"]
+    assert r["recent"] == ["tan sneakers"]
+
+
+def test_fallback_rotates_away_from_recent():
+    from ai.generate_outfit import generate_outfit
+    weather = {"condition": "cloudy", "high": 18, "low": 11}
+    wardrobe = [
+        {"name": "tan sneakers", "category": "shoes", "formality": ["casual"]},
+        {"name": "white sneakers", "category": "shoes", "formality": ["casual"]},
+        {"name": "tee", "category": "top", "formality": ["casual"]},
+        {"name": "jeans", "category": "bottom", "formality": ["casual"]},
+    ]
+    out = generate_outfit(weather, wardrobe, request={"recent": ["tan sneakers"], "instructions": "", "formality_hint": "casual"})
+    assert "white sneakers" in out["items"] and "tan sneakers" not in out["items"]

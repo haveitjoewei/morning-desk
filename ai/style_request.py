@@ -45,9 +45,17 @@ def build_request(prefs, day):
     formality = _formality(occasion, day.get("dress_step", 0))
 
     avoid = list(day.get("exclude") or [])
+    recent = list(day.get("recent") or [])
     bits = []
     if prefs.get("style_notes"):
         bits.append(f"Personal style: {prefs['style_notes']}.")
+    for rule in prefs.get("rules") or []:
+        bits.append(rule)
+    if recent:
+        bits.append(
+            "Recently worn — rotate away from these for variety unless one is clearly "
+            f"ideal today: {', '.join(recent)}."
+        )
     if prefs.get("love_colors"):
         bits.append(f"Favours these colours: {', '.join(prefs['love_colors'])}.")
     if prefs.get("avoid_colors"):
@@ -73,5 +81,6 @@ def build_request(prefs, day):
         "instructions": " ".join(bits),
         "runs_cold": bool(prefs.get("runs_cold")),
         "avoid": avoid,
+        "recent": recent,
         "variety": bool(day.get("variety")),
     }

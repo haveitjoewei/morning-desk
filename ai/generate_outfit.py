@@ -64,6 +64,7 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
     athletic_events = [event for event in calendar if event.get("dress_code") == "athletic"]
     office_day = context.get("work_mode") == "office"
     dress_to_impress = context.get("intent") == "dress_to_impress" or office_day
+    recent = set((request or {}).get("recent") or [])
     condition = weather.get("condition", "weather").replace("_", " ")
     temperature_note = "mild temperature"
     if weather.get("high", 0) <= 14:
@@ -73,6 +74,8 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
 
     def score(item, formality=None):
         value = 0
+        if item.get("name") in recent:
+            value -= 3  # rotate away from recently worn pieces
         if formality and _formality_ok(item, formality):
             value += 4
         if athletic_events:

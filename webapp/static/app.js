@@ -11,6 +11,8 @@ const store = {
   set token(v) { v ? localStorage.setItem("wc.token", v) : localStorage.removeItem("wc.token"); },
   get prefs() { try { return JSON.parse(localStorage.getItem("wc.prefs")) || {}; } catch { return {}; } },
   set prefs(v) { localStorage.setItem("wc.prefs", JSON.stringify(v)); },
+  get recent() { try { return JSON.parse(localStorage.getItem("wc.recent")) || []; } catch { return []; } },
+  set recent(v) { localStorage.setItem("wc.recent", JSON.stringify(v.slice(0, 15))); },
 };
 
 let day = { occasion: null, temp_step: 0, dress_step: 0, anchor: null, wish: "", variety: false, rejections: [], date: null, location: null };
@@ -70,7 +72,10 @@ function renderLook(pieces) {
 async function fetchOutfit() {
   loading(true);
   try {
+    day.recent = store.recent;
     const r = await api("/api/outfit", { prefs: store.prefs, day });
+    const names = (r.pieces || []).map((p) => p.name).filter(Boolean);
+    store.recent = [...names, ...store.recent.filter((n) => !names.includes(n))];
     activeOccasion = r.occasion || activeOccasion; renderOccasions();
     $("#headline").textContent = r.headline || "";
     $("#reason").textContent = r.reason || "";

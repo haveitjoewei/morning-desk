@@ -1,1 +1,8 @@
-{"runs_cold": true, "style_notes": "soft neutrals, cozy and put-together"}
+{
+  "runs_cold": true,
+  "style_notes": "soft neutrals, cozy and put-together",
+  "office_days": [
+    1,
+    3
+  ]
+}
