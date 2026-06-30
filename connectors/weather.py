@@ -108,6 +108,28 @@ def fetch_weather(config_path=None, day=0):
         return FALLBACK_WEATHER.copy()
 
 
+def geocode(name):
+    """City name -> {latitude, longitude, timezone, label} via Open-Meteo (no key)."""
+    if not name:
+        return None
+    query = urlencode({"name": name, "count": 1})
+    try:
+        with urlopen(f"https://geocoding-api.open-meteo.com/v1/search?{query}", timeout=8) as response:
+            data = json.loads(response.read().decode("utf-8"))
+    except (OSError, URLError, TimeoutError, json.JSONDecodeError):
+        return None
+    results = data.get("results") or []
+    if not results:
+        return None
+    r = results[0]
+    return {
+        "latitude": r["latitude"],
+        "longitude": r["longitude"],
+        "timezone": r.get("timezone", "auto"),
+        "label": ", ".join(filter(None, [r.get("name"), r.get("country_code")])),
+    }
+
+
 def fetch_weather_for(profile, day=0):
     """Weather for a profile's configured location (profiles/<profile>/config.json)."""
     if os.environ.get("MD_OFFLINE") == "1":

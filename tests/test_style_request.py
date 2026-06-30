@@ -52,3 +52,34 @@ def test_plan_outfit_for_profile_returns_pieces(tmp_path, monkeypatch):
     from core.outfit import plan_outfit
     result = plan_outfit("eve", prefs={}, day={"occasion": "dressy"})
     assert "headline" in result and "pieces" in result and "weather" in result
+
+
+def test_continuous_temp_step_warmer():
+    # two "warmer" steps -> dress for 4C cooler
+    assert effective_high(18, {}, {"temp_step": -2}) == 14
+
+
+def test_dress_step_makes_it_dressier():
+    r = build_request({}, {"occasion": "work", "dress_step": 1})
+    assert r["formality_hint"] == "business"
+    r2 = build_request({}, {"occasion": "casual", "dress_step": -1})
+    assert r2["formality_hint"] == "casual"  # clamped at floor
+
+
+def test_rejection_excludes_item_and_explains():
+    r = build_request({}, {"rejections": [{"item": "linen shirt", "reason": "too cold"}]})
+    assert "linen shirt" in r["avoid"]
+    assert "too cold" in r["instructions"]
+
+
+def test_generate_outfit_never_picks_avoided_item():
+    from ai.generate_outfit import generate_outfit
+    weather = {"condition": "cloudy", "high": 18, "low": 11}
+    wardrobe = [
+        {"name": "white tee", "category": "top", "formality": ["casual"]},
+        {"name": "grey tee", "category": "top", "formality": ["casual"]},
+        {"name": "blue jeans", "category": "bottom", "formality": ["casual"]},
+        {"name": "white sneakers", "category": "shoes", "formality": ["casual"]},
+    ]
+    out = generate_outfit(weather, wardrobe, request={"avoid": ["white tee"], "instructions": "", "formality_hint": "casual"})
+    assert "white tee" not in out["items"]

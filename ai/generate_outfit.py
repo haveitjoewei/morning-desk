@@ -165,11 +165,14 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
     calendar = calendar or []
     context = context or {}
     request = request or {}
-    fallback = fallback_outfit(weather, wardrobe_items, calendar, context, request)
+
+    avoid = set(request.get("avoid") or [])
+    usable = [w for w in wardrobe_items if w.get("name") not in avoid]
+    fallback = fallback_outfit(weather, usable, calendar, context, request)
     if not available():
         return fallback
 
-    anchor = _anchor_name(request.get("anchor"), wardrobe_items)
+    anchor = _anchor_name(request.get("anchor"), usable)
     system_text = SYSTEM
     if request.get("instructions"):
         system_text += "\nWearer preferences for today: " + request["instructions"]
@@ -182,7 +185,7 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
             "calendar": calendar,
             "context": context,
             "request": request,
-            "wardrobe": wardrobe_items,
+            "wardrobe": usable,
         }
         response = client().messages.create(
             model=MODEL,
@@ -192,7 +195,7 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
             messages=[{"role": "user", "content": json.dumps(payload, ensure_ascii=False)}],
         )
         outfit = json.loads(text_of(response))
-        if not valid_outfit(outfit, wardrobe_items):
+        if not valid_outfit(outfit, usable):
             return fallback
         if anchor and anchor not in outfit["items"]:
             return fallback  # anchor is non-negotiable

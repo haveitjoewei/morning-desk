@@ -1,35 +1,50 @@
 """Turn a person's preferences and a day's tweaks into engine inputs.
 
-Standing prefs (runs cold, style notes, love/avoid colours) plus per-day overrides
-(occasion, temperature nudge, anchor a piece, free-text wish) become a single
-request the outfit generator folds into its stylist prompt and selection.
+Standing prefs (runs cold, style notes, love/avoid colours) plus per-day controls
+become a single request the outfit generator folds into its stylist prompt and
+selection:
+  - occasion + dress_step  -> a formality target (dressier / more casual, continuous)
+  - temp_step              -> warmer / lighter, continuous (each step ~2C)
+  - anchor                 -> build around a specific piece
+  - wish                   -> free-text instruction
+  - variety                -> ask for a fresh, less-obvious combination
+  - rejections / exclude   -> pieces to avoid (with reasons)
 """
 from __future__ import annotations
 
-OCCASION_FORMALITY = {
-    "casual": "casual",
-    "cozy home": "casual",
-    "work": "smart casual",
-    "dressy": "smart casual",
-    "going out": "smart casual",
+FORMALITY_LEVELS = ["casual", "smart casual", "business", "formal"]
+OCCASION_BASE = {
+    "casual": 0, "cozy home": 0, "work": 1, "dressy": 1, "going out": 1, "formal": 3,
 }
 
 
 def effective_high(high, prefs, day):
-    """Temperature the outfit should dress for, after cold-bias and the day nudge."""
+    """Temperature the outfit should dress for, after cold-bias and the warmth steps."""
     high = high if isinstance(high, (int, float)) else 18
-    if (prefs or {}).get("runs_cold"):
+    prefs, day = prefs or {}, day or {}
+    if prefs.get("runs_cold"):
         high -= 3
-    nudge = (day or {}).get("temp_nudge")
+    nudge = day.get("temp_nudge")
     if nudge == "warmer":
         high -= 2
     elif nudge == "lighter":
         high += 3
+    high += int(day.get("temp_step", 0)) * 2  # negative steps = warmer
     return round(high)
+
+
+def _formality(occasion, dress_step):
+    base = OCCASION_BASE.get(occasion, 0)
+    idx = max(0, min(len(FORMALITY_LEVELS) - 1, base + int(dress_step or 0)))
+    return FORMALITY_LEVELS[idx]
 
 
 def build_request(prefs, day):
     prefs, day = prefs or {}, day or {}
+    occasion = (day.get("occasion") or "casual").lower()
+    formality = _formality(occasion, day.get("dress_step", 0))
+
+    avoid = list(day.get("exclude") or [])
     bits = []
     if prefs.get("style_notes"):
         bits.append(f"Personal style: {prefs['style_notes']}.")
@@ -39,13 +54,24 @@ def build_request(prefs, day):
         bits.append(f"Avoid these colours: {', '.join(prefs['avoid_colors'])}.")
     if prefs.get("runs_cold"):
         bits.append("Runs cold — prefer thicker layers and an extra layer.")
+    bits.append(f"Target formality: {formality}.")
     if day.get("wish"):
         bits.append(f"Today she asked for: {day['wish']}.")
-    occasion = (day.get("occasion") or "casual").lower()
+    for rej in day.get("rejections") or []:
+        name = rej.get("item") if isinstance(rej, dict) else rej
+        reason = rej.get("reason", "") if isinstance(rej, dict) else ""
+        if name:
+            avoid.append(name)
+            bits.append(f"Do NOT use '{name}'{f' ({reason})' if reason else ''}; pick something else.")
+    if day.get("variety"):
+        bits.append("Offer a fresh, less-obvious combination — avoid the usual go-to pieces.")
+
     return {
         "anchor": day.get("anchor"),
-        "formality_hint": OCCASION_FORMALITY.get(occasion, "casual"),
+        "formality_hint": formality,
         "occasion": occasion,
         "instructions": " ".join(bits),
         "runs_cold": bool(prefs.get("runs_cold")),
+        "avoid": avoid,
+        "variety": bool(day.get("variety")),
     }

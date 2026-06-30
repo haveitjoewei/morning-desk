@@ -91,6 +91,16 @@ def weather(_=Depends(require_token)):
     return fetch_weather_for(profile())
 
 
+@app.get("/api/geocode")
+def geocode_city(q: str = "", _=Depends(require_token)):
+    from connectors.weather import geocode
+
+    result = geocode(q)
+    if not result:
+        raise HTTPException(status_code=404, detail="city not found")
+    return result
+
+
 @app.get("/img/{kind}/{name}")
 def image(kind: str, name: str):
     if kind not in {"cutouts", "clean"} or "/" in name or ".." in name:
