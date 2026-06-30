@@ -363,3 +363,29 @@ def test_multiple_anchors_are_included_without_multiple_bags():
 
     assert "navy cardigan" in out["items"]
     assert len([name for name in out["items"] if "bag" in name]) == 1
+
+
+def test_anchored_accessories_still_return_complete_outfit():
+    from ai.generate_outfit import generate_outfit
+    weather = {"condition": "cloudy", "high": 9, "low": 3}
+    wardrobe = [
+        {"name": "cream puffer", "id": "cream-puffer", "category": "outerwear", "formality": ["casual"], "warmth": 5, "material": "nylon puffer"},
+        {"name": "wool beanie", "id": "wool-beanie", "category": "accessory", "formality": ["casual"], "warmth": 4, "material": "ribbed wool"},
+        {"name": "plaid scarf", "id": "plaid-scarf", "category": "accessory", "formality": ["casual"], "warmth": 3, "material": "plaid wool"},
+        {"name": "canvas tote", "id": "canvas-tote", "category": "bag", "formality": ["casual"], "warmth": 1, "material": "canvas"},
+        {"name": "black boots", "id": "black-boots", "category": "shoes", "formality": ["casual"], "warmth": 4, "material": "leather"},
+        {"name": "striped thermal top", "id": "thermal-top", "category": "top", "formality": ["casual"], "warmth": 4, "material": "ribbed cotton", "pattern": "striped"},
+        {"name": "gingham fleece pants", "id": "fleece-pants", "category": "pants", "formality": ["casual"], "warmth": 4, "material": "floral fleece", "pattern": "gingham"},
+    ]
+
+    out = generate_outfit(
+        weather,
+        wardrobe,
+        request={
+            "formality_hint": "casual",
+            "anchors": ["cream-puffer", "wool-beanie", "plaid-scarf", "canvas-tote", "black-boots"],
+        },
+    )
+
+    assert "striped thermal top" in out["items"]
+    assert "gingham fleece pants" in out["items"]

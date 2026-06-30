@@ -71,6 +71,38 @@ def test_update_item_metadata_writes_correction(monkeypatch, tmp_path):
     assert json.loads((d / "items.json").read_text())[0].get("polish") is None
 
 
+def test_anchor_check_warns_on_conflicting_slots(monkeypatch, tmp_path):
+    monkeypatch.setenv("WARDROBE_PIN", "2468")
+    monkeypatch.setenv("WARDROBE_SECRET", "s")
+    monkeypatch.setenv("MD_OFFLINE", "1")
+    monkeypatch.setenv("MD_PROFILES_ROOT", str(tmp_path))
+    monkeypatch.setenv("WARDROBE_PROFILE", "eve")
+    d = tmp_path / "eve"
+    d.mkdir()
+    (d / "items.json").write_text(json.dumps([
+        {"name": "Navy Sweater", "id": "navy-sweater", "category": "knit"},
+        {"name": "Silk Blouse", "id": "silk-blouse", "category": "blouse"},
+        {"name": "Taupe Bag", "id": "taupe-bag", "category": "bag"},
+        {"name": "Black Bag", "id": "black-bag", "category": "bag"},
+    ]))
+    (d / "config.json").write_text('{"categories":"womenswear","location":{"latitude":-33.8,"longitude":151.2,"timezone":"Australia/Sydney"}}')
+    from fastapi.testclient import TestClient
+    from webapp.app import app
+    c = TestClient(app)
+    tok = c.post("/api/unlock", json={"pin": "2468"}).json()["token"]
+
+    r = c.post(
+        "/api/anchors/check",
+        headers={"Authorization": f"Bearer {tok}"},
+        json={"anchors": ["navy-sweater", "silk-blouse", "taupe-bag", "black-bag"]},
+    )
+
+    assert r.status_code == 200
+    warnings = r.json()["warnings"]
+    assert any("top" in w for w in warnings)
+    assert any("bag" in w for w in warnings)
+
+
 def test_vercel_config_uses_modern_python_function_shape():
     cfg = json.loads(Path("vercel.json").read_text())
 

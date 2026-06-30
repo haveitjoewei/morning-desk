@@ -222,6 +222,11 @@ def _slot(item):
     return category
 
 
+def _complete_slots(items):
+    slots = {_slot(item) for item in items if item}
+    return ("body" in slots or {"upper", "lower"}.issubset(slots)) and "shoes" in slots
+
+
 def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, request=None):
     calendar = calendar or []
     context = context or {}
@@ -402,7 +407,43 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
         if len(final) >= 5:
             break
     if _style_penalty([by_name.get(name) for name in final]) >= 8:
-        final = [name for name in final if _texture_weight(by_name.get(name, {})) < 2 or name in anchored]
+        final = [
+            name for name in final
+            if _texture_weight(by_name.get(name, {})) < 2
+            or name in anchored
+            or _slot(by_name.get(name)) in {"upper", "lower", "body", "shoes"}
+        ]
+
+    def make_room(names):
+        if len(names) < 5:
+            return names
+        for removable_slot in ("accessory", "bag", "layer"):
+            for idx, name in enumerate(names):
+                if _slot(by_name.get(name)) == removable_slot:
+                    return names[:idx] + names[idx + 1:]
+        return names[:-1]
+
+    def add_required(names, categories):
+        existing_slots = {_slot(by_name.get(name)) for name in names}
+        candidate = first(categories, formality=formality) or first(categories)
+        if not candidate or candidate in names:
+            return names
+        slot = _slot(by_name.get(candidate))
+        if slot in existing_slots:
+            return names
+        names = make_room(names)
+        names.append(candidate)
+        return names
+
+    if not _complete_slots([by_name.get(name) for name in final]):
+        slots = {_slot(by_name.get(name)) for name in final}
+        if "body" not in slots:
+            if "upper" not in slots:
+                final = add_required(final, UPPER_CATEGORIES)
+            if "lower" not in slots:
+                final = add_required(final, LOWER_CATEGORIES)
+        if "shoes" not in {_slot(by_name.get(name)) for name in final}:
+            final = add_required(final, "shoes")
     items = final
 
     headline = "Rain-ready casual" if wants_rain else "Easy casual layers"

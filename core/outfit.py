@@ -15,6 +15,36 @@ from ai.style_request import build_request, effective_high
 from core.profiles import load_config, load_prefs
 from wardrobe.catalog import load_wardrobe, resolve_pieces
 
+UPPER_CATEGORIES = {"top", "blouse", "knit"}
+LOWER_CATEGORIES = {"bottom", "pants", "jeans", "skirt", "shorts"}
+
+
+def _anchor_slot(item):
+    category = item.get("category")
+    if category in UPPER_CATEGORIES:
+        return "top"
+    if category in LOWER_CATEGORIES:
+        return "bottom"
+    if category in {"midlayer", "cardigan", "outerwear"}:
+        return "layer"
+    return category
+
+
+def anchor_warnings(wardrobe, anchors):
+    by_id = {item.get("id"): item for item in wardrobe}
+    selected = [by_id[a] for a in anchors or [] if a in by_id]
+    warnings = []
+    by_slot = {}
+    for item in selected:
+        by_slot.setdefault(_anchor_slot(item), []).append(item.get("name"))
+
+    for slot, names in by_slot.items():
+        if len(names) > 1 and slot in {"top", "bottom", "shoes", "bag", "dress"}:
+            warnings.append(f"These may compete for the same {slot} slot: {', '.join(names)}.")
+    if "dress" in by_slot and ("top" in by_slot or "bottom" in by_slot):
+        warnings.append("A dress usually replaces a separate top and bottom.")
+    return warnings
+
 
 def _parse_date(value):
     if not value:

@@ -13,7 +13,7 @@ from fastapi import Depends, FastAPI, Header, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from core.outfit import plan_outfit
+from core.outfit import anchor_warnings, plan_outfit
 from core.profiles import profile_dir
 from wardrobe.catalog import load_wardrobe, save_metadata_correction
 from webapp.auth import check_pin, make_token, verify_token
@@ -108,6 +108,12 @@ def update_wardrobe_item(item_id: str, body: dict, _=Depends(require_token)):
         "wear_frequency": item.get("wear_frequency"),
         "avoid_often": item.get("avoid_often"),
     }
+
+
+@app.post("/api/anchors/check")
+def check_anchors(body: dict, _=Depends(require_token)):
+    items = load_wardrobe(profile=profile())
+    return {"warnings": anchor_warnings(items, body.get("anchors") or [])}
 
 
 @app.get("/api/weather")
