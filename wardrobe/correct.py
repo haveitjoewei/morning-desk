@@ -18,7 +18,7 @@ from pathlib import Path
 from ai._llm import MODEL, available, client, text_of
 from wardrobe.ingest import GARMENT_SCHEMA
 
-ITEMS = Path(__file__).resolve().parents[1] / "wardrobe" / "items.json"
+from core.profiles import DEFAULT_PROFILE, items_path
 
 # Garment fields a correction may touch (the flat ingest schema fields).
 MUTABLE = list(GARMENT_SCHEMA["properties"])
@@ -57,10 +57,11 @@ def find(items, needle):
     return None
 
 
-def correct(needle, instruction):
+def correct(needle, instruction, profile=DEFAULT_PROFILE):
     if not available():
         raise SystemExit("ANTHROPIC_API_KEY not set — correction needs it.")
-    items = json.loads(ITEMS.read_text())
+    items_file = items_path(profile)
+    items = json.loads(items_file.read_text())
     item = find(items, needle)
     if not item:
         raise SystemExit(f"No garment matching '{needle}'.")
@@ -88,9 +89,9 @@ def correct(needle, instruction):
     item.setdefault("learned", []).append({"correction": instruction, "note": note})
     print(f"  learned += {note!r}")
 
-    tmp = ITEMS.with_name("items.tmp.json")
+    tmp = items_file.with_name("items.tmp.json")
     tmp.write_text(json.dumps(items, indent=2) + "\n")
-    tmp.replace(ITEMS)
+    tmp.replace(items_file)
     print(f"Saved {item['id']}.")
 
 
@@ -98,8 +99,9 @@ def main():
     parser = argparse.ArgumentParser(description="Apply a plain-language wardrobe correction.")
     parser.add_argument("item", help="Garment id, or a substring of its id/name.")
     parser.add_argument("instruction", help="What's wrong, in plain language.")
+    parser.add_argument("--profile", default=DEFAULT_PROFILE, help="Wardrobe profile.")
     args = parser.parse_args()
-    correct(args.item, args.instruction)
+    correct(args.item, args.instruction, profile=args.profile)
 
 
 if __name__ == "__main__":

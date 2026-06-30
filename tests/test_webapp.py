@@ -1,4 +1,6 @@
 from webapp.auth import check_pin, make_token, verify_token
+import json
+from pathlib import Path
 
 
 def test_pin_roundtrip(monkeypatch):
@@ -36,3 +38,20 @@ def test_unlock_and_outfit(monkeypatch, tmp_path):
                json={"prefs": {}, "day": {"occasion": "dressy"}})
     assert r.status_code == 200 and "headline" in r.json()
     assert c.post("/api/outfit", json={"prefs": {}, "day": {}}).status_code == 401
+
+
+def test_vercel_config_uses_modern_python_function_shape():
+    cfg = json.loads(Path("vercel.json").read_text())
+
+    assert "builds" not in cfg
+    assert "routes" not in cfg
+    assert cfg["rewrites"] == [{"source": "/(.*)", "destination": "/api/index"}]
+
+    api = cfg["functions"]["api/index.py"]
+    assert api["maxDuration"] == 10
+    include = api["includeFiles"]
+    assert "profiles/evangeline/cutouts/**" in include
+    assert "profiles/evangeline/items.json" in include
+    assert "profiles/evangeline/config.json" in include
+    assert "profiles/evangeline/prefs.json" in include
+    assert "images_clean" not in json.dumps(include)

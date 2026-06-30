@@ -1,6 +1,14 @@
 {
-  "version": 2,
-  "builds": [{ "src": "api/index.py", "use": "@vercel/python" }],
-  "routes": [{ "src": "/(.*)", "dest": "api/index.py" }],
-  "functions": { "api/index.py": { "maxDuration": 10, "includeFiles": "profiles/evangeline/**" } }
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 10,
+      "includeFiles": [
+        "profiles/evangeline/cutouts/**",
+        "profiles/evangeline/items.json",
+        "profiles/evangeline/config.json",
+        "profiles/evangeline/prefs.json"
+      ]
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/index" }]
 }
