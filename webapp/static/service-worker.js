@@ -1,4 +1,4 @@
-const CACHE = "wc-v4";
+const CACHE = "wc-v5";
 const SHELL = [
   "/",
   "/static/style.css",

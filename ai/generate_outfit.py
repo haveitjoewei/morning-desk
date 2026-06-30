@@ -534,8 +534,8 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
         required_anchors = [name for name in anchors if name not in outfit["items"]]
         if anchor and anchor not in outfit["items"]:
             return fallback  # anchor is non-negotiable
-        if required_anchors and not any(name in fallback["items"] for name in required_anchors):
-            return fallback
+        if required_anchors:
+            return fallback  # the fallback force-includes every anchor
         return outfit
     except Exception:
         return fallback

@@ -56,6 +56,7 @@
         <button id="anchor-btn" class="chip">★ Anchor a piece</button>
         <button id="variety-btn" class="chip">🔀 Surprise me</button>
         <button id="plan-btn" class="chip">📅 Plan ahead</button>
+        <button id="wardrobe-btn" class="chip">👗 My wardrobe</button>
       </div>
       <div class="row plan" id="plan" hidden>
         <input type="date" id="date">
@@ -76,16 +77,28 @@
       <div class="modal-head"><span>Build around…</span><button id="picker-close" class="icon-btn">✕</button></div>
       <p class="modal-note">Pick one or more pieces. If two pieces clash, the stylist keeps the stronger anchor.</p>
       <div id="picker-groups"></div>
+      <div id="anchor-warn" class="warn" hidden></div>
       <button id="picker-apply" class="btn primary wide">Build outfit</button>
     </div>
   </div>
 
-  <!-- Reject reason -->
+  <!-- Piece actions sheet -->
   <div id="reason-modal" class="modal" hidden>
-    <div class="modal-card">
-      <div class="modal-head"><span id="reason-title">Swap this piece</span><button id="reason-close" class="icon-btn">✕</button></div>
-      <div class="row" id="reason-chips"></div>
-      <button id="edit-piece" class="chip">Edit warmth / polish / comfort</button>
+    <div class="modal-card sheet">
+      <div class="modal-head"><span id="reason-title">This piece</span><button id="reason-close" class="icon-btn">✕</button></div>
+      <div class="piece-hero">
+        <img id="reason-img" alt="">
+        <div id="reason-name" class="piece-name"></div>
+      </div>
+      <div class="sheet-actions">
+        <button id="act-remove" class="action"><span class="ic">✕</span><b>Remove</b><small>leave it out today</small></button>
+        <button id="act-swap" class="action"><span class="ic">⇄</span><b>Swap</b><small>show me another</small></button>
+        <button id="edit-piece" class="action"><span class="ic">✎</span><b>Edit</b><small>warmth · polish · fit</small></button>
+      </div>
+      <div id="reason-chips" class="reason-chips" hidden>
+        <p class="modal-note">Why swap it?</p>
+        <div id="reason-chip-row" class="row"></div>
+      </div>
     </div>
   </div>
 
@@ -93,6 +106,7 @@
   <div id="piece-editor" class="modal" hidden>
     <div class="modal-card">
       <div class="modal-head"><span id="piece-title">Edit piece</span><button id="piece-close" class="icon-btn">✕</button></div>
+      <div class="piece-hero small"><img id="piece-img" alt=""></div>
       <label class="range"><span>Warmth <b id="warmth-value"></b></span><input id="piece-warmth" type="range" min="1" max="5"></label>
       <label class="range"><span>Polish <b id="polish-value"></b></span><input id="piece-polish" type="range" min="1" max="5"></label>
       <label class="range"><span>Comfort <b id="comfort-value"></b></span><input id="piece-comfort" type="range" min="1" max="5"></label>
@@ -118,6 +132,15 @@
       <label class="field"><span>Office days (you dress sharper)</span>
         <span class="weekdays" id="office-days"></span></label>
       <button id="settings-save" class="btn primary wide">Save</button>
+    </div>
+  </div>
+
+  <!-- Wardrobe browser -->
+  <div id="wardrobe-modal" class="modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head"><span>My Wardrobe</span><button id="wardrobe-close" class="icon-btn">✕</button></div>
+      <p class="modal-note">Tap any piece to fine-tune its warmth, polish, fit and where it's worn.</p>
+      <div id="wardrobe-groups"></div>
     </div>
   </div>
 

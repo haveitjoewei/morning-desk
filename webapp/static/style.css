@@ -248,3 +248,30 @@ body {
 
 /* desktop niceties */
 @media (min-width: 720px) { #app { max-width: 680px; margin: 0 auto; } }
+
+/* ── Piece sheet (tap an item) ────────────────────────── */
+.sheet .piece-hero, .piece-hero { text-align: center; padding: 6px 0 16px; }
+.piece-hero img { height: 144px; object-fit: contain; filter: drop-shadow(0 10px 14px rgba(70,50,30,.14)); }
+.piece-hero.small img { height: 100px; }
+.piece-name { font-family: var(--serif); font-size: 18px; margin-top: 10px; color: var(--ink); }
+.sheet-actions { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+.action {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 15px 8px;
+  border: 1px solid var(--line); border-radius: 16px; background: var(--card); cursor: pointer;
+  transition: border-color .2s, transform .12s;
+}
+.action:hover { border-color: var(--accent); }
+.action:active { transform: scale(.96); }
+.action .ic { font-size: 19px; color: var(--accent); line-height: 1; }
+.action b { font-size: 14px; font-weight: 600; color: var(--ink); }
+.action small { font-size: 10.5px; color: var(--muted); text-align: center; line-height: 1.2; }
+.reason-chips { margin-top: 18px; }
+.reason-chips .modal-note { margin: 0 0 8px; }
+
+/* ── Anchor conflict warning ──────────────────────────── */
+.warn {
+  margin: 14px 0 4px; padding: 13px 15px; background: #f6ecd8; border: 1px solid #e3c98f;
+  border-radius: 14px; color: #7a5a20; font-size: 13px; line-height: 1.5;
+}
+.warn p { margin-bottom: 9px; }
+.warn .chip { background: #fff; color: #7a5a20; border-color: #d9b870; }

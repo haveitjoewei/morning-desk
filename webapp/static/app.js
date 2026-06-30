@@ -97,16 +97,45 @@ async function fetchOutfit() {
 
 function openReason(piece) {
   const name = piece.name;
-  $("#reason-title").textContent = "Swap: " + name;
-  const wrap = $("#reason-chips"); wrap.innerHTML = "";
+  $("#reason-title").textContent = "This piece";
+  $("#reason-img").src = piece.url || "";
+  $("#reason-name").textContent = name || "";
+  $("#reason-chips").hidden = true;
+  const row = $("#reason-chip-row"); row.innerHTML = "";
   REASONS.forEach((reason) => {
     const b = document.createElement("button");
     b.className = "chip"; b.textContent = reason;
     b.onclick = () => { day.rejections.push({ item: name, reason }); $("#reason-modal").hidden = true; fetchOutfit(); };
-    wrap.appendChild(b);
+    row.appendChild(b);
   });
+  $("#act-remove").onclick = () => {
+    day.rejections.push({ item: name, reason: "removed for today" });
+    $("#reason-modal").hidden = true; fetchOutfit();
+  };
+  $("#act-swap").onclick = () => { $("#reason-chips").hidden = false; };
   $("#edit-piece").onclick = () => { $("#reason-modal").hidden = true; openPieceEditor(piece); };
   $("#reason-modal").hidden = false;
+}
+
+async function openWardrobe() {
+  const groups = $("#wardrobe-groups"); groups.innerHTML = "Loading…"; $("#wardrobe-modal").hidden = false;
+  try {
+    const items = (await api("/api/wardrobe")).filter((i) => i.url);
+    const byCat = {};
+    items.forEach((i) => { (byCat[i.category || "other"] ||= []).push(i); });
+    groups.innerHTML = "";
+    Object.keys(byCat).sort().forEach((cat) => {
+      const h = document.createElement("h4"); h.className = "group-head"; h.textContent = cat; groups.appendChild(h);
+      const grid = document.createElement("div"); grid.className = "grid";
+      byCat[cat].forEach((i) => {
+        const cell = document.createElement("button"); cell.className = "pick";
+        cell.innerHTML = `<img src="${i.url}" alt=""><span>${i.name || ""}</span>`;
+        cell.onclick = () => { $("#wardrobe-modal").hidden = true; openPieceEditor(i); };
+        grid.appendChild(cell);
+      });
+      groups.appendChild(grid);
+    });
+  } catch { groups.innerHTML = "Couldn't load wardrobe."; }
 }
 
 async function openPicker() {
@@ -137,6 +166,25 @@ async function openPicker() {
   } catch { groups.innerHTML = "Couldn't load wardrobe."; }
 }
 
+async function buildFromAnchors() {
+  const warn = $("#anchor-warn");
+  if ((day.anchors || []).length) {
+    try {
+      const { warnings } = await api("/api/anchors/check", { anchors: day.anchors });
+      if (warnings && warnings.length) {
+        warn.innerHTML = warnings.map((w) => `<p>⚠ ${w}</p>`).join("") +
+          `<button id="warn-proceed" class="chip">Build anyway</button>`;
+        warn.hidden = false;
+        $("#warn-proceed").onclick = () => { warn.hidden = true; $("#picker").hidden = true; fetchOutfit(); };
+        return;
+      }
+    } catch { /* ignore check failures, just build */ }
+  }
+  warn.hidden = true;
+  $("#picker").hidden = true;
+  fetchOutfit();
+}
+
 function bindRange(id, valueId) {
   const input = $(id), value = $(valueId);
   const sync = () => { value.textContent = input.value; };
@@ -146,6 +194,7 @@ function bindRange(id, valueId) {
 function openPieceEditor(piece) {
   editingPiece = piece;
   $("#piece-title").textContent = piece.name || "Edit piece";
+  $("#piece-img").src = piece.url || "";
   $("#piece-warmth").value = piece.warmth || 3;
   $("#piece-polish").value = piece.polish || (piece.category === "bag" ? 3 : 2);
   $("#piece-comfort").value = piece.comfort || 3;
@@ -229,8 +278,13 @@ function bind() {
   $("#variety-btn").onclick = () => { day.variety = true; fetchOutfit(); };
   $("#anchor-btn").onclick = openPicker;
   $("#picker-close").onclick = () => { $("#picker").hidden = true; };
-  $("#picker-apply").onclick = () => { $("#picker").hidden = true; fetchOutfit(); };
+  $("#picker-apply").onclick = buildFromAnchors;
+  $("#wardrobe-btn").onclick = openWardrobe;
+  $("#wardrobe-close").onclick = () => { $("#wardrobe-modal").hidden = true; };
   $("#reason-close").onclick = () => { $("#reason-modal").hidden = true; };
+  document.querySelectorAll(".modal").forEach((m) => {
+    m.addEventListener("click", (e) => { if (e.target === m) m.hidden = true; });
+  });
   $("#piece-close").onclick = () => { $("#piece-editor").hidden = true; };
   $("#piece-save").onclick = savePieceEditor;
   $("#plan-btn").onclick = () => { $("#plan").hidden = !$("#plan").hidden; };

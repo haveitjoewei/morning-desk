@@ -30,6 +30,14 @@ def _anchor_slot(item):
     return category
 
 
+_HEAD_WORDS = ("hat", "cap", "beanie", "beret")
+
+
+def _is_headwear(item):
+    text = (item.get("subtype", "") + " " + item.get("name", "")).lower()
+    return any(w in text for w in _HEAD_WORDS)
+
+
 def anchor_warnings(wardrobe, anchors):
     by_id = {item.get("id"): item for item in wardrobe}
     selected = [by_id[a] for a in anchors or [] if a in by_id]
@@ -41,6 +49,9 @@ def anchor_warnings(wardrobe, anchors):
     for slot, names in by_slot.items():
         if len(names) > 1 and slot in {"top", "bottom", "shoes", "bag", "dress"}:
             warnings.append(f"These may compete for the same {slot} slot: {', '.join(names)}.")
+    heads = [item.get("name") for item in selected if _is_headwear(item)]
+    if len(heads) > 1:
+        warnings.append(f"You can only wear one on your head: {', '.join(heads)}.")
     if "dress" in by_slot and ("top" in by_slot or "bottom" in by_slot):
         warnings.append("A dress usually replaces a separate top and bottom.")
     return warnings
