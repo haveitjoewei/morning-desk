@@ -2838,5 +2838,104 @@
     "image": "wardrobe/images/beige-crewneck-t-shirt-2.jpg",
     "source": "IMG_6524.JPG",
     "learned": []
+  },
+  {
+    "name": "olive cargo joggers",
+    "category": "bottom",
+    "subtype": "cargo jogger pants",
+    "brand": null,
+    "colors": [
+      "olive",
+      "khaki"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton twill",
+    "texture": "smooth woven twill",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Tapered cargo jogger with elastic waistband and cuffed elastic ankles, side cargo pockets",
+    "confidence": "high",
+    "id": "olive-cargo-joggers-2",
+    "image": "profiles/joseph/images/olive-cargo-joggers-2.jpg",
+    "source": "IMG_6543.JPG",
+    "learned": []
+  },
+  {
+    "name": "cream puffer vest",
+    "category": "outerwear",
+    "subtype": "puffer vest",
+    "brand": null,
+    "colors": [
+      "cream",
+      "beige"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "nylon shell with synthetic fill",
+    "texture": "smooth quilted",
+    "thickness": "thick",
+    "warmth": 4,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": true,
+    "season": [
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Boxy cropped puffer vest with high stand collar, full-zip front, and side pockets; relaxed fit",
+    "confidence": "high",
+    "id": "cream-puffer-vest",
+    "image": "profiles/joseph/images/cream-puffer-vest.jpg",
+    "source": "IMG_6544.JPG",
+    "learned": []
+  },
+  {
+    "name": "black and white striped long-sleeve tee",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "white",
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "striped",
+    "sleeve": "long",
+    "material": "cotton jersey",
+    "texture": "smooth knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed boxy fit with ribbed crew neck and cuffs",
+    "confidence": "high",
+    "id": "black-and-white-striped-long-sleeve-tee",
+    "image": "profiles/joseph/images/black-and-white-striped-long-sleeve-tee.jpg",
+    "source": "IMG_6545.JPG",
+    "learned": []
   }
 ]
