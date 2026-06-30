@@ -49,6 +49,33 @@ def load_wardrobe(path=None, corrections_path=None, profile=DEFAULT_PROFILE):
     ]
 
 
+def save_metadata_correction(item_id, values, profile=DEFAULT_PROFILE):
+    path = items_path(profile)
+    items = json.loads(path.read_text())
+    item = next((it for it in items if item_id in (it.get("id"), it.get("name"))), None)
+    if not item:
+        return None
+
+    allowed = {"warmth", "polish", "comfort", "home_ok", "office_ok", "wear_frequency", "avoid_often"}
+    set_values = {k: v for k, v in (values or {}).items() if k in allowed}
+    for key in ("warmth", "polish", "comfort", "wear_frequency"):
+        if key in set_values:
+            set_values[key] = max(1, min(5, int(set_values[key])))
+    for key in ("home_ok", "office_ok", "avoid_often"):
+        if key in set_values:
+            set_values[key] = bool(set_values[key])
+
+    corrections_path = path.with_name("corrections.json")
+    corrections = json.loads(corrections_path.read_text()) if corrections_path.exists() else []
+    correction = next((c for c in corrections if c.get("name") == item["name"]), None)
+    if not correction:
+        correction = {"name": item["name"], "set": {}}
+        corrections.append(correction)
+    correction.setdefault("set", {}).update(set_values)
+    corrections_path.write_text(json.dumps(corrections, indent=2) + "\n")
+    return _apply_correction(item, correction)
+
+
 _ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -74,8 +101,16 @@ def resolve_pieces(names, items, profile=DEFAULT_PROFILE):
     for name in names:
         item = by_name.get(name)
         pieces.append({
+            "id": item.get("id") if item else None,
             "name": name,
             "image": _piece_image(item, profile) if item else None,
             "category": item.get("category", "") if item else "",
+            "warmth": item.get("warmth") if item else None,
+            "polish": item.get("polish") if item else None,
+            "comfort": item.get("comfort") if item else None,
+            "home_ok": item.get("home_ok") if item else None,
+            "office_ok": item.get("office_ok") if item else None,
+            "wear_frequency": item.get("wear_frequency") if item else None,
+            "avoid_often": item.get("avoid_often") if item else None,
         })
     return pieces

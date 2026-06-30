@@ -57,11 +57,16 @@ body { min-height: 100vh; padding: env(safe-area-inset-top) 0 env(safe-area-inse
 .modal-head { display: flex; justify-content: space-between; align-items: center; font-weight: 600; margin-bottom: 14px; }
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .pick { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 8px; cursor: pointer; }
+.pick.on { border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
 .pick img { width: 100%; height: 90px; object-fit: contain; }
 .pick span { display: block; font-size: 10px; color: var(--muted); margin-top: 4px; line-height: 1.1; }
+.modal-note { color: var(--muted); font-size: 13px; line-height: 1.4; margin: -4px 0 12px; }
 .field { display: block; margin-bottom: 14px; }
 .field span { display: block; font-size: 13px; color: var(--muted); margin-bottom: 5px; }
 .field input, .field textarea { width: 100%; padding: 11px; border: 1px solid var(--line); border-radius: 10px; font-size: 15px; font-family: inherit; }
+.range { display: block; margin-bottom: 16px; }
+.range span { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.range input { width: 100%; accent-color: var(--accent); }
 .toggle { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; font-size: 15px; }
 .error { color: #c0392b; font-size: 14px; margin-top: 10px; }
 

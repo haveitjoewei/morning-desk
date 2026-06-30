@@ -5,7 +5,7 @@ become a single request the outfit generator folds into its stylist prompt and
 selection:
   - occasion + dress_step  -> a formality target (dressier / more casual, continuous)
   - temp_step              -> warmer / lighter, continuous (each step ~2C)
-  - anchor                 -> build around a specific piece
+  - anchor / anchors       -> build around one or more specific pieces
   - wish                   -> free-text instruction
   - variety                -> ask for a fresh, less-obvious combination
   - rejections / exclude   -> pieces to avoid (with reasons)
@@ -73,9 +73,13 @@ def build_request(prefs, day):
             bits.append(f"Do NOT use '{name}'{f' ({reason})' if reason else ''}; pick something else.")
     if day.get("variety"):
         bits.append("Offer a fresh, less-obvious combination — avoid the usual go-to pieces.")
+    anchors = list(day.get("anchors") or ([day["anchor"]] if day.get("anchor") else []))
+    if anchors:
+        bits.append(f"Anchor these pieces if they can coexist in one outfit: {', '.join(anchors)}.")
 
     return {
         "anchor": day.get("anchor"),
+        "anchors": anchors,
         "formality_hint": formality,
         "occasion": occasion,
         "instructions": " ".join(bits),

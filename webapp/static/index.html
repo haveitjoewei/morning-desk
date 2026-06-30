@@ -71,7 +71,9 @@
   <div id="picker" class="modal" hidden>
     <div class="modal-card">
       <div class="modal-head"><span>Build around…</span><button id="picker-close" class="icon-btn">✕</button></div>
+      <p class="modal-note">Pick one or more pieces. If two pieces clash, the stylist keeps the stronger anchor.</p>
       <div id="picker-groups"></div>
+      <button id="picker-apply" class="btn primary wide">Build outfit</button>
     </div>
   </div>
 
@@ -80,6 +82,22 @@
     <div class="modal-card">
       <div class="modal-head"><span id="reason-title">Swap this piece</span><button id="reason-close" class="icon-btn">✕</button></div>
       <div class="row" id="reason-chips"></div>
+      <button id="edit-piece" class="chip">Edit warmth / polish / comfort</button>
+    </div>
+  </div>
+
+  <!-- Piece metadata -->
+  <div id="piece-editor" class="modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head"><span id="piece-title">Edit piece</span><button id="piece-close" class="icon-btn">✕</button></div>
+      <label class="range"><span>Warmth <b id="warmth-value"></b></span><input id="piece-warmth" type="range" min="1" max="5"></label>
+      <label class="range"><span>Polish <b id="polish-value"></b></span><input id="piece-polish" type="range" min="1" max="5"></label>
+      <label class="range"><span>Comfort <b id="comfort-value"></b></span><input id="piece-comfort" type="range" min="1" max="5"></label>
+      <label class="range"><span>Wear often <b id="wear-value"></b></span><input id="piece-wear" type="range" min="1" max="5"></label>
+      <label class="toggle"><input type="checkbox" id="piece-home"> Good for home</label>
+      <label class="toggle"><input type="checkbox" id="piece-office"> Good for office</label>
+      <label class="toggle"><input type="checkbox" id="piece-avoid"> Avoid recommending often</label>
+      <button id="piece-save" class="btn primary wide">Save ratings</button>
     </div>
   </div>
 

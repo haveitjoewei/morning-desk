@@ -15,8 +15,10 @@ const store = {
   set recent(v) { localStorage.setItem("wc.recent", JSON.stringify(v.slice(0, 15))); },
 };
 
-let day = { occasion: null, temp_step: 0, dress_step: 0, anchor: null, wish: "", variety: false, rejections: [], date: null, location: null };
+let day = { occasion: null, temp_step: 0, dress_step: 0, anchor: null, anchors: [], wish: "", variety: false, rejections: [], date: null, location: null };
 let activeOccasion = null;
+let currentPieces = {};
+let editingPiece = null;
 
 async function api(path, body) {
   const opts = { method: body ? "POST" : "GET", headers: {} };
@@ -53,15 +55,17 @@ function renderOccasions() {
 
 function renderLook(pieces) {
   const look = $("#look"); look.innerHTML = "";
+  currentPieces = {};
   const rows = { top: document.createElement("div"), bottom: document.createElement("div") };
   rows.top.className = rows.bottom.className = "look-row";
   let any = false;
   (pieces || []).forEach((p) => {
     if (!p.url) return; any = true;
+    currentPieces[p.name] = p;
     const fig = document.createElement("figure");
     fig.className = "look-item cat-" + (p.category || "other");
     fig.innerHTML = `<img src="${p.url}" alt=""><figcaption>${p.name || ""}</figcaption>`;
-    fig.onclick = () => openReason(p.name);
+    fig.onclick = () => openReason(p);
     (TOP_ROW.has(p.category) ? rows.top : rows.bottom).appendChild(fig);
   });
   if (rows.top.children.length) look.appendChild(rows.top);
@@ -91,7 +95,8 @@ async function fetchOutfit() {
   }
 }
 
-function openReason(name) {
+function openReason(piece) {
+  const name = piece.name;
   $("#reason-title").textContent = "Swap: " + name;
   const wrap = $("#reason-chips"); wrap.innerHTML = "";
   REASONS.forEach((reason) => {
@@ -100,6 +105,7 @@ function openReason(name) {
     b.onclick = () => { day.rejections.push({ item: name, reason }); $("#reason-modal").hidden = true; fetchOutfit(); };
     wrap.appendChild(b);
   });
+  $("#edit-piece").onclick = () => { $("#reason-modal").hidden = true; openPieceEditor(piece); };
   $("#reason-modal").hidden = false;
 }
 
@@ -115,14 +121,58 @@ async function openPicker() {
       const grid = document.createElement("div"); grid.className = "grid";
       byCat[cat].forEach((i) => {
         const cell = document.createElement("button");
-        cell.className = "pick";
+        cell.className = "pick" + ((day.anchors || []).includes(i.id) ? " on" : "");
         cell.innerHTML = `<img src="${i.url}" alt=""><span>${i.name || ""}</span>`;
-        cell.onclick = () => { day.anchor = i.id; $("#picker").hidden = true; fetchOutfit(); };
+        cell.onclick = () => {
+          const set = new Set(day.anchors || []);
+          set.has(i.id) ? set.delete(i.id) : set.add(i.id);
+          day.anchors = [...set];
+          day.anchor = day.anchors[0] || null;
+          cell.classList.toggle("on");
+        };
         grid.appendChild(cell);
       });
       groups.appendChild(grid);
     });
   } catch { groups.innerHTML = "Couldn't load wardrobe."; }
+}
+
+function bindRange(id, valueId) {
+  const input = $(id), value = $(valueId);
+  const sync = () => { value.textContent = input.value; };
+  input.oninput = sync; sync();
+}
+
+function openPieceEditor(piece) {
+  editingPiece = piece;
+  $("#piece-title").textContent = piece.name || "Edit piece";
+  $("#piece-warmth").value = piece.warmth || 3;
+  $("#piece-polish").value = piece.polish || (piece.category === "bag" ? 3 : 2);
+  $("#piece-comfort").value = piece.comfort || 3;
+  $("#piece-wear").value = piece.wear_frequency || 3;
+  $("#piece-home").checked = piece.home_ok !== false;
+  $("#piece-office").checked = piece.office_ok === true;
+  $("#piece-avoid").checked = piece.avoid_often === true;
+  bindRange("#piece-warmth", "#warmth-value");
+  bindRange("#piece-polish", "#polish-value");
+  bindRange("#piece-comfort", "#comfort-value");
+  bindRange("#piece-wear", "#wear-value");
+  $("#piece-editor").hidden = false;
+}
+
+async function savePieceEditor() {
+  if (!editingPiece || !editingPiece.id) return;
+  await api("/api/wardrobe/" + encodeURIComponent(editingPiece.id), {
+    warmth: +$("#piece-warmth").value,
+    polish: +$("#piece-polish").value,
+    comfort: +$("#piece-comfort").value,
+    wear_frequency: +$("#piece-wear").value,
+    home_ok: $("#piece-home").checked,
+    office_ok: $("#piece-office").checked,
+    avoid_often: $("#piece-avoid").checked,
+  });
+  $("#piece-editor").hidden = true;
+  fetchOutfit();
 }
 
 async function applyPlan() {
@@ -179,7 +229,10 @@ function bind() {
   $("#variety-btn").onclick = () => { day.variety = true; fetchOutfit(); };
   $("#anchor-btn").onclick = openPicker;
   $("#picker-close").onclick = () => { $("#picker").hidden = true; };
+  $("#picker-apply").onclick = () => { $("#picker").hidden = true; fetchOutfit(); };
   $("#reason-close").onclick = () => { $("#reason-modal").hidden = true; };
+  $("#piece-close").onclick = () => { $("#piece-editor").hidden = true; };
+  $("#piece-save").onclick = savePieceEditor;
   $("#plan-btn").onclick = () => { $("#plan").hidden = !$("#plan").hidden; };
   $("#plan-apply").onclick = applyPlan;
   $("#settings-btn").onclick = () => { loadSettings(); $("#settings").hidden = false; };

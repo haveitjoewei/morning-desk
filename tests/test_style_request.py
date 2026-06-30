@@ -23,6 +23,11 @@ def test_request_carries_anchor_and_wish_and_occasion():
     assert "sage" in r["instructions"]
 
 
+def test_request_carries_multiple_anchors():
+    r = build_request({}, {"anchors": ["green-cardigan", "loafers"]})
+    assert r["anchors"] == ["green-cardigan", "loafers"]
+
+
 def test_runs_cold_flag_and_default_occasion():
     r = build_request({"runs_cold": True}, {})
     assert r["runs_cold"] is True
@@ -296,3 +301,65 @@ def test_elegant_style_notes_prefer_polished_bag():
 
     assert "leather saddle bag" in out["items"]
     assert "canvas tote" not in out["items"]
+
+
+def test_mild_rain_later_does_not_force_puffer_or_boots():
+    from ai.generate_outfit import generate_outfit
+    weather = {"condition": "rain_later", "high": 18, "low": 12}
+    wardrobe = [
+        {"name": "cream puffer", "category": "outerwear", "formality": ["smart casual"], "rain_ok": True, "warmth": 5, "material": "nylon puffer"},
+        {"name": "taupe cardigan", "category": "cardigan", "formality": ["smart casual"], "rain_ok": False, "warmth": 3, "material": "cotton knit"},
+        {"name": "silk blouse", "category": "blouse", "formality": ["smart casual"], "warmth": 1, "material": "silk", "neutral": True},
+        {"name": "cream trousers", "category": "pants", "formality": ["smart casual"], "warmth": 2, "material": "tailored cotton", "neutral": True},
+        {"name": "black boots", "category": "shoes", "formality": ["smart casual"], "rain_ok": True, "warmth": 3, "material": "leather"},
+        {"name": "cream loafers", "category": "shoes", "formality": ["smart casual"], "rain_ok": False, "warmth": 1, "material": "leather"},
+    ]
+
+    out = generate_outfit(
+        weather,
+        wardrobe,
+        request={"formality_hint": "smart casual", "style_notes": "elegant classy", "recent": ["black boots"]},
+    )
+
+    assert "cream puffer" not in out["items"]
+    assert "black boots" not in out["items"]
+
+
+def test_cozy_home_prefers_soft_home_clothes_over_jeans_or_dresses():
+    from ai.generate_outfit import generate_outfit
+    weather = {"condition": "cloudy", "high": 16, "low": 10}
+    wardrobe = [
+        {"name": "soft sweatshirt", "category": "knit", "formality": ["casual"], "warmth": 3, "material": "brushed fleece", "best_for": ["home"]},
+        {"name": "oatmeal sweatpants", "category": "pants", "formality": ["casual"], "warmth": 3, "material": "fleece", "best_for": ["home"]},
+        {"name": "straight jeans", "category": "jeans", "formality": ["casual"], "warmth": 2, "material": "denim"},
+        {"name": "black midi dress", "category": "dress", "formality": ["casual", "smart casual"], "warmth": 2},
+        {"name": "house slides", "category": "shoes", "formality": ["casual"], "warmth": 1, "best_for": ["home"]},
+    ]
+
+    out = generate_outfit(weather, wardrobe, request={"formality_hint": "casual", "occasion": "cozy home"})
+
+    assert "oatmeal sweatpants" in out["items"]
+    assert "straight jeans" not in out["items"]
+    assert "black midi dress" not in out["items"]
+
+
+def test_multiple_anchors_are_included_without_multiple_bags():
+    from ai.generate_outfit import generate_outfit
+    weather = {"condition": "cloudy", "high": 18, "low": 12}
+    wardrobe = [
+        {"name": "navy cardigan", "id": "navy-cardigan", "category": "cardigan", "formality": ["smart casual"], "warmth": 3},
+        {"name": "silk blouse", "id": "silk-blouse", "category": "blouse", "formality": ["smart casual"], "warmth": 1},
+        {"name": "cream trousers", "id": "cream-trousers", "category": "pants", "formality": ["smart casual"], "warmth": 2},
+        {"name": "loafers", "id": "loafers", "category": "shoes", "formality": ["smart casual"], "warmth": 1},
+        {"name": "taupe bag", "id": "taupe-bag", "category": "bag", "formality": ["smart casual"], "warmth": 0},
+        {"name": "black bag", "id": "black-bag", "category": "bag", "formality": ["smart casual"], "warmth": 0},
+    ]
+
+    out = generate_outfit(
+        weather,
+        wardrobe,
+        request={"formality_hint": "smart casual", "anchors": ["navy-cardigan", "taupe-bag", "black-bag"]},
+    )
+
+    assert "navy cardigan" in out["items"]
+    assert len([name for name in out["items"] if "bag" in name]) == 1

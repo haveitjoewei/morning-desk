@@ -40,6 +40,37 @@ def test_unlock_and_outfit(monkeypatch, tmp_path):
     assert c.post("/api/outfit", json={"prefs": {}, "day": {}}).status_code == 401
 
 
+def test_update_item_metadata_writes_correction(monkeypatch, tmp_path):
+    monkeypatch.setenv("WARDROBE_PIN", "2468")
+    monkeypatch.setenv("WARDROBE_SECRET", "s")
+    monkeypatch.setenv("MD_OFFLINE", "1")
+    monkeypatch.setenv("MD_PROFILES_ROOT", str(tmp_path))
+    monkeypatch.setenv("WARDROBE_PROFILE", "eve")
+    d = tmp_path / "eve"
+    d.mkdir()
+    (d / "items.json").write_text(json.dumps([
+        {"name": "Cream Trousers", "id": "cream-trousers", "category": "pants", "formality": ["smart casual"], "warmth": 2}
+    ]))
+    (d / "config.json").write_text('{"categories":"womenswear","location":{"latitude":-33.8,"longitude":151.2,"timezone":"Australia/Sydney"}}')
+    from fastapi.testclient import TestClient
+    from webapp.app import app
+    c = TestClient(app)
+    tok = c.post("/api/unlock", json={"pin": "2468"}).json()["token"]
+
+    r = c.post(
+        "/api/wardrobe/cream-trousers",
+        headers={"Authorization": f"Bearer {tok}"},
+        json={"warmth": 3, "polish": 4, "comfort": 2, "home_ok": False, "office_ok": True},
+    )
+
+    assert r.status_code == 200
+    corrections = json.loads((d / "corrections.json").read_text())
+    assert corrections[0]["name"] == "Cream Trousers"
+    assert corrections[0]["set"]["warmth"] == 3
+    assert corrections[0]["set"]["polish"] == 4
+    assert json.loads((d / "items.json").read_text())[0].get("polish") is None
+
+
 def test_vercel_config_uses_modern_python_function_shape():
     cfg = json.loads(Path("vercel.json").read_text())
 

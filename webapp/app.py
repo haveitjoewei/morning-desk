@@ -15,7 +15,7 @@ from fastapi.staticfiles import StaticFiles
 
 from core.outfit import plan_outfit
 from core.profiles import profile_dir
-from wardrobe.catalog import load_wardrobe
+from wardrobe.catalog import load_wardrobe, save_metadata_correction
 from webapp.auth import check_pin, make_token, verify_token
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -79,9 +79,35 @@ def wardrobe(_=Depends(require_token)):
             "name": it.get("name"),
             "category": it.get("category"),
             "url": _url_for_id(it.get("id")),
+            "warmth": it.get("warmth"),
+            "polish": it.get("polish"),
+            "comfort": it.get("comfort"),
+            "home_ok": it.get("home_ok"),
+            "office_ok": it.get("office_ok"),
+            "wear_frequency": it.get("wear_frequency"),
+            "avoid_often": it.get("avoid_often"),
         }
         for it in items
     ]
+
+
+@app.post("/api/wardrobe/{item_id}")
+def update_wardrobe_item(item_id: str, body: dict, _=Depends(require_token)):
+    item = save_metadata_correction(item_id, body, profile=profile())
+    if not item:
+        raise HTTPException(status_code=404, detail="item not found")
+    return {
+        "id": item.get("id"),
+        "name": item.get("name"),
+        "category": item.get("category"),
+        "warmth": item.get("warmth"),
+        "polish": item.get("polish"),
+        "comfort": item.get("comfort"),
+        "home_ok": item.get("home_ok"),
+        "office_ok": item.get("office_ok"),
+        "wear_frequency": item.get("wear_frequency"),
+        "avoid_often": item.get("avoid_often"),
+    }
 
 
 @app.get("/api/weather")
