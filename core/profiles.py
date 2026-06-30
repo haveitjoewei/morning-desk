@@ -25,5 +25,9 @@ def load_config(name: str) -> dict:
         cfg.update(json.loads(path.read_text()))
     return cfg
 
+def load_prefs(name: str) -> dict:
+    path = profile_dir(name) / "prefs.json"
+    return json.loads(path.read_text()) if path.exists() else {}
+
 def items_path(name: str) -> Path:
     return profile_dir(name) / "items.json"

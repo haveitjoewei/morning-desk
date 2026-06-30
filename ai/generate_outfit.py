@@ -56,6 +56,64 @@ def _anchor_name(anchor, wardrobe_items):
     return None
 
 
+def _anchor_item(anchor, wardrobe_items):
+    if not anchor:
+        return None
+    for item in wardrobe_items:
+        if anchor in (item.get("name"), item.get("id")):
+            return item
+    return None
+
+
+FORMALITY_RANK = {"athletic": 0, "casual": 1, "smart casual": 2, "business": 3, "formal": 4}
+UPPER_CATEGORIES = {"top", "blouse", "knit"}
+LAYER_CATEGORIES = {"midlayer", "cardigan"}
+LOWER_CATEGORIES = {"bottom", "pants", "jeans", "skirt", "shorts"}
+BAG_CATEGORIES = {"bag"}
+
+
+def _category_in(item, categories):
+    return item.get("category") in categories
+
+
+def _best_formality_rank(item):
+    value = item.get("formality")
+    values = value if isinstance(value, list) else [value]
+    ranks = [FORMALITY_RANK[v] for v in values if v in FORMALITY_RANK]
+    return max(ranks) if ranks else 1
+
+
+def _target_warmth(high):
+    high = high if isinstance(high, (int, float)) else 18
+    if high <= 10:
+        return 5
+    if high <= 14:
+        return 4
+    if high <= 19:
+        return 3
+    if high <= 24:
+        return 2
+    return 1
+
+
+def _style_tokens(request):
+    text = " ".join(
+        str((request or {}).get(key, ""))
+        for key in ("style_notes", "instructions", "occasion")
+    ).lower()
+    return {
+        "elegant": any(word in text for word in ("elegant", "classy", "polished", "refined")),
+        "casual": any(word in text for word in ("cozy", "casual", "relaxed")),
+    }
+
+
+def _text_fields(item):
+    return " ".join(
+        str(item.get(key, ""))
+        for key in ("name", "subtype", "material", "texture")
+    ).lower()
+
+
 def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, request=None):
     calendar = calendar or []
     context = context or {}
@@ -65,7 +123,11 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
     office_day = context.get("work_mode") == "office"
     dress_to_impress = context.get("intent") == "dress_to_impress" or office_day
     recent = set((request or {}).get("recent") or [])
+    requested_formality = (request or {}).get("formality_hint")
+    style = _style_tokens(request)
+    variety = bool((request or {}).get("variety"))
     condition = weather.get("condition", "weather").replace("_", " ")
+    target_warmth = _target_warmth(weather.get("high"))
     temperature_note = "mild temperature"
     if weather.get("high", 0) <= 14:
         temperature_note = "cool day"
@@ -77,7 +139,11 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
         if item.get("name") in recent:
             value -= 3  # rotate away from recently worn pieces
         if formality and _formality_ok(item, formality):
-            value += 4
+            value += 6
+        if formality in FORMALITY_RANK:
+            value -= abs(_best_formality_rank(item) - FORMALITY_RANK[formality])
+        if item.get("warmth") is not None:
+            value -= abs(int(item.get("warmth", target_warmth)) - target_warmth)
         if athletic_events:
             if _formality_ok(item, "athletic"):
                 value += 2
@@ -89,6 +155,18 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
             value += 2
         if context.get("occasion") and context["occasion"] in item.get("best_for", []):
             value += 2
+        if style["elegant"]:
+            text = _text_fields(item)
+            if item.get("neutral"):
+                value += 1
+            if item.get("category") in {"blouse", "pants", "skirt", "dress", "bag"}:
+                value += 1
+            if any(word in text for word in ("leather", "silk", "tailored", "wool", "quilted")):
+                value += 2
+            if any(word in text for word in ("canvas", "sweatshirt", "sweatpants", "puffer")):
+                value -= 2
+            if item.get("pattern") == "graphic":
+                value -= 3
         if (
             item.get("category") == "bottom"
             and "short" in item.get("subtype", "").lower()
@@ -97,10 +175,11 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
             value -= 3
         return value
 
-    def first(category, *, rain_ok=None, formality=None):
+    def first(categories, *, rain_ok=None, formality=None):
+        categories = {categories} if isinstance(categories, str) else set(categories)
         matches = []
         for item in wardrobe_items:
-            if item["category"] != category:
+            if item.get("category") not in categories:
                 continue
             if rain_ok is not None and item.get("rain_ok") != rain_ok:
                 continue
@@ -108,25 +187,46 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
         if not matches:
             return None
         matches.sort(key=lambda item: score(item, formality), reverse=True)
-        best = matches[0]
+        best = matches[1] if variety and len(matches) > 1 else matches[0]
         if formality and not _formality_ok(best, formality) and score(best, formality) == 0:
             return None
         return best["name"]
 
-    formality = "smart casual" if smart_casual or dress_to_impress else "casual"
-    items = [
-        first("outerwear", rain_ok=True)
-        if wants_rain
-        else first("midlayer", formality=formality),
-        first("top", formality=formality) or first("top"),
-        first("bottom", formality=formality) or first("bottom"),
+    formality = requested_formality or ("smart casual" if smart_casual or dress_to_impress else "casual")
+    dressy_rank = FORMALITY_RANK.get(formality, 1)
+    layer_needed = target_warmth >= 4
+
+    anchor_item = _anchor_item((request or {}).get("anchor"), wardrobe_items)
+    dress_occasion = (request or {}).get("occasion") in {"dressy", "going out", "formal"}
+    dress_allowed = dress_occasion or formality == "formal" or (
+        anchor_item and anchor_item.get("category") == "dress"
+    )
+    dress = first("dress", formality=formality) if dress_allowed else None
+    items = []
+    rain_layer_required = weather.get("condition") in {"rain_likely", "storm"} or target_warmth >= 3
+    if wants_rain and rain_layer_required:
+        items.append(first("outerwear", rain_ok=True, formality=formality) or first("outerwear", rain_ok=True))
+    elif layer_needed:
+        items.append(first(LAYER_CATEGORIES | {"outerwear"}, formality=formality))
+
+    if dress:
+        items.append(dress)
+    else:
+        items.extend([
+            first(UPPER_CATEGORIES, formality=formality) or first(UPPER_CATEGORIES),
+            first(LOWER_CATEGORIES, formality=formality) or first(LOWER_CATEGORIES),
+        ])
+
+    items.append(
         first("shoes", rain_ok=True, formality=formality) or first("shoes", formality=formality)
         if wants_rain
-        else first("shoes", formality=formality),
-    ]
+        else first("shoes", formality=formality)
+    )
+    if dressy_rank >= FORMALITY_RANK["smart casual"]:
+        items.append(first(BAG_CATEGORIES, formality=formality) or first(BAG_CATEGORIES))
     items = [item for item in items if item]
 
-    anchor = _anchor_name((request or {}).get("anchor"), wardrobe_items)
+    anchor = anchor_item.get("name") if anchor_item else None
     if anchor and anchor not in items:
         items = [anchor] + [i for i in items if i != anchor]
         items = items[:5]

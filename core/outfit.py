@@ -12,7 +12,7 @@ import os
 
 from ai.generate_outfit import generate_outfit
 from ai.style_request import build_request, effective_high
-from core.profiles import load_config
+from core.profiles import load_config, load_prefs
 from wardrobe.catalog import load_wardrobe, resolve_pieces
 
 
@@ -44,7 +44,7 @@ def _default_occasion(target_date, prefs):
 
 
 def plan_outfit(profile, prefs=None, day=None):
-    prefs, day = prefs or {}, dict(day or {})
+    prefs, day = {**load_prefs(profile), **(prefs or {})}, dict(day or {})
     cfg = load_config(profile)
 
     target = _parse_date(day.get("date"))

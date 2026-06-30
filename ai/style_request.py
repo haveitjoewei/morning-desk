@@ -79,6 +79,7 @@ def build_request(prefs, day):
         "formality_hint": formality,
         "occasion": occasion,
         "instructions": " ".join(bits),
+        "style_notes": prefs.get("style_notes", ""),
         "runs_cold": bool(prefs.get("runs_cold")),
         "avoid": avoid,
         "recent": recent,
