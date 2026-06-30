@@ -70,3 +70,21 @@ body { min-height: 100vh; padding: env(safe-area-inset-top) 0 env(safe-area-inse
 .spinner { width: 34px; height: 34px; border: 3px solid var(--line); border-top-color: var(--accent);
   border-radius: 50%; animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* New controls */
+.controls { align-items: center; }
+.stepper { display: flex; align-items: center; gap: 8px; width: 100%; }
+.stepper > span { font-size: 13px; color: var(--muted); min-width: 58px; }
+.stepper button { flex: 1; border: 1px solid var(--line); background: var(--card); border-radius: 10px;
+  padding: 10px; font-size: 14px; cursor: pointer; }
+.plan { gap: 8px; align-items: center; }
+.plan input { flex: 1; padding: 10px; border: 1px solid var(--line); border-radius: 10px; font-size: 14px;
+  background: #fff; font-family: inherit; }
+.hint { font-size: 12px; color: var(--muted); margin: 2px 0 4px; }
+.group-head { font-size: 12px; text-transform: capitalize; color: var(--muted); margin: 14px 0 6px;
+  letter-spacing: .5px; }
+.weekdays { display: flex; gap: 5px; flex-wrap: wrap; }
+.wd { border: 1px solid var(--line); background: var(--card); border-radius: 8px; padding: 7px 9px;
+  font-size: 13px; cursor: pointer; }
+.wd.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.look-item { cursor: pointer; }

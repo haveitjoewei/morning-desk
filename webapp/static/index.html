@@ -11,7 +11,6 @@
 </head>
 <body>
 
-  <!-- Lock screen -->
   <section id="lock" class="lock">
     <div class="lock-card">
       <h1 class="brand">Your Closet</h1>
@@ -22,11 +21,10 @@
     </div>
   </section>
 
-  <!-- App -->
   <main id="app" hidden>
     <header class="top">
       <div>
-        <div id="date" class="date"></div>
+        <div id="date-label" class="date"></div>
         <div id="weather" class="weather"></div>
       </div>
       <button id="settings-btn" class="icon-btn" aria-label="Settings">⚙</button>
@@ -35,16 +33,33 @@
     <section class="outfit">
       <h2 id="headline" class="headline"></h2>
       <div id="look" class="look"></div>
+      <p class="hint" id="look-hint" hidden>Tap a piece to swap it.</p>
       <p id="reason" class="reason"></p>
     </section>
 
     <section class="tweaks">
       <div class="row" id="occasions"></div>
-      <div class="row">
-        <button class="chip" data-nudge="warmer">Warmer</button>
-        <button class="chip" data-nudge="lighter">Lighter</button>
-        <button id="anchor-btn" class="chip">★ Anchor a piece</button>
+
+      <div class="row controls">
+        <div class="stepper"><span>Warmth</span>
+          <button data-warm="-1">＋ Warmer</button><button data-warm="1">Lighter ＋</button></div>
       </div>
+      <div class="row controls">
+        <div class="stepper"><span>Polish</span>
+          <button data-dress="1">↑ Dressier</button><button data-dress="-1">↓ Casual</button></div>
+      </div>
+
+      <div class="row">
+        <button id="anchor-btn" class="chip">★ Anchor a piece</button>
+        <button id="variety-btn" class="chip">🔀 Surprise me</button>
+        <button id="plan-btn" class="chip">📅 Plan ahead</button>
+      </div>
+      <div class="row plan" id="plan" hidden>
+        <input type="date" id="date">
+        <input type="text" id="city" placeholder="City (optional)">
+        <button id="plan-apply" class="chip">Apply</button>
+      </div>
+
       <div class="row wish-row">
         <input id="wish" class="wish" type="text" placeholder="Anything else? e.g. “something flowy”, “wear the green cardigan”">
       </div>
@@ -52,11 +67,19 @@
     </section>
   </main>
 
-  <!-- Anchor picker -->
+  <!-- Anchor picker (grouped by category) -->
   <div id="picker" class="modal" hidden>
     <div class="modal-card">
       <div class="modal-head"><span>Build around…</span><button id="picker-close" class="icon-btn">✕</button></div>
-      <div id="picker-grid" class="grid"></div>
+      <div id="picker-groups"></div>
+    </div>
+  </div>
+
+  <!-- Reject reason -->
+  <div id="reason-modal" class="modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head"><span id="reason-title">Swap this piece</span><button id="reason-close" class="icon-btn">✕</button></div>
+      <div class="row" id="reason-chips"></div>
     </div>
   </div>
 
@@ -71,12 +94,13 @@
         <input type="text" id="love-colors" placeholder="sage, cream, camel"></label>
       <label class="field"><span>Colours to avoid</span>
         <input type="text" id="avoid-colors" placeholder="neon"></label>
+      <label class="field"><span>Office days (you dress sharper)</span>
+        <span class="weekdays" id="office-days"></span></label>
       <button id="settings-save" class="btn primary wide">Save</button>
     </div>
   </div>
 
   <div id="loading" class="loading" hidden><div class="spinner"></div></div>
-
   <script src="/static/app.js"></script>
 </body>
 </html>
