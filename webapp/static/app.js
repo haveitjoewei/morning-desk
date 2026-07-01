@@ -398,22 +398,21 @@ async function applyPlan() {
   fetchOutfit();
 }
 
-async function setSuburb() {
+async function resolveSuburb() {
+  // Turn the suburb box into a location when it changed; keep the previous one on miss.
   const q = $("#suburb").value.trim();
-  const status = $("#suburb-status");
-  if (!q) {
-    const p = { ...store.prefs }; delete p.location; store.prefs = p;
-    day.location = null; status.textContent = "Using your default location.";
-    fetchOutfit(); return;
-  }
-  status.textContent = "Finding…";
+  const curLabel = (store.prefs.location && store.prefs.location.label) || "";
+  if (q === curLabel) return store.prefs.location || null;
+  if (!q) return null;
+  $("#suburb-status").textContent = "Finding location…";
   try {
     const loc = await api("/api/geocode?q=" + encodeURIComponent(q));
-    store.prefs = { ...store.prefs, location: loc };
-    day.location = loc; status.textContent = "Set to " + (loc.label || q);
-    pushState();
-    fetchOutfit();
-  } catch { status.textContent = "Couldn't find that place."; }
+    $("#suburb-status").textContent = "Set to " + (loc.label || q);
+    return loc;
+  } catch {
+    $("#suburb-status").textContent = "Couldn't find that place — keeping previous.";
+    return store.prefs.location || null;
+  }
 }
 
 function renderOfficeDays() {
@@ -438,17 +437,20 @@ function loadSettings() {
   renderOfficeDays();
 }
 
-function saveSettings() {
+async function saveSettings() {
   const split = (v) => v.split(",").map((s) => s.trim()).filter(Boolean);
   const office = [...document.querySelectorAll("#office-days .wd.on")].map((b) => +b.dataset.i);
+  const location = await resolveSuburb();
   store.prefs = {
-    ...store.prefs,  // keep location and anything set elsewhere
+    ...store.prefs,
     runs_cold: $("#runs-cold").checked,
     style_notes: $("#style-notes").value.trim(),
     love_colors: split($("#love-colors").value),
     avoid_colors: split($("#avoid-colors").value),
     office_days: office,
+    location,
   };
+  day.location = location;
   pushState();
   $("#settings").hidden = true; fetchOutfit();
 }
@@ -477,7 +479,6 @@ function bind() {
   $("#settings-btn").onclick = () => { loadSettings(); $("#settings").hidden = false; };
   $("#settings-close").onclick = () => { $("#settings").hidden = true; };
   $("#settings-save").onclick = saveSettings;
-  $("#suburb-set").onclick = setSuburb;
   $("#signout-btn").onclick = signOut;
   $("#day-prev").onclick = () => shiftDay(-1);
   $("#day-next").onclick = () => shiftDay(1);
