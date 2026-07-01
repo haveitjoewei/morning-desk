@@ -14,7 +14,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from core.outfit import anchor_warnings, plan_outfit
-from core.profiles import profile_dir
+from core.profiles import load_config, profile_dir
 from wardrobe.catalog import load_wardrobe, save_metadata_correction
 from webapp.auth import check_pin, make_token, verify_token
 
@@ -66,7 +66,16 @@ async def unlock(body: dict):
     prof = check_pin(body.get("pin", ""))
     if not prof:
         raise HTTPException(status_code=401, detail="wrong pin")
-    return {"token": make_token(prof), "profile": prof, "name": prof.capitalize()}
+    try:
+        menswear = load_config(prof).get("categories") == "menswear"
+    except Exception:
+        menswear = False
+    return {
+        "token": make_token(prof),
+        "profile": prof,
+        "name": prof.capitalize(),
+        "menswear": menswear,
+    }
 
 
 @app.post("/api/outfit")

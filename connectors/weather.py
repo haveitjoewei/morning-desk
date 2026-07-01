@@ -15,12 +15,12 @@ FALLBACK_WEATHER = {
     "precipitation_probability": 60,
     "precipitation_mm": 1.0,
     "hourly": [
-        {"hour": 6, "temp": 12, "pop": 10, "mm": 0.0},
-        {"hour": 9, "temp": 14, "pop": 30, "mm": 0.2},
-        {"hour": 12, "temp": 17, "pop": 55, "mm": 0.6},
-        {"hour": 15, "temp": 18, "pop": 70, "mm": 1.2},
-        {"hour": 18, "temp": 15, "pop": 40, "mm": 0.3},
-        {"hour": 21, "temp": 13, "pop": 15, "mm": 0.0},
+        {"hour": 6, "temp": 12, "pop": 10, "mm": 0.0, "wind": 9},
+        {"hour": 9, "temp": 14, "pop": 30, "mm": 0.2, "wind": 12},
+        {"hour": 12, "temp": 17, "pop": 55, "mm": 0.6, "wind": 15},
+        {"hour": 15, "temp": 18, "pop": 70, "mm": 1.2, "wind": 18},
+        {"hour": 18, "temp": 15, "pop": 40, "mm": 0.3, "wind": 14},
+        {"hour": 21, "temp": 13, "pop": 15, "mm": 0.0, "wind": 10},
     ],
 }
 
@@ -38,7 +38,7 @@ def build_open_meteo_url(config, days=1):
             "timezone": config.get("timezone", "auto"),
             "forecast_days": days,
             "current": "temperature_2m,weather_code,precipitation",
-            "hourly": "temperature_2m,precipitation_probability,precipitation",
+            "hourly": "temperature_2m,precipitation_probability,precipitation,wind_speed_10m",
             "daily": ",".join(
                 [
                     "temperature_2m_max",
@@ -109,6 +109,7 @@ def _hourly_precip(hourly, day):
     temps = hourly.get("temperature_2m") or []
     pops = hourly.get("precipitation_probability") or []
     mms = hourly.get("precipitation") or []
+    winds = hourly.get("wind_speed_10m") or []
     bars = []
     for i in range(day * 24, min(day * 24 + 24, len(times))):
         hour = int(str(times[i])[11:13] or 0)
@@ -118,6 +119,7 @@ def _hourly_precip(hourly, day):
                 "temp": round(float(temps[i])) if i < len(temps) and temps[i] is not None else None,
                 "pop": int(pops[i] or 0) if i < len(pops) else 0,
                 "mm": round(float(mms[i] or 0), 2) if i < len(mms) else 0.0,
+                "wind": round(float(winds[i])) if i < len(winds) and winds[i] is not None else None,
             })
     return bars
 

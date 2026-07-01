@@ -98,13 +98,27 @@ def anchor_warnings(wardrobe, anchors):
     return warnings
 
 
-def _parse_date(value):
+def _today(cfg):
+    """Today in the profile's own timezone — the server runs in UTC, which is a day
+    behind in Australia for much of the day."""
+    tz = (cfg.get("location") or {}).get("timezone")
+    if tz:
+        try:
+            from zoneinfo import ZoneInfo
+
+            return _dt.datetime.now(ZoneInfo(tz)).date()
+        except Exception:
+            pass
+    return _dt.date.today()
+
+
+def _parse_date(value, today):
     if not value:
-        return _dt.date.today()
+        return today
     try:
         return _dt.date.fromisoformat(str(value)[:10])
     except ValueError:
-        return _dt.date.today()
+        return today
 
 
 _WEATHER_CACHE = {}  # key -> (monotonic_expiry, weather); short-lived, per warm process
@@ -142,8 +156,9 @@ def plan_outfit(profile, prefs=None, day=None):
     prefs, day = {**load_prefs(profile), **(prefs or {})}, dict(day or {})
     cfg = load_config(profile)
 
-    target = _parse_date(day.get("date"))
-    offset = max(0, min(6, (target - _dt.date.today()).days))  # Open-Meteo: today..+6
+    today = _today(cfg)
+    target = _parse_date(day.get("date"), today)
+    offset = max(0, min(6, (target - today).days))  # Open-Meteo: today..+6
     weather = _weather(cfg, day.get("location"), offset)
 
     if not day.get("occasion"):
@@ -156,4 +171,11 @@ def plan_outfit(profile, prefs=None, day=None):
         dressed, wardrobe, calendar=[], context={"intent": request["occasion"]}, request=request
     )
     outfit["pieces"] = resolve_pieces(outfit.get("items", []), wardrobe, profile=profile)
-    return {**outfit, "weather": weather, "occasion": day["occasion"], "date": target.isoformat()}
+    place = (day.get("location") or cfg.get("location") or {}).get("label")
+    return {
+        **outfit,
+        "weather": weather,
+        "occasion": day["occasion"],
+        "date": target.isoformat(),
+        "place": place,
+    }

@@ -17,9 +17,19 @@ const store = {
   set prefs(v) { localStorage.setItem(this._k("prefs"), JSON.stringify(v)); },
   get recent() { try { return JSON.parse(localStorage.getItem(this._k("recent"))) || []; } catch { return []; } },
   set recent(v) { localStorage.setItem(this._k("recent"), JSON.stringify(v.slice(0, 15))); },
+  get units() { return localStorage.getItem("wc.units") || "C"; },   // shared display pref
+  set units(v) { localStorage.setItem("wc.units", v); },
+  get locked() { try { return JSON.parse(localStorage.getItem(this._k("locked"))) || {}; } catch { return {}; } },
+  set locked(v) { localStorage.setItem(this._k("locked"), JSON.stringify(v)); },
 };
 
-let day = { occasion: null, temp_step: 0, dress_step: 0, anchor: null, anchors: [], wish: "", variety: false, rejections: [], date: null, location: null };
+const FRESH_DAY = () => ({ occasion: null, temp_step: 0, dress_step: 0, anchor: null, anchors: [], wish: "", variety: false, rejections: [], date: null, location: null });
+let lastWeather = null;
+let lastResult = null;
+function todayISO() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; }
+function fmtTemp(c) { if (c == null) return ""; return store.units === "F" ? `${Math.round(c * 9 / 5 + 32)}°` : `${Math.round(c)}°`; }
+
+let day = FRESH_DAY();
 let activeOccasion = null;
 let currentPieces = {};
 let editingPiece = null;
@@ -43,21 +53,31 @@ async function unlock() {
   try {
     const r = await api("/api/unlock", { pin: $("#pin").value });
     store.token = r.token; store.profile = r.profile || "";
-    setWhoami(r.name || cap(store.profile));
+    localStorage.setItem("wc.menswear." + store.profile, r.menswear ? "1" : "");
     $("#pin").value = "";
+    afterLogin(r.name || cap(store.profile));
     showApp(); fetchOutfit();
   } catch { $("#lock-error").hidden = false; }
 }
 
 function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ""; }
+function setWhoami(name) { const el = $("#whoami"); if (el) el.textContent = name ? `${name}’s closet` : ""; }
+function wardrobeIcon() { return localStorage.getItem("wc.menswear." + store.profile) ? "👔" : "👗"; }
+function updateUnitToggle() { const b = $("#unit-toggle"); if (b) b.textContent = store.units === "F" ? "°F" : "°C"; }
 
-function setWhoami(name) {
-  const el = $("#whoami"); if (el) el.textContent = name ? `${name}’s closet` : "";
+function afterLogin(name) {
+  setWhoami(name);
+  day = FRESH_DAY();
+  day.location = store.prefs.location || null;
+  $("#wish").value = "";
+  $("#wardrobe-btn").textContent = `${wardrobeIcon()} Browse & edit my wardrobe`;
+  updateUnitToggle();
 }
 
 function signOut() {
   store.token = null; store.profile = null;
-  setWhoami(""); $("#pin").value = "";
+  setWhoami(""); $("#pin").value = ""; $("#wish").value = "";
+  day = FRESH_DAY();
   showLock();
 }
 
@@ -77,14 +97,20 @@ function renderLook(pieces) {
   currentPieces = {};
   const rows = { top: document.createElement("div"), bottom: document.createElement("div") };
   rows.top.className = rows.bottom.className = "look-row";
+  const anchors = new Set(day.anchors || []);
   let any = false;
   (pieces || []).forEach((p) => {
     if (!p.url) return; any = true;
     currentPieces[p.name] = p;
+    const anchored = p.id && anchors.has(p.id);
     const fig = document.createElement("figure");
-    fig.className = "look-item cat-" + (p.category || "other");
-    fig.innerHTML = `<img src="${p.url}" alt=""><figcaption>${p.name || ""}</figcaption>`;
-    fig.onclick = () => openReason(p);
+    fig.className = "look-item cat-" + (p.category || "other") + (anchored ? " anchored" : "");
+    fig.innerHTML = `<img src="${p.url}" alt=""><figcaption>${p.name || ""}</figcaption>` +
+      (anchored ? `<button class="unanchor" data-id="${p.id}" title="Anchored — tap to release">🔒</button>` : "");
+    fig.onclick = (e) => {
+      if (e.target.closest(".unanchor")) { e.stopPropagation(); unanchor(p.id); return; }
+      openReason(p);
+    };
     (TOP_ROW.has(p.category) ? rows.top : rows.bottom).appendChild(fig);
   });
   if (rows.top.children.length) look.appendChild(rows.top);
@@ -92,21 +118,35 @@ function renderLook(pieces) {
   $("#look-hint").hidden = !any;
 }
 
+function unanchor(id) {
+  day.anchors = (day.anchors || []).filter((x) => x !== id);
+  day.anchor = day.anchors[0] || null;
+  fetchOutfit();
+}
+
+function renderResult(r) {
+  lastResult = r;
+  activeOccasion = r.occasion || activeOccasion; renderOccasions();
+  $("#headline").textContent = r.headline || "";
+  $("#reason").textContent = r.reason || "";
+  $("#place").textContent = r.place || "";
+  renderWeather(r.weather);
+  const d = r.date ? new Date(r.date + "T00:00:00") : new Date();
+  $("#date-label").textContent = d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
+  renderLook(r.pieces);
+  updateLockButton();
+}
+
 async function fetchOutfit() {
+  const key = day.date || todayISO();
+  if (store.locked[key]) { renderResult(store.locked[key]); return; }  // pinned day
   loading(true);
   try {
     day.recent = store.recent;
     const r = await api("/api/outfit", { prefs: store.prefs, day });
     const names = (r.pieces || []).map((p) => p.name).filter(Boolean);
     store.recent = [...names, ...store.recent.filter((n) => !names.includes(n))];
-    activeOccasion = r.occasion || activeOccasion; renderOccasions();
-    $("#headline").textContent = r.headline || "";
-    $("#reason").textContent = r.reason || "";
-    $("#weather").textContent = (r.weather && r.weather.summary) || "";
-    renderWeatherBars(r.weather);
-    const d = r.date ? new Date(r.date + "T00:00:00") : new Date();
-    $("#date-label").textContent = d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
-    renderLook(r.pieces);
+    renderResult(r);
   } catch (e) {
     if (e.message !== "locked") $("#reason").textContent = "Couldn't load — try again.";
   } finally {
@@ -115,15 +155,53 @@ async function fetchOutfit() {
   }
 }
 
+function shiftDay(delta) {
+  const t = todayISO();
+  const d = new Date((day.date || t) + "T00:00:00"); d.setDate(d.getDate() + delta);
+  const iso = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  const max = new Date(t + "T00:00:00"); max.setDate(max.getDate() + 6);
+  if (iso < t || d > max) return;                       // Open-Meteo window: today..+6
+  day.date = iso === t ? null : iso;
+  day.occasion = null; activeOccasion = null;           // let the new weekday set the occasion
+  fetchOutfit();
+}
+
+function updateLockButton() {
+  const b = $("#lock-day"); if (!b) return;
+  const on = !!store.locked[day.date || todayISO()];
+  b.textContent = on ? "🔒" : "🔓";
+  b.classList.toggle("on", on);
+  b.title = on ? "Locked for the day — tap to unlock" : "Lock this outfit for the day";
+}
+
+function toggleLock() {
+  const key = day.date || todayISO();
+  const locked = { ...store.locked };
+  if (locked[key]) { delete locked[key]; store.locked = locked; fetchOutfit(); }
+  else if (lastResult) { locked[key] = lastResult; store.locked = locked; updateLockButton(); }
+}
+
 function fmtHour(h) {
   const ap = h < 12 ? "am" : "pm";
   return `${((h + 11) % 12) + 1}${ap}`;
 }
 
+let wxHours = [];
+
+function renderWeather(w) {
+  lastWeather = w || null;
+  const el = $("#weather");
+  if (!w) { if (el) el.textContent = ""; renderWeatherBars(null); return; }
+  const cond = (w.summary || "").split(", ").slice(1).join(", ") || (w.condition || "").replace(/_/g, " ");
+  if (el) el.textContent = `${fmtTemp(w.high)}  ${cond}`.trim().toUpperCase();
+  renderWeatherBars(w);
+}
+
 function renderWeatherBars(w) {
   const el = $("#weather-bars");
   if (!el) return;
-  const hrs = (w && w.hourly) || [];
+  const pop = $("#wx-pop"); if (pop) pop.hidden = true;
+  const hrs = (w && w.hourly) || []; wxHours = hrs;
   if (!hrs.length) { el.hidden = true; el.innerHTML = ""; return; }
   const temps = hrs.map((h) => h.temp).filter((t) => t != null);
   const lo = temps.length ? Math.min(...temps) : w.low;
@@ -131,15 +209,14 @@ function renderWeatherBars(w) {
   const peak = hrs.reduce((a, b) => (b.pop > a.pop ? b : a), hrs[0]);
   const n = hrs.length;
   const tickAt = new Set([0, Math.round(n / 3), Math.round((2 * n) / 3), n - 1]);
-  const bars = hrs.map((h) => {
+  const bars = hrs.map((h, i) => {
     const cls = h.pop >= 50 ? "wbar wet" : h.pop >= 25 ? "wbar damp" : "wbar";
-    const t = h.temp != null ? ` ${h.temp}°` : "";
-    return `<span class="${cls}" style="--p:${Math.max(6, h.pop)}%" title="${fmtHour(h.hour)}${t} · rain ${h.pop}%"></span>`;
+    return `<span class="${cls}" data-i="${i}" style="--p:${Math.max(6, h.pop)}%"></span>`;
   }).join("");
   const ticks = hrs.map((h, i) => tickAt.has(i)
-    ? `<span class="wtick"><b>${h.temp != null ? h.temp + "°" : ""}</b><i>${fmtHour(h.hour)}</i></span>`
+    ? `<span class="wtick"><b>${fmtTemp(h.temp)}</b><i>${fmtHour(h.hour)}</i></span>`
     : `<span class="wtick"></span>`).join("");
-  const range = (lo != null && hi != null) ? `${lo}°–${hi}°` : "";
+  const range = (lo != null && hi != null) ? `${fmtTemp(lo)}–${fmtTemp(hi)}` : "";
   const rain = peak.pop >= 20 ? `rain ~${peak.pop}% · ${fmtHour(peak.hour)}` : "dry through the day";
   el.innerHTML =
     `<div class="wbars-head"><span class="wbars-range">${range}</span><span class="wbars-cap">${rain}</span></div>` +
@@ -148,10 +225,25 @@ function renderWeatherBars(w) {
   el.hidden = false;
 }
 
+function showWxPop(i) {
+  const h = wxHours[i]; const pop = $("#wx-pop"); if (!h || !pop) return;
+  pop.innerHTML =
+    `<b>${fmtHour(h.hour)}</b><span>${fmtTemp(h.temp)}</span>` +
+    `<span>🌧 ${h.pop}%</span>` + (h.wind != null ? `<span>🌬 ${h.wind} km/h</span>` : "");
+  pop.hidden = false;
+}
+
+function openZoom(url) {
+  if (!url) return;
+  $("#zoom-img").src = url;
+  $("#zoom").hidden = false;
+}
+
 function openReason(piece) {
   const name = piece.name;
   $("#reason-title").textContent = "This piece";
   $("#reason-img").src = piece.url || "";
+  $("#reason-img").onclick = () => openZoom(piece.url);
   $("#reason-name").textContent = name || "";
   $("#reason-chips").hidden = true;
   const row = $("#reason-chip-row"); row.innerHTML = "";
@@ -248,6 +340,7 @@ function openPieceEditor(piece) {
   editingPiece = piece;
   $("#piece-title").textContent = piece.name || "Edit piece";
   $("#piece-img").src = piece.url || "";
+  $("#piece-img").onclick = () => openZoom(piece.url);
   $("#piece-warmth").value = piece.warmth || 3;
   $("#piece-polish").value = piece.polish || (piece.category === "bag" ? 3 : 2);
   $("#piece-comfort").value = piece.comfort || 3;
@@ -278,14 +371,28 @@ async function savePieceEditor() {
 }
 
 async function applyPlan() {
-  day.date = $("#date").value || null;
-  const city = $("#city").value.trim();
-  if (city) {
-    try { day.location = await api("/api/geocode?q=" + encodeURIComponent(city)); }
-    catch { day.location = null; }
-  } else { day.location = null; }
+  const t = todayISO();
+  day.date = ($("#date").value && $("#date").value >= t) ? ($("#date").value === t ? null : $("#date").value) : null;
+  day.occasion = null; activeOccasion = null;
   $("#plan").hidden = true;
   fetchOutfit();
+}
+
+async function setSuburb() {
+  const q = $("#suburb").value.trim();
+  const status = $("#suburb-status");
+  if (!q) {
+    const p = { ...store.prefs }; delete p.location; store.prefs = p;
+    day.location = null; status.textContent = "Using your default location.";
+    fetchOutfit(); return;
+  }
+  status.textContent = "Finding…";
+  try {
+    const loc = await api("/api/geocode?q=" + encodeURIComponent(q));
+    store.prefs = { ...store.prefs, location: loc };
+    day.location = loc; status.textContent = "Set to " + (loc.label || q);
+    fetchOutfit();
+  } catch { status.textContent = "Couldn't find that place."; }
 }
 
 function renderOfficeDays() {
@@ -305,6 +412,8 @@ function loadSettings() {
   $("#style-notes").value = p.style_notes || "";
   $("#love-colors").value = (p.love_colors || []).join(", ");
   $("#avoid-colors").value = (p.avoid_colors || []).join(", ");
+  $("#suburb").value = (p.location && p.location.label) || "";
+  $("#suburb-status").textContent = "";
   renderOfficeDays();
 }
 
@@ -312,6 +421,7 @@ function saveSettings() {
   const split = (v) => v.split(",").map((s) => s.trim()).filter(Boolean);
   const office = [...document.querySelectorAll("#office-days .wd.on")].map((b) => +b.dataset.i);
   store.prefs = {
+    ...store.prefs,  // keep location and anything set elsewhere
     runs_cold: $("#runs-cold").checked,
     style_notes: $("#style-notes").value.trim(),
     love_colors: split($("#love-colors").value),
@@ -345,12 +455,21 @@ function bind() {
   $("#settings-btn").onclick = () => { loadSettings(); $("#settings").hidden = false; };
   $("#settings-close").onclick = () => { $("#settings").hidden = true; };
   $("#settings-save").onclick = saveSettings;
+  $("#suburb-set").onclick = setSuburb;
   $("#signout-btn").onclick = signOut;
+  $("#day-prev").onclick = () => shiftDay(-1);
+  $("#day-next").onclick = () => shiftDay(1);
+  $("#lock-day").onclick = toggleLock;
+  $("#unit-toggle").onclick = () => { store.units = store.units === "F" ? "C" : "F"; updateUnitToggle(); if (lastWeather) renderWeather(lastWeather); };
+  const bars = $("#weather-bars");
+  bars.addEventListener("click", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
+  bars.addEventListener("mousemove", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
+  $("#zoom").onclick = () => { $("#zoom").hidden = true; };
 }
 
 function init() {
-  bind(); renderOccasions();
-  if (store.token) { setWhoami(cap(store.profile)); showApp(); fetchOutfit(); } else { showLock(); }
+  bind(); renderOccasions(); updateUnitToggle();
+  if (store.token) { afterLogin(cap(store.profile)); showApp(); fetchOutfit(); } else { showLock(); }
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/static/service-worker.js").catch(() => {});
 }
 init();

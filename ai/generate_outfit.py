@@ -598,6 +598,34 @@ def _compact(wardrobe_items):
     return [{k: it[k] for k in _KEEP if k in it} for it in wardrobe_items]
 
 
+def _ensure_base_under_mid(items, wardrobe_items, request):
+    """Menswear: a sweater/sweatshirt/hoodie (category 'midlayer') should have a shirt
+    or tee underneath — never worn bare as the only top. Womenswear knits are exempt."""
+    by_name = {i.get("name"): i for i in wardrobe_items}
+    chosen = [by_name.get(n) for n in items if by_name.get(n)]
+    if len(chosen) >= 6:
+        return items
+    needs_base = [i for i in chosen if i.get("category") == "midlayer"]
+    has_base = any(_layer_role(i) == "base" for i in chosen)  # top/blouse/dress
+    if not needs_base or has_base:
+        return items
+    used = set(items)
+    recent = set((request or {}).get("recent") or [])
+    cands = [
+        i for i in wardrobe_items
+        if i.get("category") in {"top", "blouse"} and i.get("name") not in used
+        and all(_can_nest(i, m) for m in needs_base)
+    ]
+    if not cands:
+        return items
+    # a thin, plain, long-sleeve shirt makes the best under-layer
+    cands.sort(key=lambda i: (
+        _bulk(i), 0 if i.get("sleeve") == "long" else 1,
+        _texture_weight(i), 1 if i.get("name") in recent else 0,
+    ))
+    return items + [cands[0]["name"]]
+
+
 def valid_outfit(outfit, wardrobe_items):
     known = {item["name"] for item in wardrobe_items}
     by_name = {item["name"]: item for item in wardrobe_items}
@@ -621,6 +649,7 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
     avoid = set(request.get("avoid") or [])
     usable = [w for w in wardrobe_items if w.get("name") not in avoid]
     fallback = fallback_outfit(weather, usable, calendar, context, request)
+    fallback["items"] = _ensure_base_under_mid(fallback["items"], usable, request)
     if not available():
         return fallback
 
@@ -670,6 +699,7 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
             return fallback  # anchor is non-negotiable
         if required_anchors:
             return fallback  # the fallback force-includes every anchor
+        outfit["items"] = _ensure_base_under_mid(outfit["items"], usable, request)
         return outfit
     except Exception:
         return fallback
