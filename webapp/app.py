@@ -127,6 +127,28 @@ def update_wardrobe_item(item_id: str, body: dict, prof: str = Depends(require_t
     }
 
 
+@app.get("/api/state")
+def get_state(prof: str = Depends(require_token)):
+    """Cross-device state (locked outfits + saved prefs) for this profile."""
+    from webapp import kvstore
+
+    if not kvstore.available():
+        return {"synced": False}
+    data = kvstore.get_json(f"closet:{prof}") or {}
+    return {"synced": True, "locked": data.get("locked") or {}, "prefs": data.get("prefs")}
+
+
+@app.post("/api/state")
+def put_state(body: dict, prof: str = Depends(require_token)):
+    from webapp import kvstore
+
+    if not kvstore.available():
+        return {"synced": False}
+    payload = {"locked": body.get("locked") or {}, "prefs": body.get("prefs")}
+    kvstore.set_json(f"closet:{prof}", payload)
+    return {"synced": True}
+
+
 @app.post("/api/anchors/check")
 def check_anchors(body: dict, prof: str = Depends(require_token)):
     items = load_wardrobe(profile=prof)

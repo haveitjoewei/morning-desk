@@ -380,12 +380,15 @@ body {
 /* ── Lock the day ────────────────────────────────────── */
 .outfit-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .lockbtn {
-  background: none; border: none; font-size: 20px; cursor: pointer; padding: 4px;
-  line-height: 1; opacity: .55; transition: opacity .2s, transform .12s; flex-shrink: 0;
+  display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0;
+  background: var(--card); border: 1px solid var(--line); color: var(--muted);
+  border-radius: 999px; padding: 6px 13px; font-size: 12px; font-weight: 600;
+  letter-spacing: .3px; cursor: pointer; transition: all .2s; white-space: nowrap; line-height: 1;
 }
-.lockbtn:hover { opacity: 1; }
-.lockbtn:active { transform: scale(.9); }
-.lockbtn.on { opacity: 1; }
+.lockbtn:hover { border-color: var(--accent); color: var(--ink); }
+.lockbtn:active { transform: scale(.95); }
+.lockbtn.on { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 6px 16px -8px var(--accent); }
+.outfit.locked .look { outline: 2px solid var(--accent); outline-offset: 4px; }
 
 /* ── Anchored piece indicator ────────────────────────── */
 .look-item.anchored img {

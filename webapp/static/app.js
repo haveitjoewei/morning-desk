@@ -55,8 +55,9 @@ async function unlock() {
     store.token = r.token; store.profile = r.profile || "";
     localStorage.setItem("wc.menswear." + store.profile, r.menswear ? "1" : "");
     $("#pin").value = "";
-    afterLogin(r.name || cap(store.profile));
-    showApp(); fetchOutfit();
+    showApp();
+    await afterLogin(r.name || cap(store.profile));
+    fetchOutfit();
   } catch { $("#lock-error").hidden = false; }
 }
 
@@ -65,13 +66,30 @@ function setWhoami(name) { const el = $("#whoami"); if (el) el.textContent = nam
 function wardrobeIcon() { return localStorage.getItem("wc.menswear." + store.profile) ? "👔" : "👗"; }
 function updateUnitToggle() { const b = $("#unit-toggle"); if (b) b.textContent = store.units === "F" ? "°F" : "°C"; }
 
-function afterLogin(name) {
+async function afterLogin(name) {
   setWhoami(name);
   day = FRESH_DAY();
-  day.location = store.prefs.location || null;
   $("#wish").value = "";
   $("#wardrobe-btn").textContent = `${wardrobeIcon()} Browse & edit my wardrobe`;
   updateUnitToggle();
+  await pullState();                       // adopt locked outfits + prefs synced from other devices
+  day.location = store.prefs.location || null;
+}
+
+async function pullState() {
+  if (!store.token) return;
+  try {
+    const s = await api("/api/state");
+    if (s && s.synced) {
+      if (s.locked) store.locked = { ...store.locked, ...s.locked };
+      if (s.prefs) store.prefs = s.prefs;
+    }
+  } catch { /* offline / no store — keep local state */ }
+}
+
+function pushState() {
+  if (!store.token) return;
+  api("/api/state", { locked: store.locked, prefs: store.prefs }).catch(() => {});
 }
 
 function signOut() {
@@ -169,9 +187,10 @@ function shiftDay(delta) {
 function updateLockButton() {
   const b = $("#lock-day"); if (!b) return;
   const on = !!store.locked[day.date || todayISO()];
-  b.textContent = on ? "🔒" : "🔓";
+  b.innerHTML = on ? "🔒 Locked" : "🔓 Lock";
   b.classList.toggle("on", on);
   b.title = on ? "Locked for the day — tap to unlock" : "Lock this outfit for the day";
+  document.querySelector(".outfit").classList.toggle("locked", on);
 }
 
 function toggleLock() {
@@ -179,6 +198,7 @@ function toggleLock() {
   const locked = { ...store.locked };
   if (locked[key]) { delete locked[key]; store.locked = locked; fetchOutfit(); }
   else if (lastResult) { locked[key] = lastResult; store.locked = locked; updateLockButton(); }
+  pushState();
 }
 
 function fmtHour(h) {
@@ -391,6 +411,7 @@ async function setSuburb() {
     const loc = await api("/api/geocode?q=" + encodeURIComponent(q));
     store.prefs = { ...store.prefs, location: loc };
     day.location = loc; status.textContent = "Set to " + (loc.label || q);
+    pushState();
     fetchOutfit();
   } catch { status.textContent = "Couldn't find that place."; }
 }
@@ -428,6 +449,7 @@ function saveSettings() {
     avoid_colors: split($("#avoid-colors").value),
     office_days: office,
   };
+  pushState();
   $("#settings").hidden = true; fetchOutfit();
 }
 
@@ -469,7 +491,7 @@ function bind() {
 
 function init() {
   bind(); renderOccasions(); updateUnitToggle();
-  if (store.token) { afterLogin(cap(store.profile)); showApp(); fetchOutfit(); } else { showLock(); }
+  if (store.token) { showApp(); afterLogin(cap(store.profile)).then(fetchOutfit); } else { showLock(); }
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/static/service-worker.js").catch(() => {});
 }
 init();
