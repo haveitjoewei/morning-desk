@@ -3,6 +3,7 @@
     "api/index.py": {
       "maxDuration": 10,
       "includeFiles": [
+        "webapp/static/**",
         "profiles/evangeline/cutouts/**",
         "profiles/evangeline/items.json",
         "profiles/evangeline/config.json",

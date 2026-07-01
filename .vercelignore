@@ -1,0 +1,15 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+tests/
+docs/
+logs/
+renderer/
+content/
+profiles/joseph/
+profiles/evangeline/images/
+profiles/evangeline/images_clean/
+profiles/evangeline/inbox/
+node_modules/
+.git/
