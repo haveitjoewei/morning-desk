@@ -14,6 +14,14 @@ FALLBACK_WEATHER = {
     "condition": "rain_later",
     "precipitation_probability": 60,
     "precipitation_mm": 1.0,
+    "hourly": [
+        {"hour": 6, "pop": 10, "mm": 0.0},
+        {"hour": 9, "pop": 30, "mm": 0.2},
+        {"hour": 12, "pop": 55, "mm": 0.6},
+        {"hour": 15, "pop": 70, "mm": 1.2},
+        {"hour": 18, "pop": 40, "mm": 0.3},
+        {"hour": 21, "pop": 15, "mm": 0.0},
+    ],
 }
 
 
@@ -30,6 +38,7 @@ def build_open_meteo_url(config, days=1):
             "timezone": config.get("timezone", "auto"),
             "forecast_days": days,
             "current": "temperature_2m,weather_code,precipitation",
+            "hourly": "precipitation_probability,precipitation",
             "daily": ",".join(
                 [
                     "temperature_2m_max",
@@ -90,7 +99,25 @@ def parse_open_meteo(payload, day=0):
         "condition": condition,
         "precipitation_probability": precipitation_probability,
         "precipitation_mm": precipitation_mm,
+        "hourly": _hourly_precip(payload.get("hourly", {}), day),
     }
+
+
+def _hourly_precip(hourly, day):
+    """Waking-hours (6am-9pm) precip chance + mm for the target day, for an intraday bar."""
+    times = hourly.get("time") or []
+    pops = hourly.get("precipitation_probability") or []
+    mms = hourly.get("precipitation") or []
+    bars = []
+    for i in range(day * 24, min(day * 24 + 24, len(times))):
+        hour = int(str(times[i])[11:13] or 0)
+        if 6 <= hour <= 21:
+            bars.append({
+                "hour": hour,
+                "pop": int(pops[i] or 0) if i < len(pops) else 0,
+                "mm": round(float(mms[i] or 0), 2) if i < len(mms) else 0.0,
+            })
+    return bars
 
 
 def fetch_open_meteo(config, days=1):

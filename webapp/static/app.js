@@ -84,6 +84,7 @@ async function fetchOutfit() {
     $("#headline").textContent = r.headline || "";
     $("#reason").textContent = r.reason || "";
     $("#weather").textContent = (r.weather && r.weather.summary) || "";
+    renderWeatherBars(r.weather);
     const d = r.date ? new Date(r.date + "T00:00:00") : new Date();
     $("#date-label").textContent = d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
     renderLook(r.pieces);
@@ -93,6 +94,29 @@ async function fetchOutfit() {
     day.variety = false;  // one-shot
     loading(false);
   }
+}
+
+function fmtHour(h) {
+  const ap = h < 12 ? "am" : "pm";
+  return `${((h + 11) % 12) + 1}${ap}`;
+}
+
+function renderWeatherBars(w) {
+  const el = $("#weather-bars");
+  if (!el) return;
+  const hrs = (w && w.hourly) || [];
+  if (!hrs.length) { el.hidden = true; el.innerHTML = ""; return; }
+  const peak = hrs.reduce((a, b) => (b.pop > a.pop ? b : a), hrs[0]);
+  const bars = hrs.map((h) => {
+    const cls = h.pop >= 50 ? "wbar wet" : h.pop >= 25 ? "wbar damp" : "wbar";
+    const mm = h.mm ? `, ${h.mm}mm` : "";
+    return `<span class="${cls}" style="--p:${Math.max(4, h.pop)}%" title="${fmtHour(h.hour)}: ${h.pop}%${mm}"></span>`;
+  }).join("");
+  const cap = peak.pop >= 20
+    ? `Rain ~${peak.pop}% around ${fmtHour(peak.hour)}`
+    : "Dry through the day";
+  el.innerHTML = `<span class="wbars-row">${bars}</span><span class="wbars-cap">${cap}</span>`;
+  el.hidden = false;
 }
 
 function openReason(piece) {

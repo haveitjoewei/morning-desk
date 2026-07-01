@@ -282,3 +282,31 @@ body {
   position: sticky; bottom: 0; margin-top: 6px; padding: 14px 0 4px;
   background: linear-gradient(rgba(251,248,242,0), var(--card) 34%);
 }
+
+/* Intraday precipitation bars in the header */
+.wbars { margin-top: 7px; }
+.wbars[hidden] { display: none; }
+.wbars-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 32px;
+  width: max-content;
+  max-width: 240px;
+}
+.wbar {
+  width: 6px;
+  height: var(--p, 4%);
+  min-height: 3px;
+  background: var(--line);
+  border-radius: 3px 3px 0 0;
+}
+.wbar.damp { background: #b9cdd8; }
+.wbar.wet  { background: #6d97b3; }
+.wbars-cap {
+  display: block;
+  margin-top: 4px;
+  font-size: .72rem;
+  letter-spacing: .02em;
+  color: var(--muted);
+}
