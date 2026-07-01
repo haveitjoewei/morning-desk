@@ -389,3 +389,21 @@ def test_anchored_accessories_still_return_complete_outfit():
 
     assert "striped thermal top" in out["items"]
     assert "gingham fleece pants" in out["items"]
+
+
+def test_anchor_warnings_formality_pattern_warmth():
+    from core.outfit import anchor_warnings
+    wardrobe = [
+        {"id": "gown", "name": "silk gown", "category": "dress", "formality": ["formal"], "warmth": 1},
+        {"id": "sweats", "name": "grey sweatpants", "category": "pants", "formality": ["athletic", "casual"], "warmth": 3},
+        {"id": "leo", "name": "leopard midi skirt", "category": "skirt", "pattern": "animal", "warmth": 2},
+        {"id": "floral", "name": "floral blouse", "category": "blouse", "pattern": "floral", "warmth": 2},
+        {"id": "puffer", "name": "down puffer", "category": "outerwear", "warmth": 5},
+        {"id": "tank", "name": "linen tank", "category": "top", "warmth": 1},
+    ]
+    w1 = anchor_warnings(wardrobe, ["gown", "sweats"])
+    assert any("dressiness" in x for x in w1)
+    w2 = anchor_warnings(wardrobe, ["leo", "floral"])
+    assert any("bold patterns" in x for x in w2)
+    w3 = anchor_warnings(wardrobe, ["puffer", "tank"])
+    assert any("temperatures" in x for x in w3)

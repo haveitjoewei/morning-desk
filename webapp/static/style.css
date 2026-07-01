@@ -275,3 +275,10 @@ body {
 }
 .warn p { margin-bottom: 9px; }
 .warn .chip { background: #fff; color: #7a5a20; border-color: #d9b870; }
+
+/* Floating submit in the anchor picker */
+#picker .modal-card { padding-bottom: 12px; }
+.sticky-foot {
+  position: sticky; bottom: 0; margin-top: 6px; padding: 14px 0 4px;
+  background: linear-gradient(rgba(251,248,242,0), var(--card) 34%);
+}

@@ -31,11 +31,27 @@ def _anchor_slot(item):
 
 
 _HEAD_WORDS = ("hat", "cap", "beanie", "beret")
+_FORMALITY_RANK = {"athletic": 0, "casual": 1, "smart casual": 2, "business": 3, "formal": 4}
+_BOLD_PATTERNS = {"graphic", "floral", "colorblock", "check", "animal", "leopard"}
+_BOLD_WORDS = ("leopard", "floral", "plaid", "snakeskin", "zebra", "tie-dye", "sequin")
 
 
 def _is_headwear(item):
     text = (item.get("subtype", "") + " " + item.get("name", "")).lower()
     return any(w in text for w in _HEAD_WORDS)
+
+
+def _formality_ranks(item):
+    value = item.get("formality")
+    levels = value if isinstance(value, list) else ([value] if value else [])
+    return [_FORMALITY_RANK[level] for level in levels if level in _FORMALITY_RANK]
+
+
+def _is_bold_pattern(item):
+    if item.get("pattern") in _BOLD_PATTERNS:
+        return True
+    text = (item.get("subtype", "") + " " + item.get("name", "")).lower()
+    return any(w in text for w in _BOLD_WORDS)
 
 
 def anchor_warnings(wardrobe, anchors):
@@ -46,14 +62,35 @@ def anchor_warnings(wardrobe, anchors):
     for item in selected:
         by_slot.setdefault(_anchor_slot(item), []).append(item.get("name"))
 
+    # 1. Same wear-slot (two tops, two skirts, two bags, two dresses…)
     for slot, names in by_slot.items():
         if len(names) > 1 and slot in {"top", "bottom", "shoes", "bag", "dress"}:
             warnings.append(f"These may compete for the same {slot} slot: {', '.join(names)}.")
+    # 2. Two head pieces
     heads = [item.get("name") for item in selected if _is_headwear(item)]
     if len(heads) > 1:
         warnings.append(f"You can only wear one on your head: {', '.join(heads)}.")
+    # 3. A dress plus separates
     if "dress" in by_slot and ("top" in by_slot or "bottom" in by_slot):
         warnings.append("A dress usually replaces a separate top and bottom.")
+    # 4. Formality clash — two pieces whose dressiness ranges don't overlap
+    for i in range(len(selected)):
+        for j in range(i + 1, len(selected)):
+            a, b = _formality_ranks(selected[i]), _formality_ranks(selected[j])
+            if a and b and (max(a) < min(b) - 1 or max(b) < min(a) - 1):
+                warnings.append(
+                    f"{selected[i].get('name')} and {selected[j].get('name')} are very "
+                    "different dressiness levels."
+                )
+    # 5. Two bold patterns
+    bold = [item.get("name") for item in selected if _is_bold_pattern(item)]
+    if len(bold) > 1:
+        warnings.append(f"Two bold patterns may clash: {', '.join(bold)}.")
+    # 6. Warmth clash — a very warm piece with a very light one
+    warm = [i.get("name") for i in selected if (i.get("warmth") or 3) >= 4]
+    light = [i.get("name") for i in selected if (i.get("warmth") or 3) <= 1]
+    if warm and light:
+        warnings.append(f"These suit very different temperatures: {warm[0]} vs {light[0]}.")
     return warnings
 
 
