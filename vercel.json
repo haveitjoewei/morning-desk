@@ -1,15 +1,17 @@
 {
-  "functions": {
-    "api/index.py": {
-      "maxDuration": 10,
-      "includeFiles": [
-        "webapp/static/**",
-        "profiles/evangeline/cutouts/**",
-        "profiles/evangeline/items.json",
-        "profiles/evangeline/config.json",
-        "profiles/evangeline/prefs.json"
-      ]
+  "services": {
+    "web": {
+      "root": ".",
+      "entrypoint": "webapp/app.py"
     }
   },
-  "rewrites": [{ "source": "/(.*)", "destination": "/api/index" }]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": {
+        "type": "service",
+        "service": "web"
+      }
+    }
+  ]
 }

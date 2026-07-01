@@ -24,3 +24,4 @@ profiles/*/cutouts/
 profiles/*/inbox/
 profiles/*/recent.json
 profiles/*/recent.tmp.json
+.vercel

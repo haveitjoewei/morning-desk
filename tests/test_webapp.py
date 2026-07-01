@@ -103,18 +103,10 @@ def test_anchor_check_warns_on_conflicting_slots(monkeypatch, tmp_path):
     assert any("bag" in w for w in warnings)
 
 
-def test_vercel_config_uses_modern_python_function_shape():
+def test_vercel_config_routes_to_the_fastapi_service():
+    # Vercel's Python runtime auto-detects the FastAPI app and manages this file
+    # (a "services" config), so we just sanity-check it points at our app.
     cfg = json.loads(Path("vercel.json").read_text())
-
-    assert "builds" not in cfg
-    assert "routes" not in cfg
-    assert cfg["rewrites"] == [{"source": "/(.*)", "destination": "/api/index"}]
-
-    api = cfg["functions"]["api/index.py"]
-    assert api["maxDuration"] == 10
-    include = api["includeFiles"]
-    assert "profiles/evangeline/cutouts/**" in include
-    assert "profiles/evangeline/items.json" in include
-    assert "profiles/evangeline/config.json" in include
-    assert "profiles/evangeline/prefs.json" in include
-    assert "images_clean" not in json.dumps(include)
+    assert "builds" not in cfg and "routes" not in cfg
+    assert cfg["services"]["web"]["entrypoint"] == "webapp/app.py"
+    assert cfg["rewrites"][0]["destination"]["service"] == "web"

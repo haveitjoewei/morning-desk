@@ -66,7 +66,7 @@ async def unlock(body: dict):
 def outfit(body: dict, _=Depends(require_token)):
     result = plan_outfit(profile(), prefs=body.get("prefs") or {}, day=body.get("day") or {})
     for piece in result.get("pieces", []):
-        piece["url"] = _image_url(piece.get("image"))
+        piece["url"] = _url_for_id(piece.get("id")) or _image_url(piece.get("image"))
     return result
 
 
