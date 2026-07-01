@@ -400,10 +400,51 @@ def test_anchor_warnings_formality_pattern_warmth():
         {"id": "floral", "name": "floral blouse", "category": "blouse", "pattern": "floral", "warmth": 2},
         {"id": "puffer", "name": "down puffer", "category": "outerwear", "warmth": 5},
         {"id": "tank", "name": "linen tank", "category": "top", "warmth": 1},
+        {"id": "lightcardi", "name": "sheer cardigan", "category": "cardigan", "warmth": 1},
     ]
     w1 = anchor_warnings(wardrobe, ["gown", "sweats"])
     assert any("dressiness" in x for x in w1)
     w2 = anchor_warnings(wardrobe, ["leo", "floral"])
     assert any("bold patterns" in x for x in w2)
-    w3 = anchor_warnings(wardrobe, ["puffer", "tank"])
-    assert any("temperatures" in x for x in w3)
+    # A light base under a warm coat is valid layering — no temperature warning.
+    assert not any("temperatures" in x for x in anchor_warnings(wardrobe, ["puffer", "tank"]))
+    # Two pieces competing for the same layer slot at opposite warmths still clash.
+    assert any("temperatures" in x for x in anchor_warnings(wardrobe, ["puffer", "lightcardi"]))
+
+
+def test_cool_days_stack_compatible_layers_not_one_heavy_piece():
+    from ai.generate_outfit import fallback_outfit, _slot
+
+    wardrobe = [
+        {"id": "t", "name": "thin tee", "category": "top", "thickness": "thin", "warmth": 2, "formality": ["casual"]},
+        {"id": "c", "name": "fine cardigan", "category": "cardigan", "thickness": "medium", "warmth": 3, "formality": ["casual"]},
+        {"id": "co", "name": "wool coat", "category": "outerwear", "thickness": "medium", "warmth": 4, "formality": ["casual"]},
+        {"id": "p", "name": "jeans", "category": "jeans", "thickness": "medium", "warmth": 2, "formality": ["casual"]},
+        {"id": "s", "name": "sneakers", "category": "shoes", "warmth": 2, "formality": ["casual"]},
+    ]
+    cold = fallback_outfit({"high": 8, "condition": "clear"}, wardrobe)["items"]
+    torso = [_slot({**w, **{}}) for w in wardrobe if w["name"] in cold]
+    # a cold day layers up: at least two distinct torso layers coexist
+    layered = {s for s in (_slot(next(w for w in wardrobe if w["name"] == n)) for n in cold)
+               if s in {"base", "mid", "outer"}}
+    assert len(layered) >= 2
+
+    mild = fallback_outfit({"high": 24, "condition": "clear"}, wardrobe)["items"]
+    mild_layers = {_slot(next(w for w in wardrobe if w["name"] == n)) for n in mild}
+    assert mild_layers & {"base", "mid", "outer"}  # has a top
+    assert "mid" not in mild_layers and "outer" not in mild_layers  # but no forced extra layers
+
+
+def test_incompatible_layers_are_not_nested():
+    from ai.generate_outfit import _can_nest, _stack_warmth
+
+    thin_top = {"category": "top", "thickness": "thin", "warmth": 2}
+    chunky = {"category": "knit", "thickness": "thick", "texture": "chunky cable knit", "warmth": 4}
+    slim_blazer = {"category": "outerwear", "subtype": "tailored slim blazer", "warmth": 2}
+    coat = {"category": "outerwear", "thickness": "medium", "warmth": 4}
+
+    assert _can_nest(thin_top, coat)
+    assert not _can_nest(chunky, slim_blazer)   # chunky won't fit under a slim jacket
+    assert not _can_nest(chunky, {"category": "outerwear", "thickness": "thick", "warmth": 5})  # two thick
+    # two light layers combine toward, but stay below, one genuinely warm piece
+    assert _stack_warmth([thin_top, {"category": "cardigan", "warmth": 2}]) < _stack_warmth([{"category": "outerwear", "warmth": 5}])

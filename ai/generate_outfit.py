@@ -28,8 +28,14 @@ SYSTEM = (
     "- Pattern: at most one patterned piece; everything else solid.\n"
     "- Texture: avoid stacking multiple statement textures (e.g. quilted + tweed + ribbed); "
     "use one textured focus and let smoother pieces support it.\n"
-    "- Proportion & layering: a complete look is top + bottom + shoes; add a mid-layer or "
-    "outerwear only when warmth or rain calls for it. Don't stack two bulky layers.\n"
+    "- Proportion & layering: a complete look is top + bottom + shoes; add layers only when "
+    "warmth or rain calls for them. The stack runs base (thin top) -> mid (sweater/cardigan) "
+    "-> outer (coat). On a cool day, reaching the target warmth by combining TWO lighter "
+    "layers (e.g. a thin top under a knit, or a knit under a coat) is often better and more "
+    "polished than one heavy piece. But only nest pieces that physically fit: never put a "
+    "chunky/thick knit under a slim or tailored jacket, never stack two thick/bulky pieces, "
+    "and don't layer a voluminous or ruffled top under a fitted layer (it bulks and pokes "
+    "through). Use each item's thickness, sleeve and fit_notes to judge what nests.\n"
     "- Accessories: include at most one bag.\n"
     "- Register: keep every piece in one formality lane — today's intent decides it "
     "(office/dress_to_impress leans 'smart casual'; work_from_home/off is 'casual'). Each "
@@ -95,10 +101,17 @@ UPPER_CATEGORIES = {"top", "blouse", "knit"}
 LAYER_CATEGORIES = {"midlayer", "cardigan"}
 LOWER_CATEGORIES = {"bottom", "pants", "jeans", "skirt", "shorts"}
 BAG_CATEGORIES = {"bag"}
+# Layering stack: base (worn against skin) -> mid (sweater/cardigan) -> outer (coat).
+BASE_CATEGORIES = {"top", "blouse", "dress"}
+MID_CATEGORIES = {"knit", "cardigan", "midlayer"}
 BOOT_WORDS = ("boot", "boots")
 PUFFER_WORDS = ("puffer", "down/synthetic fill", "synthetic fill")
 COZY_WORDS = ("fleece", "sweat", "soft", "slipper", "ugg", "jersey")
 TEXTURE_WORDS = ("ribbed", "quilted", "tweed", "suede", "velvet", "shearling", "ruffle", "cable", "chunky", "floral", "gingham", "striped")
+BULK_WORDS = ("chunky", "cable", "fleece", "quilted", "puffer", "shearling", "sherpa", "fluffy", "down")
+FITTED_WORDS = ("tailored", "slim", "fitted", "blazer", "structured", "slim-fit")
+VOLUMINOUS_WORDS = ("ruffle", "puff", "balloon", "peplum", "cape", "voluminous", "tiered", "bishop")
+_THICKNESS = {"thin": 1, "medium": 2, "thick": 3}
 
 
 def _category_in(item, categories):
@@ -205,16 +218,71 @@ def _style_penalty(items):
     return penalty
 
 
+def _layer_role(item):
+    """Where a torso piece sits in the stack: base < mid < outer (None if not torso)."""
+    category = (item or {}).get("category")
+    if category in BASE_CATEGORIES:
+        return "base"
+    if category in MID_CATEGORIES:
+        return "mid"
+    if category == "outerwear":
+        return "outer"
+    return None
+
+
+def _thickness(item):
+    return _THICKNESS.get((item or {}).get("thickness"), 2)
+
+
+def _bulk(item):
+    """Coarse volume 1-3 — heavy textures read thick even if 'thickness' says otherwise."""
+    value = _thickness(item)
+    if any(word in _text_fields(item) for word in BULK_WORDS):
+        value = max(value, 3)
+    return value
+
+
+def _is_fitted(item):
+    text = _text_fields(item) + " " + str((item or {}).get("fit_notes", "")).lower()
+    return any(word in text for word in FITTED_WORDS)
+
+
+def _can_nest(inner, outer):
+    """True if `inner` can be worn under `outer` without bulk or poke-through problems."""
+    inner_bulk, outer_bulk = _bulk(inner), _bulk(outer)
+    if inner_bulk == 3 and _is_fitted(outer):
+        return False  # chunky piece won't fit under a slim/tailored layer
+    if inner_bulk == 3 and outer_bulk == 3:
+        return False  # two thick layers don't nest
+    if _is_fitted(outer) and any(w in _text_fields(inner) for w in VOLUMINOUS_WORDS):
+        return False  # ruffles/volume bulk and poke out under a fitted outer
+    return True
+
+
+def _warmth(item):
+    value = (item or {}).get("warmth")
+    return int(value) if isinstance(value, (int, float)) else 2
+
+
+def _stack_warmth(items):
+    """Combined torso warmth — each extra layer adds less (two thin can rival one thick)."""
+    warmths = sorted((_warmth(i) for i in items if i and _layer_role(i)), reverse=True)
+    total, factor = 0.0, 1.0
+    for warmth in warmths:
+        total += warmth * factor
+        factor *= 0.6
+    return total
+
+
 def _slot(item):
     category = (item or {}).get("category")
-    if category in UPPER_CATEGORIES:
-        return "upper"
-    if category in LAYER_CATEGORIES or category == "outerwear":
-        return "layer"
-    if category in LOWER_CATEGORIES:
-        return "lower"
     if category == "dress":
         return "body"
+    role = _layer_role(item)
+    if role:
+        return role  # base / mid / outer — distinct so a full stack can coexist
+    if category in LOWER_CATEGORIES:
+        return "lower"
     if category == "shoes":
         return "shoes"
     if category == "bag":
@@ -224,7 +292,9 @@ def _slot(item):
 
 def _complete_slots(items):
     slots = {_slot(item) for item in items if item}
-    return ("body" in slots or {"upper", "lower"}.issubset(slots)) and "shoes" in slots
+    torso = bool(slots & {"base", "mid", "body"})
+    covered = "body" in slots or (torso and "lower" in slots)
+    return covered and "shoes" in slots
 
 
 def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, request=None):
@@ -335,7 +405,7 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
 
     formality = requested_formality or ("smart casual" if smart_casual or dress_to_impress else "casual")
     dressy_rank = FORMALITY_RANK.get(formality, 1)
-    layer_needed = target_warmth >= 4
+    by_name = {item.get("name"): item for item in wardrobe_items}
 
     anchor_items = _anchor_items(request, wardrobe_items)
     anchor_item = anchor_items[0] if anchor_items else None
@@ -344,20 +414,71 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
         anchor_item and anchor_item.get("category") == "dress"
     )
     dress = first("dress", formality=formality) if dress_allowed else None
-    items = []
-    rain_layer_required = weather.get("condition") in {"rain_likely", "storm"} or target_warmth >= 4
-    if wants_rain and rain_layer_required:
-        items.append(first("outerwear", rain_ok=True, formality=formality) or first("outerwear", rain_ok=True))
-    elif layer_needed:
-        items.append(first(LAYER_CATEGORIES | {"outerwear"}, formality=formality))
 
+    def _pick(categories, *, rain_ok=None, nest_over=None, exclude=None):
+        cats = {categories} if isinstance(categories, str) else set(categories)
+        exclude = exclude or set()
+        cands = []
+        for item in wardrobe_items:
+            if item.get("category") not in cats or item.get("name") in exclude:
+                continue
+            if rain_ok is not None and item.get("rain_ok") != rain_ok:
+                continue
+            if nest_over and not all(_can_nest(inner, item) for inner in nest_over):
+                continue
+            cands.append(item)
+        if not cands:
+            return None
+        cands.sort(key=lambda item: score(item, formality), reverse=True)
+        return cands[1] if variety and len(cands) > 1 else cands[0]
+
+    # Torso stack: base -> optional mid -> optional outer, layered up until it clears
+    # the day's target warmth. Two lighter layers can beat one heavy piece, and every
+    # added layer is checked so it physically nests (no chunky knit under a slim coat).
+    items = []
+    layer_needed = target_warmth >= 4  # only stack extra torso layers when it's genuinely cool
+    rain_layer_required = weather.get("condition") in {"rain_likely", "storm"} or target_warmth >= 4
     if dress:
-        items.append(dress)
+        torso = [by_name.get(dress)]
     else:
-        items.extend([
-            first(UPPER_CATEGORIES, formality=formality) or first(UPPER_CATEGORIES),
-            first(LOWER_CATEGORIES, formality=formality) or first(LOWER_CATEGORIES),
-        ])
+        torso = [item for item in anchor_items if _layer_role(item)]
+        if not any(_layer_role(item) == "base" for item in torso):
+            base = _pick(UPPER_CATEGORIES, exclude={i.get("name") for i in torso})
+            if base:
+                torso.append(base)
+
+    def warm_enough():
+        return _stack_warmth(torso) >= target_warmth
+
+    def has_role(role):
+        return any(_layer_role(item) == role for item in torso if item)
+
+    if wants_rain and rain_layer_required and not has_role("outer"):
+        shell = _pick("outerwear", rain_ok=True, nest_over=[i for i in torso if i]) or _pick(
+            "outerwear", rain_ok=True
+        )
+        if shell:
+            torso.append(shell)
+    if layer_needed and not warm_enough() and not has_role("mid"):
+        mids = {"cardigan"} if any(i and i.get("category") == "knit" for i in torso) else MID_CATEGORIES
+        mid = _pick(
+            mids,
+            nest_over=[i for i in torso if i and _layer_role(i) == "base"],
+            exclude={i.get("name") for i in torso if i},
+        )
+        if mid:
+            torso.append(mid)
+    if layer_needed and not warm_enough() and not has_role("outer"):
+        outer = _pick("outerwear", nest_over=[i for i in torso if i],
+                      exclude={i.get("name") for i in torso if i})
+        if outer:
+            torso.append(outer)
+
+    items.extend(item.get("name") for item in torso if item)
+    if not dress:
+        lower = first(LOWER_CATEGORIES, formality=formality) or first(LOWER_CATEGORIES)
+        if lower:
+            items.append(lower)
 
     items.append(
         first("shoes", rain_ok=True, formality=formality) or first("shoes", formality=formality)
@@ -368,7 +489,6 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
         items.append(first(BAG_CATEGORIES, formality=formality) or first(BAG_CATEGORIES))
     items = [item for item in items if item]
 
-    by_name = {item.get("name"): item for item in wardrobe_items}
     anchored = []
     used_bag = False
     for item in anchor_items:
@@ -404,20 +524,20 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
         final.append(name)
         used_categories.add(category)
         used_slots.add(slot)
-        if len(final) >= 5:
+        if len(final) >= 6:
             break
     if _style_penalty([by_name.get(name) for name in final]) >= 8:
         final = [
             name for name in final
             if _texture_weight(by_name.get(name, {})) < 2
             or name in anchored
-            or _slot(by_name.get(name)) in {"upper", "lower", "body", "shoes"}
+            or _slot(by_name.get(name)) in {"base", "mid", "outer", "lower", "body", "shoes"}
         ]
 
     def make_room(names):
-        if len(names) < 5:
+        if len(names) < 6:
             return names
-        for removable_slot in ("accessory", "bag", "layer"):
+        for removable_slot in ("accessory", "bag", "outer", "mid"):
             for idx, name in enumerate(names):
                 if _slot(by_name.get(name)) == removable_slot:
                     return names[:idx] + names[idx + 1:]
@@ -438,7 +558,7 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
     if not _complete_slots([by_name.get(name) for name in final]):
         slots = {_slot(by_name.get(name)) for name in final}
         if "body" not in slots:
-            if "upper" not in slots:
+            if not (slots & {"base", "mid"}):
                 final = add_required(final, UPPER_CATEGORIES)
             if "lower" not in slots:
                 final = add_required(final, LOWER_CATEGORIES)
@@ -468,8 +588,9 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
 
 
 _KEEP = ("name", "id", "category", "subtype", "colors", "neutral", "formality",
-         "warmth", "rain_ok", "condition", "pattern", "material", "texture",
-         "polish", "comfort", "home_ok", "office_ok", "wear_frequency", "avoid_often")
+         "warmth", "thickness", "sleeve", "fit_notes", "rain_ok", "condition",
+         "pattern", "material", "texture", "polish", "comfort", "home_ok",
+         "office_ok", "wear_frequency", "avoid_often")
 
 
 def _compact(wardrobe_items):
@@ -486,7 +607,7 @@ def valid_outfit(outfit, wardrobe_items):
         and isinstance(outfit.get("headline"), str)
         and isinstance(outfit.get("reason"), str)
         and isinstance(outfit.get("items"), list)
-        and 2 <= len(outfit["items"]) <= 5
+        and 2 <= len(outfit["items"]) <= 6
         and all(isinstance(item, str) and item in known for item in outfit["items"])
         and len(bags) <= 1
     )

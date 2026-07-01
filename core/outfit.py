@@ -86,11 +86,15 @@ def anchor_warnings(wardrobe, anchors):
     bold = [item.get("name") for item in selected if _is_bold_pattern(item)]
     if len(bold) > 1:
         warnings.append(f"Two bold patterns may clash: {', '.join(bold)}.")
-    # 6. Warmth clash — a very warm piece with a very light one
-    warm = [i.get("name") for i in selected if (i.get("warmth") or 3) >= 4]
-    light = [i.get("name") for i in selected if (i.get("warmth") or 3) <= 1]
-    if warm and light:
-        warnings.append(f"These suit very different temperatures: {warm[0]} vs {light[0]}.")
+    # 6. Warmth clash — only when a very warm and a very light piece compete for the SAME
+    #    slot (e.g. two layers). Across slots a light base under a warm coat is valid layering.
+    for names in by_slot.values():
+        picks = [i for i in selected if i.get("name") in names]
+        warm = [i.get("name") for i in picks if (i.get("warmth") or 3) >= 4]
+        light = [i.get("name") for i in picks if (i.get("warmth") or 3) <= 1]
+        if warm and light:
+            warnings.append(f"These suit very different temperatures: {warm[0]} vs {light[0]}.")
+            break
     return warnings
 
 
