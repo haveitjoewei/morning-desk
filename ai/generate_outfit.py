@@ -626,13 +626,27 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
 
     anchors = [item.get("name") for item in _anchor_items(request, usable)]
     anchor = _anchor_name(request.get("anchor"), usable)
-    system_text = SYSTEM
+
+    # Stable prefix (styling rules + wardrobe) is cached so rapid adjustments — warmer,
+    # dressier, surprise-me — reuse it instead of re-sending 100+ items each tap.
+    system_blocks = [
+        {"type": "text", "text": SYSTEM, "cache_control": {"type": "ephemeral"}},
+        {
+            "type": "text",
+            "text": "Client wardrobe — choose ONLY from these exact item names:\n"
+            + json.dumps(_compact(usable), ensure_ascii=False),
+            "cache_control": {"type": "ephemeral"},
+        },
+    ]
+    directives = []
     if request.get("instructions"):
-        system_text += "\nWearer preferences for today: " + request["instructions"]
+        directives.append("Wearer preferences for today: " + request["instructions"])
     if anchor:
-        system_text += f"\nYou MUST build the outfit around this exact item and include it: {anchor}."
+        directives.append(f"You MUST build the outfit around this exact item and include it: {anchor}.")
     if anchors:
-        system_text += "\nInclude these anchor items if they can coexist in one styled outfit: " + ", ".join(anchors) + "."
+        directives.append("Include these anchor items if they can coexist in one styled outfit: " + ", ".join(anchors) + ".")
+    if directives:
+        system_blocks.append({"type": "text", "text": "\n".join(directives)})
 
     try:
         payload = {
@@ -640,13 +654,12 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
             "calendar": calendar,
             "context": context,
             "request": request,
-            "wardrobe": _compact(usable),
         }
         response = client().messages.create(
             model=MODEL,
             max_tokens=260,
             output_config={"format": {"type": "json_schema", "schema": OUTFIT_SCHEMA}},
-            system=[{"type": "text", "text": system_text, "cache_control": {"type": "ephemeral"}}],
+            system=system_blocks,
             messages=[{"role": "user", "content": json.dumps(payload, ensure_ascii=False)}],
         )
         outfit = json.loads(text_of(response))

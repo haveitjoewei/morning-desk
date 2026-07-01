@@ -107,15 +107,28 @@ def _parse_date(value):
         return _dt.date.today()
 
 
+_WEATHER_CACHE = {}  # key -> (monotonic_expiry, weather); short-lived, per warm process
+_WEATHER_TTL = 600  # seconds — a day's forecast doesn't move between rapid adjustments
+
+
 def _weather(cfg, location_override, offset):
+    import time
+
     from connectors.weather import FALLBACK_WEATHER, fetch_open_meteo, parse_open_meteo
 
     if os.environ.get("MD_OFFLINE") == "1":
         return FALLBACK_WEATHER.copy()
     location = location_override or cfg.get("location", {})
+    key = (location.get("latitude"), location.get("longitude"), offset)
+    hit = _WEATHER_CACHE.get(key)
+    now = time.monotonic()
+    if hit and hit[0] > now:
+        return hit[1].copy()
     try:
         payload = fetch_open_meteo(location, days=offset + 1)
-        return parse_open_meteo(payload, day=offset)
+        weather = parse_open_meteo(payload, day=offset)
+        _WEATHER_CACHE[key] = (now + _WEATHER_TTL, weather)
+        return weather.copy()
     except Exception:
         return FALLBACK_WEATHER.copy()
 
