@@ -203,8 +203,7 @@ body {
   font-size: 11px; text-transform: capitalize; color: var(--accent); margin: 16px 0 8px;
   letter-spacing: 1.5px; font-weight: 600;
 }
-#picker-apply, #edit-piece, #piece-save { margin-top: 18px; }
-#edit-piece { display: block; width: 100%; text-align: center; }
+#picker-apply, #piece-save { margin-top: 18px; }
 
 .field { display: block; margin-bottom: 16px; }
 .field > span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px;
@@ -283,30 +282,70 @@ body {
   background: linear-gradient(rgba(251,248,242,0), var(--card) 34%);
 }
 
-/* Intraday precipitation bars in the header */
-.wbars { margin-top: 7px; }
+/* Intraday weather strip: temp range + rain summary, hourly rain bars, time/temp ticks */
+.wbars { margin-top: 10px; max-width: 260px; }
 .wbars[hidden] { display: none; }
+.wbars-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  margin-bottom: 5px;
+}
+.wbars-range {
+  font-family: var(--serif); font-weight: 500; font-size: 15px; color: var(--ink);
+  letter-spacing: -.2px;
+}
+.wbars-cap {
+  font-size: 10px; letter-spacing: 1.4px; text-transform: uppercase;
+  font-weight: 600; color: var(--muted);
+}
 .wbars-row {
-  display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 32px;
-  width: max-content;
-  max-width: 240px;
+  display: flex; align-items: flex-end; gap: 2px; height: 26px;
 }
 .wbar {
-  width: 6px;
-  height: var(--p, 4%);
-  min-height: 3px;
-  background: var(--line);
-  border-radius: 3px 3px 0 0;
+  flex: 1; min-width: 3px; height: var(--p, 6%); min-height: 3px;
+  background: var(--line); border-radius: 2px 2px 0 0;
+  transition: height .3s cubic-bezier(.2,.7,.2,1);
 }
-.wbar.damp { background: #b9cdd8; }
+.wbar.damp { background: #bcd0da; }
 .wbar.wet  { background: #6d97b3; }
-.wbars-cap {
-  display: block;
-  margin-top: 4px;
-  font-size: .72rem;
-  letter-spacing: .02em;
-  color: var(--muted);
+.wticks {
+  display: flex; gap: 2px; margin-top: 4px;
 }
+.wtick { flex: 1; min-width: 3px; display: flex; flex-direction: column; align-items: center; }
+.wtick b { font-size: 11px; font-weight: 600; color: var(--ink-soft); line-height: 1.1; }
+.wtick i {
+  font-style: normal; font-size: 8.5px; letter-spacing: .3px; color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── Multi-profile: whoami + sign out + header layout ─── */
+.top { align-items: flex-start; }
+.top-l { min-width: 0; }
+.top-r { display: flex; gap: 2px; flex-shrink: 0; }
+.whoami {
+  font-family: var(--serif); font-style: italic; font-size: 13px;
+  color: var(--accent); letter-spacing: .2px; margin-bottom: 6px; min-height: 1em;
+}
+.whoami:empty { display: none; }
+#signout-btn:hover { transform: none; }
+
+/* Secondary / ghost button */
+.btn.ghost {
+  background: transparent; color: var(--ink-soft); border: 1px solid var(--line);
+}
+.btn.ghost:hover { border-color: var(--accent); color: var(--ink); }
+.btn.ghost:active { transform: translateY(1px); }
+
+/* Labelled divider separating "your closet" from today's tweaks */
+.closet-sep {
+  display: flex; align-items: center; gap: 12px; margin: 22px 0 12px;
+  color: var(--muted); font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+}
+.closet-sep::before, .closet-sep::after {
+  content: ""; flex: 1; height: 1px; background: var(--line);
+}
+
+/* Equal-sized action tiles (Remove / Swap / Edit) regardless of label length */
+.sheet-actions { align-items: stretch; }
+.action { min-height: 92px; justify-content: center; }
+.action b { line-height: 1.1; }
+.action small { min-height: 2.4em; display: flex; align-items: center; justify-content: center; }

@@ -26,12 +26,16 @@
 
   <main id="app" hidden>
     <header class="top">
-      <div>
+      <div class="top-l">
+        <div id="whoami" class="whoami"></div>
         <div id="date-label" class="date"></div>
         <div id="weather" class="weather"></div>
         <div id="weather-bars" class="wbars" hidden></div>
       </div>
-      <button id="settings-btn" class="icon-btn" aria-label="Settings">⚙</button>
+      <div class="top-r">
+        <button id="settings-btn" class="icon-btn" aria-label="Settings">⚙</button>
+        <button id="signout-btn" class="icon-btn" aria-label="Sign out" title="Sign out">⎋</button>
+      </div>
     </header>
 
     <section class="outfit">
@@ -57,7 +61,6 @@
         <button id="anchor-btn" class="chip">★ Anchor a piece</button>
         <button id="variety-btn" class="chip">🔀 Surprise me</button>
         <button id="plan-btn" class="chip">📅 Plan ahead</button>
-        <button id="wardrobe-btn" class="chip">👗 My wardrobe</button>
       </div>
       <div class="row plan" id="plan" hidden>
         <input type="date" id="date">
@@ -69,6 +72,9 @@
         <input id="wish" class="wish" type="text" placeholder="Anything else? e.g. “something flowy”, “wear the green cardigan”">
       </div>
       <button id="regen" class="btn primary wide">Show me an outfit</button>
+
+      <div class="closet-sep"><span>Your closet</span></div>
+      <button id="wardrobe-btn" class="btn ghost wide">👗 Browse &amp; edit my wardrobe</button>
     </section>
   </main>
 

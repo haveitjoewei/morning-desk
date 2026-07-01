@@ -36,22 +36,24 @@ if PROFILES_ROOT.exists():
     app.mount("/profiles", StaticFiles(directory=str(PROFILES_ROOT)), name="profiles")
 
 
-def require_token(authorization: str = Header(default="")):
+def require_token(authorization: str = Header(default="")) -> str:
+    """Verify the token and return the profile it is bound to."""
     token = authorization[7:] if authorization.startswith("Bearer ") else authorization
-    if not verify_token(token):
+    prof = verify_token(token)
+    if not prof:
         raise HTTPException(status_code=401, detail="locked")
-    return True
+    return prof
 
 
-def _url_for_id(item_id):
+def _url_for_id(item_id, prof):
     """Transparent cutout served as a static CDN asset at /profiles/<who>/cutouts/."""
     if not item_id:
         return None
-    return f"/profiles/{profile()}/cutouts/{item_id}.png"
+    return f"/profiles/{prof}/cutouts/{item_id}.png"
 
 
-def _image_url(image):
-    return _url_for_id(Path(image).stem) if image else None
+def _image_url(image, prof):
+    return _url_for_id(Path(image).stem, prof) if image else None
 
 
 @app.get("/")
@@ -61,28 +63,30 @@ def index():
 
 @app.post("/api/unlock")
 async def unlock(body: dict):
-    if not check_pin(body.get("pin", "")):
+    prof = check_pin(body.get("pin", ""))
+    if not prof:
         raise HTTPException(status_code=401, detail="wrong pin")
-    return {"token": make_token()}
+    return {"token": make_token(prof), "profile": prof, "name": prof.capitalize()}
 
 
 @app.post("/api/outfit")
-def outfit(body: dict, _=Depends(require_token)):
-    result = plan_outfit(profile(), prefs=body.get("prefs") or {}, day=body.get("day") or {})
+def outfit(body: dict, prof: str = Depends(require_token)):
+    result = plan_outfit(prof, prefs=body.get("prefs") or {}, day=body.get("day") or {})
     for piece in result.get("pieces", []):
-        piece["url"] = _url_for_id(piece.get("id")) or _image_url(piece.get("image"))
+        piece["url"] = _url_for_id(piece.get("id"), prof) or _image_url(piece.get("image"), prof)
+    result["profile"] = prof
     return result
 
 
 @app.get("/api/wardrobe")
-def wardrobe(_=Depends(require_token)):
-    items = load_wardrobe(profile=profile())
+def wardrobe(prof: str = Depends(require_token)):
+    items = load_wardrobe(profile=prof)
     return [
         {
             "id": it.get("id"),
             "name": it.get("name"),
             "category": it.get("category"),
-            "url": _url_for_id(it.get("id")),
+            "url": _url_for_id(it.get("id"), prof),
             "warmth": it.get("warmth"),
             "polish": it.get("polish"),
             "comfort": it.get("comfort"),
@@ -96,8 +100,8 @@ def wardrobe(_=Depends(require_token)):
 
 
 @app.post("/api/wardrobe/{item_id}")
-def update_wardrobe_item(item_id: str, body: dict, _=Depends(require_token)):
-    item = save_metadata_correction(item_id, body, profile=profile())
+def update_wardrobe_item(item_id: str, body: dict, prof: str = Depends(require_token)):
+    item = save_metadata_correction(item_id, body, profile=prof)
     if not item:
         raise HTTPException(status_code=404, detail="item not found")
     return {
@@ -115,20 +119,20 @@ def update_wardrobe_item(item_id: str, body: dict, _=Depends(require_token)):
 
 
 @app.post("/api/anchors/check")
-def check_anchors(body: dict, _=Depends(require_token)):
-    items = load_wardrobe(profile=profile())
+def check_anchors(body: dict, prof: str = Depends(require_token)):
+    items = load_wardrobe(profile=prof)
     return {"warnings": anchor_warnings(items, body.get("anchors") or [])}
 
 
 @app.get("/api/weather")
-def weather(_=Depends(require_token)):
+def weather(prof: str = Depends(require_token)):
     from connectors.weather import fetch_weather_for
 
-    return fetch_weather_for(profile())
+    return fetch_weather_for(prof)
 
 
 @app.get("/api/geocode")
-def geocode_city(q: str = "", _=Depends(require_token)):
+def geocode_city(q: str = "", _: str = Depends(require_token)):
     from connectors.weather import geocode
 
     result = geocode(q)

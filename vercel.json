@@ -3,8 +3,8 @@
   "functions": {
     "api/index.py": {
       "maxDuration": 10,
-      "excludeFiles": "profiles/{joseph/**,evangeline/images/**,evangeline/images_clean/**,evangeline/inbox/**}",
-      "includeFiles": "profiles/evangeline/cutouts/**"
+      "excludeFiles": "profiles/{evangeline/images/**,evangeline/images_clean/**,evangeline/inbox/**,joseph/images/**,joseph/images_clean/**,joseph/inbox/**}",
+      "includeFiles": "profiles/{evangeline/cutouts/**,joseph/cutouts/**}"
     }
   },
   "rewrites": [{ "source": "/(.*)", "destination": "/api/index" }]

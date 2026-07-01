@@ -14,7 +14,10 @@ orchestrator/
 device/
 calendar/
 .vercel/
-profiles/joseph/
+profiles/joseph/images/
+profiles/joseph/images_clean/
+profiles/joseph/inbox/
+profiles/joseph/review.md
 profiles/evangeline/images/
 profiles/evangeline/images_clean/
 profiles/evangeline/inbox/

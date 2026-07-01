@@ -9,10 +9,14 @@ const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const store = {
   get token() { return localStorage.getItem("wc.token"); },
   set token(v) { v ? localStorage.setItem("wc.token", v) : localStorage.removeItem("wc.token"); },
-  get prefs() { try { return JSON.parse(localStorage.getItem("wc.prefs")) || {}; } catch { return {}; } },
-  set prefs(v) { localStorage.setItem("wc.prefs", JSON.stringify(v)); },
-  get recent() { try { return JSON.parse(localStorage.getItem("wc.recent")) || []; } catch { return []; } },
-  set recent(v) { localStorage.setItem("wc.recent", JSON.stringify(v.slice(0, 15))); },
+  get profile() { return localStorage.getItem("wc.profile") || ""; },
+  set profile(v) { v ? localStorage.setItem("wc.profile", v) : localStorage.removeItem("wc.profile"); },
+  // Prefs and recency are per-profile, so switching closets never mixes them.
+  _k(base) { return `wc.${base}.${this.profile || "_"}`; },
+  get prefs() { try { return JSON.parse(localStorage.getItem(this._k("prefs"))) || {}; } catch { return {}; } },
+  set prefs(v) { localStorage.setItem(this._k("prefs"), JSON.stringify(v)); },
+  get recent() { try { return JSON.parse(localStorage.getItem(this._k("recent"))) || []; } catch { return []; } },
+  set recent(v) { localStorage.setItem(this._k("recent"), JSON.stringify(v.slice(0, 15))); },
 };
 
 let day = { occasion: null, temp_step: 0, dress_step: 0, anchor: null, anchors: [], wish: "", variety: false, rejections: [], date: null, location: null };
@@ -37,9 +41,24 @@ function loading(on) { $("#loading").hidden = !on; }
 async function unlock() {
   $("#lock-error").hidden = true;
   try {
-    const { token } = await api("/api/unlock", { pin: $("#pin").value });
-    store.token = token; showApp(); fetchOutfit();
+    const r = await api("/api/unlock", { pin: $("#pin").value });
+    store.token = r.token; store.profile = r.profile || "";
+    setWhoami(r.name || cap(store.profile));
+    $("#pin").value = "";
+    showApp(); fetchOutfit();
   } catch { $("#lock-error").hidden = false; }
+}
+
+function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ""; }
+
+function setWhoami(name) {
+  const el = $("#whoami"); if (el) el.textContent = name ? `${name}’s closet` : "";
+}
+
+function signOut() {
+  store.token = null; store.profile = null;
+  setWhoami(""); $("#pin").value = "";
+  showLock();
 }
 
 function renderOccasions() {
@@ -106,16 +125,26 @@ function renderWeatherBars(w) {
   if (!el) return;
   const hrs = (w && w.hourly) || [];
   if (!hrs.length) { el.hidden = true; el.innerHTML = ""; return; }
+  const temps = hrs.map((h) => h.temp).filter((t) => t != null);
+  const lo = temps.length ? Math.min(...temps) : w.low;
+  const hi = temps.length ? Math.max(...temps) : w.high;
   const peak = hrs.reduce((a, b) => (b.pop > a.pop ? b : a), hrs[0]);
+  const n = hrs.length;
+  const tickAt = new Set([0, Math.round(n / 3), Math.round((2 * n) / 3), n - 1]);
   const bars = hrs.map((h) => {
     const cls = h.pop >= 50 ? "wbar wet" : h.pop >= 25 ? "wbar damp" : "wbar";
-    const mm = h.mm ? `, ${h.mm}mm` : "";
-    return `<span class="${cls}" style="--p:${Math.max(4, h.pop)}%" title="${fmtHour(h.hour)}: ${h.pop}%${mm}"></span>`;
+    const t = h.temp != null ? ` ${h.temp}°` : "";
+    return `<span class="${cls}" style="--p:${Math.max(6, h.pop)}%" title="${fmtHour(h.hour)}${t} · rain ${h.pop}%"></span>`;
   }).join("");
-  const cap = peak.pop >= 20
-    ? `Rain ~${peak.pop}% around ${fmtHour(peak.hour)}`
-    : "Dry through the day";
-  el.innerHTML = `<span class="wbars-row">${bars}</span><span class="wbars-cap">${cap}</span>`;
+  const ticks = hrs.map((h, i) => tickAt.has(i)
+    ? `<span class="wtick"><b>${h.temp != null ? h.temp + "°" : ""}</b><i>${fmtHour(h.hour)}</i></span>`
+    : `<span class="wtick"></span>`).join("");
+  const range = (lo != null && hi != null) ? `${lo}°–${hi}°` : "";
+  const rain = peak.pop >= 20 ? `rain ~${peak.pop}% · ${fmtHour(peak.hour)}` : "dry through the day";
+  el.innerHTML =
+    `<div class="wbars-head"><span class="wbars-range">${range}</span><span class="wbars-cap">${rain}</span></div>` +
+    `<div class="wbars-row">${bars}</div>` +
+    `<div class="wticks">${ticks}</div>`;
   el.hidden = false;
 }
 
@@ -316,11 +345,12 @@ function bind() {
   $("#settings-btn").onclick = () => { loadSettings(); $("#settings").hidden = false; };
   $("#settings-close").onclick = () => { $("#settings").hidden = true; };
   $("#settings-save").onclick = saveSettings;
+  $("#signout-btn").onclick = signOut;
 }
 
 function init() {
   bind(); renderOccasions();
-  if (store.token) { showApp(); fetchOutfit(); } else { showLock(); }
+  if (store.token) { setWhoami(cap(store.profile)); showApp(); fetchOutfit(); } else { showLock(); }
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/static/service-worker.js").catch(() => {});
 }
 init();

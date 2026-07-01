@@ -110,7 +110,23 @@ def test_vercel_config_bundles_only_cutouts_not_full_images():
     cfg = json.loads(Path("vercel.json").read_text())
     assert "services" not in cfg and "builds" not in cfg
     fn = cfg["functions"]["api/index.py"]
-    # include the cutouts the app serves; exclude every heavy image dir from the bundle
-    assert fn["includeFiles"] == "profiles/evangeline/cutouts/**"
-    assert "images_clean" in fn["excludeFiles"] and "joseph" in fn["excludeFiles"]
+    # include both profiles' cutouts (multi-profile); exclude every heavy image dir
+    assert "evangeline/cutouts" in fn["includeFiles"] and "joseph/cutouts" in fn["includeFiles"]
+    assert "images_clean" in fn["excludeFiles"]
+    assert "images_clean" not in fn["includeFiles"]
     assert cfg["rewrites"] == [{"source": "/(.*)", "destination": "/api/index"}]
+
+
+def test_pin_maps_to_its_own_profile(monkeypatch):
+    from webapp.auth import check_pin, make_token, verify_token
+    monkeypatch.setenv("WARDROBE_SECRET", "s3cret")
+    monkeypatch.setenv("WARDROBE_PROFILE", "evangeline")
+    monkeypatch.setenv("WARDROBE_PIN", "1111")       # default profile
+    monkeypatch.setenv("WARDROBE_PIN_JOSEPH", "2222")  # second profile
+    assert check_pin("1111") == "evangeline"
+    assert check_pin("2222") == "joseph"
+    assert check_pin("9999") is None
+    # the token round-trips the profile it was minted for
+    assert verify_token(make_token("joseph")) == "joseph"
+    assert verify_token(make_token("evangeline")) == "evangeline"
+    assert verify_token("evangeline.0.deadbeef") is None  # expired/forged
