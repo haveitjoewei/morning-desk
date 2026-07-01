@@ -103,10 +103,14 @@ def test_anchor_check_warns_on_conflicting_slots(monkeypatch, tmp_path):
     assert any("bag" in w for w in warnings)
 
 
-def test_vercel_config_routes_to_the_fastapi_service():
-    # Vercel's Python runtime auto-detects the FastAPI app and manages this file
-    # (a "services" config), so we just sanity-check it points at our app.
+def test_vercel_config_bundles_only_cutouts_not_full_images():
+    # Functions model (not experimental "services", which bundles the whole repo and
+    # ignores .vercelignore -> 398MB > 225MB limit). We include ONLY the cutouts the
+    # app serves; all the images_clean stay out of the function.
     cfg = json.loads(Path("vercel.json").read_text())
-    assert "builds" not in cfg and "routes" not in cfg
-    assert cfg["services"]["web"]["entrypoint"] == "webapp/app.py"
-    assert cfg["rewrites"][0]["destination"]["service"] == "web"
+    assert "services" not in cfg and "builds" not in cfg
+    fn = cfg["functions"]["api/index.py"]
+    # include the cutouts the app serves; exclude every heavy image dir from the bundle
+    assert fn["includeFiles"] == "profiles/evangeline/cutouts/**"
+    assert "images_clean" in fn["excludeFiles"] and "joseph" in fn["excludeFiles"]
+    assert cfg["rewrites"] == [{"source": "/(.*)", "destination": "/api/index"}]

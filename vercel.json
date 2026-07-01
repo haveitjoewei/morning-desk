@@ -1,17 +1,11 @@
 {
-  "services": {
-    "web": {
-      "root": ".",
-      "entrypoint": "webapp/app.py"
+  "framework": null,
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 10,
+      "excludeFiles": "profiles/{joseph/**,evangeline/images/**,evangeline/images_clean/**,evangeline/inbox/**}",
+      "includeFiles": "profiles/evangeline/cutouts/**"
     }
   },
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": {
-        "type": "service",
-        "service": "web"
-      }
-    }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/index" }]
 }

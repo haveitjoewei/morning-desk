@@ -1,5 +1,6 @@
 venv/
 .venv/
+_uv/
 __pycache__/
 *.pyc
 tests/
@@ -7,9 +8,16 @@ docs/
 logs/
 renderer/
 content/
+scripts/
+server/
+orchestrator/
+device/
+calendar/
+.vercel/
 profiles/joseph/
 profiles/evangeline/images/
 profiles/evangeline/images_clean/
 profiles/evangeline/inbox/
+profiles/evangeline/review.md
 node_modules/
 .git/

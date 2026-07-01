@@ -20,6 +20,7 @@ from webapp.auth import check_pin, make_token, verify_token
 
 ROOT = Path(__file__).resolve().parents[1]
 STATIC = Path(__file__).resolve().parent / "static"
+PROFILES_ROOT = Path(os.environ.get("MD_PROFILES_ROOT", str(ROOT / "profiles")))
 
 
 def profile() -> str:
@@ -28,6 +29,11 @@ def profile() -> str:
 
 app = FastAPI(title="Wardrobe Companion")
 app.mount("/static", StaticFiles(directory=str(STATIC)), name="static")
+# Cutouts ship as static CDN assets (kept out of the function so it stays under the
+# 225MB size limit) and are served straight from the CDN at their own path. This mount
+# makes local dev serve the same URLs; on Vercel the CDN answers first so it's unused.
+if PROFILES_ROOT.exists():
+    app.mount("/profiles", StaticFiles(directory=str(PROFILES_ROOT)), name="profiles")
 
 
 def require_token(authorization: str = Header(default="")):
@@ -38,12 +44,10 @@ def require_token(authorization: str = Header(default="")):
 
 
 def _url_for_id(item_id):
-    """Prefer a precomputed transparent cutout, else the cleaned photo."""
+    """Transparent cutout served as a static CDN asset at /profiles/<who>/cutouts/."""
     if not item_id:
         return None
-    if (profile_dir(profile()) / "cutouts" / f"{item_id}.png").exists():
-        return f"/img/cutouts/{item_id}.png"
-    return f"/img/clean/{item_id}.jpg"
+    return f"/profiles/{profile()}/cutouts/{item_id}.png"
 
 
 def _image_url(image):
