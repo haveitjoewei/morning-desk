@@ -21,6 +21,8 @@ const store = {
   set units(v) { localStorage.setItem("wc.units", v); },
   get locked() { try { return JSON.parse(localStorage.getItem(this._k("locked"))) || {}; } catch { return {}; } },
   set locked(v) { localStorage.setItem(this._k("locked"), JSON.stringify(v)); },
+  get occasions() { try { return JSON.parse(localStorage.getItem(this._k("occ"))) || {}; } catch { return {}; } },
+  set occasions(v) { localStorage.setItem(this._k("occ"), JSON.stringify(v)); },
 };
 
 const FRESH_DAY = () => ({ occasion: null, temp_step: 0, dress_step: 0, anchor: null, anchors: [], wish: "", variety: false, rejections: [], date: null, location: null });
@@ -82,6 +84,7 @@ async function pullState() {
     const s = await api("/api/state");
     if (s && s.synced) {
       if (s.locked) store.locked = { ...store.locked, ...s.locked };
+      if (s.occasions) store.occasions = { ...store.occasions, ...s.occasions };
       if (s.prefs) store.prefs = s.prefs;
     }
   } catch { /* offline / no store — keep local state */ }
@@ -89,7 +92,7 @@ async function pullState() {
 
 function pushState() {
   if (!store.token) return;
-  api("/api/state", { locked: store.locked, prefs: store.prefs }).catch(() => {});
+  api("/api/state", { locked: store.locked, prefs: store.prefs, occasions: store.occasions }).catch(() => {});
 }
 
 function signOut() {
@@ -105,7 +108,13 @@ function renderOccasions() {
     const b = document.createElement("button");
     b.className = "chip" + (o.toLowerCase() === (activeOccasion || "").toLowerCase() ? " on" : "");
     b.textContent = o;
-    b.onclick = () => { day.occasion = o; day.rejections = []; activeOccasion = o; renderOccasions(); fetchOutfit(); };
+    b.onclick = () => {
+      const key = day.date || todayISO();
+      day.occasion = o; day.rejections = []; activeOccasion = o;
+      store.occasions = { ...store.occasions, [key]: o };   // remember what you picked for this day
+      pushState();
+      renderOccasions(); fetchOutfit();
+    };
     wrap.appendChild(b);
   });
 }
@@ -163,6 +172,8 @@ async function fetchOutfit() {
   } else if (lk && lk.pieces) {           // legacy frozen snapshot
     renderResult(lk); return;
   }
+  const occ = store.occasions[key];       // a day you explicitly set overrides office-day defaults
+  if (occ) { day.occasion = occ; activeOccasion = occ; }
   loading(true);
   try {
     day.recent = store.recent;

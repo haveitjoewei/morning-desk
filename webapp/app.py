@@ -164,7 +164,12 @@ def get_state(prof: str = Depends(require_token)):
     if not kvstore.available():
         return {"synced": False}
     data = kvstore.get_json(f"closet:{prof}") or {}
-    return {"synced": True, "locked": data.get("locked") or {}, "prefs": data.get("prefs")}
+    return {
+        "synced": True,
+        "locked": data.get("locked") or {},
+        "prefs": data.get("prefs"),
+        "occasions": data.get("occasions") or {},
+    }
 
 
 @app.post("/api/state")
@@ -173,7 +178,11 @@ def put_state(body: dict, prof: str = Depends(require_token)):
 
     if not kvstore.available():
         return {"synced": False}
-    payload = {"locked": body.get("locked") or {}, "prefs": body.get("prefs")}
+    payload = {
+        "locked": body.get("locked") or {},
+        "prefs": body.get("prefs"),
+        "occasions": body.get("occasions") or {},
+    }
     kvstore.set_json(f"closet:{prof}", payload)
     return {"synced": True}
 
