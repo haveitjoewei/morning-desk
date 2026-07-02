@@ -434,21 +434,23 @@ function openPieceEditor(piece, origin) {
 
 async function savePieceEditor() {
   if (!editingPiece || !editingPiece.id) return;
+  const vals = {
+    warmth: +$("#piece-warmth").value,
+    polish: +$("#piece-polish").value,
+    comfort: +$("#piece-comfort").value,
+    wear_frequency: +$("#piece-wear").value,
+    home_ok: $("#piece-home").checked,
+    office_ok: $("#piece-office").checked,
+    avoid_often: $("#piece-avoid").checked,
+  };
   const btn = $("#piece-save"); btn.disabled = true; btn.textContent = "Saving…";
   try {
-    await api("/api/wardrobe/" + encodeURIComponent(editingPiece.id), {
-      warmth: +$("#piece-warmth").value,
-      polish: +$("#piece-polish").value,
-      comfort: +$("#piece-comfort").value,
-      wear_frequency: +$("#piece-wear").value,
-      home_ok: $("#piece-home").checked,
-      office_ok: $("#piece-office").checked,
-      avoid_often: $("#piece-avoid").checked,
-    });
+    await api("/api/wardrobe/" + encodeURIComponent(editingPiece.id), vals);
   } finally { btn.disabled = false; btn.textContent = "Save ratings"; }
+  Object.assign(editingPiece, vals);   // reflect locally; ratings apply to FUTURE outfits
   $("#piece-editor").hidden = true;
   const origin = pieceEditorOrigin; pieceEditorOrigin = null;
-  if (origin === "wardrobe") openWardrobe(); else fetchOutfit();
+  if (origin === "wardrobe") openWardrobe();   // else: keep the current outfit untouched
 }
 
 async function applyPlan() {
