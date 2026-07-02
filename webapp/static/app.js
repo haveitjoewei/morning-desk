@@ -289,13 +289,19 @@ function otherIds(name) {
   return Object.values(currentPieces).filter((p) => p.id && p.name !== name).map((p) => p.id);
 }
 
-// Swap = keep every other piece pinned, only replace this slot.
+// Swap = keep every other piece pinned for THIS regeneration only, replacing just this
+// slot. The temporary pins are released afterwards so the rest aren't stuck locked.
 function swapPiece(name, reason) {
+  const userAnchors = day.anchors || [];
   const keep = otherIds(name);
-  day.anchors = keep; day.anchor = keep[0] || null;
+  day.anchors = [...new Set([...userAnchors, ...keep])];
+  day.anchor = day.anchors[0] || null;
   day.rejections.push({ item: name, reason });
   $("#reason-modal").hidden = true;
-  fetchOutfit();
+  fetchOutfit().then(() => {
+    day.anchors = userAnchors; day.anchor = userAnchors[0] || null;
+    if (lastResult) renderResult(lastResult);   // clear the transient anchor badges
+  });
 }
 
 function openReason(piece) {
