@@ -157,7 +157,12 @@ function renderResult(r) {
 
 async function fetchOutfit() {
   const key = day.date || todayISO();
-  if (store.locked[key]) { renderResult(store.locked[key]); return; }  // pinned day
+  const lk = store.locked[key];
+  if (lk && lk.anchors) {                 // pinned day: keep its pieces, still allow warmer etc.
+    day.anchors = lk.anchors; day.anchor = lk.anchors[0] || null;
+  } else if (lk && lk.pieces) {           // legacy frozen snapshot
+    renderResult(lk); return;
+  }
   loading(true);
   try {
     day.recent = store.recent;
@@ -193,12 +198,33 @@ function updateLockButton() {
   document.querySelector(".outfit").classList.toggle("locked", on);
 }
 
+function currentIds() {
+  return Object.values(currentPieces).map((p) => p.id).filter(Boolean);
+}
+
 function toggleLock() {
   const key = day.date || todayISO();
   const locked = { ...store.locked };
-  if (locked[key]) { delete locked[key]; store.locked = locked; fetchOutfit(); }
-  else if (lastResult) { locked[key] = lastResult; store.locked = locked; updateLockButton(); }
+  if (locked[key]) {
+    delete locked[key]; store.locked = locked;
+    day.anchors = []; day.anchor = null;
+  } else {
+    const ids = currentIds();
+    locked[key] = { anchors: ids }; store.locked = locked;
+    day.anchors = ids; day.anchor = ids[0] || null;
+  }
+  updateLockButton();
+  if (lastResult) renderResult(lastResult);   // refresh badges without regenerating
   pushState();
+}
+
+// Keep a locked day's stored anchors in step when pieces are kept/released.
+function syncLockAnchors() {
+  const key = day.date || todayISO();
+  if (store.locked[key]) {
+    store.locked = { ...store.locked, [key]: { anchors: day.anchors || [] } };
+    pushState();
+  }
 }
 
 function fmtHour(h) {
@@ -259,26 +285,54 @@ function openZoom(url) {
   $("#zoom").hidden = false;
 }
 
+function otherIds(name) {
+  return Object.values(currentPieces).filter((p) => p.id && p.name !== name).map((p) => p.id);
+}
+
+// Swap = keep every other piece pinned, only replace this slot.
+function swapPiece(name, reason) {
+  const keep = otherIds(name);
+  day.anchors = keep; day.anchor = keep[0] || null;
+  day.rejections.push({ item: name, reason });
+  $("#reason-modal").hidden = true;
+  fetchOutfit();
+}
+
 function openReason(piece) {
   const name = piece.name;
+  const anchored = piece.id && (day.anchors || []).includes(piece.id);
   $("#reason-title").textContent = "This piece";
   $("#reason-img").src = piece.url || "";
   $("#reason-img").onclick = () => openZoom(piece.url);
   $("#reason-name").textContent = name || "";
   $("#reason-chips").hidden = true;
+  $("#keep-label").textContent = anchored ? "Release" : "Keep";
+  $("#keep-sub").textContent = anchored ? "stop anchoring it" : "anchor this piece";
   const row = $("#reason-chip-row"); row.innerHTML = "";
   REASONS.forEach((reason) => {
     const b = document.createElement("button");
     b.className = "chip"; b.textContent = reason;
-    b.onclick = () => { day.rejections.push({ item: name, reason }); $("#reason-modal").hidden = true; fetchOutfit(); };
+    b.onclick = () => swapPiece(name, reason);
     row.appendChild(b);
   });
+  $("#act-keep").onclick = () => {
+    const set = new Set(day.anchors || []);
+    if (piece.id) { set.has(piece.id) ? set.delete(piece.id) : set.add(piece.id); }
+    day.anchors = [...set]; day.anchor = day.anchors[0] || null;
+    syncLockAnchors();
+    $("#reason-modal").hidden = true;
+    if (lastResult) renderResult(lastResult);   // update badge, keep the outfit
+  };
   $("#act-remove").onclick = () => {
+    if (lastResult) lastResult.pieces = (lastResult.pieces || []).filter((p) => p.name !== name);
     day.rejections.push({ item: name, reason: "removed for today" });
-    $("#reason-modal").hidden = true; fetchOutfit();
+    day.anchors = (day.anchors || []).filter((id) => id !== piece.id);
+    syncLockAnchors();
+    $("#reason-modal").hidden = true;
+    if (lastResult) renderResult(lastResult);   // drop just this piece, keep the rest
   };
   $("#act-swap").onclick = () => { $("#reason-chips").hidden = false; };
-  $("#edit-piece").onclick = () => { $("#reason-modal").hidden = true; openPieceEditor(piece); };
+  $("#edit-piece").onclick = () => { $("#reason-modal").hidden = true; openPieceEditor(piece, "look"); };
   $("#reason-modal").hidden = false;
 }
 
@@ -295,7 +349,7 @@ async function openWardrobe() {
       byCat[cat].forEach((i) => {
         const cell = document.createElement("button"); cell.className = "pick";
         cell.innerHTML = `<img src="${i.url}" alt=""><span>${i.name || ""}</span>`;
-        cell.onclick = () => { $("#wardrobe-modal").hidden = true; openPieceEditor(i); };
+        cell.onclick = () => { $("#wardrobe-modal").hidden = true; openPieceEditor(i, "wardrobe"); };
         grid.appendChild(cell);
       });
       groups.appendChild(grid);
@@ -356,8 +410,11 @@ function bindRange(id, valueId) {
   input.oninput = sync; sync();
 }
 
-function openPieceEditor(piece) {
+let pieceEditorOrigin = null;
+
+function openPieceEditor(piece, origin) {
   editingPiece = piece;
+  pieceEditorOrigin = origin || null;
   $("#piece-title").textContent = piece.name || "Edit piece";
   $("#piece-img").src = piece.url || "";
   $("#piece-img").onclick = () => openZoom(piece.url);
@@ -377,17 +434,21 @@ function openPieceEditor(piece) {
 
 async function savePieceEditor() {
   if (!editingPiece || !editingPiece.id) return;
-  await api("/api/wardrobe/" + encodeURIComponent(editingPiece.id), {
-    warmth: +$("#piece-warmth").value,
-    polish: +$("#piece-polish").value,
-    comfort: +$("#piece-comfort").value,
-    wear_frequency: +$("#piece-wear").value,
-    home_ok: $("#piece-home").checked,
-    office_ok: $("#piece-office").checked,
-    avoid_often: $("#piece-avoid").checked,
-  });
+  const btn = $("#piece-save"); btn.disabled = true; btn.textContent = "Saving…";
+  try {
+    await api("/api/wardrobe/" + encodeURIComponent(editingPiece.id), {
+      warmth: +$("#piece-warmth").value,
+      polish: +$("#piece-polish").value,
+      comfort: +$("#piece-comfort").value,
+      wear_frequency: +$("#piece-wear").value,
+      home_ok: $("#piece-home").checked,
+      office_ok: $("#piece-office").checked,
+      avoid_often: $("#piece-avoid").checked,
+    });
+  } finally { btn.disabled = false; btn.textContent = "Save ratings"; }
   $("#piece-editor").hidden = true;
-  fetchOutfit();
+  const origin = pieceEditorOrigin; pieceEditorOrigin = null;
+  if (origin === "wardrobe") openWardrobe(); else fetchOutfit();
 }
 
 async function applyPlan() {
@@ -472,7 +533,11 @@ function bind() {
   document.querySelectorAll(".modal").forEach((m) => {
     m.addEventListener("click", (e) => { if (e.target === m) m.hidden = true; });
   });
-  $("#piece-close").onclick = () => { $("#piece-editor").hidden = true; };
+  $("#piece-close").onclick = () => {
+    $("#piece-editor").hidden = true;
+    const origin = pieceEditorOrigin; pieceEditorOrigin = null;
+    if (origin === "wardrobe") openWardrobe();
+  };
   $("#piece-save").onclick = savePieceEditor;
   $("#plan-btn").onclick = () => { $("#plan").hidden = !$("#plan").hidden; };
   $("#plan-apply").onclick = applyPlan;

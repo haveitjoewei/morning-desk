@@ -152,7 +152,7 @@ def _default_occasion(target_date, prefs):
     return "Work" if target_date.weekday() in office_days else "Casual"
 
 
-def plan_outfit(profile, prefs=None, day=None):
+def plan_outfit(profile, prefs=None, day=None, wardrobe=None):
     prefs, day = {**load_prefs(profile), **(prefs or {})}, dict(day or {})
     cfg = load_config(profile)
 
@@ -164,7 +164,7 @@ def plan_outfit(profile, prefs=None, day=None):
     if not day.get("occasion"):
         day["occasion"] = _default_occasion(target, prefs)
 
-    wardrobe = load_wardrobe(profile=profile)
+    wardrobe = wardrobe if wardrobe is not None else load_wardrobe(profile=profile)
     request = build_request(prefs, day)
     dressed = {**weather, "high": effective_high(weather.get("high"), prefs, day)}
     outfit = generate_outfit(

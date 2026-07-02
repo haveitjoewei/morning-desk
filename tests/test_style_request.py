@@ -448,3 +448,17 @@ def test_incompatible_layers_are_not_nested():
     assert not _can_nest(chunky, {"category": "outerwear", "thickness": "thick", "warmth": 5})  # two thick
     # two light layers combine toward, but stay below, one genuinely warm piece
     assert _stack_warmth([thin_top, {"category": "cardigan", "warmth": 2}]) < _stack_warmth([{"category": "outerwear", "warmth": 5}])
+
+
+def test_dress_never_pairs_with_separate_top_or_bottom():
+    from ai.generate_outfit import _strip_conflicts
+    wardrobe = [
+        {"id": "d", "name": "silk dress", "category": "dress"},
+        {"id": "p", "name": "black trousers", "category": "pants"},
+        {"id": "t", "name": "white tee", "category": "top"},
+        {"id": "c", "name": "grey cardigan", "category": "cardigan"},
+        {"id": "s", "name": "flats", "category": "shoes"},
+    ]
+    out = _strip_conflicts(["silk dress", "black trousers", "white tee", "grey cardigan", "flats"], wardrobe)
+    assert "black trousers" not in out and "white tee" not in out   # dress replaces separates
+    assert "silk dress" in out and "flats" in out and "grey cardigan" in out  # layer over a dress is fine

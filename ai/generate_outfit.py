@@ -327,9 +327,9 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
         if formality in FORMALITY_RANK:
             value -= abs(_best_formality_rank(item) - FORMALITY_RANK[formality])
         if item.get("polish") is not None and formality in FORMALITY_RANK:
-            value -= abs(int(item.get("polish", 2)) - (FORMALITY_RANK[formality] + 1))
+            value -= 2 * abs(int(item.get("polish", 2)) - (FORMALITY_RANK[formality] + 1))
         if item.get("warmth") is not None:
-            value -= abs(int(item.get("warmth", target_warmth)) - target_warmth)
+            value -= 2 * abs(int(item.get("warmth", target_warmth)) - target_warmth)
         if item.get("wear_frequency") is not None:
             value += int(item.get("wear_frequency", 3)) - 3
         if item.get("avoid_often"):
@@ -598,6 +598,40 @@ def _compact(wardrobe_items):
     return [{k: it[k] for k in _KEEP if k in it} for it in wardrobe_items]
 
 
+def _strip_conflicts(items, wardrobe_items):
+    """Drop incoherent combinations the model sometimes returns: a dress worn with
+    separate tops/bottoms, two of the same wear slot, or a second bag."""
+    by_name = {i.get("name"): i for i in wardrobe_items}
+    has_dress = any(by_name.get(n, {}).get("category") == "dress" for n in items)
+    out, used_slots, used_bag = [], set(), False
+    for name in items:
+        item = by_name.get(name)
+        if not item:
+            continue
+        category, slot = item.get("category"), _slot(item)
+        # a dress is a complete base — it replaces separate tops and bottoms
+        if has_dress and category != "dress" and (
+            category in LOWER_CATEGORIES or category in BASE_CATEGORIES
+        ):
+            continue
+        if category == "bag":
+            if used_bag:
+                continue
+            used_bag = True
+        elif slot in used_slots and slot in {"base", "mid", "lower", "body", "shoes"}:
+            continue
+        used_slots.add(slot)
+        out.append(name)
+    return out
+
+
+def _finalize(items, wardrobe_items, request):
+    """Coherence + completeness pass applied to every outfit before it's returned."""
+    items = _strip_conflicts(items, wardrobe_items)
+    items = _ensure_base_under_mid(items, wardrobe_items, request)
+    return items
+
+
 def _ensure_base_under_mid(items, wardrobe_items, request):
     """Menswear: a sweater/sweatshirt/hoodie (category 'midlayer') should have a shirt
     or tee underneath — never worn bare as the only top. Womenswear knits are exempt."""
@@ -649,7 +683,7 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
     avoid = set(request.get("avoid") or [])
     usable = [w for w in wardrobe_items if w.get("name") not in avoid]
     fallback = fallback_outfit(weather, usable, calendar, context, request)
-    fallback["items"] = _ensure_base_under_mid(fallback["items"], usable, request)
+    fallback["items"] = _finalize(fallback["items"], usable, request)
     if not available():
         return fallback
 
@@ -699,7 +733,7 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
             return fallback  # anchor is non-negotiable
         if required_anchors:
             return fallback  # the fallback force-includes every anchor
-        outfit["items"] = _ensure_base_under_mid(outfit["items"], usable, request)
+        outfit["items"] = _finalize(outfit["items"], usable, request)
         return outfit
     except Exception:
         return fallback

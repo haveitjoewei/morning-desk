@@ -45,6 +45,24 @@ def require_token(authorization: str = Header(default="")) -> str:
     return prof
 
 
+_EDITABLE = ("warmth", "polish", "comfort", "wear_frequency", "home_ok", "office_ok", "avoid_often")
+
+
+def _wardrobe(prof):
+    """Wardrobe with the wearer's saved metadata edits applied. On Vercel the
+    filesystem is read-only, so edits live in KV (closet:<prof>:corr) — merge them here."""
+    from webapp import kvstore
+
+    items = load_wardrobe(profile=prof)
+    corr = kvstore.get_json(f"closet:{prof}:corr") if kvstore.available() else None
+    if corr:
+        for item in items:
+            fields = corr.get(item.get("id"))
+            if fields:
+                item.update(fields)
+    return items
+
+
 def _url_for_id(item_id, prof):
     """Transparent cutout served as a static CDN asset at /profiles/<who>/cutouts/."""
     if not item_id:
@@ -80,7 +98,8 @@ async def unlock(body: dict):
 
 @app.post("/api/outfit")
 def outfit(body: dict, prof: str = Depends(require_token)):
-    result = plan_outfit(prof, prefs=body.get("prefs") or {}, day=body.get("day") or {})
+    result = plan_outfit(prof, prefs=body.get("prefs") or {}, day=body.get("day") or {},
+                         wardrobe=_wardrobe(prof))
     for piece in result.get("pieces", []):
         piece["url"] = _url_for_id(piece.get("id"), prof) or _image_url(piece.get("image"), prof)
     result["profile"] = prof
@@ -89,7 +108,7 @@ def outfit(body: dict, prof: str = Depends(require_token)):
 
 @app.get("/api/wardrobe")
 def wardrobe(prof: str = Depends(require_token)):
-    items = load_wardrobe(profile=prof)
+    items = _wardrobe(prof)
     return [
         {
             "id": it.get("id"),
@@ -110,7 +129,17 @@ def wardrobe(prof: str = Depends(require_token)):
 
 @app.post("/api/wardrobe/{item_id}")
 def update_wardrobe_item(item_id: str, body: dict, prof: str = Depends(require_token)):
-    item = save_metadata_correction(item_id, body, profile=prof)
+    from webapp import kvstore
+
+    fields = {k: body[k] for k in _EDITABLE if k in body}
+    if kvstore.available():
+        # Vercel FS is read-only; persist edits to KV so they stick and sync.
+        corr = kvstore.get_json(f"closet:{prof}:corr") or {}
+        corr[item_id] = {**corr.get(item_id, {}), **fields}
+        kvstore.set_json(f"closet:{prof}:corr", corr)
+        item = next((i for i in _wardrobe(prof) if i.get("id") == item_id), None)
+    else:
+        item = save_metadata_correction(item_id, body, profile=prof)
     if not item:
         raise HTTPException(status_code=404, detail="item not found")
     return {
@@ -151,7 +180,7 @@ def put_state(body: dict, prof: str = Depends(require_token)):
 
 @app.post("/api/anchors/check")
 def check_anchors(body: dict, prof: str = Depends(require_token)):
-    items = load_wardrobe(profile=prof)
+    items = _wardrobe(prof)
     return {"warnings": anchor_warnings(items, body.get("anchors") or [])}
 
 
