@@ -125,7 +125,9 @@ def _hourly_precip(hourly, day):
 
 
 def fetch_open_meteo(config, days=1):
-    with urlopen(build_open_meteo_url(config, days), timeout=8) as response:
+    # open-meteo has been slow (~8s); allow it to finish so the result gets cached
+    # (in KV) for the next window instead of timing out and refetching every request.
+    with urlopen(build_open_meteo_url(config, days), timeout=15) as response:
         return json.loads(response.read().decode("utf-8"))
 
 
