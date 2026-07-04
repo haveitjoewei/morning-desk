@@ -163,7 +163,12 @@ def _weather(cfg, location_override, offset):
             kv.set_json(kvkey, weather, ttl=_WEATHER_TTL)
         return weather.copy()
     except Exception:
-        return FALLBACK_WEATHER.copy()
+        # open-meteo slow/down — serve approximate weather now, but cache it only
+        # briefly so we recheck for the real forecast soon.
+        fallback = FALLBACK_WEATHER.copy()
+        if kv:
+            kv.set_json(kvkey, fallback, ttl=180)
+        return fallback
 
 
 def _default_occasion(target_date, prefs):
