@@ -48,5 +48,7 @@ def get_json(key):
         return None
 
 
-def set_json(key, value) -> bool:
-    return _command("SET", key, json.dumps(value, ensure_ascii=False)) is not None
+def set_json(key, value, ttl=None) -> bool:
+    payload = json.dumps(value, ensure_ascii=False)
+    args = ("SET", key, payload, "EX", str(int(ttl))) if ttl else ("SET", key, payload)
+    return _command(*args) is not None

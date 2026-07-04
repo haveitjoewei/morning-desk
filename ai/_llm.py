@@ -29,7 +29,9 @@ def client(timeout=None):
         api_key=os.environ.get("ANTHROPIC_API_KEY"),
         auth_token=os.environ.get("ANTHROPIC_AUTH_TOKEN"),
         timeout=timeout,
-        max_retries=1,
+        # No retry: on a serverless request a retry just doubles the wait toward the
+        # function limit; failing fast to the deterministic fallback is better.
+        max_retries=int(os.environ.get("MD_LLM_RETRIES", "0")),
     )
 
 

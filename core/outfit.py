@@ -133,15 +133,34 @@ def _weather(cfg, location_override, offset):
     if os.environ.get("MD_OFFLINE") == "1":
         return FALLBACK_WEATHER.copy()
     location = location_override or cfg.get("location", {})
-    key = (location.get("latitude"), location.get("longitude"), offset)
-    hit = _WEATHER_CACHE.get(key)
+    lat, lon = location.get("latitude"), location.get("longitude")
+    key = (lat, lon, offset)
     now = time.monotonic()
+    hit = _WEATHER_CACHE.get(key)
     if hit and hit[0] > now:
         return hit[1].copy()
+
+    # Shared cache across serverless instances — open-meteo can be slow, and fetching it
+    # inline on every request blows the function budget. Fetch at most once per TTL.
+    kv = None
+    try:
+        from webapp import kvstore
+        if kvstore.available():
+            kv = kvstore
+    except Exception:
+        kv = None
+    kvkey = f"wx:{lat}:{lon}:{offset}"
+    if kv:
+        cached = kv.get_json(kvkey)
+        if cached:
+            _WEATHER_CACHE[key] = (now + _WEATHER_TTL, cached)
+            return dict(cached)
     try:
         payload = fetch_open_meteo(location, days=offset + 1)
         weather = parse_open_meteo(payload, day=offset)
         _WEATHER_CACHE[key] = (now + _WEATHER_TTL, weather)
+        if kv:
+            kv.set_json(kvkey, weather, ttl=_WEATHER_TTL)
         return weather.copy()
     except Exception:
         return FALLBACK_WEATHER.copy()
