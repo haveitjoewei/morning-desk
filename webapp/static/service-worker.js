@@ -1,4 +1,4 @@
-const CACHE = "wc-v7";
+const CACHE = "wc-v8";
 const SHELL = [
   "/",
   "/static/style.css",
@@ -17,6 +17,10 @@ self.addEventListener("activate", (e) => {
     caches.keys()
       .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
+      // A new SW means new code — reload any open windows so they pick it up instead of
+      // running stale JS from the previous (cache-first) worker.
+      .then(() => self.clients.matchAll({ type: "window" }))
+      .then((clients) => clients.forEach((c) => { try { c.navigate(c.url); } catch (e) {} }))
   );
 });
 
