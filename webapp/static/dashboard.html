@@ -28,6 +28,7 @@
       <div class="d-left">
         <div id="d-date" class="d-date"></div>
         <div class="wx-line"><span id="d-weather" class="weather"></span></div>
+        <div id="d-place" class="place"></div>
         <div id="d-bars" class="wbars" hidden></div>
       </div>
       <div class="d-right">
@@ -36,26 +37,33 @@
     </header>
 
     <section class="d-stage">
-      <button class="d-outfit" id="d-outfit" aria-label="Adjust today's outfit">
-        <div class="d-look-head">
-          <span class="d-eyebrow">Today's look</span>
-          <span id="d-headline" class="d-headline"></span>
-        </div>
-        <div id="d-look" class="look"></div>
-        <p id="d-reason" class="reason"></p>
-        <span class="d-adjust">Tap the look to adjust →</span>
-      </button>
+      <div class="d-look-head">
+        <span class="d-eyebrow">Today's look</span>
+        <span id="d-headline" class="d-headline"></span>
+      </div>
+      <div id="d-look" class="look"></div>
+      <p class="d-hint">tap a piece to swap or remove it</p>
+
+      <div class="d-controls">
+        <input id="d-wish" class="d-wish" type="text" placeholder="Anything for today? e.g. “warmer”, “wear the navy sweater”">
+        <button id="d-regen" class="btn primary d-regen">↻ New outfit</button>
+      </div>
+
+      <button id="d-adv-toggle" class="d-adv-toggle">Advanced ⌄</button>
+      <div id="d-advanced" class="d-advanced" hidden>
+        <div id="d-occasions" class="row"></div>
+        <div class="row controls"><div class="stepper"><span>Warmth</span>
+          <button data-warm="-1">＋ Warmer</button><button data-warm="1">Lighter ＋</button></div></div>
+        <div class="row controls"><div class="stepper"><span>Polish</span>
+          <button data-dress="1">↑ Dressier</button><button data-dress="-1">↓ Casual</button></div></div>
+      </div>
     </section>
   </main>
 
-  <!-- Inline closet overlay: the full app in an iframe (adjust here, dashboard mirrors it) -->
-  <div id="d-overlay" class="d-overlay" hidden>
-    <div class="d-overlay-bar">
-      <span class="d-overlay-title" id="d-overlay-title">Adjust outfit</span>
-      <button id="d-close" class="btn primary">✓ Done</button>
-    </div>
-    <iframe id="d-frame" title="Adjust outfit"></iframe>
-  </div>
+  <!-- Piece action popover -->
+  <div id="d-pop" class="d-pop" hidden></div>
+  <!-- Zoom -->
+  <div id="d-zoom" class="zoom" hidden><img id="d-zoom-img" alt=""></div>
 
   <div id="d-loading" class="loading" hidden><div class="spinner"></div></div>
   <script src="/static/dashboard.js"></script>

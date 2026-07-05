@@ -45,6 +45,7 @@ async function unlock() {
     const tokens = { ...dash.tokens, [r.profile]: r.token };
     dash.tokens = tokens; dash.active = r.profile;
     localStorage.setItem("wc.menswear." + r.profile, r.menswear ? "1" : "");
+    day = freshDay(); activeOccasion = null;
     showApp(); renderProfiles(); loadOutfit();
   } catch { $("#d-lock-error").hidden = false; }
 }
@@ -62,36 +63,53 @@ function renderProfiles() {
 
 function switchProfile(p) {
   if (p === dash.active) return;
-  if (dash.tokens[p]) { dash.active = p; renderProfiles(); loadOutfit(); }
+  if (dash.tokens[p]) { dash.active = p; day = freshDay(); activeOccasion = null; renderProfiles(); loadOutfit(); }
   else { showLock(p); }
 }
 
-// The closet publishes today's look here (same-origin) — mirror it so adjusting reflects instantly.
-function readToday(profile) { try { return JSON.parse(localStorage.getItem("wc.today." + profile)); } catch { return null; } }
-function prefsFor(profile) { try { return JSON.parse(localStorage.getItem("wc.prefs." + profile)) || {}; } catch { return {}; } }
+// ── Per-profile state (shared with the closet PWA via wc.* localStorage) ──
+const REASONS = ["too warm", "too cold", "doesn't fit", "not feeling it"];
+const OCCASIONS = ["Casual", "Weekend", "Work", "Dressy", "Going out", "Cozy home"];
+const K = (base) => `wc.${base}.${dash.active}`;
+const getJSON = (key, dflt) => { try { const v = JSON.parse(localStorage.getItem(key)); return v == null ? dflt : v; } catch { return dflt; } };
+const prefs = () => getJSON(K("prefs"), {});
+const recent = () => getJSON(K("recent"), []);
+const setRecent = (v) => localStorage.setItem(K("recent"), JSON.stringify(v.slice(0, 15)));
+const occStore = () => getJSON(K("occ"), {});
+const setOcc = (o) => localStorage.setItem(K("occ"), JSON.stringify(o));
+
+function freshDay() { return { occasion: null, temp_step: 0, dress_step: 0, anchor: null, anchors: [], wish: "", variety: false, rejections: [], date: null, location: null }; }
+let day = freshDay();
+let lastResult = null, currentPieces = {}, activeOccasion = null;
 
 async function loadOutfit() {
   const active = dash.active;
-  const cached = readToday(active);
-  if (cached && cached.date === todayISO() && cached.result) { renderResult(cached.result); return; }
+  const savedOcc = occStore()[todayISO()];
+  if (savedOcc && !day.occasion) { day.occasion = savedOcc; activeOccasion = savedOcc; }
   loading(true);
   try {
-    const r = await api("/api/outfit", { prefs: prefsFor(active), day: {} }, dash.tokens[active]);
-    try { localStorage.setItem("wc.today." + active, JSON.stringify({ date: r.date, result: r })); } catch (e) {}
+    day.recent = recent();
+    const r = await api("/api/outfit", { prefs: prefs(), day }, dash.tokens[active]);
+    const names = (r.pieces || []).map((p) => p.name).filter(Boolean);
+    setRecent([...names, ...recent().filter((n) => !names.includes(n))]);
     renderResult(r);
   } catch (e) {
     if (e.message === "locked") { const t = { ...dash.tokens }; delete t[active]; dash.tokens = t; showLock(active); }
     else $("#d-headline").textContent = "Couldn't load — try again.";
-  } finally { loading(false); }
+  } finally { loading(false); day.variety = false; }
 }
 
 function renderResult(r) {
+  lastResult = r;
+  activeOccasion = r.occasion || activeOccasion;
   const d = r.date ? new Date(r.date + "T00:00:00") : new Date();
   $("#d-date").textContent = d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
   $("#d-headline").textContent = r.headline || "";
-  $("#d-reason").textContent = r.reason || "";
+  $("#d-place").textContent = (r.weather && r.weather.place) || "";
   renderWeather(r.weather);
   renderLook(r.pieces);
+  renderOccasions();
+  try { localStorage.setItem("wc.today." + dash.active, JSON.stringify({ date: r.date, result: r })); } catch (e) {}
 }
 
 function renderWeather(w) {
@@ -115,34 +133,92 @@ function renderWeather(w) {
 }
 
 function renderLook(pieces) {
-  const look = $("#d-look"); look.innerHTML = "";
+  const look = $("#d-look"); look.innerHTML = ""; currentPieces = {};
   const rows = { top: document.createElement("div"), bottom: document.createElement("div") };
   rows.top.className = rows.bottom.className = "look-row";
+  const anchors = new Set(day.anchors || []);
   (pieces || []).forEach((p) => {
     if (!p.url) return;
+    currentPieces[p.name] = p;
+    const anchored = p.id && anchors.has(p.id);
     const fig = document.createElement("figure");
-    fig.className = "look-item cat-" + (p.category || "other");
-    fig.innerHTML = `<img src="${p.url}" alt=""><figcaption>${p.name || ""}</figcaption>`;
+    fig.className = "look-item cat-" + (p.category || "other") + (anchored ? " anchored" : "");
+    fig.innerHTML = `<img src="${p.url}" alt=""><figcaption>${p.name || ""}</figcaption>` +
+      (anchored ? `<button class="unanchor" data-id="${p.id}" title="Anchored — tap to release">🔒</button>` : "");
+    fig.onclick = (e) => {
+      if (e.target.closest(".unanchor")) { e.stopPropagation(); keepPiece(p); return; }
+      openPieceMenu(p);
+    };
     (TOP_ROW.has(p.category) ? rows.top : rows.bottom).appendChild(fig);
   });
   if (rows.top.children.length) look.appendChild(rows.top);
   if (rows.bottom.children.length) look.appendChild(rows.bottom);
 }
 
-// Inline adjust: load the full closet in an iframe, pointed at the active profile.
-function openOverlay() {
-  const active = dash.active;
-  if (!dash.tokens[active]) { showLock(active); return; }
-  localStorage.setItem("wc.token", dash.tokens[active]);
-  localStorage.setItem("wc.profile", active);
-  $("#d-overlay-title").textContent = `${cap(active)}'s closet`;
-  $("#d-frame").src = "/?embed=1";
-  $("#d-overlay").hidden = false;
+// Tap a piece -> one compact popover; one more tap acts (2 clicks total).
+function openPieceMenu(piece) {
+  const pop = $("#d-pop");
+  const anchored = piece.id && (day.anchors || []).includes(piece.id);
+  pop.innerHTML =
+    `<div class="d-pop-card">` +
+    `<div class="d-pop-head"><img src="${piece.url}" alt=""><b>${piece.name || ""}</b>` +
+    `<button class="d-pop-x" aria-label="Close">✕</button></div>` +
+    `<div class="d-pop-sub">Swap it — why?</div><div class="d-pop-reasons">` +
+    REASONS.map((r) => `<button class="chip" data-reason="${r}">${r}</button>`).join("") +
+    `<button class="chip" data-reason="">just swap</button></div>` +
+    `<div class="d-pop-actions">` +
+    `<button class="chip" data-act="remove">✕ Remove</button>` +
+    `<button class="chip" data-act="keep">${anchored ? "🔓 Release" : "★ Keep"}</button>` +
+    `<button class="chip" data-act="zoom">⤢ Zoom</button></div></div>`;
+  pop.hidden = false;
+  pop.querySelector(".d-pop-x").onclick = closePop;
+  pop.querySelectorAll("[data-reason]").forEach((b) => b.onclick = () => swapPiece(piece.name, b.dataset.reason));
+  pop.querySelector('[data-act="remove"]').onclick = () => removePiece(piece);
+  pop.querySelector('[data-act="keep"]').onclick = () => keepPiece(piece);
+  pop.querySelector('[data-act="zoom"]').onclick = () => { closePop(); $("#d-zoom-img").src = piece.url; $("#d-zoom").hidden = false; };
 }
-function closeOverlay() {
-  $("#d-overlay").hidden = true;
-  $("#d-frame").src = "about:blank";
-  loadOutfit();   // mirror whatever the closet last showed
+function closePop() { $("#d-pop").hidden = true; }
+
+// Swap keeps every other piece pinned for one regeneration, then releases them.
+function swapPiece(name, reason) {
+  const userAnchors = day.anchors || [];
+  const keep = Object.values(currentPieces).filter((p) => p.id && p.name !== name).map((p) => p.id);
+  day.anchors = [...new Set([...userAnchors, ...keep])]; day.anchor = day.anchors[0] || null;
+  day.rejections.push({ item: name, reason: reason || "show me another" });
+  closePop();
+  loadOutfit().then(() => { day.anchors = userAnchors; day.anchor = userAnchors[0] || null; if (lastResult) renderLook(lastResult.pieces); });
+}
+function removePiece(piece) {
+  if (lastResult) lastResult.pieces = (lastResult.pieces || []).filter((p) => p.name !== piece.name);
+  day.rejections.push({ item: piece.name, reason: "removed for today" });
+  day.anchors = (day.anchors || []).filter((id) => id !== piece.id);
+  closePop();
+  if (lastResult) renderLook(lastResult.pieces);
+}
+function keepPiece(piece) {
+  const set = new Set(day.anchors || []);
+  if (piece.id) { set.has(piece.id) ? set.delete(piece.id) : set.add(piece.id); }
+  day.anchors = [...set]; day.anchor = day.anchors[0] || null;
+  closePop();
+  if (lastResult) renderLook(lastResult.pieces);
+}
+
+function newOutfit() { day.anchors = []; day.anchor = null; day.rejections = []; day.variety = true; loadOutfit(); }
+function submitWish() { day.wish = $("#d-wish").value.trim(); loadOutfit(); }
+
+function renderOccasions() {
+  const wrap = $("#d-occasions"); if (!wrap) return; wrap.innerHTML = "";
+  OCCASIONS.forEach((o) => {
+    const b = document.createElement("button");
+    b.className = "chip" + (o.toLowerCase() === (activeOccasion || "").toLowerCase() ? " on" : "");
+    b.textContent = o;
+    b.onclick = () => {
+      day.occasion = o; day.rejections = []; activeOccasion = o;
+      setOcc({ ...occStore(), [todayISO()]: o });
+      renderOccasions(); loadOutfit();
+    };
+    wrap.appendChild(b);
+  });
 }
 
 // Kiosk auto-auth: a signed token in the URL (?k=<joseph token>, or ?joseph=…&evangeline=…)
@@ -163,11 +239,18 @@ function init() {
   seedKioskTokens();
   $("#d-unlock").onclick = unlock;
   $("#d-pin").addEventListener("keydown", (e) => { if (e.key === "Enter") unlock(); });
-  $("#d-outfit").onclick = openOverlay;
-  $("#d-close").onclick = closeOverlay;
-  $("#d-overlay").addEventListener("click", (e) => { if (e.target === $("#d-overlay")) closeOverlay(); });
-  // refresh when the screen wakes / tab refocuses (kiosk mornings)
-  document.addEventListener("visibilitychange", () => { if (!document.hidden && !$("#d-app").hidden) loadOutfit(); });
+  $("#d-regen").onclick = newOutfit;
+  $("#d-wish").addEventListener("keydown", (e) => { if (e.key === "Enter") submitWish(); });
+  $("#d-adv-toggle").onclick = () => {
+    const a = $("#d-advanced"); a.hidden = !a.hidden;
+    $("#d-adv-toggle").textContent = a.hidden ? "Advanced ⌄" : "Advanced ⌃";
+  };
+  document.querySelectorAll("[data-warm]").forEach((b) => b.onclick = () => { day.temp_step += +b.dataset.warm; loadOutfit(); });
+  document.querySelectorAll("[data-dress]").forEach((b) => b.onclick = () => { day.dress_step += +b.dataset.dress; loadOutfit(); });
+  $("#d-pop").addEventListener("click", (e) => { if (e.target === $("#d-pop")) closePop(); });
+  $("#d-zoom").onclick = () => { $("#d-zoom").hidden = true; };
+  // fresh look when the kiosk wakes / tab refocuses
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && !$("#d-app").hidden) { day = freshDay(); loadOutfit(); } });
 
   renderProfiles();
   const active = dash.active;
