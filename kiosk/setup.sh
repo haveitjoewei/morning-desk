@@ -5,18 +5,41 @@ set -e
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
 LAUNCHER="$HERE/morning-kiosk.sh"
-WAKE_HHMM="06:30:00"     # when the Mac wakes
-RUN_HOUR=6               # when the dashboard opens (a minute after wake)
-RUN_MIN=31
+BASE="https://morning-desk-ashen.vercel.app"
+WAKE_HHMM="06:30:00"          # when the Mac wakes
+RUN_HOUR=6; RUN_MIN=31        # when the dashboard opens (a minute after wake)
 LABEL="com.morningdesk.kiosk"
 PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
 
-if [ ! -x "$LAUNCHER" ]; then echo "Missing $LAUNCHER"; exit 1; fi
+# 1. Mint a long-lived, no-PIN token for this device (asks for your dashboard PIN once).
+if [ ! -f "$LAUNCHER" ]; then
+  echo "Your Morning Desk PIN (Joseph):"
+  read -rs PIN; echo
+  echo "Minting a kiosk token…"
+  RESP="$(curl -s -X POST "$BASE/api/unlock" -H 'Content-Type: application/json' -d "{\"pin\":\"$PIN\",\"kiosk\":true}")"
+  TOKEN="$(printf '%s' "$RESP" | sed -n 's/.*"token":"\([^"]*\)".*/\1/p')"
+  if [ -z "$TOKEN" ]; then echo "Couldn't mint a token — wrong PIN?"; exit 1; fi
+  cat > "$LAUNCHER" <<LAUNCHEOF
+#!/bin/bash
+# Morning Desk kiosk launcher (auto-generated). Contains a bearer token for this
+# device — keep private. Regenerate by deleting this file and re-running setup.sh.
+URL="$BASE/dashboard?k=$TOKEN"
+CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+/usr/bin/caffeinate -d -t 10800 &
+"\$CHROME" --kiosk --app="\$URL" --user-data-dir="\$HOME/.morningdesk-kiosk" \\
+  --no-first-run --no-default-browser-check --disable-translate \\
+  --disable-features=TranslateUI --overscroll-history-navigation=0 \\
+  --disable-session-crashed-bubble --disable-infobars >/dev/null 2>&1 &
+LAUNCHEOF
+  chmod +x "$LAUNCHER"
+  echo "  ✓ launcher written."
+fi
 
-echo "1/3  Scheduling the Mac to wake every day at ${WAKE_HHMM} (needs your password)…"
+# 2. Wake the Mac every day.
+echo "Scheduling daily wake at ${WAKE_HHMM} (needs your Mac password)…"
 sudo pmset repeat wakeorpoweron MTWRFSU "$WAKE_HHMM"
 
-echo "2/3  Installing the launch agent…"
+# 3. Launch agent that opens the kiosk a minute after wake.
 mkdir -p "$HOME/Library/LaunchAgents"
 cat > "$PLIST" <<PLISTEOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -30,14 +53,11 @@ cat > "$PLIST" <<PLISTEOF
   <key>RunAtLoad</key><false/>
 </dict></plist>
 PLISTEOF
-
 launchctl unload "$PLIST" 2>/dev/null || true
 launchctl load "$PLIST"
 
-echo "3/3  Done."
 echo
-echo "  • Mac wakes ${WAKE_HHMM}, dashboard opens ${RUN_HOUR}:${RUN_MIN} in fullscreen kiosk."
-echo "  • Test it right now:      bash kiosk/morning-kiosk.sh"
-echo "  • Exit kiosk Chrome:      Cmd+Q  (or Ctrl+Cmd+Q to lock)"
-echo "  • Stop the schedule:      launchctl unload \"$PLIST\"  &&  sudo pmset repeat cancel"
-echo "  • Change the time:        edit WAKE_HHMM / RUN_MIN in this script and re-run."
+echo "Done. Mac wakes ${WAKE_HHMM}, dashboard opens ${RUN_HOUR}:${RUN_MIN} fullscreen."
+echo "  • Test now:     bash kiosk/morning-kiosk.sh   (Cmd+Q to quit)"
+echo "  • Undo:         launchctl unload \"$PLIST\" && sudo pmset repeat cancel"
+echo "  • Needs Google Chrome installed."
