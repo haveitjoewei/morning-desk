@@ -24,6 +24,13 @@ echo "Configuring power scheduling (needs your Mac password once)…"
 echo "$USER_NAME ALL=(root) NOPASSWD: /usr/bin/pmset" | sudo tee /etc/sudoers.d/morningdesk >/dev/null
 sudo chmod 440 /etc/sudoers.d/morningdesk
 
+# 0b. Stop the Mac asking for a password on wake — otherwise the kiosk sits behind
+# the lock screen. Enter your LOGIN password when prompted.
+echo "Turning off the wake password (enter your Mac LOGIN password):"
+sysadminctl -screenLock off -password - 2>/dev/null || \
+  echo "  ! couldn't disable via sysadminctl — set Lock Screen → 'Require password' → Never manually."
+defaults -currentHost write com.apple.screensaver idleTime 0 2>/dev/null || true
+
 # 1. Mint a long-lived no-PIN token + generate the launcher (only if missing).
 if [ ! -f "$LAUNCHER" ]; then
   printf "Your Morning Desk PIN (Joseph): "; read -rs PIN; echo
