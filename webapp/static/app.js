@@ -2,7 +2,7 @@
 
 const $ = (s) => document.querySelector(s);
 const TOP_ROW = new Set(["outerwear", "midlayer", "top", "blouse", "knit", "cardigan", "dress"]);
-const OCCASIONS = ["Casual", "Work", "Dressy", "Going out", "Cozy home"];
+const OCCASIONS = ["Casual", "Weekend", "Work", "Dressy", "Going out", "Cozy home"];
 const REASONS = ["too cold", "too warm", "too small / doesn't fit", "wrong for the occasion", "not feeling it"];
 const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -576,9 +576,22 @@ function bind() {
   $("#zoom").onclick = () => { $("#zoom").hidden = true; };
 }
 
+const EMBED = new URLSearchParams(location.search).has("embed");
+function readTodayLocal() {
+  try { const t = JSON.parse(localStorage.getItem("wc.today." + store.profile)); return (t && t.result) || null; } catch { return null; }
+}
+
 function init() {
   bind(); renderOccasions(); updateUnitToggle();
-  if (store.token) { showApp(); afterLogin(cap(store.profile)).then(fetchOutfit); } else { showLock(); }
+  if (EMBED) document.body.classList.add("embed");
+  if (store.token) {
+    showApp();
+    afterLogin(cap(store.profile)).then(() => {
+      const current = EMBED && readTodayLocal();
+      if (current) renderResult(current);   // edit the look already on screen; don't regenerate
+      else fetchOutfit();
+    });
+  } else { showLock(); }
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/static/service-worker.js").catch(() => {});
 }
 init();

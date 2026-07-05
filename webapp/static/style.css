@@ -414,3 +414,7 @@ body {
 .suburb-row { display: flex; gap: 8px; }
 .suburb-row input { flex: 1; }
 .field-note { font-size: 11px; color: var(--muted); margin-top: 4px; display: block; }
+
+/* Embedded in the dashboard overlay: drop the redundant masthead, focus on the look */
+body.embed .top { display: none; }
+body.embed .outfit { padding-top: 18px; }

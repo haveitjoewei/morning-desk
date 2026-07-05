@@ -145,7 +145,22 @@ function closeOverlay() {
   loadOutfit();   // mirror whatever the closet last showed
 }
 
+// Kiosk auto-auth: a signed token in the URL (?k=<joseph token>, or ?joseph=…&evangeline=…)
+// seeds this device so the morning display never asks for a PIN.
+function seedKioskTokens() {
+  const qp = new URLSearchParams(location.search);
+  const seed = { joseph: qp.get("joseph") || qp.get("k"), evangeline: qp.get("evangeline") };
+  let seeded = null;
+  const toks = { ...dash.tokens };
+  for (const p of PROFILES) { if (seed[p]) { toks[p] = seed[p]; seeded = seeded || p; } }
+  if (seeded) {
+    dash.tokens = toks; dash.active = seeded;
+    history.replaceState(null, "", location.pathname);   // drop the token from the URL
+  }
+}
+
 function init() {
+  seedKioskTokens();
   $("#d-unlock").onclick = unlock;
   $("#d-pin").addEventListener("keydown", (e) => { if (e.key === "Enter") unlock(); });
   $("#d-outfit").onclick = openOverlay;

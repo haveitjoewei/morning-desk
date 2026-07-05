@@ -1,6 +1,11 @@
 /* Morning Desk dashboard — glanceable kiosk view over the closet engine.
    Reuses tokens + .look/.wbars components from style.css. */
 
+/* Fill exactly one screen — a kiosk should never scroll. */
+html, body { height: 100%; overflow: hidden; }
+#d-app { height: 100vh; display: flex; flex-direction: column; }
+#d-reason { display: none; }   /* keep it glanceable — drop the wordy reasoning */
+
 .d-top {
   display: flex; justify-content: space-between; align-items: flex-start;
   gap: 20px; padding: clamp(20px, 4vw, 44px) clamp(20px, 5vw, 64px) 18px;
@@ -26,29 +31,31 @@
 .d-prof.on { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 8px 18px -10px var(--accent); }
 
 /* Stage + outfit card (the whole thing is the tap target to adjust) */
-.d-stage { display: grid; place-items: center; padding: clamp(24px, 5vh, 60px) clamp(16px, 4vw, 48px); }
+.d-stage { flex: 1; min-height: 0; display: grid; place-items: center; padding: clamp(12px, 2vh, 32px) clamp(16px, 4vw, 48px); overflow: hidden; }
 .d-outfit {
-  width: 100%; max-width: 760px; text-align: center; cursor: pointer;
+  width: 100%; max-width: 760px; max-height: 100%; text-align: center; cursor: pointer;
   background: none; border: none; font: inherit; color: inherit;
-  display: block; transition: transform .25s;
+  display: flex; flex-direction: column; transition: transform .25s;
 }
 .d-outfit:active { transform: scale(.99); }
-.d-look-head { margin-bottom: 6px; }
+.d-look-head { margin-bottom: 4px; }
 .d-eyebrow {
-  display: block; font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  display: block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
   color: var(--accent); font-weight: 600;
 }
 .d-headline {
   font-family: var(--serif); font-weight: 500; letter-spacing: -.5px;
-  font-size: clamp(26px, 3.4vw, 42px); line-height: 1.1; display: block; margin-top: 6px;
+  font-size: clamp(22px, 3vw, 38px); line-height: 1.1; display: block; margin-top: 4px;
 }
-.d-outfit .look { margin: 22px auto 10px; max-width: 720px; }
-.d-outfit .look-item img { height: clamp(120px, 15vw, 190px); }
-.d-outfit .reason { text-align: center; max-width: 60ch; margin: 8px auto 0; }
+.d-outfit .look { margin: clamp(10px, 2vh, 22px) auto 0; max-width: 720px; min-height: 0; }
+/* Images scale to the available height so the whole look fits without scrolling. */
+.d-outfit .look-item img { height: clamp(84px, 12vh, 170px); }
+.d-outfit .cat-shoes img { height: clamp(50px, 7vh, 92px); }
 .d-adjust {
-  display: inline-block; margin-top: 18px; font-size: 13px; letter-spacing: 1px;
+  display: inline-block; margin-top: clamp(10px, 2vh, 18px); font-size: 12px; letter-spacing: 1px;
   text-transform: uppercase; font-weight: 600; color: var(--muted);
-  border: 1px solid var(--line); border-radius: 999px; padding: 9px 18px; transition: all .2s;
+  border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; transition: all .2s;
+  align-self: center;
 }
 .d-outfit:hover .d-adjust { border-color: var(--accent); color: var(--accent); }
 

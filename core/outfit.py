@@ -173,7 +173,10 @@ def _weather(cfg, location_override, offset):
 
 def _default_occasion(target_date, prefs):
     office_days = prefs.get("office_days", [1, 3])  # Tue, Thu
-    return "Work" if target_date.weekday() in office_days else "Casual"
+    weekday = target_date.weekday()  # Mon=0 .. Sun=6
+    if weekday >= 5:
+        return "Weekend"             # Sat/Sun — a day off, not a work-from-home day
+    return "Work" if weekday in office_days else "Casual"  # Casual weekday = WFH
 
 
 def plan_outfit(profile, prefs=None, day=None, wardrobe=None):

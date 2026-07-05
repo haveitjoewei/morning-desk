@@ -14,7 +14,7 @@ from __future__ import annotations
 
 FORMALITY_LEVELS = ["casual", "smart casual", "business", "formal"]
 OCCASION_BASE = {
-    "casual": 0, "cozy home": 0, "work": 1, "dressy": 1, "going out": 1, "formal": 3,
+    "casual": 0, "cozy home": 0, "weekend": 0, "work": 1, "dressy": 1, "going out": 1, "formal": 3,
 }
 
 
