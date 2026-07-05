@@ -93,8 +93,9 @@ async def unlock(body: dict):
         menswear = load_config(prof).get("categories") == "menswear"
     except Exception:
         menswear = False
+    ttl = 3650 if body.get("kiosk") else 30   # kiosk gets a long-lived, PIN-minted token
     return {
-        "token": make_token(prof),
+        "token": make_token(prof, ttl_days=ttl),
         "profile": prof,
         "name": prof.capitalize(),
         "menswear": menswear,
