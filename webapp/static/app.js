@@ -162,6 +162,8 @@ function renderResult(r) {
   $("#date-label").textContent = d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
   renderLook(r.pieces);
   updateLockButton();
+  // Publish today's look so the dashboard can mirror it (same-origin, instant reflect).
+  try { localStorage.setItem("wc.today." + store.profile, JSON.stringify({ date: r.date, result: r })); } catch (e) {}
 }
 
 async function fetchOutfit() {

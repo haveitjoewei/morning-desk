@@ -79,6 +79,11 @@ def index():
     return FileResponse(STATIC / "index.html")
 
 
+@app.get("/dashboard")
+def dashboard():
+    return FileResponse(STATIC / "dashboard.html")
+
+
 @app.post("/api/unlock")
 async def unlock(body: dict):
     prof = check_pin(body.get("pin", ""))

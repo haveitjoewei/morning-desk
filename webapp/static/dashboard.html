@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f1ebe1">
+  <title>Morning Desk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+
+  <section id="d-lock" class="lock" hidden>
+    <div class="lock-card">
+      <h1 class="brand">Morning Desk</h1>
+      <p class="sub" id="d-lock-sub">Enter your PIN to begin.</p>
+      <input id="d-pin" class="pin" type="password" inputmode="numeric" placeholder="PIN" autocomplete="off">
+      <button id="d-unlock" class="btn primary">Open</button>
+      <p id="d-lock-error" class="error" hidden>That PIN didn't work.</p>
+    </div>
+  </section>
+
+  <main id="d-app" hidden>
+    <header class="d-top">
+      <div class="d-left">
+        <div id="d-date" class="d-date"></div>
+        <div class="wx-line"><span id="d-weather" class="weather"></span></div>
+        <div id="d-bars" class="wbars" hidden></div>
+      </div>
+      <div class="d-right">
+        <div id="d-profiles" class="d-profiles"></div>
+      </div>
+    </header>
+
+    <section class="d-stage">
+      <button class="d-outfit" id="d-outfit" aria-label="Adjust today's outfit">
+        <div class="d-look-head">
+          <span class="d-eyebrow">Today's look</span>
+          <span id="d-headline" class="d-headline"></span>
+        </div>
+        <div id="d-look" class="look"></div>
+        <p id="d-reason" class="reason"></p>
+        <span class="d-adjust">Tap the look to adjust →</span>
+      </button>
+    </section>
+  </main>
+
+  <!-- Inline closet overlay: the full app in an iframe (adjust here, dashboard mirrors it) -->
+  <div id="d-overlay" class="d-overlay" hidden>
+    <div class="d-overlay-bar">
+      <span class="d-overlay-title" id="d-overlay-title">Adjust outfit</span>
+      <button id="d-close" class="btn primary">✓ Done</button>
+    </div>
+    <iframe id="d-frame" title="Adjust outfit"></iframe>
+  </div>
+
+  <div id="d-loading" class="loading" hidden><div class="spinner"></div></div>
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>
