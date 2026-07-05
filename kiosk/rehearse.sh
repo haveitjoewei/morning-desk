@@ -12,7 +12,7 @@ HHMM=$(date -v+2M '+%H:%M')
 TMP="$HOME/Library/LaunchAgents/com.morningdesk.rehearse.plist"
 
 echo "Scheduling a one-off wake at $HHMM …"
-sudo /usr/bin/pmset schedule wake "$WHEN"
+sudo /usr/bin/pmset schedule wakeorpoweron "$WHEN"
 
 cat > "$TMP" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -22,6 +22,8 @@ cat > "$TMP" <<EOF
   <key>ProgramArguments</key><array><string>/bin/bash</string><string>$LAUNCHER</string></array>
   <key>StartCalendarInterval</key>
   <dict><key>Hour</key><integer>$((10#$HH))</integer><key>Minute</key><integer>$((10#$MM))</integer></dict>
+  <key>StandardOutPath</key><string>$HOME/Library/Logs/morningdesk-kiosk.log</string>
+  <key>StandardErrorPath</key><string>$HOME/Library/Logs/morningdesk-kiosk.log</string>
   <key>RunAtLoad</key><false/>
 </dict></plist>
 EOF
@@ -31,4 +33,5 @@ launchctl load "$TMP"
 echo
 echo "Now run:   pmset sleepnow"
 echo "The Mac wakes at $HHMM and opens the kiosk. Cmd+Q to quit."
+echo "If it doesn't appear, check the log:  cat ~/Library/Logs/morningdesk-kiosk.log"
 echo "Then clean up:  launchctl unload \"$TMP\" && rm \"$TMP\""

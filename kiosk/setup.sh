@@ -35,19 +35,26 @@ if [ ! -f "$LAUNCHER" ]; then
 # Morning Desk kiosk launcher (auto-generated; contains a device token — keep private).
 URL="$BASE/dashboard?k=$TOKEN"
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+LOG="\$HOME/Library/Logs/morningdesk-kiosk.log"
+echo "\$(date '+%F %T') launcher fired" >> "\$LOG"
+# Scheduled wakes are often "dark" (display off, no GUI). Assert user activity to
+# turn the display on and keep it awake 2h.
+/usr/bin/caffeinate -u -t 1 >/dev/null 2>&1
+/usr/bin/caffeinate -d -t 7200 &
+sleep 3
 # Re-arm the NEXT wake so the other run fires even from deep sleep.
 H=\$(date +%H)
 if [ "\$H" -lt 12 ]; then
-  sudo /usr/bin/pmset schedule wake "\$(date -v${EH}H -v${EM}M -v0S '+%m/%d/%y %H:%M:%S')" 2>/dev/null || true
+  sudo /usr/bin/pmset schedule wakeorpoweron "\$(date -v${EH}H -v${EM}M -v0S '+%m/%d/%y %H:%M:%S')" >>"\$LOG" 2>&1 || true
 else
-  sudo /usr/bin/pmset schedule wake "\$(date -v+1d -v${MH}H -v${MM}M -v0S '+%m/%d/%y %H:%M:%S')" 2>/dev/null || true
+  sudo /usr/bin/pmset schedule wakeorpoweron "\$(date -v+1d -v${MH}H -v${MM}M -v0S '+%m/%d/%y %H:%M:%S')" >>"\$LOG" 2>&1 || true
 fi
 pkill -f "morningdesk-kiosk" 2>/dev/null || true      # avoid stacking windows
-/usr/bin/caffeinate -d -t 7200 &                      # hold the screen awake 2h
 "\$CHROME" --kiosk --app="\$URL" --user-data-dir="\$HOME/.morningdesk-kiosk" \\
   --no-first-run --no-default-browser-check --disable-translate \\
   --disable-features=TranslateUI --overscroll-history-navigation=0 \\
-  --disable-session-crashed-bubble --disable-infobars >/dev/null 2>&1 &
+  --disable-session-crashed-bubble --disable-infobars >>"\$LOG" 2>&1 &
+echo "\$(date '+%F %T') chrome launched" >> "\$LOG"
 LAUNCHEOF
   chmod +x "$LAUNCHER"
   echo "  ✓ launcher written."
