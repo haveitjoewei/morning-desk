@@ -51,13 +51,15 @@ REPO="\$(cd "\$(dirname "\$0")/.." && pwd)"
 TOKEN="\${URL##*k=}"
 [ -f "\$HOME/.config/morning-desk/environment" ] && . "\$HOME/.config/morning-desk/environment"
 (cd "\$REPO" && ./venv/bin/python -m orchestrator.publish_brief "\$TOKEN") >>"\$LOG" 2>&1 &
-if ! pgrep -f "morningdesk-kiosk" >/dev/null; then
-  "\$CHROME" --kiosk --app="\$URL" --user-data-dir="\$HOME/.morningdesk-kiosk" \\
-    --no-first-run --no-default-browser-check --disable-translate \\
-    --disable-features=TranslateUI --overscroll-history-navigation=0 \\
-    --disable-session-crashed-bubble --disable-infobars >>"\$LOG" 2>&1 &
-  echo "\$(date '+%F %T') chrome launched" >> "\$LOG"
-fi
+# Close any lingering kiosk window and reopen fresh so it always pops to the front.
+# Matches only the kiosk Chrome (its own --user-data-dir), never your normal Chrome.
+pkill -f "morningdesk-kiosk" 2>/dev/null; sleep 1
+"\$CHROME" --kiosk --app="\$URL" --user-data-dir="\$HOME/.morningdesk-kiosk" \\
+  --no-first-run --no-default-browser-check --disable-translate \\
+  --disable-features=TranslateUI --overscroll-history-navigation=0 \\
+  --disable-session-crashed-bubble --disable-infobars >>"\$LOG" 2>&1 &
+echo "\$(date '+%F %T') chrome launched" >> "\$LOG"
+open -a "Google Chrome" 2>/dev/null || true   # bring it to the front
 LAUNCHEOF
   chmod +x "$LAUNCHER"
   echo "  ✓ launcher written."
