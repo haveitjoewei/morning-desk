@@ -46,6 +46,11 @@ if [ "\$H" -lt 12 ]; then
 else
   sudo /usr/bin/pmset schedule wakeorpoweron "\$(date -v+1d -v${MH}H -v${MM}M -v0S '+%m/%d/%y %H:%M:%S')" >>"\$LOG" 2>&1 || true
 fi
+# Refresh the brief (schedule + priorities) from local connectors, in the background.
+REPO="\$(cd "\$(dirname "\$0")/.." && pwd)"
+TOKEN="\${URL##*k=}"
+[ -f "\$HOME/.config/morning-desk/environment" ] && . "\$HOME/.config/morning-desk/environment"
+(cd "\$REPO" && ./venv/bin/python -m orchestrator.publish_brief "\$TOKEN") >>"\$LOG" 2>&1 &
 if ! pgrep -f "morningdesk-kiosk" >/dev/null; then
   "\$CHROME" --kiosk --app="\$URL" --user-data-dir="\$HOME/.morningdesk-kiosk" \\
     --no-first-run --no-default-browser-check --disable-translate \\

@@ -46,7 +46,7 @@ async function unlock() {
     dash.tokens = tokens; dash.active = r.profile;
     localStorage.setItem("wc.menswear." + r.profile, r.menswear ? "1" : "");
     day = freshDay(); activeOccasion = null;
-    showApp(); renderProfiles(); loadOutfit();
+    showApp(); renderProfiles(); loadOutfit(); loadBrief();
   } catch { $("#d-lock-error").hidden = false; }
 }
 
@@ -63,7 +63,7 @@ function renderProfiles() {
 
 function switchProfile(p) {
   if (p === dash.active) return;
-  if (dash.tokens[p]) { dash.active = p; day = freshDay(); activeOccasion = null; renderProfiles(); loadOutfit(); }
+  if (dash.tokens[p]) { dash.active = p; day = freshDay(); activeOccasion = null; renderProfiles(); loadOutfit(); loadBrief(); }
   else { showLock(p); }
 }
 
@@ -223,6 +223,32 @@ function keepPiece(piece) {
   if (lastResult) renderLook(lastResult.pieces);
 }
 
+// ── Brief blocks (schedule + priorities), published by the local job ──
+async function loadBrief() {
+  const brief = $("#d-brief");
+  try {
+    const b = await api("/api/brief", null, dash.tokens[dash.active]);
+    if (!b || !b.synced) { brief.hidden = true; return; }
+    renderSchedule(b.schedule || []);
+    renderPriorities(b.priorities || []);
+    brief.hidden = !((b.schedule || []).length || (b.priorities || []).length);
+  } catch { brief.hidden = true; }
+}
+function renderSchedule(items) {
+  const el = $("#d-schedule");
+  el.innerHTML = items.length
+    ? items.map((e) => `<div class="d-sched"><span class="d-sched-t">${e.time || ""}</span>` +
+        `<span class="d-sched-x"><b>${e.title || ""}</b>${e.location ? `<i>${e.location}</i>` : ""}</span></div>`).join("")
+    : `<p class="d-empty">Nothing scheduled.</p>`;
+}
+function renderPriorities(items) {
+  const block = $("#d-priorities-block"), el = $("#d-priorities");
+  block.hidden = !items.length;
+  el.innerHTML = items.map((p) =>
+    `<div class="d-prio d-prio-${p.urgency || "today"}"><b>${p.title || ""}</b>` +
+    `${p.summary ? `<span>${p.summary}</span>` : ""}<i>${p.source || ""}</i></div>`).join("");
+}
+
 function newOutfit() { day.anchors = []; day.anchor = null; day.rejections = []; day.variety = true; loadOutfit(); }
 function submitWish() { day.wish = $("#d-wish").value.trim(); loadOutfit(); }
 
@@ -275,10 +301,13 @@ function init() {
   bars.addEventListener("click", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
   bars.addEventListener("mousemove", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
   // fresh look when the kiosk wakes / tab refocuses
-  document.addEventListener("visibilitychange", () => { if (!document.hidden && !$("#d-app").hidden) { day = freshDay(); loadOutfit(); } });
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && !$("#d-app").hidden) { day = freshDay(); loadOutfit(); loadBrief(); } });
 
   renderProfiles();
   const active = dash.active;
-  if (dash.tokens[active]) { showApp(); loadOutfit(); } else { showLock(active); }
+  if (dash.tokens[active]) {
+    showApp(); loadOutfit(); loadBrief();
+    setTimeout(loadBrief, 12000);   // catch the fresh brief the launcher publishes on wake
+  } else { showLock(active); }
 }
 init();

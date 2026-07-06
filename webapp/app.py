@@ -193,6 +193,32 @@ def put_state(body: dict, prof: str = Depends(require_token)):
     return {"synced": True}
 
 
+@app.get("/api/brief")
+def get_brief(prof: str = Depends(require_token)):
+    """Morning brief blocks (schedule + priorities), published by the local job."""
+    from webapp import kvstore
+
+    if not kvstore.available():
+        return {"synced": False}
+    return {"synced": True, **(kvstore.get_json(f"brief:{prof}") or {})}
+
+
+@app.post("/api/brief")
+def put_brief(body: dict, prof: str = Depends(require_token)):
+    from webapp import kvstore
+
+    if not kvstore.available():
+        return {"synced": False}
+    payload = {
+        "date": body.get("date"),
+        "generated_at": body.get("generated_at"),
+        "schedule": body.get("schedule") or [],
+        "priorities": body.get("priorities") or [],
+    }
+    kvstore.set_json(f"brief:{prof}", payload, ttl=129600)   # ~36h
+    return {"synced": True}
+
+
 @app.post("/api/anchors/check")
 def check_anchors(body: dict, prof: str = Depends(require_token)):
     items = _wardrobe(prof)
