@@ -1,37 +1,17 @@
 #!/bin/bash
-# Rehearse the scheduled kiosk from sleep: schedules a wake + a one-off launch ~2 min
-# out, so you can sleep the Mac and watch it wake and pop up the kiosk.
+# Rehearse the real watcher from sleep: set a one-off target ~2 min out + wake the
+# Mac then, so the background watcher fires the kiosk exactly like a real morning.
 #   bash kiosk/rehearse.sh   then   pmset sleepnow
 set -e
-HERE="$(cd "$(dirname "$0")" && pwd)"
-LAUNCHER="$HERE/morning-kiosk.sh"
-UID_NUM="$(id -u)"
-[ -f "$LAUNCHER" ] || { echo "Run kiosk/setup.sh first."; exit 1; }
+STAMP="$HOME/Library/Application Support/morningdesk"
+mkdir -p "$STAMP"
 
-WHEN=$(date -v+2M '+%m/%d/%y %H:%M:00')
-HH=$(date -v+2M +%H); MM=$(date -v+2M +%M); HHMM=$(date -v+2M '+%H:%M')
-TMP="$HOME/Library/LaunchAgents/com.morningdesk.rehearse.plist"
-
-echo "Scheduling a wake at $HHMM…"
+T=$(date -v+2M +%H%M); WHEN=$(date -v+2M '+%m/%d/%y %H:%M:00'); HHMM=$(date -v+2M '+%H:%M')
+echo "$T" > "$STAMP/rehearse"          # the watcher will fire at this minute
 sudo /usr/bin/pmset schedule wakeorpoweron "$WHEN"
 
-cat > "$TMP" <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict>
-  <key>Label</key><string>com.morningdesk.rehearse</string>
-  <key>ProgramArguments</key><array><string>/bin/bash</string><string>$LAUNCHER</string></array>
-  <key>StartCalendarInterval</key>
-  <dict><key>Hour</key><integer>$((10#$HH))</integer><key>Minute</key><integer>$((10#$MM))</integer></dict>
-  <key>StandardOutPath</key><string>$HOME/Library/Logs/morningdesk-kiosk.log</string>
-  <key>StandardErrorPath</key><string>$HOME/Library/Logs/morningdesk-kiosk.log</string>
-</dict></plist>
-EOF
-launchctl bootout "gui/$UID_NUM" "$TMP" 2>/dev/null || true
-launchctl bootstrap "gui/$UID_NUM" "$TMP"
-
+echo "One-off target set for $HHMM and a wake scheduled."
 echo
 echo "Now run:   pmset sleepnow"
-echo "At $HHMM the Mac wakes and the kiosk pops up. Cmd+Q to quit."
-echo "Clean up:  launchctl bootout gui/$UID_NUM \"$TMP\" && rm \"$TMP\""
-echo "Log:       cat ~/Library/Logs/morningdesk-kiosk.log"
+echo "At $HHMM the Mac wakes and the watcher pops up the kiosk. Cmd+Q to quit."
+echo "Watch it:  tail -f ~/Library/Logs/morningdesk-kiosk.log"

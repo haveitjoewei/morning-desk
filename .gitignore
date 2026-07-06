@@ -27,3 +27,4 @@ profiles/*/recent.tmp.json
 .vercel
 kiosk/morning-kiosk.sh
 kiosk/rearm.sh
+kiosk/kiosk-daemon.sh
