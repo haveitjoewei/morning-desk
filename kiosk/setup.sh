@@ -80,7 +80,9 @@ while true; do
   [ -f "\$STAMP/rehearse" ] && TARGETS="\$TARGETS \$(cat "\$STAMP/rehearse" 2>/dev/null)"
   for T in \$TARGETS; do
     D=\$((NOW - \$(mins "\$T")))
-    if [ "\$D" -ge 0 ] && [ "\$D" -le 2 ] && [ ! -f "\$STAMP/\$TODAY-\$T" ]; then
+    # Fire anytime within 2h of the target (once/day) — so a missed scheduled wake
+    # still shows the kiosk the moment you open the laptop that morning/evening.
+    if [ "\$D" -ge 0 ] && [ "\$D" -le 120 ] && [ ! -f "\$STAMP/\$TODAY-\$T" ]; then
       touch "\$STAMP/\$TODAY-\$T"; rm -f "\$STAMP/rehearse"
       echo "\$(date '+%F %T') watcher firing \$T" >> "\$LOG"
       /bin/bash "\$LAUNCHER"
