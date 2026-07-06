@@ -26,10 +26,15 @@
   <main id="d-app" hidden>
     <header class="d-top">
       <div class="d-left">
-        <div id="d-date" class="d-date"></div>
+        <div class="date-nav">
+          <button id="d-prev" class="daynav" aria-label="Previous day">‹</button>
+          <div id="d-date" class="d-date"></div>
+          <button id="d-next" class="daynav" aria-label="Next day">›</button>
+        </div>
         <div class="wx-line"><span id="d-weather" class="weather"></span></div>
         <div id="d-place" class="place"></div>
         <div id="d-bars" class="wbars" hidden></div>
+        <div id="d-wx-pop" class="wx-pop" hidden></div>
       </div>
       <div class="d-right">
         <div id="d-profiles" class="d-profiles"></div>

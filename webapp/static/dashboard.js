@@ -112,24 +112,44 @@ function renderResult(r) {
   try { localStorage.setItem("wc.today." + dash.active, JSON.stringify({ date: r.date, result: r })); } catch (e) {}
 }
 
+let wxHours = [];
 function renderWeather(w) {
-  const el = $("#d-weather"), bars = $("#d-bars");
-  if (!w) { el.textContent = ""; bars.hidden = true; return; }
+  const el = $("#d-weather"), bars = $("#d-bars"), pop = $("#d-wx-pop");
+  if (pop) pop.hidden = true;
+  if (!w) { el.textContent = ""; bars.hidden = true; wxHours = []; return; }
   const cond = (w.summary || "").split(", ").slice(1).join(", ") || (w.condition || "").replace(/_/g, " ");
   el.textContent = `${fmtTemp(w.high)}  ${cond}${w.place ? " · " + w.place : ""}`.toUpperCase();
-  const hrs = w.hourly || [];
+  const hrs = w.hourly || []; wxHours = hrs;
   if (!hrs.length) { bars.hidden = true; bars.innerHTML = ""; return; }
   const temps = hrs.map((h) => h.temp).filter((t) => t != null);
   const lo = temps.length ? Math.min(...temps) : w.low, hi = temps.length ? Math.max(...temps) : w.high;
   const peak = hrs.reduce((a, b) => (b.pop > a.pop ? b : a), hrs[0]);
   const n = hrs.length, tickAt = new Set([0, Math.round(n / 3), Math.round((2 * n) / 3), n - 1]);
-  const barHtml = hrs.map((h) => `<span class="wbar${h.pop >= 50 ? " wet" : h.pop >= 25 ? " damp" : ""}" style="--p:${Math.max(6, h.pop)}%"></span>`).join("");
+  const barHtml = hrs.map((h, i) => `<span class="wbar${h.pop >= 50 ? " wet" : h.pop >= 25 ? " damp" : ""}" data-i="${i}" style="--p:${Math.max(6, h.pop)}%"></span>`).join("");
   const ticks = hrs.map((h, i) => tickAt.has(i) ? `<span class="wtick"><b>${fmtTemp(h.temp)}</b><i>${fmtHour(h.hour)}</i></span>` : `<span class="wtick"></span>`).join("");
   bars.innerHTML =
     `<div class="wbars-head"><span class="wbars-range">${lo != null && hi != null ? `${fmtTemp(lo)}–${fmtTemp(hi)}` : ""}</span>` +
     `<span class="wbars-cap">${peak.pop >= 20 ? `rain ~${peak.pop}% · ${fmtHour(peak.hour)}` : "dry through the day"}</span></div>` +
     `<div class="wbars-row">${barHtml}</div><div class="wticks">${ticks}</div>`;
   bars.hidden = false;
+}
+
+function showWxPop(i) {
+  const h = wxHours[i], pop = $("#d-wx-pop"); if (!h || !pop) return;
+  pop.innerHTML = `<b>${fmtHour(h.hour)}</b><span>${fmtTemp(h.temp)}</span><span>🌧 ${h.pop}%</span>` +
+    (h.wind != null ? `<span>🌬 ${h.wind} km/h</span>` : "");
+  pop.hidden = false;
+}
+
+function shiftDay(delta) {
+  const t = todayISO();
+  const base = new Date((day.date || t) + "T00:00:00"); base.setDate(base.getDate() + delta);
+  const iso = `${base.getFullYear()}-${String(base.getMonth() + 1).padStart(2, "0")}-${String(base.getDate()).padStart(2, "0")}`;
+  const max = new Date(t + "T00:00:00"); max.setDate(max.getDate() + 6);
+  if (iso < t || base > max) return;                 // weather window: today..+6
+  day = freshDay(); activeOccasion = null;
+  day.date = iso === t ? null : iso;
+  loadOutfit();
 }
 
 function renderLook(pieces) {
@@ -249,6 +269,11 @@ function init() {
   document.querySelectorAll("[data-dress]").forEach((b) => b.onclick = () => { day.dress_step += +b.dataset.dress; loadOutfit(); });
   $("#d-pop").addEventListener("click", (e) => { if (e.target === $("#d-pop")) closePop(); });
   $("#d-zoom").onclick = () => { $("#d-zoom").hidden = true; };
+  $("#d-prev").onclick = () => shiftDay(-1);
+  $("#d-next").onclick = () => shiftDay(1);
+  const bars = $("#d-bars");
+  bars.addEventListener("click", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
+  bars.addEventListener("mousemove", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
   // fresh look when the kiosk wakes / tab refocuses
   document.addEventListener("visibilitychange", () => { if (!document.hidden && !$("#d-app").hidden) { day = freshDay(); loadOutfit(); } });
 
