@@ -223,16 +223,48 @@ function keepPiece(piece) {
   if (lastResult) renderLook(lastResult.pieces);
 }
 
+// ── Journal prompt — morning intention / evening reflection ──
+// Drawn from well-known routines: Ivy Lee / The ONE Thing, the Five Minute Journal,
+// Stoic morning & evening reviews (Marcus Aurelius, Seneca), Franklin's daily
+// questions, Three Good Things (positive psychology), Eat That Frog.
+const PROMPTS = {
+  morning: [
+    "What's the ONE thing today that makes everything else easier or unnecessary?",
+    "What would make today great?",
+    "What's within your control today — and what isn't?",
+    "What good shall you do this day?",
+    "Who do you want to be today, and what would that person do first?",
+    "What's the hard thing you're avoiding? Can it go first?",
+    "Name one thing you're genuinely looking forward to today.",
+    "If today repeated 100 times, would it build the life you want? Adjust one thing.",
+  ],
+  evening: [
+    "What went well today — and why?",
+    "What did you do well? What could you improve? What did you learn?",
+    "What good have you done today?",
+    "What drained you, and what energized you?",
+    "What's one thing you'd do differently tomorrow?",
+    "Three things you're grateful for right now?",
+    "Did today move you closer to what matters? How?",
+    "What can you set down before sleep?",
+  ],
+};
+function renderJournal() {
+  const evening = new Date().getHours() >= 17;
+  const set = evening ? PROMPTS.evening : PROMPTS.morning;
+  const start = new Date(new Date().getFullYear(), 0, 0);
+  const doy = Math.floor((new Date() - start) / 86400000);
+  $("#d-journal-title").textContent = evening ? "Evening reflection" : "Morning intention";
+  $("#d-journal-prompt").textContent = set[doy % set.length];
+}
+
 // ── Brief blocks (schedule + priorities), published by the local job ──
 async function loadBrief() {
-  const brief = $("#d-brief");
+  renderJournal();   // always shown (framework prompt, no backend needed)
   try {
     const b = await api("/api/brief", null, dash.tokens[dash.active]);
-    if (!b || !b.synced) { brief.hidden = true; return; }
-    renderSchedule(b.schedule || []);
-    renderPriorities(b.priorities || []);
-    brief.hidden = !((b.schedule || []).length || (b.priorities || []).length);
-  } catch { brief.hidden = true; }
+    if (b && b.synced) { renderSchedule(b.schedule || []); renderPriorities(b.priorities || []); }
+  } catch { /* keep the journal + any prior brief */ }
 }
 function renderSchedule(items) {
   const el = $("#d-schedule");
