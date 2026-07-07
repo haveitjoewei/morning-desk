@@ -84,6 +84,15 @@
     </div>
   </main>
 
+  <!-- Editor overlay — embeds the closet (settings / per-garment edit) without a page jump -->
+  <div id="d-edit" class="d-overlay" hidden>
+    <div class="d-overlay-bar">
+      <span class="d-overlay-title" id="d-edit-title">Preferences</span>
+      <button id="d-edit-done" class="btn primary">Done</button>
+    </div>
+    <iframe id="d-frame" title="Edit"></iframe>
+  </div>
+
   <!-- Piece action popover -->
   <div id="d-pop" class="d-pop" hidden></div>
   <!-- Zoom -->

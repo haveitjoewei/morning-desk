@@ -6,6 +6,12 @@
       "runtimeExecutable": "./venv/bin/python",
       "runtimeArgs": ["-m", "server.app"],
       "port": 8080
+    },
+    {
+      "name": "closet",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-lc", "WARDROBE_PIN=1225 WARDROBE_SECRET=dev WARDROBE_PROFILE=evangeline WARDROBE_PIN_JOSEPH=4321 MD_OFFLINE=1 exec ./venv/bin/python -m uvicorn webapp.app:app --port 8137 --log-level warning"],
+      "port": 8137
     }
   ]
 }

@@ -577,6 +577,17 @@ function bind() {
 }
 
 const EMBED = new URLSearchParams(location.search).has("embed");
+// When embedded from the dashboard, jump straight to the requested editor so the
+// user never sees the redundant closet home. Reuses the existing modals.
+async function openRequestedPanel() {
+  const qp = new URLSearchParams(location.search);
+  if (qp.get("panel") === "settings") { loadSettings(); $("#settings").hidden = false; return; }
+  if (qp.get("panel") === "wardrobe") { openWardrobe(); return; }
+  const editId = qp.get("edit");
+  if (editId) {
+    try { const it = (await api("/api/wardrobe")).find((i) => i.id === editId); if (it) openPieceEditor(it, null); } catch {}
+  }
+}
 function readTodayLocal() {
   try { const t = JSON.parse(localStorage.getItem("wc.today." + store.profile)); return (t && t.result) || null; } catch { return null; }
 }
@@ -590,6 +601,7 @@ function init() {
       const current = EMBED && readTodayLocal();
       if (current) renderResult(current);   // edit the look already on screen; don't regenerate
       else fetchOutfit();
+      openRequestedPanel();                  // ?panel=settings / ?edit=<id> deep-links (dashboard embed)
     });
   } else { showLock(); }
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("/static/service-worker.js").catch(() => {});

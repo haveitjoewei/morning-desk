@@ -200,15 +200,36 @@ function openPieceMenu(piece) {
     `<div class="d-pop-actions">` +
     `<button class="chip" data-act="remove">✕ Remove</button>` +
     `<button class="chip" data-act="keep">${anchored ? "🔓 Release" : "★ Keep"}</button>` +
+    (piece.id ? `<button class="chip" data-act="edit">✎ Edit details</button>` : "") +
     `<button class="chip" data-act="zoom">⤢ Zoom</button></div></div>`;
   pop.hidden = false;
   pop.querySelector(".d-pop-x").onclick = closePop;
   pop.querySelectorAll("[data-reason]").forEach((b) => b.onclick = () => swapPiece(piece.name, b.dataset.reason));
   pop.querySelector('[data-act="remove"]').onclick = () => removePiece(piece);
   pop.querySelector('[data-act="keep"]').onclick = () => keepPiece(piece);
+  const editBtn = pop.querySelector('[data-act="edit"]');
+  if (editBtn) editBtn.onclick = () => { closePop(); openEditor("edit=" + encodeURIComponent(piece.id), piece.name || "Edit piece"); };
   pop.querySelector('[data-act="zoom"]').onclick = () => { closePop(); $("#d-zoom-img").src = piece.url; $("#d-zoom").hidden = false; };
 }
 function closePop() { $("#d-pop").hidden = true; }
+
+// Editor overlay — embed the closet (same origin) so settings + per-garment editing
+// reuse the closet's own modals. Sync the closet's token to the active profile first
+// so the iframe is already signed in; on close, drop today's cache so edits take hold
+// on the next look (no auto-regen — keeps loads minimal).
+function openEditor(query, title) {
+  const tok = dash.tokens[dash.active];
+  if (!tok) { showLock(dash.active); return; }
+  localStorage.setItem("wc.token", tok);
+  localStorage.setItem("wc.profile", dash.active);
+  $("#d-edit-title").textContent = title || "Edit";
+  $("#d-frame").src = "/?embed&" + query;
+  $("#d-edit").hidden = false;
+}
+function closeEditor() {
+  $("#d-edit").hidden = true; $("#d-frame").src = "about:blank";
+  delete outfitCache[outfitKey()];   // reflect any warmth/preference edits next load
+}
 
 // Swap keeps every other piece pinned for one regeneration, then releases them.
 function swapPiece(name, reason) {
@@ -342,7 +363,9 @@ function init() {
   $("#d-prev").onclick = () => shiftDay(-1);
   $("#d-next").onclick = () => shiftDay(1);
   $("#d-journal").onclick = () => { journalStep++; renderJournal(); };   // tap for another prompt
-  $("#d-settings").onclick = () => { location.href = "/"; };             // full closet: edit clothes + prefs
+  $("#d-settings").onclick = () => openEditor("panel=settings", "Preferences");   // prefs overlay, no page jump
+  $("#d-edit-done").onclick = closeEditor;
+  $("#d-edit").addEventListener("click", (e) => { if (e.target === $("#d-edit")) closeEditor(); });
   const bars = $("#d-bars");
   bars.addEventListener("click", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
   bars.addEventListener("mousemove", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
