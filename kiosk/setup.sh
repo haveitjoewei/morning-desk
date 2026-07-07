@@ -51,15 +51,17 @@ REPO="\$(cd "\$(dirname "\$0")/.." && pwd)"
 TOKEN="\${URL##*k=}"
 [ -f "\$HOME/.config/morning-desk/environment" ] && . "\$HOME/.config/morning-desk/environment"
 (cd "\$REPO" && ./venv/bin/python -m orchestrator.publish_brief "\$TOKEN") >>"\$LOG" 2>&1 &
-# Close any lingering kiosk window and reopen fresh so it always pops to the front.
-# Matches only the kiosk Chrome (its own --user-data-dir), never your normal Chrome.
-pkill -f "morningdesk-kiosk" 2>/dev/null; sleep 1
-"\$CHROME" --kiosk --app="\$URL" --user-data-dir="\$HOME/.morningdesk-kiosk" \\
+# Close any lingering kiosk window, then open a NEW instance via 'open -na' so macOS
+# activates it and switches to its window (a plain background launch opens --kiosk on
+# a separate Space you never see). Matches only the kiosk Chrome (its own data-dir).
+pkill -f "morningdesk-kiosk" 2>/dev/null; sleep 2
+open -na "Google Chrome" --args --app="\$URL" \\
+  --user-data-dir="\$HOME/.morningdesk-kiosk" \\
+  --window-position=0,24 --window-size=1600,1000 \\
   --no-first-run --no-default-browser-check --disable-translate \\
   --disable-features=TranslateUI --overscroll-history-navigation=0 \\
-  --disable-session-crashed-bubble --disable-infobars >>"\$LOG" 2>&1 &
-echo "\$(date '+%F %T') chrome launched" >> "\$LOG"
-open -a "Google Chrome" 2>/dev/null || true   # bring it to the front
+  --disable-session-crashed-bubble --disable-infobars >>"\$LOG" 2>&1
+echo "\$(date '+%F %T') chrome launched (open -na)" >> "\$LOG"
 LAUNCHEOF
   chmod +x "$LAUNCHER"
   echo "  ✓ launcher written."
