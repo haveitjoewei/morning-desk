@@ -28,3 +28,6 @@ profiles/*/recent.tmp.json
 kiosk/morning-kiosk.sh
 kiosk/rearm.sh
 kiosk/kiosk-daemon.sh
+
+# stray vendored uv binary (54MB) — Vercel provides its own
+_uv/
