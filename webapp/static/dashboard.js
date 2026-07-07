@@ -82,16 +82,27 @@ function freshDay() { return { occasion: null, temp_step: 0, dress_step: 0, anch
 let day = freshDay();
 let lastResult = null, currentPieces = {}, activeOccasion = null;
 
-async function loadOutfit() {
+// Outfit cache — key by profile+date, value carries a signature of the inputs that
+// affect generation. Navigating back to an already-loaded day (or waking the kiosk)
+// re-renders the cached look instead of paying for another AI call. Any real change
+// (occasion, warmth, wish, swap, New outfit) shifts the signature → a fresh load.
+const outfitCache = {};
+const outfitSig = () => JSON.stringify([day.occasion, day.temp_step, day.dress_step, day.anchors, day.rejections, day.wish]);
+const outfitKey = () => `${dash.active}:${day.date || todayISO()}`;
+
+async function loadOutfit(force) {
   const active = dash.active;
   const savedOcc = occStore()[todayISO()];
   if (savedOcc && !day.occasion) { day.occasion = savedOcc; activeOccasion = savedOcc; }
+  const key = outfitKey(), sig = outfitSig();
+  if (!force && outfitCache[key] && outfitCache[key].sig === sig) { renderResult(outfitCache[key].result); return; }
   loading(true);
   try {
     day.recent = recent();
     const r = await api("/api/outfit", { prefs: prefs(), day }, dash.tokens[active]);
     const names = (r.pieces || []).map((p) => p.name).filter(Boolean);
     setRecent([...names, ...recent().filter((n) => !names.includes(n))]);
+    outfitCache[key] = { sig, result: r };
     renderResult(r);
   } catch (e) {
     if (e.message === "locked") { const t = { ...dash.tokens }; delete t[active]; dash.tokens = t; showLock(active); }
@@ -249,13 +260,14 @@ const PROMPTS = {
     "What can you set down before sleep?",
   ],
 };
+let journalStep = 0;
 function renderJournal() {
   const evening = new Date().getHours() >= 17;
   const set = evening ? PROMPTS.evening : PROMPTS.morning;
   const start = new Date(new Date().getFullYear(), 0, 0);
   const doy = Math.floor((new Date() - start) / 86400000);
   $("#d-journal-title").textContent = evening ? "Evening reflection" : "Morning intention";
-  $("#d-journal-prompt").textContent = set[doy % set.length];
+  $("#d-journal-prompt").textContent = set[(doy + journalStep) % set.length];
 }
 
 // ── Brief blocks (schedule + priorities), published by the local job ──
@@ -281,7 +293,7 @@ function renderPriorities(items) {
     `${p.summary ? `<span>${p.summary}</span>` : ""}<i>${p.source || ""}</i></div>`).join("");
 }
 
-function newOutfit() { day.anchors = []; day.anchor = null; day.rejections = []; day.variety = true; loadOutfit(); }
+function newOutfit() { day.anchors = []; day.anchor = null; day.rejections = []; day.variety = true; loadOutfit(true); }
 function submitWish() { day.wish = $("#d-wish").value.trim(); loadOutfit(); }
 
 function renderOccasions() {
@@ -329,6 +341,8 @@ function init() {
   $("#d-zoom").onclick = () => { $("#d-zoom").hidden = true; };
   $("#d-prev").onclick = () => shiftDay(-1);
   $("#d-next").onclick = () => shiftDay(1);
+  $("#d-journal").onclick = () => { journalStep++; renderJournal(); };   // tap for another prompt
+  $("#d-settings").onclick = () => { location.href = "/"; };             // full closet: edit clothes + prefs
   const bars = $("#d-bars");
   bars.addEventListener("click", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
   bars.addEventListener("mousemove", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
@@ -337,6 +351,11 @@ function init() {
 
   renderProfiles();
   const active = dash.active;
+  // Seed today's cache from the last saved look so a kiosk relaunch costs no AI call.
+  const stored = getJSON("wc.today." + active, null);
+  if (stored && stored.result && (stored.result.date || todayISO()) === todayISO()) {
+    outfitCache[`${active}:${todayISO()}`] = { sig: outfitSig(), result: stored.result };
+  }
   if (dash.tokens[active]) {
     showApp(); loadOutfit(); loadBrief();
     setTimeout(loadBrief, 12000);   // catch the fresh brief the launcher publishes on wake
