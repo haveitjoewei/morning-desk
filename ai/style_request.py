@@ -30,6 +30,14 @@ def effective_high(high, prefs, day):
     elif nudge == "lighter":
         high += 3
     high += int(day.get("temp_step", 0)) * 2  # negative steps = warmer
+    # A "too cold"/"too warm" swap reason should re-pick that slot warmer/lighter — not
+    # just avoid the piece. A swap pins the rest, so this only shifts the swapped slot.
+    for rej in day.get("rejections") or []:
+        reason = (rej.get("reason", "") if isinstance(rej, dict) else "").lower()
+        if "cold" in reason:
+            high -= 4
+        elif "warm" in reason or "hot" in reason:
+            high += 4
     return round(high)
 
 
