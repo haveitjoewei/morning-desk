@@ -2937,5 +2937,40 @@
     "image": "profiles/joseph/images/black-and-white-striped-long-sleeve-tee.jpg",
     "source": "IMG_6545.JPG",
     "learned": []
+  },
+  {
+    "name": "white low-top leather sneakers",
+    "category": "shoes",
+    "subtype": "low-top sneakers",
+    "brand": "Nike",
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth leather with perforations",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "athletic"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "worn",
+    "fit_notes": "Classic Air Force 1 style, visible scuffing and dirt on toe and midsole",
+    "confidence": "high",
+    "id": "white-low-top-leather-sneakers",
+    "image": "profiles/joseph/images/white-low-top-leather-sneakers.jpg",
+    "source": "IMG_6738.JPG",
+    "learned": []
   }
 ]

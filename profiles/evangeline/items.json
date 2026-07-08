@@ -3506,5 +3506,1095 @@
     "image": "profiles/evangeline/images/dusty-blue-mock-neck-knit-sweater.jpg",
     "source": "IMG_6650.JPG",
     "learned": []
+  },
+  {
+    "name": "lime green ribbed mock-neck top",
+    "category": "knit",
+    "subtype": "sleeveless ribbed mock-neck top",
+    "brand": null,
+    "colors": [
+      "lime green"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "cotton-viscose blend knit",
+    "texture": "ribbed knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Fitted cropped silhouette with high mock neckline",
+    "confidence": "medium",
+    "id": "lime-green-ribbed-mock-neck-top",
+    "image": "profiles/evangeline/images/lime-green-ribbed-mock-neck-top.jpg",
+    "source": "IMG_6706.JPG",
+    "learned": []
+  },
+  {
+    "name": "cream sleeveless swing dress",
+    "category": "dress",
+    "subtype": "sleeveless A-line swing dress",
+    "brand": null,
+    "colors": [
+      "cream",
+      "ivory"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "cotton jersey with woven back panel",
+    "texture": "soft smooth jersey",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "loose A-line swing silhouette with keyhole back closure, flowy and relaxed",
+    "confidence": "medium",
+    "id": "cream-sleeveless-swing-dress",
+    "image": "profiles/evangeline/images/cream-sleeveless-swing-dress.jpg",
+    "source": "IMG_6707.JPG",
+    "learned": []
+  },
+  {
+    "name": "blue and white striped A-line skirt",
+    "category": "skirt",
+    "subtype": "midi A-line skirt",
+    "brand": null,
+    "colors": [
+      "light blue",
+      "white"
+    ],
+    "neutral": false,
+    "pattern": "striped",
+    "sleeve": "na",
+    "material": "cotton",
+    "texture": "smooth woven",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "A-line silhouette with fullness at the hem, sits at waist, flowing drape",
+    "confidence": "medium",
+    "id": "blue-and-white-striped-a-line-skirt",
+    "image": "profiles/evangeline/images/blue-and-white-striped-a-line-skirt.jpg",
+    "source": "IMG_6708.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy lace-trim camisole",
+    "category": "top",
+    "subtype": "sleeveless lace-trim camisole",
+    "brand": null,
+    "colors": [
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "polyester satin",
+    "texture": "smooth satin with lace trim",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business",
+      "formal"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed A-line cut with deep V-neck lace trim; flowy drape",
+    "confidence": "high",
+    "id": "navy-lace-trim-camisole",
+    "image": "profiles/evangeline/images/navy-lace-trim-camisole.jpg",
+    "source": "IMG_6709.JPG",
+    "learned": []
+  },
+  {
+    "name": "white sleeveless shift dress",
+    "category": "dress",
+    "subtype": "sleeveless shift dress",
+    "brand": null,
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "polyester ponte knit",
+    "texture": "smooth structured knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "A-line shift silhouette, boat neckline, sits above knee, slightly relaxed fit",
+    "confidence": "medium",
+    "id": "white-sleeveless-shift-dress",
+    "image": "profiles/evangeline/images/white-sleeveless-shift-dress.jpg",
+    "source": "IMG_6710.JPG",
+    "learned": []
+  },
+  {
+    "name": "black A-line mini skirt",
+    "category": "skirt",
+    "subtype": "A-line mini skirt",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "polyester blend suiting",
+    "texture": "smooth woven",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "Short A-line silhouette with darted waist, sits at natural waist",
+    "confidence": "medium",
+    "id": "black-a-line-mini-skirt",
+    "image": "profiles/evangeline/images/black-a-line-mini-skirt.jpg",
+    "source": "IMG_6711.JPG",
+    "learned": []
+  },
+  {
+    "name": "white long-sleeve crop top",
+    "category": "top",
+    "subtype": "long-sleeve crop t-shirt",
+    "brand": "Kookai",
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton jersey",
+    "texture": "smooth soft knit",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped length, fitted cut with slim long sleeves and round neckline",
+    "confidence": "high",
+    "id": "white-long-sleeve-crop-top",
+    "image": "profiles/evangeline/images/white-long-sleeve-crop-top.jpg",
+    "source": "IMG_6712.JPG",
+    "learned": []
+  },
+  {
+    "name": "white pleated mini skirt",
+    "category": "skirt",
+    "subtype": "pleated a-line mini skirt",
+    "brand": null,
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "polyester blend",
+    "texture": "smooth woven with pleats",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "athletic"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "flared pleated skirt with elastic-look waistband, short mini length",
+    "confidence": "medium",
+    "id": "white-pleated-mini-skirt",
+    "image": "profiles/evangeline/images/white-pleated-mini-skirt.jpg",
+    "source": "IMG_6713.JPG",
+    "learned": []
+  },
+  {
+    "name": "dark wash denim shorts",
+    "category": "shorts",
+    "subtype": "denim shorts",
+    "brand": null,
+    "colors": [
+      "dark indigo",
+      "navy"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton denim",
+    "texture": "woven denim with contrast topstitching",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "button-fly denim shorts with five-pocket styling and contrast orange stitching, mid-thigh length",
+    "confidence": "high",
+    "id": "dark-wash-denim-shorts",
+    "image": "profiles/evangeline/images/dark-wash-denim-shorts.jpg",
+    "source": "IMG_6714.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige knit sweater vest",
+    "category": "knit",
+    "subtype": "v-neck sweater vest",
+    "brand": null,
+    "colors": [
+      "beige",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "wool blend knit",
+    "texture": "textured knit with ribbed trim",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "winter",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed fit, ribbed v-neck and hem, layering piece",
+    "confidence": "medium",
+    "id": "beige-knit-sweater-vest",
+    "image": "profiles/evangeline/images/beige-knit-sweater-vest.jpg",
+    "source": "IMG_6715.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy embroidered scalloped-edge top",
+    "category": "blouse",
+    "subtype": "tie-front embroidered blouse",
+    "brand": null,
+    "colors": [
+      "navy",
+      "yellow"
+    ],
+    "neutral": false,
+    "pattern": "other",
+    "sleeve": "short",
+    "material": "cotton",
+    "texture": "smooth woven with embroidered scalloped trim",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Relaxed cut with decorative yellow tie fastening at front and scalloped embroidered edges featuring leaf/fruit motifs",
+    "confidence": "medium",
+    "id": "navy-embroidered-scalloped-edge-top",
+    "image": "profiles/evangeline/images/navy-embroidered-scalloped-edge-top.jpg",
+    "source": "IMG_6716.JPG",
+    "learned": []
+  },
+  {
+    "name": "medium wash wide-leg jeans",
+    "category": "jeans",
+    "subtype": "high-rise wide-leg jeans",
+    "brand": null,
+    "colors": [
+      "medium blue",
+      "indigo"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton denim",
+    "texture": "woven denim with faded whiskering",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "winter"
+    ],
+    "condition": "good",
+    "fit_notes": "high-rise waist, wide straight leg, cropped/full length hem",
+    "confidence": "high",
+    "id": "medium-wash-wide-leg-jeans",
+    "image": "profiles/evangeline/images/medium-wash-wide-leg-jeans.jpg",
+    "source": "IMG_6717.JPG",
+    "learned": []
+  },
+  {
+    "name": "black knit vest with white whipstitch trim",
+    "category": "cardigan",
+    "subtype": "sleeveless knit vest",
+    "brand": "Love Bonito",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "cotton knit blend",
+    "texture": "smooth knit with contrast blanket-stitch edging",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed boxy fit, V-neck, button-front with two patch pockets",
+    "confidence": "high",
+    "id": "black-knit-vest-with-white-whipstitch-trim",
+    "image": "profiles/evangeline/images/black-knit-vest-with-white-whipstitch-trim.jpg",
+    "source": "IMG_6718.JPG",
+    "learned": []
+  },
+  {
+    "name": "white tailored shorts",
+    "category": "shorts",
+    "subtype": "tailored dress shorts",
+    "brand": null,
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton twill blend",
+    "texture": "smooth woven",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "structured tailored shorts with belt loops, mid rise, appears regular fit",
+    "confidence": "medium",
+    "id": "white-tailored-shorts",
+    "image": "profiles/evangeline/images/white-tailored-shorts.jpg",
+    "source": "IMG_6719.JPG",
+    "learned": []
+  },
+  {
+    "name": "black ribbed knit top",
+    "category": "knit",
+    "subtype": "short-sleeve knit top",
+    "brand": null,
+    "colors": [
+      "black"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "short",
+    "material": "cotton-viscose blend knit",
+    "texture": "fine ribbed knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional",
+      "summer"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted stretch knit with ribbed horizontal bands, likely slim bodycon fit",
+    "confidence": "medium",
+    "id": "black-ribbed-knit-top",
+    "image": "profiles/evangeline/images/black-ribbed-knit-top.jpg",
+    "source": "IMG_6720.JPG",
+    "learned": []
+  },
+  {
+    "name": "beige V-neck button cardigan",
+    "category": "cardigan",
+    "subtype": "V-neck knit cardigan",
+    "brand": "Uniqlo",
+    "colors": [
+      "beige",
+      "oatmeal"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "wool blend knit",
+    "texture": "soft brushed knit with ribbed cuffs and hem",
+    "thickness": "medium",
+    "warmth": 3,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "autumn",
+      "spring",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped relaxed fit with dropped shoulders and ribbed trim",
+    "confidence": "high",
+    "id": "beige-v-neck-button-cardigan",
+    "image": "profiles/evangeline/images/beige-v-neck-button-cardigan.jpg",
+    "source": "IMG_6721.JPG",
+    "learned": []
+  },
+  {
+    "name": "white long-sleeve crewneck tee",
+    "category": "top",
+    "subtype": "long-sleeve t-shirt",
+    "brand": null,
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "long",
+    "material": "cotton jersey",
+    "texture": "smooth soft knit",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "relaxed regular fit crewneck, slightly cropped hem length",
+    "confidence": "medium",
+    "id": "white-long-sleeve-crewneck-tee",
+    "image": "profiles/evangeline/images/white-long-sleeve-crewneck-tee.jpg",
+    "source": "IMG_6722.JPG",
+    "learned": []
+  },
+  {
+    "name": "white Nike Air Force 1 low-top sneakers",
+    "category": "shoes",
+    "subtype": "low-top sneakers",
+    "brand": "Nike",
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth leather with perforations",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Classic AF1 silhouette with chunky rubber sole and lace-up front; slight scuffing but overall clean.",
+    "confidence": "high",
+    "id": "white-nike-air-force-1-low-top-sneakers",
+    "image": "profiles/evangeline/images/white-nike-air-force-1-low-top-sneakers.jpg",
+    "source": "IMG_6723.JPG",
+    "learned": []
+  },
+  {
+    "name": "gold strap espadrille wedge sandal",
+    "category": "shoes",
+    "subtype": "espadrille wedge sandal",
+    "brand": "Midas",
+    "colors": [
+      "gold",
+      "beige",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "metallic elastic fabric with jute wedge",
+    "texture": "shimmery elastic straps with woven jute rope wedge",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "open-toe wedge with two elastic straps, mid-height jute-wrapped heel",
+    "confidence": "high",
+    "id": "gold-strap-espadrille-wedge-sandal",
+    "image": "profiles/evangeline/images/gold-strap-espadrille-wedge-sandal.jpg",
+    "source": "IMG_6724.JPG",
+    "learned": []
+  },
+  {
+    "name": "black crossover platform slides",
+    "category": "shoes",
+    "subtype": "platform slide sandals",
+    "brand": "Charles & Keith",
+    "colors": [
+      "black",
+      "gold"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "faux leather",
+    "texture": "smooth",
+    "thickness": "thick",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "Crossover strap slides with chunky platform sole and gold metal logo plate; open toe",
+    "confidence": "high",
+    "id": "black-crossover-platform-slides",
+    "image": "profiles/evangeline/images/black-crossover-platform-slides.jpg",
+    "source": "IMG_6725.JPG",
+    "learned": []
+  },
+  {
+    "name": "white H-strap flat slide sandals",
+    "category": "shoes",
+    "subtype": "flat slide sandals",
+    "brand": "A New Day",
+    "colors": [
+      "white",
+      "tan"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth leather",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "worn",
+    "fit_notes": "Flat sole with cut-out H-shaped upper strap, square open toe; visible scuffing and creasing on straps.",
+    "confidence": "high",
+    "id": "white-h-strap-flat-slide-sandals",
+    "image": "profiles/evangeline/images/white-h-strap-flat-slide-sandals.jpg",
+    "source": "IMG_6726.JPG",
+    "learned": []
+  },
+  {
+    "name": "woven straw sun hat",
+    "category": "accessory",
+    "subtype": "straw bucket/sun hat",
+    "brand": null,
+    "colors": [
+      "tan",
+      "beige"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "raffia straw",
+    "texture": "crocheted woven straw",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "Wide floppy brim, crown packable and flexible",
+    "confidence": "high",
+    "id": "woven-straw-sun-hat",
+    "image": "profiles/evangeline/images/woven-straw-sun-hat.jpg",
+    "source": "IMG_6727.JPG",
+    "learned": []
+  },
+  {
+    "name": "white quilted crossbody bag",
+    "category": "bag",
+    "subtype": "flap crossbody bag",
+    "brand": null,
+    "colors": [
+      "white",
+      "gold"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "faux leather",
+    "texture": "smooth with quilted panels",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": true,
+    "season": [
+      "spring",
+      "summer",
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Compact saddle-shape flap bag with gold twist-lock closure and quilted side panels; suitable for everyday and dressier occasions.",
+    "confidence": "high",
+    "id": "white-quilted-crossbody-bag",
+    "image": "profiles/evangeline/images/white-quilted-crossbody-bag.jpg",
+    "source": "IMG_6728.JPG",
+    "learned": []
+  },
+  {
+    "name": "black leather belt with silver buckle",
+    "category": "accessory",
+    "subtype": "leather belt",
+    "brand": null,
+    "colors": [
+      "black",
+      "silver"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth leather",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business",
+      "formal"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Slim-width belt with single-prong silver buckle, versatile for most trouser loops",
+    "confidence": "high",
+    "id": "black-leather-belt-with-silver-buckle",
+    "image": "profiles/evangeline/images/black-leather-belt-with-silver-buckle.jpg",
+    "source": "IMG_6729.JPG",
+    "learned": []
+  },
+  {
+    "name": "light wash frayed denim mini skirt",
+    "category": "skirt",
+    "subtype": "denim mini skirt",
+    "brand": null,
+    "colors": [
+      "light blue"
+    ],
+    "neutral": false,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "cotton denim",
+    "texture": "woven denim twill",
+    "thickness": "medium",
+    "warmth": 2,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "high-waisted mini with raw frayed hem and five-pocket styling",
+    "confidence": "high",
+    "id": "light-wash-frayed-denim-mini-skirt",
+    "image": "profiles/evangeline/images/light-wash-frayed-denim-mini-skirt.jpg",
+    "source": "IMG_6730.JPG",
+    "learned": []
+  },
+  {
+    "name": "black chain-strap leather bag",
+    "category": "bag",
+    "subtype": "chain-strap shoulder bag",
+    "brand": "Charles & Keith",
+    "colors": [
+      "black",
+      "gold"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "faux leather",
+    "texture": "glossy crinkled leather",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business",
+      "formal"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Slouchy gathered-top bag with woven gold chain shoulder strap; medium size.",
+    "confidence": "high",
+    "id": "black-chain-strap-leather-bag",
+    "image": "profiles/evangeline/images/black-chain-strap-leather-bag.jpg",
+    "source": "IMG_6731.JPG",
+    "learned": []
+  },
+  {
+    "name": "navy bird-print lightweight scarf",
+    "category": "accessory",
+    "subtype": "lightweight scarf",
+    "brand": null,
+    "colors": [
+      "navy",
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "other",
+    "sleeve": "na",
+    "material": "viscose blend",
+    "texture": "sheer woven",
+    "thickness": "thin",
+    "warmth": 2,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "autumn",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Long rectangular scarf with allover small bird motif, sheer drapey fabric",
+    "confidence": "high",
+    "id": "navy-bird-print-lightweight-scarf",
+    "image": "profiles/evangeline/images/navy-bird-print-lightweight-scarf.jpg",
+    "source": "IMG_6732.JPG",
+    "learned": []
+  },
+  {
+    "name": "white ribbed crop cami",
+    "category": "top",
+    "subtype": "cropped camisole tank",
+    "brand": null,
+    "colors": [
+      "white"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "sleeveless",
+    "material": "ribbed cotton blend",
+    "texture": "ribbed knit",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual",
+      "athletic"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "cropped fitted silhouette with fixed shoulder straps, stretchy ribbed body",
+    "confidence": "high",
+    "id": "white-ribbed-crop-cami",
+    "image": "profiles/evangeline/images/white-ribbed-crop-cami.jpg",
+    "source": "IMG_6733.JPG",
+    "learned": []
+  },
+  {
+    "name": "light blue polka dot ruched dress",
+    "category": "dress",
+    "subtype": "puff-sleeve mini dress",
+    "brand": null,
+    "colors": [
+      "light blue",
+      "white"
+    ],
+    "neutral": false,
+    "pattern": "other",
+    "sleeve": "short",
+    "material": "polyester chiffon",
+    "texture": "lightweight woven with ruching",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "fitted bodice with center-front ruching, puff sleeves, V-neck, flared mini skirt",
+    "confidence": "high",
+    "id": "light-blue-polka-dot-ruched-dress",
+    "image": "profiles/evangeline/images/light-blue-polka-dot-ruched-dress.jpg",
+    "source": "IMG_6734.JPG",
+    "learned": []
+  },
+  {
+    "name": "red crochet floral ballet flats",
+    "category": "shoes",
+    "subtype": "ballet flats",
+    "brand": null,
+    "colors": [
+      "red",
+      "tan"
+    ],
+    "neutral": false,
+    "pattern": "other",
+    "sleeve": "na",
+    "material": "crochet lace with fabric",
+    "texture": "open crochet floral lace",
+    "thickness": "thin",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "spring",
+      "summer"
+    ],
+    "condition": "good",
+    "fit_notes": "slip-on flat with cushioned tan insole; breathable open-weave upper",
+    "confidence": "high",
+    "id": "red-crochet-floral-ballet-flats",
+    "image": "profiles/evangeline/images/red-crochet-floral-ballet-flats.jpg",
+    "source": "IMG_6735.JPG",
+    "learned": []
+  },
+  {
+    "name": "brown leather belt",
+    "category": "accessory",
+    "subtype": "leather belt",
+    "brand": null,
+    "colors": [
+      "brown",
+      "silver"
+    ],
+    "neutral": true,
+    "pattern": "solid",
+    "sleeve": "na",
+    "material": "leather",
+    "texture": "smooth leather",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual",
+      "smart casual",
+      "business"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring",
+      "autumn",
+      "winter",
+      "transitional"
+    ],
+    "condition": "good",
+    "fit_notes": "Standard-width belt with silver-tone pin buckle, five adjustment holes",
+    "confidence": "high",
+    "id": "brown-leather-belt",
+    "image": "profiles/evangeline/images/brown-leather-belt.jpg",
+    "source": "IMG_6736.JPG",
+    "learned": []
+  },
+  {
+    "name": "cream crochet net tote with enamel pins",
+    "category": "bag",
+    "subtype": "crochet net shoulder tote",
+    "brand": null,
+    "colors": [
+      "cream",
+      "multicolor"
+    ],
+    "neutral": true,
+    "pattern": "other",
+    "sleeve": "na",
+    "material": "cotton",
+    "texture": "open crochet net",
+    "thickness": "medium",
+    "warmth": 1,
+    "formality": [
+      "casual"
+    ],
+    "rain_ok": false,
+    "season": [
+      "summer",
+      "spring"
+    ],
+    "condition": "good",
+    "fit_notes": "Slouchy open-weave market tote with dual shoulder straps and decorative enamel pins on the front; unstructured, roomy body.",
+    "confidence": "high",
+    "id": "cream-crochet-net-tote-with-enamel-pins",
+    "image": "profiles/evangeline/images/cream-crochet-net-tote-with-enamel-pins.jpg",
+    "source": "IMG_6737.JPG",
+    "learned": []
   }
 ]
