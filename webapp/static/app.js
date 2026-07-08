@@ -435,6 +435,7 @@ function openPieceEditor(piece, origin) {
   editingPiece = piece;
   pieceEditorOrigin = origin || null;
   $("#piece-title").textContent = piece.name || "Edit piece";
+  $("#piece-name").value = piece.name || "";
   $("#piece-img").src = piece.url || "";
   $("#piece-img").onclick = () => openZoom(piece.url);
   $("#piece-warmth").value = piece.warmth || 3;
@@ -462,6 +463,8 @@ async function savePieceEditor() {
     office_ok: $("#piece-office").checked,
     avoid_often: $("#piece-avoid").checked,
   };
+  const nm = $("#piece-name").value.trim();
+  if (nm) vals.name = nm;
   const btn = $("#piece-save"); btn.disabled = true; btn.textContent = "Saving…";
   try {
     await api("/api/wardrobe/" + encodeURIComponent(editingPiece.id), vals);

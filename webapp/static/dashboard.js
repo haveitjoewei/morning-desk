@@ -110,8 +110,13 @@ async function loadOutfit(force) {
   } finally { loading(false); day.variety = false; }
 }
 
+function renderFocus() {
+  const el = $("#d-focus"); if (el) el.value = localStorage.getItem(K("focus")) || "";
+}
+
 function renderResult(r) {
   lastResult = r;
+  renderFocus();
   activeOccasion = r.occasion || activeOccasion;
   const d = r.date ? new Date(r.date + "T00:00:00") : new Date();
   $("#d-date").textContent = d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
@@ -362,6 +367,7 @@ function init() {
   $("#d-zoom").onclick = () => { $("#d-zoom").hidden = true; };
   $("#d-prev").onclick = () => shiftDay(-1);
   $("#d-next").onclick = () => shiftDay(1);
+  $("#d-focus").addEventListener("input", (e) => localStorage.setItem(K("focus"), e.target.value));
   $("#d-journal").onclick = () => { journalStep++; renderJournal(); };   // tap for another prompt
   $("#d-settings").onclick = () => openEditor("panel=settings", "Preferences");   // prefs overlay, no page jump
   $("#d-edit-done").onclick = closeEditor;

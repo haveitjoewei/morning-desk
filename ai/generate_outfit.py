@@ -36,7 +36,9 @@ SYSTEM = (
     "chunky/thick knit under a slim or tailored jacket, never stack two thick/bulky pieces, "
     "and don't layer a voluminous or ruffled top under a fitted layer (it bulks and pokes "
     "through). Use each item's thickness, sleeve and fit_notes to judge what nests.\n"
-    "- Accessories: include at most one bag.\n"
+    "- Accessories: include at most one bag. A belt only belongs with a bottom that has "
+    "belt loops (jeans, chinos, trousers) — never with joggers, sweatpants, leggings, a "
+    "skirt, or a dress.\n"
     "- Register: keep every piece in one formality lane — today's intent decides it "
     "(office/dress_to_impress leans 'smart casual'; work_from_home/off is 'casual'). Each "
     "item's 'formality' lists the settings it suits.\n"
@@ -154,6 +156,28 @@ def _text_fields(item):
         str(item.get(key, ""))
         for key in ("name", "subtype", "material", "texture")
     ).lower()
+
+
+def _is_belt(item):
+    return (item or {}).get("category") == "accessory" and "belt" in _text_fields(item)
+
+
+# Bottoms with no belt loops — a belt on these looks wrong.
+_NO_BELT_WORDS = ("jogger", "sweatpant", "sweat pant", "track", "legging", "elastic",
+                  "drawstring", "pajama", "pyjama", "athletic", "yoga")
+# Bottoms that do have belt loops.
+_BELT_BOTTOM_WORDS = ("jean", "chino", "trouser", "tailored", "cargo", "slack",
+                      "dress pant", "suit", "short", "pant")
+
+
+def _bottom_takes_belt(item):
+    item = item or {}
+    if item.get("category") not in LOWER_CATEGORIES or item.get("category") == "skirt":
+        return False
+    text = _text_fields(item)
+    if any(word in text for word in _NO_BELT_WORDS):
+        return False
+    return any(word in text for word in _BELT_BOTTOM_WORDS)
 
 
 def _is_boot(item):
@@ -622,6 +646,12 @@ def _strip_conflicts(items, wardrobe_items):
             continue
         used_slots.add(slot)
         out.append(name)
+    # A belt only belongs with a bottom that has belt loops (jeans, chinos, trousers) —
+    # drop it on joggers/sweatpants/leggings, a skirt, or a dress.
+    if any(_is_belt(by_name.get(n)) for n in out) and not any(
+        _bottom_takes_belt(by_name.get(n)) for n in out
+    ):
+        out = [n for n in out if not _is_belt(by_name.get(n))]
     return out
 
 

@@ -45,7 +45,7 @@ def require_token(authorization: str = Header(default="")) -> str:
     return prof
 
 
-_EDITABLE = ("warmth", "polish", "comfort", "wear_frequency", "home_ok", "office_ok", "avoid_often")
+_EDITABLE = ("name", "warmth", "polish", "comfort", "wear_frequency", "home_ok", "office_ok", "avoid_often")
 
 
 def _wardrobe(prof):
