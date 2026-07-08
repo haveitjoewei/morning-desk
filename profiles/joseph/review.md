@@ -1,6 +1,6 @@
 # Wardrobe review
 
-85 item(s) catalogued, 16 need a look (confidence medium/low — fabric or thickness inferred).
+86 item(s) catalogued, 16 need a look (confidence medium/low — fabric or thickness inferred).
 
 - **beige linen-blend button-down shirt** (`beige-linen-blend-button-down-shirt`) — medium · linen-cotton blend, medium · formality casual, smart casual, business · `wardrobe/images/beige-linen-blend-button-down-shirt.jpg`
 - **grey and charcoal hooded softshell jacket** (`grey-and-charcoal-hooded-softshell-jacket`) — medium · polyester softshell with fleece backing, medium · formality athletic, casual · `wardrobe/images/grey-and-charcoal-hooded-softshell-jacket.jpg`

@@ -333,6 +333,8 @@ body {
   background: transparent; color: var(--ink-soft); border: 1px solid var(--line);
 }
 .btn.ghost:hover { border-color: var(--accent); color: var(--ink); }
+.piece-delete { margin-top: 8px; color: #b4523f; }
+.piece-delete:hover { border-color: #b4523f; color: #b4523f; }
 .btn.ghost:active { transform: translateY(1px); }
 
 /* Labelled divider separating "your closet" from today's tweaks */

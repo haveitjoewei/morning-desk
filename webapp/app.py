@@ -45,7 +45,7 @@ def require_token(authorization: str = Header(default="")) -> str:
     return prof
 
 
-_EDITABLE = ("name", "warmth", "polish", "comfort", "wear_frequency", "home_ok", "office_ok", "avoid_often")
+_EDITABLE = ("name", "category", "warmth", "polish", "comfort", "wear_frequency", "home_ok", "office_ok", "avoid_often")
 
 
 def _wardrobe(prof):
@@ -60,7 +60,7 @@ def _wardrobe(prof):
             fields = corr.get(item.get("id"))
             if fields:
                 item.update(fields)
-    return items
+    return [it for it in items if not it.get("deleted")]
 
 
 def _url_for_id(item_id, prof):
@@ -160,6 +160,19 @@ def update_wardrobe_item(item_id: str, body: dict, prof: str = Depends(require_t
         "wear_frequency": item.get("wear_frequency"),
         "avoid_often": item.get("avoid_often"),
     }
+
+
+@app.post("/api/wardrobe/{item_id}/delete")
+def delete_wardrobe_item(item_id: str, prof: str = Depends(require_token)):
+    from webapp import kvstore
+
+    if kvstore.available():
+        corr = kvstore.get_json(f"closet:{prof}:corr") or {}
+        corr[item_id] = {**corr.get(item_id, {}), "deleted": True}
+        kvstore.set_json(f"closet:{prof}:corr", corr)
+    else:
+        save_metadata_correction(item_id, {"deleted": True}, profile=prof)
+    return {"ok": True}
 
 
 @app.get("/api/state")

@@ -1,6 +1,6 @@
 # Wardrobe review
 
-102 item(s) catalogued, 41 need a look (confidence medium/low — fabric or thickness inferred).
+134 item(s) catalogued, 52 need a look (confidence medium/low — fabric or thickness inferred).
 
 - **white ruched midi dress** (`white-ruched-midi-dress`) — medium · cotton blend, thin · formality casual, smart casual · `profiles/evangeline/images/white-ruched-midi-dress.jpg`
 - **ditsy floral midi skirt** (`ditsy-floral-midi-skirt`) — medium · rayon, thin · formality casual, smart casual · `profiles/evangeline/images/ditsy-floral-midi-skirt.jpg`
@@ -43,5 +43,16 @@
 - **pink plaid fringed scarf** (`pink-plaid-fringed-scarf`) — medium · wool blend, thin · formality casual, smart casual · `profiles/evangeline/images/pink-plaid-fringed-scarf.jpg`
 - **beige long-sleeve top** (`beige-long-sleeve-top`) — medium · cotton jersey blend, thin · formality casual, smart casual · `profiles/evangeline/images/beige-long-sleeve-top.jpg`
 - **dusty blue mock-neck knit sweater** (`dusty-blue-mock-neck-knit-sweater`) — medium · wool blend knit, medium · formality casual, smart casual · `profiles/evangeline/images/dusty-blue-mock-neck-knit-sweater.jpg`
+- **lime green ribbed mock-neck top** (`lime-green-ribbed-mock-neck-top`) — medium · cotton-viscose blend knit, medium · formality casual, smart casual · `profiles/evangeline/images/lime-green-ribbed-mock-neck-top.jpg`
+- **cream sleeveless swing dress** (`cream-sleeveless-swing-dress`) — medium · cotton jersey with woven back panel, thin · formality casual, smart casual · `profiles/evangeline/images/cream-sleeveless-swing-dress.jpg`
+- **blue and white striped A-line skirt** (`blue-and-white-striped-a-line-skirt`) — medium · cotton, thin · formality casual, smart casual · `profiles/evangeline/images/blue-and-white-striped-a-line-skirt.jpg`
+- **white sleeveless shift dress** (`white-sleeveless-shift-dress`) — medium · polyester ponte knit, medium · formality casual, smart casual, business · `profiles/evangeline/images/white-sleeveless-shift-dress.jpg`
+- **black A-line mini skirt** (`black-a-line-mini-skirt`) — medium · polyester blend suiting, medium · formality casual, smart casual, business · `profiles/evangeline/images/black-a-line-mini-skirt.jpg`
+- **white pleated mini skirt** (`white-pleated-mini-skirt`) — medium · polyester blend, medium · formality casual, smart casual, athletic · `profiles/evangeline/images/white-pleated-mini-skirt.jpg`
+- **beige knit sweater vest** (`beige-knit-sweater-vest`) — medium · wool blend knit, medium · formality casual, smart casual · `profiles/evangeline/images/beige-knit-sweater-vest.jpg`
+- **navy embroidered scalloped-edge top** (`navy-embroidered-scalloped-edge-top`) — medium · cotton, medium · formality casual, smart casual · `profiles/evangeline/images/navy-embroidered-scalloped-edge-top.jpg`
+- **white tailored shorts** (`white-tailored-shorts`) — medium · cotton twill blend, medium · formality casual, smart casual · `profiles/evangeline/images/white-tailored-shorts.jpg`
+- **black ribbed knit top** (`black-ribbed-knit-top`) — medium · cotton-viscose blend knit, medium · formality casual, smart casual, business · `profiles/evangeline/images/black-ribbed-knit-top.jpg`
+- **white long-sleeve crewneck tee** (`white-long-sleeve-crewneck-tee`) — medium · cotton jersey, medium · formality casual, smart casual · `profiles/evangeline/images/white-long-sleeve-crewneck-tee.jpg`
 
 Correct any item by telling me its id and what's wrong; I update its record.

@@ -368,13 +368,18 @@ async function openWardrobe() {
       byCat[cat].forEach((i) => {
         const cell = document.createElement("button"); cell.className = "pick";
         cell.innerHTML = `<img src="${i.url}" alt=""><span>${i.name || ""}</span>`;
-        cell.onclick = () => { $("#wardrobe-modal").hidden = true; openPieceEditor(i, "wardrobe"); };
+        cell.onclick = () => {
+          wardrobeScroll = $("#wardrobe-modal .modal-card").scrollTop;   // remember place
+          $("#wardrobe-modal").hidden = true; openPieceEditor(i, "wardrobe");
+        };
         grid.appendChild(cell);
       });
       groups.appendChild(grid);
     });
+    $("#wardrobe-modal .modal-card").scrollTop = wardrobeScroll;   // restore after edit
   } catch { groups.innerHTML = "Couldn't load wardrobe."; }
 }
+let wardrobeScroll = 0;
 
 async function openPicker() {
   const groups = $("#picker-groups"); groups.innerHTML = "Loading…"; $("#picker").hidden = false;
@@ -436,6 +441,14 @@ function openPieceEditor(piece, origin) {
   pieceEditorOrigin = origin || null;
   $("#piece-title").textContent = piece.name || "Edit piece";
   $("#piece-name").value = piece.name || "";
+  const cats = localStorage.getItem("wc.menswear." + store.profile)
+    ? ["top", "midlayer", "outerwear", "bottom", "shoes", "accessory"]
+    : ["top", "blouse", "knit", "cardigan", "outerwear", "dress", "skirt", "pants", "jeans", "shorts", "shoes", "bag", "accessory"];
+  const sel = $("#piece-category");
+  sel.innerHTML = cats.map((c) => `<option value="${c}">${c}</option>`).join("");
+  if (piece.category && !cats.includes(piece.category))
+    sel.insertAdjacentHTML("afterbegin", `<option value="${piece.category}">${piece.category}</option>`);
+  sel.value = piece.category || cats[0];
   $("#piece-img").src = piece.url || "";
   $("#piece-img").onclick = () => openZoom(piece.url);
   $("#piece-warmth").value = piece.warmth || 3;
@@ -452,6 +465,18 @@ function openPieceEditor(piece, origin) {
   $("#piece-editor").hidden = false;
 }
 
+async function deletePiece() {
+  if (!editingPiece || !editingPiece.id) return;
+  if (!confirm(`Remove "${editingPiece.name || "this piece"}" from your wardrobe?`)) return;
+  const btn = $("#piece-delete"); btn.disabled = true; btn.textContent = "Removing…";
+  try {
+    await api("/api/wardrobe/" + encodeURIComponent(editingPiece.id) + "/delete", {});
+  } finally { btn.disabled = false; btn.textContent = "Delete from wardrobe"; }
+  $("#piece-editor").hidden = true;
+  const origin = pieceEditorOrigin; pieceEditorOrigin = null;
+  if (origin === "wardrobe") openWardrobe();
+}
+
 async function savePieceEditor() {
   if (!editingPiece || !editingPiece.id) return;
   const vals = {
@@ -465,6 +490,7 @@ async function savePieceEditor() {
   };
   const nm = $("#piece-name").value.trim();
   if (nm) vals.name = nm;
+  vals.category = $("#piece-category").value;
   const btn = $("#piece-save"); btn.disabled = true; btn.textContent = "Saving…";
   try {
     await api("/api/wardrobe/" + encodeURIComponent(editingPiece.id), vals);
@@ -563,6 +589,7 @@ function bind() {
     if (origin === "wardrobe") openWardrobe();
   };
   $("#piece-save").onclick = savePieceEditor;
+  $("#piece-delete").onclick = deletePiece;
   $("#plan-btn").onclick = () => { $("#plan").hidden = !$("#plan").hidden; };
   $("#plan-apply").onclick = applyPlan;
   $("#settings-btn").onclick = () => { loadSettings(); $("#settings").hidden = false; };

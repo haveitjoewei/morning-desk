@@ -92,7 +92,7 @@ const outfitKey = () => `${dash.active}:${day.date || todayISO()}`;
 
 async function loadOutfit(force) {
   const active = dash.active;
-  const savedOcc = occStore()[todayISO()];
+  const savedOcc = occStore()[day.date || todayISO()];   // per the day being viewed, not always today
   if (savedOcc && !day.occasion) { day.occasion = savedOcc; activeOccasion = savedOcc; }
   const key = outfitKey(), sig = outfitSig();
   if (!force && outfitCache[key] && outfitCache[key].sig === sig) { renderResult(outfitCache[key].result); return; }
@@ -330,7 +330,7 @@ function renderOccasions() {
     b.textContent = o;
     b.onclick = () => {
       day.occasion = o; day.rejections = []; activeOccasion = o;
-      setOcc({ ...occStore(), [todayISO()]: o });
+      setOcc({ ...occStore(), [day.date || todayISO()]: o });
       renderOccasions(); loadOutfit();
     };
     wrap.appendChild(b);
