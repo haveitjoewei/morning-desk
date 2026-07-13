@@ -284,6 +284,8 @@ def _can_nest(inner, outer):
         return False  # two thick layers don't nest
     if _is_fitted(outer) and any(w in _text_fields(inner) for w in VOLUMINOUS_WORDS):
         return False  # ruffles/volume bulk and poke out under a fitted outer
+    if (inner or {}).get("sleeve") == "long" and (outer or {}).get("sleeve") == "short":
+        return False  # long sleeves poke out under a short-sleeve layer
     return True
 
 

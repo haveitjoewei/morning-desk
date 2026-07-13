@@ -2532,16 +2532,16 @@
     "learned": []
   },
   {
-    "name": "black knit cardigan",
-    "category": "midlayer",
-    "subtype": "button-front cardigan",
+    "name": "black short-sleeve camp shirt",
+    "category": "top",
+    "subtype": "camp-collar short-sleeve shirt",
     "brand": null,
     "colors": [
       "black"
     ],
     "neutral": true,
     "pattern": "solid",
-    "sleeve": "long",
+    "sleeve": "short",
     "material": "cotton blend knit",
     "texture": "fine knit",
     "thickness": "medium",
