@@ -4,7 +4,8 @@ from ai.style_request import build_request, effective_high
 
 
 def test_cold_and_warmer_lower_the_effective_temperature():
-    assert effective_high(18, {"runs_cold": True}, {"temp_nudge": "warmer"}) == 13
+    # runs_cold dresses a full warmth band up (-6), plus a "warmer" nudge (-2).
+    assert effective_high(18, {"runs_cold": True}, {"temp_nudge": "warmer"}) == 10
 
 
 def test_lighter_raises_effective_temperature():

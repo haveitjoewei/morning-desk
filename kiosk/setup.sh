@@ -55,9 +55,9 @@ TOKEN="\${URL##*k=}"
 # activates it and switches to its window (a plain background launch opens --kiosk on
 # a separate Space you never see). Matches only the kiosk Chrome (its own data-dir).
 pkill -f "morningdesk-kiosk" 2>/dev/null; sleep 2
-open -na "Google Chrome" --args --app="\$URL" \\
+open -na "Google Chrome" --args --kiosk --app="\$URL" \\
   --user-data-dir="\$HOME/.morningdesk-kiosk" \\
-  --window-position=0,24 --window-size=1600,1000 \\
+  --start-fullscreen \\
   --no-first-run --no-default-browser-check --disable-translate \\
   --disable-features=TranslateUI --overscroll-history-navigation=0 \\
   --disable-session-crashed-bubble --disable-infobars >>"\$LOG" 2>&1

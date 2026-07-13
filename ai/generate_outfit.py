@@ -44,7 +44,11 @@ SYSTEM = (
     "item's 'formality' lists the settings it suits.\n"
     "- Weather: weight warmth/thickness/material to the temperature; prefer rain_ok pieces "
     "when rain is likely, but don't force puffers or boots for mild 'rain later'. Avoid "
-    "'worn'-condition items when dressing to impress.\n"
+    "'worn'-condition items when dressing to impress. Each item has a 'warmth' 1-5 — pick "
+    "pieces (including shoes) that MATCH the day; if the wearer runs cold, err warmer.\n"
+    "- Variety: rotate. Do NOT keep returning the same go-to pieces day after day — favour "
+    "items not in the recently-worn list, and vary the combination even on similar days.\n"
+    "- Never pick an item marked avoid_often unless it is the only thing that works.\n"
     "- Cozy home means soft, comfortable, home-appropriate clothes; avoid jeans, stiff "
     "trousers, office shoes, and dresses unless explicitly anchored.\n"
     "Return a short evocative headline, 3-5 exact item names, and one tight reason that "
@@ -345,7 +349,7 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
     def score(item, formality=None):
         value = 0
         if item.get("name") in recent:
-            value -= 5  # rotate away from recently worn pieces
+            value -= 9  # rotate away from recently worn pieces (keep the look fresh)
         if formality and _formality_ok(item, formality):
             value += 6
         if formality in FORMALITY_RANK:
@@ -353,11 +357,14 @@ def fallback_outfit(weather, wardrobe_items, calendar=None, context=None, reques
         if item.get("polish") is not None and formality in FORMALITY_RANK:
             value -= 2 * abs(int(item.get("polish", 2)) - (FORMALITY_RANK[formality] + 1))
         if item.get("warmth") is not None:
-            value -= 2 * abs(int(item.get("warmth", target_warmth)) - target_warmth)
+            warmth = int(item.get("warmth", target_warmth))
+            value -= 3 * abs(warmth - target_warmth)          # match the weather more tightly
+            if warmth < target_warmth:
+                value -= 2 * (target_warmth - warmth)         # too-cold is worse than too-warm
         if item.get("wear_frequency") is not None:
             value += int(item.get("wear_frequency", 3)) - 3
         if item.get("avoid_often"):
-            value -= 5
+            value -= 18   # "avoid recommending often" — keep it out unless nothing else fits
         if athletic_events:
             if _formality_ok(item, "athletic"):
                 value += 2
@@ -734,6 +741,9 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
     directives = []
     if request.get("instructions"):
         directives.append("Wearer preferences for today: " + request["instructions"])
+    flagged = [w.get("name") for w in usable if w.get("avoid_often")]
+    if flagged:
+        directives.append("Do NOT recommend these unless nothing else fits: " + ", ".join(flagged) + ".")
     if anchor:
         directives.append(f"You MUST build the outfit around this exact item and include it: {anchor}.")
     if anchors:

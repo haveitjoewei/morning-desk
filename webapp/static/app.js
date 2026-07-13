@@ -16,7 +16,7 @@ const store = {
   get prefs() { try { return JSON.parse(localStorage.getItem(this._k("prefs"))) || {}; } catch { return {}; } },
   set prefs(v) { localStorage.setItem(this._k("prefs"), JSON.stringify(v)); },
   get recent() { try { return JSON.parse(localStorage.getItem(this._k("recent"))) || []; } catch { return []; } },
-  set recent(v) { localStorage.setItem(this._k("recent"), JSON.stringify(v.slice(0, 15))); },
+  set recent(v) { localStorage.setItem(this._k("recent"), JSON.stringify(v.slice(0, 25))); },
   get units() { return localStorage.getItem("wc.units") || "C"; },   // shared display pref
   set units(v) { localStorage.setItem("wc.units", v); },
   get locked() { try { return JSON.parse(localStorage.getItem(this._k("locked"))) || {}; } catch { return {}; } },
@@ -109,10 +109,8 @@ function renderOccasions() {
     b.className = "chip" + (o.toLowerCase() === (activeOccasion || "").toLowerCase() ? " on" : "");
     b.textContent = o;
     b.onclick = () => {
-      const key = day.date || todayISO();
       day.occasion = o; day.rejections = []; activeOccasion = o;
-      store.occasions = { ...store.occasions, [key]: o };   // remember what you picked for this day
-      pushState();
+      if (!day.date) { store.occasions = { ...store.occasions, [todayISO()]: o }; pushState(); }  // today only
       renderOccasions(); fetchOutfit();
     };
     wrap.appendChild(b);
@@ -174,7 +172,7 @@ async function fetchOutfit() {
   } else if (lk && lk.pieces) {           // legacy frozen snapshot
     renderResult(lk); return;
   }
-  const occ = store.occasions[key];       // a day you explicitly set overrides office-day defaults
+  const occ = day.date ? null : store.occasions[todayISO()];   // office-day default wins on other days
   if (occ) { day.occasion = occ; activeOccasion = occ; }
   loading(true);
   try {

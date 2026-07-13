@@ -23,7 +23,7 @@ def effective_high(high, prefs, day):
     high = high if isinstance(high, (int, float)) else 18
     prefs, day = prefs or {}, day or {}
     if prefs.get("runs_cold"):
-        high -= 3
+        high -= 6   # a cold-runner should dress a full warmth band up, not a nudge
     nudge = day.get("temp_nudge")
     if nudge == "warmer":
         high -= 2

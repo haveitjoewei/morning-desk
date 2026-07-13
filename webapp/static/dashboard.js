@@ -74,7 +74,7 @@ const K = (base) => `wc.${base}.${dash.active}`;
 const getJSON = (key, dflt) => { try { const v = JSON.parse(localStorage.getItem(key)); return v == null ? dflt : v; } catch { return dflt; } };
 const prefs = () => getJSON(K("prefs"), {});
 const recent = () => getJSON(K("recent"), []);
-const setRecent = (v) => localStorage.setItem(K("recent"), JSON.stringify(v.slice(0, 15)));
+const setRecent = (v) => localStorage.setItem(K("recent"), JSON.stringify(v.slice(0, 25)));
 const occStore = () => getJSON(K("occ"), {});
 const setOcc = (o) => localStorage.setItem(K("occ"), JSON.stringify(o));
 
@@ -92,7 +92,9 @@ const outfitKey = () => `${dash.active}:${day.date || todayISO()}`;
 
 async function loadOutfit(force) {
   const active = dash.active;
-  const savedOcc = occStore()[day.date || todayISO()];   // per the day being viewed, not always today
+  // Only TODAY keeps a manually-chosen occasion; any other day always starts from its
+  // weekday default (office days -> Work) so it can never get stuck on a stale WFH.
+  const savedOcc = day.date ? null : occStore()[todayISO()];
   if (savedOcc && !day.occasion) { day.occasion = savedOcc; activeOccasion = savedOcc; }
   const key = outfitKey(), sig = outfitSig();
   if (!force && outfitCache[key] && outfitCache[key].sig === sig) { renderResult(outfitCache[key].result); return; }
@@ -118,6 +120,7 @@ function renderResult(r) {
   lastResult = r;
   renderFocus();
   activeOccasion = r.occasion || activeOccasion;
+  renderQuote();
   const d = r.date ? new Date(r.date + "T00:00:00") : new Date();
   $("#d-date").textContent = d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
   $("#d-headline").textContent = r.headline || "";
@@ -286,14 +289,58 @@ const PROMPTS = {
     "What can you set down before sleep?",
   ],
 };
+// The "day" rolls over at 2am, not midnight — 12–2am is still the night before.
+function logicalDoy() {
+  const n = new Date(); n.setHours(n.getHours() - 2);
+  const start = new Date(n.getFullYear(), 0, 0);
+  return Math.floor((n - start) / 86400000);
+}
+function isEveningNow() { const h = new Date().getHours(); return h >= 17 || h < 2; }
+
 let journalStep = 0;
 function renderJournal() {
-  const evening = new Date().getHours() >= 17;
+  const evening = isEveningNow();
   const set = evening ? PROMPTS.evening : PROMPTS.morning;
-  const start = new Date(new Date().getFullYear(), 0, 0);
-  const doy = Math.floor((new Date() - start) / 86400000);
   $("#d-journal-title").textContent = evening ? "Evening reflection" : "Morning intention";
-  $("#d-journal-prompt").textContent = set[(doy + journalStep) % set.length];
+  $("#d-journal-prompt").textContent = set[(logicalDoy() + journalStep) % set.length];
+}
+
+// Daily quote, themed to the day: focus for work days, calm for weekend/home, else general.
+const QUOTES = {
+  work: [
+    "“Amateurs sit and wait for inspiration, the rest of us just get up and go to work.” — Stephen King",
+    "“The secret of getting ahead is getting started.” — Mark Twain",
+    "“It’s not always that we need to do more but rather that we need to focus on less.” — Nathan W. Morris",
+    "“Well done is better than well said.” — Benjamin Franklin",
+    "“Do the hard jobs first. The easy jobs will take care of themselves.” — Dale Carnegie",
+    "“Action is the foundational key to all success.” — Pablo Picasso",
+    "“You don’t have to see the whole staircase, just take the first step.” — Martin Luther King Jr.",
+  ],
+  calm: [
+    "“Almost everything will work again if you unplug it for a few minutes — including you.” — Anne Lamott",
+    "“Rest and self-care are so important. You cannot serve from an empty vessel.” — Eleanor Brownn",
+    "“Nature does not hurry, yet everything is accomplished.” — Lao Tzu",
+    "“Take rest; a field that has rested gives a bountiful crop.” — Ovid",
+    "“Slow down and enjoy life. It’s not only the scenery you miss by going too fast.” — Eddie Cantor",
+    "“Adopt the pace of nature: her secret is patience.” — Ralph Waldo Emerson",
+    "“Enjoy the little things, for one day you may look back and realise they were the big things.” — Robert Brault",
+  ],
+  general: [
+    "“Whether you think you can or you think you can’t, you’re right.” — Henry Ford",
+    "“The best way to predict the future is to create it.” — Peter Drucker",
+    "“What you do every day matters more than what you do once in a while.” — Gretchen Rubin",
+    "“Little by little, one travels far.” — J.R.R. Tolkien",
+    "“Happiness is not something ready made. It comes from your own actions.” — Dalai Lama",
+    "“Start where you are. Use what you have. Do what you can.” — Arthur Ashe",
+    "“How we spend our days is, of course, how we spend our lives.” — Annie Dillard",
+  ],
+};
+function renderQuote() {
+  const el = $("#d-quote"); if (!el) return;
+  const occ = (activeOccasion || "").toLowerCase();
+  const pool = occ === "work" ? QUOTES.work
+    : (occ === "weekend" || occ === "cozy home") ? QUOTES.calm : QUOTES.general;
+  el.textContent = pool[logicalDoy() % pool.length];
 }
 
 // ── Brief blocks (schedule + priorities), published by the local job ──
@@ -330,7 +377,7 @@ function renderOccasions() {
     b.textContent = o;
     b.onclick = () => {
       day.occasion = o; day.rejections = []; activeOccasion = o;
-      setOcc({ ...occStore(), [day.date || todayISO()]: o });
+      if (!day.date) setOcc({ ...occStore(), [todayISO()]: o });   // persist for today only
       renderOccasions(); loadOutfit();
     };
     wrap.appendChild(b);
