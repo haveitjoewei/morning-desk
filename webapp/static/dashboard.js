@@ -427,11 +427,6 @@ function init() {
 
   renderProfiles();
   const active = dash.active;
-  // Seed today's cache from the last saved look so a kiosk relaunch costs no AI call.
-  const stored = getJSON("wc.today." + active, null);
-  if (stored && stored.result && (stored.result.date || todayISO()) === todayISO()) {
-    outfitCache[`${active}:${todayISO()}`] = { sig: outfitSig(), result: stored.result };
-  }
   if (dash.tokens[active]) {
     showApp(); loadOutfit(); loadBrief();
     setTimeout(loadBrief, 12000);   // catch the fresh brief the launcher publishes on wake

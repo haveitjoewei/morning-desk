@@ -55,10 +55,10 @@ html, body { height: 100%; overflow: hidden; }
   font-family: var(--serif); font-weight: 500; letter-spacing: -.5px;
   font-size: clamp(20px, 2.6vw, 34px); line-height: 1.1; display: block; margin-top: 4px;
 }
-#d-look { margin: clamp(8px, 1.6vh, 18px) auto 0; max-width: 880px; min-height: 0; }
-/* Images scale to available height so the look + controls fit without scrolling. */
-#d-look .look-item img { height: clamp(82px, 13.5vh, 168px); }
-#d-look .cat-shoes img { height: clamp(54px, 9vh, 108px); }
+#d-look { margin: clamp(8px, 1.6vh, 18px) auto 0; max-width: 1040px; min-height: 0; }
+/* The outfit is the hero — scale it up to fill the stage so it isn't lost in whitespace. */
+#d-look .look-item img { height: clamp(110px, 20vh, 250px); }
+#d-look .cat-shoes img { height: clamp(76px, 13.5vh, 165px); }
 #d-look .look-item figcaption { font-size: 10.5px; margin-top: 5px; }
 .d-hint { margin-top: clamp(8px, 1.6vh, 18px); }   /* clear the outfit captions */
 .d-outfit:hover .d-adjust { border-color: var(--accent); color: var(--accent); }
@@ -110,8 +110,8 @@ html, body { height: 100%; overflow: hidden; }
 .d-brief { padding: clamp(16px,3vh,30px) clamp(16px,2vw,26px); border-right: 1px solid var(--line);
   overflow-y: auto; display: flex; flex-direction: column; gap: 18px; }
 
-/* Daily quote — sits at the bottom of the brief column, filling the space calmly */
-.d-quote-card { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); }
+/* Daily quote — flows under the brief (not pinned to the floor, which left a mid gap) */
+.d-quote-card { padding-top: 16px; border-top: 1px solid var(--line); }
 .d-quote { font-family: var(--serif); font-style: italic; font-size: 14.5px; line-height: 1.55;
   color: var(--ink-soft); font-optical-sizing: auto; }
 .d-brief-h { font-family: var(--serif); font-weight: 500; font-size: 17px; color: var(--ink); margin-bottom: 10px;
