@@ -45,7 +45,7 @@ async function unlock() {
     const tokens = { ...dash.tokens, [r.profile]: r.token };
     dash.tokens = tokens; dash.active = r.profile;
     localStorage.setItem("wc.menswear." + r.profile, r.menswear ? "1" : "");
-    day = freshDay(); activeOccasion = null;
+    day = planningDay(); activeOccasion = null;
     showApp(); renderProfiles(); loadOutfit(); loadBrief();
   } catch { $("#d-lock-error").hidden = false; }
 }
@@ -63,7 +63,7 @@ function renderProfiles() {
 
 function switchProfile(p) {
   if (p === dash.active) return;
-  if (dash.tokens[p]) { dash.active = p; day = freshDay(); activeOccasion = null; renderProfiles(); loadOutfit(); loadBrief(); }
+  if (dash.tokens[p]) { dash.active = p; day = planningDay(); activeOccasion = null; renderProfiles(); loadOutfit(); loadBrief(); }
   else { showLock(p); }
 }
 
@@ -79,7 +79,15 @@ const occStore = () => getJSON(K("occ"), {});
 const setOcc = (o) => localStorage.setItem(K("occ"), JSON.stringify(o));
 
 function freshDay() { return { occasion: null, temp_step: 0, dress_step: 0, anchor: null, anchors: [], wish: "", variety: false, rejections: [], date: null, location: null }; }
-let day = freshDay();
+// In the evening (>=5pm) the dashboard previews TOMORROW — you're dressing for the day
+// ahead, not the one that's ending. Before 5pm it's today (date=null).
+function eveningPreviewDate() {
+  if (new Date().getHours() < 17) return null;
+  const d = new Date(); d.setDate(d.getDate() + 1);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+function planningDay() { const d = freshDay(); d.date = eveningPreviewDate(); return d; }
+let day = planningDay();
 let lastResult = null, currentPieces = {}, activeOccasion = null;
 
 // Outfit cache — key by profile+date, value carries a signature of the inputs that
@@ -92,10 +100,9 @@ const outfitKey = () => `${dash.active}:${day.date || todayISO()}`;
 
 async function loadOutfit(force) {
   const active = dash.active;
-  // Only TODAY keeps a manually-chosen occasion; any other day always starts from its
-  // weekday default (office days -> Work) so it can never get stuck on a stale WFH.
-  const savedOcc = day.date ? null : occStore()[todayISO()];
-  if (savedOcc && !day.occasion) { day.occasion = savedOcc; activeOccasion = savedOcc; }
+  // Occasion always starts from the day's weekday default (office days -> Work). A tapped
+  // chip overrides it only for this view — nothing is persisted, so it can never get
+  // stuck on a stale WFH.
   const key = outfitKey(), sig = outfitSig();
   if (!force && outfitCache[key] && outfitCache[key].sig === sig) { renderResult(outfitCache[key].result); return; }
   loading(true);
@@ -123,6 +130,12 @@ function renderResult(r) {
   renderQuote();
   const d = r.date ? new Date(r.date + "T00:00:00") : new Date();
   $("#d-date").textContent = d.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" });
+  const eb = $("#d-eyebrow");
+  if (eb) {
+    const tm = new Date(); tm.setDate(tm.getDate() + 1);
+    const tmISO = `${tm.getFullYear()}-${String(tm.getMonth() + 1).padStart(2, "0")}-${String(tm.getDate()).padStart(2, "0")}`;
+    eb.textContent = (!r.date || r.date === todayISO()) ? "Today's look" : r.date === tmISO ? "Tomorrow's look" : "The look";
+  }
   $("#d-headline").textContent = r.headline || "";
   $("#d-place").textContent = (r.weather && r.weather.place) || "";
   renderWeather(r.weather);
@@ -376,8 +389,7 @@ function renderOccasions() {
     b.className = "chip" + (o.toLowerCase() === (activeOccasion || "").toLowerCase() ? " on" : "");
     b.textContent = o;
     b.onclick = () => {
-      day.occasion = o; day.rejections = []; activeOccasion = o;
-      if (!day.date) setOcc({ ...occStore(), [todayISO()]: o });   // persist for today only
+      day.occasion = o; day.rejections = []; activeOccasion = o;   // transient override for this view
       renderOccasions(); loadOutfit();
     };
     wrap.appendChild(b);
@@ -423,7 +435,7 @@ function init() {
   bars.addEventListener("click", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
   bars.addEventListener("mousemove", (e) => { const b = e.target.closest(".wbar"); if (b) showWxPop(+b.dataset.i); });
   // fresh look when the kiosk wakes / tab refocuses
-  document.addEventListener("visibilitychange", () => { if (!document.hidden && !$("#d-app").hidden) { day = freshDay(); loadOutfit(); loadBrief(); } });
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && !$("#d-app").hidden) { day = planningDay(); loadOutfit(); loadBrief(); } });
 
   renderProfiles();
   const active = dash.active;
