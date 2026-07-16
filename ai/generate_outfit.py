@@ -720,7 +720,12 @@ def generate_outfit(weather, wardrobe_items, calendar=None, context=None, reques
     request = request or {}
 
     avoid = set(request.get("avoid") or [])
-    usable = [w for w in wardrobe_items if w.get("name") not in avoid]
+    # "avoid recommending often" is a near-hard exclusion — a soft penalty wasn't enough,
+    # the model kept picking flagged pieces. Drop them from the pool entirely, but never
+    # starve generation (keep them if too little is left to build an outfit).
+    usable = [w for w in wardrobe_items if w.get("name") not in avoid and not w.get("avoid_often")]
+    if len(usable) < 8:
+        usable = [w for w in wardrobe_items if w.get("name") not in avoid]
     fallback = fallback_outfit(weather, usable, calendar, context, request)
     fallback["items"] = _finalize(fallback["items"], usable, request)
     if not available():

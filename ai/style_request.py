@@ -57,12 +57,15 @@ def build_request(prefs, day):
     bits = []
     if prefs.get("style_notes"):
         bits.append(f"Personal style: {prefs['style_notes']}.")
-    for rule in prefs.get("rules") or []:
-        bits.append(rule)
+    # Free-text rules are casual-day preferences (e.g. "joggers on WFH days"). Don't apply
+    # them on office/dressy days — they drag the outfit casual when it should be sharp.
+    if occasion in {"casual", "weekend", "cozy home"}:
+        for rule in prefs.get("rules") or []:
+            bits.append(rule)
     if recent:
         bits.append(
-            "Recently worn — rotate away from these for variety unless one is clearly "
-            f"ideal today: {', '.join(recent)}."
+            "Recently worn — do NOT reuse any of these; pick different pieces so the look "
+            f"varies day to day and works through the whole wardrobe: {', '.join(recent)}."
         )
     if prefs.get("love_colors"):
         bits.append(f"Favours these colours: {', '.join(prefs['love_colors'])}.")
